@@ -25,10 +25,11 @@ jobs:
       with:
         arguments: build
     - name: Upload alpha build
-      if: github.ref == 'alpha'
+      if: github.ref == 'refs/heads/alpha'
       run: |
-        echo 'Test'
+        export BUILD_DATE=$(date +%Y%m%d%H%M)
+        aws cp build/libs/*.jar s3://morecreepsrevival-builds/alpha/morecreeps-alpha-${BUILD_DATE}.jar
     - name: Upload release build
-      if: github.ref == 'master'
+      if: github.ref == 'refs/heads/master'
       run: |
-        echo 'Test'
+        aws s3 cp build/libs/*.jar s3://morecreepsrevival-builds/
