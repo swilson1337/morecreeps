@@ -1,0 +1,12 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "morecreeps:items/babyjarfull"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [45, 0, 0],
+      "scale": [0.55, 0.55, 0.55]
+    }
+  }
+}

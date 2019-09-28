@@ -1,0 +1,5588 @@
+{
+	"blorpcola": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:blorpcola",
+				"stream": false
+			}
+		]
+	},
+	"barf": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:barf",
+				"stream": false
+			}
+		]
+	},
+	"welcome": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:welcome1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome17",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome18",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome19",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:welcome20",
+				"stream": false
+			}
+		]
+	},
+	"achievement": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:achievement1",
+				"stream": false
+			}
+		]
+	},
+	"bandaid": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:bandaid",
+				"stream": false
+			}
+		]
+	},
+	"chew": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:chew",
+				"stream": false
+			}
+		]
+	},
+	"spark": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:spark",
+				"stream": false
+			}
+		]
+	},
+	"mummy": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:mummy1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mummy2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mummy3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mummy4",
+				"stream": false
+			}
+		]
+	},
+	"mummyhurt": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:mummyhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mummyhurt2",
+				"stream": false
+			}
+		]
+	},
+	"mummydeath": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:mummydeath",
+				"stream": false
+			}
+		]
+	},
+	"medicine": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:medicine1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:medicine2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:medicine3",
+				"stream": false
+			}
+		]
+	},
+	"bullet": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:bullet1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bullet2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bullet3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bullet4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bullet5",
+				"stream": false
+			}
+		]
+	},
+	"old": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:old1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old17",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old18",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old19",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:old20",
+				"stream": false
+			}
+		]
+	},
+	"oldhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:oldhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldhurt5",
+				"stream": false
+			}
+		]
+	},
+	"olddeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:olddeath1",
+				"stream": false
+			}
+		]
+	},
+	"army": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:army1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:army2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:army3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:army4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:army5",
+				"stream": false
+			}
+		]
+	},
+	"armyhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:armyhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhurt4",
+				"stream": false
+			}
+		]
+	},
+	"armyhelmet": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:armyhelmet1",
+				"stream": false
+			}
+		]
+	},
+	"armyarm": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:armyarm1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyarm2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyarm3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyarm4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyarm5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyarm6",
+				"stream": false
+			}
+		]
+	},
+	"armyleg": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:armyleg1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyleg2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyleg3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyleg4",
+				"stream": false
+			}
+		]
+	},
+	"armybothlegs": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:armybothlegs1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armybothlegs2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armybothlegs3",
+				"stream": false
+			}
+		]
+	},
+	"armyhead": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:armyhead1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhead2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhead3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhead4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:armyhead5",
+				"stream": false
+			}
+		]
+	},
+	"atomsuck": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:atomsuck",
+				"stream": false
+			}
+		]
+	},
+	"atomblow": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:atomblow",
+				"stream": false
+			}
+		]
+	},
+	"atom": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:atom",
+				"stream": false
+			}
+		]
+	},
+	"atomhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:atomhurt",
+				"stream": false
+			}
+		]
+	},
+	"babymummy": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:babymummy1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:babymummy2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:babymummy3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:babymummy4",
+				"stream": false
+			}
+		]
+	},
+	"babymummyhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:babymummyhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:babymummyhurt2",
+				"stream": false
+			}
+		]
+	},
+	"babymummydeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:babymummydeath1",
+				"stream": false
+			}
+		]
+	},
+	"bigbaby": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bigbaby1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bigbaby2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bigbaby3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bigbaby4",
+				"stream": false
+			}
+		]
+	},
+	"bigbabyhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bigbabyhurt1",
+				"stream": false
+			}
+		]
+	},
+	"babyshrink": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:babyshrink1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:babyshrink2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:babyshrink3",
+				"stream": false
+			}
+		]
+	},
+	"babytakehome": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:babytakehome",
+				"stream": false
+			}
+		]
+	},
+	"blacksoul": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blacksoul1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blacksoul2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blacksoul3",
+				"stream": false
+			}
+		]
+	},
+	"blacksoulhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blacksoulhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blacksoulhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blacksoulhurt3",
+				"stream": false
+			}
+		]
+	},
+	"blacksouldeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blacksouldeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blacksouldeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blacksouldeath3",
+				"stream": false
+			}
+		]
+	},
+	"blorp": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blorp1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorp2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorp3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorp4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorp5",
+				"stream": false
+			}
+		]
+	},
+	"blorpbounce": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blorpbounce1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorpbounce2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorpbounce3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorpbounce4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorpbounce5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorpbounce6",
+				"stream": false
+			}
+		]
+	},
+	"blorpdeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blorpdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorpdeath2",
+				"stream": false
+			}
+		]
+	},
+	"blorpeat": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blorpeat",
+				"stream": false
+			}
+		]
+	},
+	"blorpgrow": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blorpgrow",
+				"stream": false
+			}
+		]
+	},
+	"blorphurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:blorphurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorphurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:blorphurt3",
+				"stream": false
+			}
+		]
+	},
+	"bombset": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bombset",
+				"stream": false
+			}
+		]
+	},
+	"boombox": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:boombox1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:boombox2",
+				"stream": false
+			}
+		]
+	},
+	"bubblescum": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bubblescum1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bubblescum2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bubblescum3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bubblescum4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bubblescum5",
+				"stream": false
+			}
+		]
+	},
+	"bubblescumdeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bubblescumdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bubblescumdeath2",
+				"stream": false
+			}
+		]
+	},
+	"bubblescumhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bubblescumhurt1",
+				"stream": false
+			}
+		]
+	},
+	"bubblescumpickup": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bubblescumpickup",
+				"stream": false
+			}
+		]
+	},
+	"bubblescumputdown": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bubblescumputdown",
+				"stream": false
+			}
+		]
+	},
+	"bullethit": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bullethit1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bullethit2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bullethit3",
+				"stream": false
+			}
+		]
+	},
+	"bum": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bum1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bum2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bum3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bum4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bum5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bum6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bum7",
+				"stream": false
+			}
+		]
+	},
+	"bumdeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumdeath",
+				"stream": false
+			}
+		]
+	},
+	"bumdontwant": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumdontwant",
+				"stream": false
+			}
+		]
+	},
+	"bumhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bumhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bumhurt3",
+				"stream": false
+			}
+		]
+	},
+	"bumleavemealone": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumleavemealone",
+				"stream": false
+			}
+		]
+	},
+	"bumlivingpee": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumlivingpee",
+				"stream": false
+			}
+		]
+	},
+	"bumpee": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumpee1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bumpee2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bumpee3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bumpee4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:bumpee5",
+				"stream": false
+			}
+		]
+	},
+	"bumpeedone": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumpeedone",
+				"stream": false
+			}
+		]
+	},
+	"bumsucker": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumsucker",
+				"stream": false
+			}
+		]
+	},
+	"bumthanks": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumthanks",
+				"stream": false
+			}
+		]
+	},
+	"bumthankyou": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:bumthankyou",
+				"stream": false
+			}
+		]
+	},
+	"camel": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:camel1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:camel2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:camel3",
+				"stream": false
+			}
+		]
+	},
+	"cameldeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:cameldeath",
+				"stream": false
+			}
+		]
+	},
+	"camelhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:camelhurt1",
+				"stream": false
+			}
+		]
+	},
+	"cameljockey": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:cameljockey1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockey2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockey3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockey4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockey5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockey6",
+				"stream": false
+			}
+		]
+	},
+	"cameljockeyget": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:cameljockeyget1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyget2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyget3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyget4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyget5",
+				"stream": false
+			}
+		]
+	},
+	"cameljockeyhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:cameljockeyhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeyhurt4",
+				"stream": false
+			}
+		]
+	},
+	"camelspit": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:camelspit",
+				"stream": false
+			}
+		]
+	},
+	"camelspits": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:camelspits",
+				"stream": false
+			}
+		]
+	},
+	"camelsplash": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:camelsplash",
+				"stream": false
+			}
+		]
+	},
+	"castlecritter": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:castlecritter1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlecritter2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlecritter3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlecritter4",
+				"stream": false
+			}
+		]
+	},
+	"castlecritterhurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:castlecritterhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlecritterhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlecritterhurt3",
+				"stream": false
+			}
+		]
+	},
+	"castlecritterdeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:castlecritterdeath",
+				"stream": false
+			}
+		]
+	},
+	"castleguard": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:castleguard1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard17",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard18",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard19",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguard20",
+				"stream": false
+			}
+		]
+	},
+	"castleguarddeath": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "morecreeps:castleguarddeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguarddeath9",
+				"stream": false
+			}
+		]
+	},
+	"castleguardhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:castleguardhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardhurt17",
+				"stream": false
+			}
+		]
+	},
+	"castleguardmad": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:castleguardmad1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleguardmad9",
+				"stream": false
+			}
+		]
+	},
+	"castleking": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:castleking6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleking7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleking8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleking9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleking10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleking11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castleking12",
+				"stream": false
+			}
+		]
+	},
+	"castlekingdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:castlekingdeath1",
+				"stream": false
+			}
+		]
+	},
+	"castlekinghurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:castlekinghurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlekinghurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlekinghurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlekinghurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:castlekinghurt5",
+				"stream": false
+			}
+		]
+	},
+	"cavedrums": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavedrums",
+				"stream": false
+			}
+		]
+	},
+	"cavemanbuild": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanbuild1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanbuild2",
+				"stream": false
+			}
+		]
+	},
+	"cavemandead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemandead1",
+				"stream": false
+			}
+		]
+	},
+	"cavemanevil": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanevil1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanevil2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanevil3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanevil4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanevil5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanevil6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanevil7",
+				"stream": false
+			}
+		]
+	},
+	"cavemanfree": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanfree1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfree2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfree3",
+				"stream": false
+			}
+		]
+	},
+	"cavemanfrozen": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanfrozen1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfrozen2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfrozen3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfrozen4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfrozen5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanfrozen6",
+				"stream": false
+			}
+		]
+	},
+	"cavemanhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanhurt8",
+				"stream": false
+			}
+		]
+	},
+	"cavemanice": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanice1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanice2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanice3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavemanice4",
+				"stream": false
+			}
+		]
+	},
+	"cavemanicefinished": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavemanicefinished",
+				"stream": false
+			}
+		]
+	},
+	"cavewomandead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavewomandead1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomandead2",
+				"stream": false
+			}
+		]
+	},
+	"cavewomanfree": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavewomanfree1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomanfree2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomanfree3",
+				"stream": false
+			}
+		]
+	},
+	"cavewomanfrozen": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavewomanfrozen1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomanfrozen2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomanfrozen3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomanfrozen4",
+				"stream": false
+			}
+		]
+	},
+	"cavewomanhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cavewomanhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cavewomanhurt2",
+				"stream": false
+			}
+		]
+	},
+	"chickeneat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:chickeneat",
+				"stream": false
+			}
+		]
+	},
+	"desertlizard": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:desertlizard1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:desertlizard2",
+				"stream": false
+			}
+		]
+	},
+	"desertlizarddeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:desertlizarddeath",
+				"stream": false
+			}
+		]
+	},
+	"desertlizardfireball": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:desertlizardfireball",
+				"stream": false
+			}
+		]
+	},
+	"desertlizardhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:desertlizardhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:desertlizardhurt2",
+				"stream": false
+			}
+		]
+	},
+	"digbugcall": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:digbugcall1",
+				"stream": false
+			}
+		]
+	},
+	"digbugdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:digbugdeath1",
+				"stream": false
+			}
+		]
+	},
+	"digbugdig": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:digbugdig1",
+				"stream": false
+			}
+		]
+	},
+	"digbugfull": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:digbugfull",
+				"stream": false
+			}
+		]
+	},
+	"digbughurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:digbughurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:digbughurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:digbughurt3",
+				"stream": false
+			}
+		]
+	},
+	"diode": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:diode1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:diode2",
+				"stream": false
+			}
+		]
+	},
+	"discomole": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:discomole1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:discomole2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:discomole3",
+				"stream": false
+			}
+		]
+	},
+	"discomoledeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:discomoledeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:discomoledeath2",
+				"stream": false
+			}
+		]
+	},
+	"discomolehurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:discomolehurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:discomolehurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:discomolehurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:discomolehurt4",
+				"stream": false
+			}
+		]
+	},
+	"earthgem": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:earthgem",
+				"stream": false
+			}
+		]
+	},
+	"evilcreature": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evilcreature1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreature2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreature3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreature4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreature5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreature6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreature7",
+				"stream": false
+			}
+		]
+	},
+	"evilcreaturedeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evilcreaturedeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreaturedeath2",
+				"stream": false
+			}
+		]
+	},
+	"evilcreaturehurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evilcreaturehurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreaturehurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreaturehurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreaturehurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreaturehurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilcreaturehurt6",
+				"stream": false
+			}
+		]
+	},
+	"evilcreaturejump": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evilcreaturejump",
+				"stream": false
+			}
+		]
+	},
+	"evileggbirth": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evileggbirth",
+				"stream": false
+			}
+		]
+	},
+	"evileggcluck": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evileggcluck",
+				"stream": false
+			}
+		]
+	},
+	"evilexplosion": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evilexplosion1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilexplosion13",
+				"stream": false
+			}
+		]
+	},
+	"evilhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evilhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evilhurt5",
+				"stream": false
+			}
+		]
+	},
+	"evillaugh": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evillaugh1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evillaugh2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evillaugh3",
+				"stream": false
+			}
+		]
+	},
+	"extinguisher": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:extinguisher",
+				"stream": false
+			}
+		]
+	},
+	"featurenotavailable": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:featurenotavailable",
+				"stream": true
+			}
+		]
+	},
+	"firegem": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:firegem",
+				"stream": false
+			}
+		]
+	},
+	"floob": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floob1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floob2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floob3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floob4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floob5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floob6",
+				"stream": false
+			}
+		]
+	},
+	"floobdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floobdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobdeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobdeath3",
+				"stream": false
+			}
+		]
+	},
+	"floobhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floobhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobhurt5",
+				"stream": false
+			}
+		]
+	},
+	"floobship": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floobship1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobship2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobship3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobship4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:floobship5",
+				"stream": false
+			}
+		]
+	},
+	"floobshipclang": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floobshipclang",
+				"stream": false
+			}
+		]
+	},
+	"floobshipexplode": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floobshipexplode",
+				"stream": false
+			}
+		]
+	},
+	"floobshipspawn": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:floobshipspawn",
+				"stream": false
+			}
+		]
+	},
+	"g": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:g1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:g2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:g3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:g4",
+				"stream": false
+			}
+		]
+	},
+	"gdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:gdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gdeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gdeath3",
+				"stream": false
+			}
+		]
+	},
+	"gemsword": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:gemsword",
+				"stream": false
+			}
+		]
+	},
+	"ggpig": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpig1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ggpig10",
+				"stream": false
+			}
+		]
+	},
+	"ggpigangry": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigangry",
+				"stream": false
+			}
+		]
+	},
+	"ggpigarmor": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigarmor",
+				"stream": false
+			}
+		]
+	},
+	"ggpigdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigdeath",
+				"stream": false
+			}
+		]
+	},
+	"ggpigeat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigeat",
+				"stream": false
+			}
+		]
+	},
+	"ggpigfull": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigfull",
+				"stream": false
+			}
+		]
+	},
+	"ggpiglevelup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpiglevelup",
+				"stream": false
+			}
+		]
+	},
+	"ggpigmount": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigmount",
+				"stream": false
+			}
+		]
+	},
+	"ggpigradio": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigradio",
+				"stream": false
+			}
+		]
+	},
+	"ggpigunmount": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ggpigunmount",
+				"stream": false
+			}
+		]
+	},
+	"ghurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ghurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ghurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ghurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ghurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ghurt5",
+				"stream": false
+			}
+		]
+	},
+	"giraffe": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffe1",
+				"stream": false
+			}
+		]
+	},
+	"giraffechew": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffechew",
+				"stream": false
+			}
+		]
+	},
+	"giraffedead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffedead1",
+				"stream": false
+			}
+		]
+	},
+	"giraffegallop": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffegallop",
+				"stream": false
+			}
+		]
+	},
+	"giraffehurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffehurt1",
+				"stream": false
+			}
+		]
+	},
+	"giraffesplash": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffesplash",
+				"stream": false
+			}
+		]
+	},
+	"giraffetamed": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:giraffetamed",
+				"stream": false
+			}
+		]
+	},
+	"googoat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:googoat1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:googoat2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:googoat3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:googoat4",
+				"stream": false
+			}
+		]
+	},
+	"googoatdead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:googoatdead1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:googoatdead2",
+				"stream": false
+			}
+		]
+	},
+	"googoathurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:googoathurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:googoathurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:googoathurt3",
+				"stream": false
+			}
+		]
+	},
+	"googoatstretch": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:googoatstretch",
+				"stream": false
+			}
+		]
+	},
+	"gregg": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:gregg1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregg9",
+				"stream": false
+			}
+		]
+	},
+	"greggdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:greggdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:greggdeath2",
+				"stream": false
+			}
+		]
+	},
+	"gregghurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:gregghurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:gregghurt2",
+				"stream": false
+			}
+		]
+	},
+	"growray": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:growray",
+				"stream": false
+			}
+		]
+	},
+	"guineapig10level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapig10level",
+				"stream": false
+			}
+		]
+	},
+	"guineapig5level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapig5level",
+				"stream": false
+			}
+		]
+	},
+	"guineapig15level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapig15level",
+				"stream": false
+			}
+		]
+	},
+	"guineapig20level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapig20level",
+				"stream": false
+			}
+		]
+	},
+	"guineapigcriticalhit": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapigcriticalhit1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:guineapigcriticalhit2",
+				"stream": false
+			}
+		]
+	},
+	"guineapighotel": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapighotel",
+				"stream": false
+			}
+		]
+	},
+	"guineapignowheat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapignowheat",
+				"stream": false
+			}
+		]
+	},
+	"guineapigspeeddown": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapigspeeddown",
+				"stream": false
+			}
+		]
+	},
+	"guineapigspeedup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapigspeedup",
+				"stream": false
+			}
+		]
+	},
+	"guineapigtrain": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:guineapigtrain",
+				"stream": false
+			}
+		]
+	},
+	"gumblow": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:gumblow",
+				"stream": false
+			}
+		]
+	},
+	"hardcandy": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hardcandy",
+				"stream": false
+			}
+		]
+	},
+	"healinggem": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:healinggem",
+				"stream": false
+			}
+		]
+	},
+	"hippo": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hippo1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hippo2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hippo3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hippo4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hippo5",
+				"stream": false
+			}
+		]
+	},
+	"hippodeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hippodeath1",
+				"stream": false
+			}
+		]
+	},
+	"hippohurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hippohurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hippohurt2",
+				"stream": false
+			}
+		]
+	},
+	"horsehead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:horsehead1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:horsehead2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:horsehead3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:horsehead4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:horsehead5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:horsehead6",
+				"stream": false
+			}
+		]
+	},
+	"horseheadblastoff": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:horseheadblastoff",
+				"stream": false
+			}
+		]
+	},
+	"horseheadgem": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:horseheadgem",
+				"stream": false
+			}
+		]
+	},
+	"hotdog": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdog1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdog14",
+				"stream": false
+			}
+		]
+	},
+	"hotdog5level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdog5level",
+				"stream": false
+			}
+		]
+	},
+	"hotdog10level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdog10level",
+				"stream": false
+			}
+		]
+	},
+	"hotdog15level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdog15level",
+				"stream": false
+			}
+		]
+	},
+	"hotdog20level": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdog20level",
+				"stream": false
+			}
+		]
+	},
+	"hotdogattack": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogattack1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdogattack2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdogattack3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdogattack4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdogattack5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdogattack6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdogattack7",
+				"stream": false
+			}
+		]
+	},
+	"hotdogdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogdeath",
+				"stream": false
+			}
+		]
+	},
+	"hotdogeat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogeat",
+				"stream": false
+			}
+		]
+	},
+	"hotdogheaven": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogheaven",
+				"stream": false
+			}
+		]
+	},
+	"hotdoghurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdoghurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hotdoghurt2",
+				"stream": false
+			}
+		]
+	},
+	"hotdogkill": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogkill",
+				"stream": false
+			}
+		]
+	},
+	"hotdoglevelneeded": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdoglevelneeded",
+				"stream": false
+			}
+		]
+	},
+	"hotdognobones": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdognobones",
+				"stream": false
+			}
+		]
+	},
+	"hotdogpickup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogpickup",
+				"stream": false
+			}
+		]
+	},
+	"hotdogputdown": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogputdown",
+				"stream": false
+			}
+		]
+	},
+	"hotdogredstone": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogredstone",
+				"stream": false
+			}
+		]
+	},
+	"hotdogtamed": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogtamed",
+				"stream": false
+			}
+		]
+	},
+	"hotdogtrain": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogtrain",
+				"stream": false
+			}
+		]
+	},
+	"hotdogwhoosh": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hotdogwhoosh",
+				"stream": false
+			}
+		]
+	},
+	"huncharmy": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:huncharmy",
+				"stream": false
+			}
+		]
+	},
+	"hunchbackthanks": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hunchbackthanks1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchbackthanks10",
+				"stream": false
+			}
+		]
+	},
+	"hunchcake": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hunchcake1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchcake2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchcake3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchcake4",
+				"stream": false
+			}
+		]
+	},
+	"hunchdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hunchdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchdeath2",
+				"stream": false
+			}
+		]
+	},
+	"hunchhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hunchhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:hunchhurt4",
+				"stream": false
+			}
+		]
+	},
+	"hunchquiet": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hunchquiet",
+				"stream": false
+			}
+		]
+	},
+	"hunchthankyou": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:hunchthankyou",
+				"stream": false
+			}
+		]
+	},
+	"invisibleman": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:invisibleman1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisibleman2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisibleman3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisibleman4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisibleman5",
+				"stream": false
+			}
+		]
+	},
+	"invisiblemanangry": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:invisiblemanangry1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanangry11",
+				"stream": false
+			}
+		]
+	},
+	"invisiblemandeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:invisiblemandeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemandeath2",
+				"stream": false
+			}
+		]
+	},
+	"invisiblemanforgetit": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:invisiblemanforgetit",
+				"stream": false
+			}
+		]
+	},
+	"invisiblemanhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:invisiblemanhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:invisiblemanhurt6",
+				"stream": false
+			}
+		]
+	},
+	"kid": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kid1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kid2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kid3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kid4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kid5",
+				"stream": false
+			}
+		]
+	},
+	"kidcold": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidcold1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidcold2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidcold3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidcold4",
+				"stream": false
+			}
+		]
+	},
+	"kidcookies": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidcookies",
+				"stream": false
+			}
+		]
+	},
+	"kiddeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kiddeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kiddeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kiddeath3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kiddeath4",
+				"stream": false
+			}
+		]
+	},
+	"kiddown": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kiddown",
+				"stream": false
+			}
+		]
+	},
+	"kidfind": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidfind1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidfind2",
+				"stream": false
+			}
+		]
+	},
+	"kidhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidhurt3",
+				"stream": false
+			}
+		]
+	},
+	"kidnontpickup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidnontpickup",
+				"stream": false
+			}
+		]
+	},
+	"kidride": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidride1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidride2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidride3",
+				"stream": false
+			}
+		]
+	},
+	"kidup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:kidup1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:kidup2",
+				"stream": false
+			}
+		]
+	},
+	"lawyer": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyer1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyer8",
+				"stream": false
+			}
+		]
+	},
+	"lawyerbum": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerbum1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerbum2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerbum3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerbum4",
+				"stream": false
+			}
+		]
+	},
+	"lawyerbusted": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerbusted",
+				"stream": false
+			}
+		]
+	},
+	"lawyerdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerdeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerdeath3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerdeath4",
+				"stream": false
+			}
+		]
+	},
+	"lawyerhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerhurt14",
+				"stream": false
+			}
+		]
+	},
+	"lawyermoneyhit": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyermoneyhit1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyermoneyhit2",
+				"stream": false
+			}
+		]
+	},
+	"lawyersuck": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyersuck1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyersuck2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyersuck3",
+				"stream": false
+			}
+		]
+	},
+	"lawyertake": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyertake1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyertake2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyertake3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyertake4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyertake5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyertake6",
+				"stream": false
+			}
+		]
+	},
+	"lawyerundead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerundead1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundead2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundead3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundead4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundead5",
+				"stream": false
+			}
+		]
+	},
+	"lawyerundeaddeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerundeaddeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundeaddeath2",
+				"stream": false
+			}
+		]
+	},
+	"lawyerundeadhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lawyerundeadhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundeadhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lawyerundeadhurt3",
+				"stream": false
+			}
+		]
+	},
+	"lick": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lick",
+				"stream": false
+			}
+		]
+	},
+	"lolliman": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lolliman1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolliman2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolliman3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolliman4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolliman5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolliman6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolliman7",
+				"stream": false
+			}
+		]
+	},
+	"lollimandeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lollimandeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimandeath2",
+				"stream": false
+			}
+		]
+	},
+	"lollimanexplode": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lollimanexplode",
+				"stream": false
+			}
+		]
+	},
+	"lollimanhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lollimanhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimanhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimanhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimanhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimanhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimanhurt6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lollimanhurt7",
+				"stream": false
+			}
+		]
+	},
+	"lollimantakeoff": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lollimantakeoff1",
+				"stream": false
+			}
+		]
+	},
+	"lolly": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:lolly1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:lolly2",
+				"stream": false
+			}
+		]
+	},
+	"mandog": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mandog1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandog2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandog3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandog4",
+				"stream": false
+			}
+		]
+	},
+	"mandogdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mandogdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandogdeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandogdeath3",
+				"stream": false
+			}
+		]
+	},
+	"mandoghurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mandoghurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandoghurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandoghurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mandoghurt4",
+				"stream": false
+			}
+		]
+	},
+	"mandogtamed": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mandogtamed",
+				"stream": false
+			}
+		]
+	},
+	"mininggem": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mininggem",
+				"stream": false
+			}
+		]
+	},
+	"mininggembad": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mininggembad",
+				"stream": false
+			}
+		]
+	},
+	"mobile": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:mobile1",
+				"stream": true
+			},
+			{
+				"name": "morecreeps:mobile2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:mobile15",
+				"stream": true
+			}
+		]
+	},
+	"nonswimmer": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:nonswimmer1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmer9",
+				"stream": false
+			}
+		]
+	},
+	"nonswimmerdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:nonswimmerdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerdeath2",
+				"stream": false
+			}
+		]
+	},
+	"nonswimmerhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:nonswimmerhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerhurt4",
+				"stream": false
+			}
+		]
+	},
+	"nonswimmerreward": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:nonswimmerreward1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerreward2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerreward3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmerreward4",
+				"stream": false
+			}
+		]
+	},
+	"nonswimmersorry": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:nonswimmersorry1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:nonswimmersorry2",
+				"stream": false
+			}
+		]
+	},
+	"oldpickup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:oldpickup1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldpickup2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldpickup3",
+				"stream": false
+			}
+		]
+	},
+	"oldputdown": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:oldputdown1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:oldputdown2",
+				"stream": false
+			}
+		]
+	},
+	"pastaeat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pastaeat",
+				"stream": false
+			}
+		]
+	},
+	"petradiodrop": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:petradiodrop",
+				"stream": false
+			}
+		]
+	},
+	"petradiopickup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:petradiopickup",
+				"stream": false
+			}
+		]
+	},
+	"preacher": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:preacher1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher17",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher18",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher19",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacher20",
+				"stream": false
+			}
+		]
+	},
+	"preacherburn": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:preacherburn1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherburn2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherburn3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherburn4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherburn5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherburn6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherburn7",
+				"stream": false
+			}
+		]
+	},
+	"preacherdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:preacherdeath",
+				"stream": false
+			}
+		]
+	},
+	"preacherhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:preacherhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:preacherhurt6",
+				"stream": false
+			}
+		]
+	},
+	"preacherraise": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:preacherraise",
+				"stream": false
+			}
+		]
+	},
+	"prisoner": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:prisoner1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner17",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner18",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner19",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner20",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisoner21",
+				"stream": false
+			}
+		]
+	},
+	"prisonerdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:prisonerdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerdeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerdeath3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerdeath4",
+				"stream": false
+			}
+		]
+	},
+	"prisonerhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:prisonerhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerhurt5",
+				"stream": false
+			}
+		]
+	},
+	"prisonerreward": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:prisonerreward1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerreward2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:prisonerreward3",
+				"stream": false
+			}
+		]
+	},
+	"prisonersorry": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:prisonersorry",
+				"stream": false
+			}
+		]
+	},
+	"pyramid": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pyramid1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pyramid2",
+				"stream": false
+			}
+		]
+	},
+	"pyramidcurse": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pyramidcurse",
+				"stream": false
+			}
+		]
+	},
+	"pyramiddeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pyramiddeath",
+				"stream": false
+			}
+		]
+	},
+	"pyramiddiscovered": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pyramiddiscovered",
+				"stream": false
+			}
+		]
+	},
+	"pyramidhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pyramidhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pyramidhurt2",
+				"stream": false
+			}
+		]
+	},
+	"battlecastle": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:battlecastle",
+				"stream": false
+			}
+		]
+	},
+	"ratman": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ratman1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratman14",
+				"stream": false
+			}
+		]
+	},
+	"ratmanhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ratmanhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratmanhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ratmanhurt3",
+				"stream": false
+			}
+		]
+	},
+	"ratmanscratch": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ratmanscratch1",
+				"stream": false
+			}
+		]
+	},
+	"raygun": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:raygun1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:raygun2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:raygun3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:raygun4",
+				"stream": false
+			}
+		]
+	},
+	"robothurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:robothurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:robothurt8",
+				"stream": false
+			}
+		]
+	},
+	"rocketexplode": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:rocketexplode",
+				"stream": false
+			}
+		]
+	},
+	"rocketfire": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:rocketfire1",
+				"stream": false
+			}
+		]
+	},
+	"rockmonster": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:rockmonster1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:rockmonster2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:rockmonster3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:rockmonster4",
+				"stream": false
+			}
+		]
+	},
+	"rockmonsterdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:rockmonsterdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:rockmonsterdeath2",
+				"stream": false
+			}
+		]
+	},
+	"saldead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:saldead1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:saldead2",
+				"stream": false
+			}
+		]
+	},
+	"salgreeting": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:salgreeting1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salgreeting2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salgreeting3",
+				"stream": false
+			}
+		]
+	},
+	"salhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:salhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salhurt5",
+				"stream": false
+			}
+		]
+	},
+	"salnobodyshrinks": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:salnobodyshrinks",
+				"stream": false
+			}
+		]
+	},
+	"salnomoney": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:salnomoney1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salnomoney9",
+				"stream": false
+			}
+		]
+	},
+	"salrats": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:salrats1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salrats2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salrats3",
+				"stream": false
+			}
+		]
+	},
+	"salsale": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:salsale1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:salsale9",
+				"stream": false
+			}
+		]
+	},
+	"schlump": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump12",
+				"stream": false
+			}
+		]
+	},
+	"schlump-big": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-big",
+				"stream": false
+			}
+		]
+	},
+	"schlump-bright": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-bright",
+				"stream": false
+			}
+		]
+	},
+	"schlumpdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlumpdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlumpdeath2",
+				"stream": false
+			}
+		]
+	},
+	"schlumphurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlumphurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlumphurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlumphurt3",
+				"stream": false
+			}
+		]
+	},
+	"schlump-indoors": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-indoors",
+				"stream": false
+			}
+		]
+	},
+	"schlump-ok": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-ok",
+				"stream": false
+			}
+		]
+	},
+	"schlump-overload": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-overload",
+				"stream": false
+			}
+		]
+	},
+	"schlump-reward": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-reward",
+				"stream": false
+			}
+		]
+	},
+	"schlump-room": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-room",
+				"stream": false
+			}
+		]
+	},
+	"schlump-sucks": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:schlump-sucks1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump-sucks2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump-sucks3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump-sucks4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:schlump-sucks5",
+				"stream": false
+			}
+		]
+	},
+	"shrinkray": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:shrinkray",
+				"stream": false
+			}
+		]
+	},
+	"shrinkkill": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:shrinkkill",
+				"stream": false
+			}
+		]
+	},
+	"skygem": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:skygem",
+				"stream": false
+			}
+		]
+	},
+	"skygemdown": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:skygemdown",
+				"stream": false
+			}
+		]
+	},
+	"skygemup": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:skygemup",
+				"stream": false
+			}
+		]
+	},
+	"slotmachinespin": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:slotmachinespin1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:slotmachinespin2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:slotmachinespin3",
+				"stream": false
+			}
+		]
+	},
+	"snowdevil": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowdevil1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowdevil2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowdevil3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowdevil4",
+				"stream": false
+			}
+		]
+	},
+	"snowdevildeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowdevildeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowdevildeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowdevildeath3",
+				"stream": false
+			}
+		]
+	},
+	"snowdevilhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowdevilhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowdevilhurt2",
+				"stream": false
+			}
+		]
+	},
+	"snowdeviltamed": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowdeviltamed",
+				"stream": false
+			}
+		]
+	},
+	"snowman": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowman1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowman2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:snowman3",
+				"stream": false
+			}
+		]
+	},
+	"snowmanbounce": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowmanbounce",
+				"stream": false
+			}
+		]
+	},
+	"snowmandeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowmandeath1",
+				"stream": false
+			}
+		]
+	},
+	"snowmanhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:snowmanhurt1",
+				"stream": false
+			}
+		]
+	},
+	"superdogapple": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:superdogapple1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:superdogapple2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:superdogapple3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:superdogapple4",
+				"stream": false
+			}
+		]
+	},
+	"superdogname": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:superdogname1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:superdogname2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:superdogname3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:superdogname4",
+				"stream": false
+			}
+		]
+	},
+	"teddead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:teddead",
+				"stream": false
+			}
+		]
+	},
+	"tedinsult": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:tedinsult1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:tedinsult13",
+				"stream": false
+			}
+		]
+	},
+	"thief": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:thief",
+				"stream": false
+			}
+		]
+	},
+	"thiefdeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:thiefdeath1",
+				"stream": false
+			}
+		]
+	},
+	"thieffindplayer": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:thieffindplayer",
+				"stream": false
+			}
+		]
+	},
+	"thiefhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:thiefhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:thiefhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:thiefhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:thiefhurt4",
+				"stream": false
+			}
+		]
+	},
+	"thiefsteal": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:thiefsteal",
+				"stream": false
+			}
+		]
+	},
+	"todddead": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:todddead",
+				"stream": false
+			}
+		]
+	},
+	"toddinsult": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:toddinsult1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:toddinsult9",
+				"stream": false
+			}
+		]
+	},
+	"tombstone": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:tombstone",
+				"stream": false
+			}
+		]
+	},
+	"towelfun": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:towelfun",
+				"stream": false
+			}
+		]
+	},
+	"trophysmash": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:trophysmash",
+				"stream": false
+			}
+		]
+	}
+}
