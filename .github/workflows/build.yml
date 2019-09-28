@@ -24,3 +24,11 @@ jobs:
       uses: eskatos/gradle-command-action@v1
       with:
         arguments: build
+    - name: Upload alpha build
+      if: github.ref == 'alpha'
+      run: |
+        echo 'Test'
+    - name: Upload release build
+      if: github.ref == 'master'
+      run: |
+        echo 'Test'
