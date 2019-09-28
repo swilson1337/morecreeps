@@ -1,0 +1,25 @@
+name: Build Alpha
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install awscli
+    - name: Build JAR
+      uses: eskatos/gradle-command-action@v1
+      with:
+        arguments: build
