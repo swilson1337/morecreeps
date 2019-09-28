@@ -26,10 +26,18 @@ jobs:
         arguments: build
     - name: Upload alpha build
       if: github.ref == 'refs/heads/alpha'
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
       run: |
         export BUILD_DATE=$(date +%Y%m%d%H%M)
-        aws cp build/libs/*.jar s3://morecreepsrevival-builds/alpha/morecreeps-alpha-${BUILD_DATE}.jar
+        aws s3 cp build/libs/*.jar s3://morecreepsrevival-builds/alpha/morecreeps-alpha-${BUILD_DATE}.jar
     - name: Upload release build
       if: github.ref == 'refs/heads/master'
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
       run: |
         aws s3 cp build/libs/*.jar s3://morecreepsrevival-builds/
