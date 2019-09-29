@@ -14,7 +14,12 @@ public class ItemRaygun extends CreepsItem
 {
     public ItemRaygun()
     {
-        super("raygun");
+        this("raygun");
+    }
+
+    public ItemRaygun(String itemName)
+    {
+        super(itemName);
 
         setMaxStackSize(1);
 

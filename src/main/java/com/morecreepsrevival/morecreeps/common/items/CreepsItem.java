@@ -10,9 +10,7 @@ public class CreepsItem extends Item
     {
         super();
 
-        setRegistryName(new ResourceLocation(MoreCreepsAndWeirdos.modid, itemName));
-
-        setUnlocalizedName(MoreCreepsAndWeirdos.modid + "." + itemName);
+        setItemName(itemName);
 
         if (!noCreativeTab)
         {
@@ -33,5 +31,14 @@ public class CreepsItem extends Item
     public float getSoundPitch()
     {
         return (0.4f / ((itemRand.nextFloat() * 0.4f) + 0.8f));
+    }
+
+    public CreepsItem setItemName(String itemName)
+    {
+        setRegistryName(new ResourceLocation(MoreCreepsAndWeirdos.modid, itemName));
+
+        setUnlocalizedName(MoreCreepsAndWeirdos.modid + "." + itemName);
+
+        return this;
     }
 }
