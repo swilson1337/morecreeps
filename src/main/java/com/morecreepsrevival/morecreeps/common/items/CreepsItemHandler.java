@@ -103,6 +103,8 @@ public class CreepsItemHandler
 
     public static final Item rocket = new ItemRocket();
 
+    public static final Item floobRaygun = new ItemRaygun("floob_raygun");
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -142,7 +144,8 @@ public class CreepsItemHandler
                 gun,
                 extinguisher,
                 rayRay,
-                rocket
+                rocket,
+                floobRaygun
         );
     }
 

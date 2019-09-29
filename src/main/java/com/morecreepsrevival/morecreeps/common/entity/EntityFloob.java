@@ -26,7 +26,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 
         baseSpeed = 0.3d;
 
-        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.raygun));
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.floobRaygun));
 
         updateAttributes();
     }

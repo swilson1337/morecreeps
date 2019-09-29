@@ -11,9 +11,7 @@ public class CreepsItemArmor extends ItemArmor
     {
         super(materialIn, renderIndexIn, equipmentSlotIn);
 
-        setRegistryName(new ResourceLocation(MoreCreepsAndWeirdos.modid, itemName));
-
-        setUnlocalizedName(MoreCreepsAndWeirdos.modid + "." + itemName);
+        setItemName(itemName);
 
         setCreativeTab(CreepsItemHandler.creativeTab);
     }
@@ -26,5 +24,14 @@ public class CreepsItemArmor extends ItemArmor
     public float getSoundPitch()
     {
         return (0.4f / ((itemRand.nextFloat() * 0.4f) + 0.8f));
+    }
+
+    public CreepsItemArmor setItemName(String itemName)
+    {
+        setRegistryName(new ResourceLocation(MoreCreepsAndWeirdos.modid, itemName));
+
+        setUnlocalizedName(MoreCreepsAndWeirdos.modid + "." + itemName);
+
+        return this;
     }
 }

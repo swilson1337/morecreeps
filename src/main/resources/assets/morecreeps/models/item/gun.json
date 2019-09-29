@@ -2,12 +2,5 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "morecreeps:items/gun2"
-  },
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [ 145, -90, 55 ],
-      "translation": [ -1, 10, 12 ],
-      "scale": [ 0.55, 0.55, 0.55 ]
-    }
   }
 }
