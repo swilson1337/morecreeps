@@ -254,6 +254,21 @@ public class EntityRay extends Entity implements IProjectile
                 this.onHit(raytraceresult);
             }
 
+            checkMeltBlock(posX, posY, posZ);
+            checkMeltBlock(posX + 1, posY, posZ);
+            checkMeltBlock(posX - 1, posY, posZ);
+            checkMeltBlock(posX, posY, posZ - 1);
+            checkMeltBlock(posX, posY, posZ + 1);
+
+            /*if (rand.nextBoolean())
+            {
+                checkFireBlock(posX, posY, posZ);
+                checkFireBlock(posX + 1, posY, posZ);
+                checkFireBlock(posX - 1, posY, posZ);
+                checkFireBlock(posX, posY, posZ - 1);
+                checkFireBlock(posX, posY, posZ + 1);
+            }*/
+
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
@@ -385,7 +400,7 @@ public class EntityRay extends Entity implements IProjectile
             this.posZ -= this.motionZ / (double)f2 * 0.05000000074505806D;
 
             playSound(CreepsSoundHandler.raygunSound, 0.2f, 1.0f / (rand.nextFloat() * 0.1f + 0.95f));
-            
+
             blast();
 
             this.inGround = true;
@@ -528,5 +543,35 @@ public class EntityRay extends Entity implements IProjectile
     public float getEyeHeight()
     {
         return 0.0F;
+    }
+
+    private void checkMeltBlock(double x, double y, double z)
+    {
+        if (!MoreCreepsConfig.rayGunMelt)
+        {
+            return;
+        }
+
+        BlockPos blockPos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
+
+        if (world.getBlockState(blockPos).getBlock() == Blocks.ICE)
+        {
+            world.setBlockState(blockPos, Blocks.WATER.getDefaultState());
+        }
+    }
+
+    private void checkFireBlock(double x, double y, double z)
+    {
+        if (!MoreCreepsConfig.rayGunFire)
+        {
+            return;
+        }
+
+        BlockPos blockPos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
+
+        if (world.isAirBlock(blockPos))
+        {
+            world.setBlockState(blockPos, Blocks.FIRE.getDefaultState());
+        }
     }
 }

@@ -14,12 +14,12 @@ public class ItemRaygun extends CreepsItem
 {
     public ItemRaygun()
     {
-        this("raygun");
+        this("raygun", false);
     }
 
-    public ItemRaygun(String itemName)
+    public ItemRaygun(String itemName, boolean noCreativeTab)
     {
-        super(itemName);
+        super(itemName, noCreativeTab);
 
         setMaxStackSize(1);
 
