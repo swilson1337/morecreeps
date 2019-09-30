@@ -283,7 +283,7 @@ public class EntityThief extends EntityCreepBase
     {
         if (!getStolen())
         {
-            EntityPlayer player = world.getClosestPlayerToEntity(this, 16.0d);
+            EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
 
             if (player != null)
             {
