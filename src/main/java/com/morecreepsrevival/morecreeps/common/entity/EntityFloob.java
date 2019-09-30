@@ -5,14 +5,12 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
@@ -53,7 +51,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 
         tasks.addTask(2, new EntityAIBreakDoor(this));
 
-        tasks.addTask(3, new EntityAIAttackRanged(this, 1.0d, 25, 75, 30.0f));
+        tasks.addTask(3, new EntityAIAttackRanged(this, 1.0d, 25, 75, 50.0f));
 
         tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
 
@@ -120,5 +118,18 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void setSwingingArms(boolean swingingArms)
     {
+    }
+
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+
+        EntityLivingBase target = getAttackTarget();
+
+        if (target != null && !(target instanceof EntityPlayer))
+        {
+            resetTarget();
+        }
     }
 }
