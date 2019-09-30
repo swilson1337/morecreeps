@@ -14,7 +14,12 @@ public class ItemRaygun extends CreepsItem
 {
     public ItemRaygun()
     {
-        super("raygun");
+        this("raygun", false);
+    }
+
+    public ItemRaygun(String itemName, boolean noCreativeTab)
+    {
+        super(itemName, noCreativeTab);
 
         setMaxStackSize(1);
 
@@ -30,7 +35,7 @@ public class ItemRaygun extends CreepsItem
 
         EntityRay ray = new EntityRay(world, player);
 
-        ray.shoot(player, player.rotationPitch, player.rotationYaw, 0.0f, 1.7f, 0.0f);
+        ray.shoot(player, player.rotationPitch, player.rotationYaw, 0.0f, 1.6f, 0.0f);
 
         if (!world.isRemote)
         {

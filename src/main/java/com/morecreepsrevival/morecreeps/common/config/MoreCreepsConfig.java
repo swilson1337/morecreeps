@@ -97,9 +97,9 @@ public class MoreCreepsConfig
 
             castleRarity = config.get(worldGenRarity, "Castle Rarity", 500, "By default : 500").getInt();
 
-            rayGunFire = config.get(itemProperty, "Raygun Fire", true).getBoolean();
+            rayGunFire = config.get(itemProperty, "Enable Raygun Fire", true).getBoolean();
 
-            rayGunMelt = config.get(itemProperty, "Raygun Melt", true).getBoolean();
+            rayGunMelt = config.get(itemProperty, "Enable Raygun Melt", true).getBoolean();
 
             floobShipExplode = config.get(mobProperty, "Allow Floobship Explosion", false).getBoolean();
 

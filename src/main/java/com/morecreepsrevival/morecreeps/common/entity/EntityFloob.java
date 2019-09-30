@@ -11,7 +11,6 @@ import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
@@ -26,7 +25,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 
         baseSpeed = 0.3d;
 
-        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.raygun));
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.floobRaygun));
 
         updateAttributes();
     }
@@ -52,7 +51,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 
         tasks.addTask(2, new EntityAIBreakDoor(this));
 
-        tasks.addTask(3, new EntityAIAttackRanged(this, 1.0d, 25, 75, 30.0f));
+        tasks.addTask(3, new EntityAIAttackRanged(this, 1.0d, 25, 75, 50.0f));
 
         tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
 
@@ -64,7 +63,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
     @Override
@@ -105,20 +104,13 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
     {
         EntityRay ray = new EntityRay(world, this);
 
-        double d0 = target.posX - posX;
-
+        double d0 = target.posX - this.posX;
         double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - ray.posY;
+        double d2 = target.posZ - this.posZ;
 
-        double d2 = target.posZ - posZ;
+        ray.shoot(d0, d1, d2, 1.6F, 0.0f);
 
-        double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
-
-        ray.shoot(d0, d1, d2, 1.6F, (float)(14 - world.getDifficulty().getDifficultyId() * 4));
-
-        if (!world.isRemote)
-        {
-            world.spawnEntity(ray);
-        }
+        world.spawnEntity(ray);
 
         playSound(CreepsSoundHandler.raygunSound, getSoundVolume(), getSoundPitch());
     }
@@ -126,5 +118,18 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void setSwingingArms(boolean swingingArms)
     {
+    }
+
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+
+        EntityLivingBase target = getAttackTarget();
+
+        if (target != null && !(target instanceof EntityPlayer))
+        {
+            resetTarget();
+        }
     }
 }

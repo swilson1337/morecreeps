@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:iron_ingot"
+    },
+    "a": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "morecreeps:baby_jar_empty",
+    "count": 1
+  }
+}

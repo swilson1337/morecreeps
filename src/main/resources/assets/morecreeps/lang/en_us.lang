@@ -35,6 +35,7 @@ item.morecreeps.gun.name=Gun
 item.morecreeps.extinguisher.name=Extinguisher
 item.morecreeps.rocket.name=Rocket
 item.morecreeps.rayray.name=Ray
+item.morecreeps.floob_raygun.name=Raygun
 
 # Entities
 entity.guineapig.name=Guinea Pig

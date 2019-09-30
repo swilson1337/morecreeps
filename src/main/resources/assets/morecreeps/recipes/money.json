@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xax",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:dye",
+      "data": 2
+    },
+    "a": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "morecreeps:money",
+    "count": 1
+  }
+}
