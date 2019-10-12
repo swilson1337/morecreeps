@@ -35,7 +35,7 @@ public class EntityThief extends EntityCreepBase
 
         setCreepTypeName("Thief");
 
-        baseHealth = 30.0f;
+        baseHealth = (float)rand.nextInt(20) + 10.0f;
 
         baseSpeed = 0.35d;
 

@@ -89,7 +89,7 @@ public class EntityGuineaPig extends EntityCreepBase
 
         baseSpeed = 0.325d;
 
-        baseHealth = (float)(rand.nextInt(5) + 5);
+        baseHealth = (float)rand.nextInt(5) + 5.0f;
 
         setWanderState(1);
 

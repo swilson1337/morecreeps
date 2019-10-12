@@ -29,7 +29,7 @@ public class EntityKid extends EntityCreepBase
 
         setModelSize(0.6f);
 
-        setSize(0.6f, 0.6f);
+        setSize(width * 0.6f, height * 0.6f);
 
         baseHealth = 25.0f;
 

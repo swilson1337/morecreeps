@@ -20,11 +20,11 @@ public class EntityG extends EntityCreepBase
 
         setCreepTypeName("G");
 
-        setSize(2.0f, 2.5f);
+        setSize(width * 2.0f, height * 2.5f);
 
         setModelSize(2.0f);
 
-        baseHealth = 80.0f;
+        baseHealth = (float)rand.nextInt(40) + 40.0f;
 
         baseSpeed = 0.3d;
 

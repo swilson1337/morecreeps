@@ -35,7 +35,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
 
         setCreepTypeName("Lawyer From Hell");
 
-        baseHealth = 40.0f;
+        baseHealth = (float)rand.nextInt(40) + 40.0f;
 
         baseSpeed = 0.3d;
 

@@ -22,7 +22,7 @@ public class EntityRobotTodd extends EntityCreepBase
 
         baseSpeed = 0.4d;
 
-        baseHealth = 45.0f;
+        baseHealth = (float)rand.nextInt(20) + 25.0f;
 
         baseAttackDamage = 2.0d;
 

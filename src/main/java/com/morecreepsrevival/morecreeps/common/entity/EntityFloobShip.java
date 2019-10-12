@@ -30,7 +30,7 @@ public class EntityFloobShip extends EntityCreepBase
 
         setCreepTypeName("Floob Ship");
 
-        baseHealth = 150.0f;
+        baseHealth = (float)rand.nextInt(100) + 50.0f;
 
         baseSpeed = 0.0d;
 

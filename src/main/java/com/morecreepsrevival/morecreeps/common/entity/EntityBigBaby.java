@@ -31,15 +31,15 @@ public class EntityBigBaby extends EntityCreepBase
 
         setCreepTypeName("Big Baby");
 
-        setSize(width * 5.25f, height * 5.55f);
+        setSize(width * 3.25f, height * 3.55f);
 
         setModelSize(6.5f);
 
-        baseHealth = 80.0f;
+        baseHealth = (float)rand.nextInt(40) + 40.0f;
 
         baseSpeed = 0.25d;
 
-        baseAttackDamage = 3.0d;
+        baseAttackDamage = 1.0d;
 
         updateAttributes();
     }
