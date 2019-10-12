@@ -253,11 +253,20 @@ public class MoreCreepsAndWeirdos
     @SubscribeEvent
     public static void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event)
     {
-        event.player.sendMessage(new TextComponentString("\2476" + name + " \247ev" + version + " [BETA] \2476loaded."));
+        if (MoreCreepsConfig.sendVersionInfo)
+        {
+            event.player.sendMessage(new TextComponentString("\2476" + name + " \247ev" + version + " [BETA] \2476loaded."));
+        }
 
-        event.player.sendMessage(new TextComponentString(welcomeMessages[rand.nextInt(welcomeMessages.length)]));
+        if (MoreCreepsConfig.sendWelcomeMessage)
+        {
+            event.player.sendMessage(new TextComponentString(welcomeMessages[rand.nextInt(welcomeMessages.length)]));
+        }
 
-        event.player.sendMessage(new TextComponentString("Come join us on Discord! https://discord.gg/r3kdyTy"));
+        if (MoreCreepsConfig.sendDiscordLink)
+        {
+            event.player.sendMessage(new TextComponentString("Come join us on Discord! https://discord.gg/r3kdyTy"));
+        }
 
         if (MoreCreepsConfig.playWelcomeSound)
         {
