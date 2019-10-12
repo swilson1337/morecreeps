@@ -33,7 +33,7 @@ public class EntityLolliman extends EntityCreepBase
 
         setCreepTypeName("Lolliman");
 
-        setSize(0.9f, 3f);
+        setSize(0.9f, 3.0f);
 
         setModelSize(2.0f);
 

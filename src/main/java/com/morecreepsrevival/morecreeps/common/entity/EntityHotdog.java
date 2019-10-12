@@ -9,5 +9,9 @@ public class EntityHotdog extends EntityCreepBase
         super(world);
 
         setCreepTypeName("Hotdog");
+
+        setSize(0.5f, 0.75f);
+
+        baseHealth = (float)rand.nextInt(15) + 5.0f;
     }
 }

@@ -48,7 +48,7 @@ public class EntitySchlump extends EntityCreepBase
 
         baseSpeed = 0.0d;
 
-        baseHealth = rand.nextInt(10) + 10;
+        baseHealth = (float)rand.nextInt(10) + 10.0f;
 
         setModelSize(0.4f);
 
