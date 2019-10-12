@@ -281,25 +281,27 @@ public class EntityThief extends EntityCreepBase
 
     public void findPlayerToAttack()
     {
-        if (!getStolen())
+        if (getStolen() || getAttackTarget() != null)
         {
-            EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
+            return;
+        }
 
-            if (player != null)
+        EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
+
+        if (player != null)
+        {
+            for (ItemStack itemStack : player.inventory.mainInventory)
             {
-                for (ItemStack itemStack : player.inventory.mainInventory)
+                if (!itemStack.isEmpty())
                 {
-                    if (!itemStack.isEmpty())
+                    if (rand.nextInt(2) == 0)
                     {
-                        if (rand.nextInt(2) == 0)
-                        {
-                            playSound(CreepsSoundHandler.thiefFindPlayerSound, getSoundVolume(), getSoundPitch());
-                        }
-
-                        setAttackTarget(player);
-
-                        return;
+                        playSound(CreepsSoundHandler.thiefFindPlayerSound, getSoundVolume(), getSoundPitch());
                     }
+
+                    setAttackTarget(player);
+
+                    return;
                 }
             }
         }
