@@ -29,11 +29,11 @@ public class EntityEvilCreature extends EntityCreepBase
 
         creatureType = EnumCreatureType.MONSTER;
 
-        setSize(3.0f, 3.0f);
+        setSize(width * 3.0f, height * 3.0f);
 
         setModelSize(3.0f);
 
-        baseHealth = 110.0f;
+        baseHealth = (float)rand.nextInt(75) + 35.0f;
 
         baseSpeed = 0.2d;
 
