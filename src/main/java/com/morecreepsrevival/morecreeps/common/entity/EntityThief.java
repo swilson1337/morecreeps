@@ -348,4 +348,9 @@ public class EntityThief extends EntityCreepBase
             entityDropItem(itemStack, 0.0f);
         }
     }
+
+    @Override
+    protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier)
+    {
+    }
 }
