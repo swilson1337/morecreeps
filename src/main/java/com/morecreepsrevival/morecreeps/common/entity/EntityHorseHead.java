@@ -1,25 +1,39 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+
+import javax.annotation.Nullable;
 
 public class EntityHorseHead extends EntityCreepBase
 {
-    public int floatDir;
+    private int floatDir;
 
-    public double floatCycle;
+    private double floatCycle;
 
-    public double floatMaxCycle;
+    private double floatMaxCycle;
 
-    public int blastOff;
+    private int blastOff;
+
+    private int gallopTime;
+
+    private int blastOffTimer;
 
     public EntityHorseHead(World worldIn)
     {
@@ -37,7 +51,11 @@ public class EntityHorseHead extends EntityCreepBase
 
         floatMaxCycle = 0.10499999672174454d;
 
+        gallopTime = 0;
+
         blastOff = rand.nextInt(500) + 400;
+
+        blastOffTimer = 0;
 
         baseHealth = 25.0f;
 
@@ -94,22 +112,6 @@ public class EntityHorseHead extends EntityCreepBase
     protected void initEntityAI()
     {
         clearAITasks();
-
-        NodeProcessor nodeProcessor = getNavigator().getNodeProcessor();
-
-        nodeProcessor.setCanSwim(true);
-
-        nodeProcessor.setCanEnterDoors(true);
-
-        tasks.addTask(1, new EntityAISwimming(this));
-
-        tasks.addTask(2, new EntityAIBreakDoor(this));
-
-        tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.5d));
-
-        tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
-
-        tasks.addTask(5, new EntityAILookIdle(this));
     }
 
     @Override
@@ -126,7 +128,7 @@ public class EntityHorseHead extends EntityCreepBase
 
         fallDistance = -100.0f;
 
-        if (!isBeingRidden() && blastOff-- < 1)
+        if (!isBeingRidden() && blastOff-- < 0)
         {
             motionY += 0.15049999952316284d;
 
@@ -174,7 +176,7 @@ public class EntityHorseHead extends EntityCreepBase
             }
         }
 
-        if (isBeingRidden() && getRidingEntity() instanceof EntityPlayer)
+        if (isBeingRidden() && getControllingPassenger() instanceof EntityPlayer)
         {
             blastOff++;
 
@@ -185,7 +187,171 @@ public class EntityHorseHead extends EntityCreepBase
         }
 
         super.onUpdate();
+    }
 
+    @Override
+    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+        if (hand == EnumHand.OFF_HAND)
+        {
+            return false;
+        }
+        else if (player.isBeingRidden())
+        {
+            player.sendMessage(new TextComponentString("Unmount all creatures before riding your Horse Head."));
+
+            return false;
+        }
+
+        rotationYaw = player.rotationYaw;
+
+        rotationPitch = player.rotationPitch;
+
+        player.fallDistance = -15.0f;
+
+        if (!world.isRemote)
+        {
+            player.startRiding(this);
+        }
+
+        blastOff += rand.nextInt(500) + 200;
+
+        motionX = 0.0d;
+
+        motionY = 0.0d;
+
+        motionZ = 0.0d;
+
+        return true;
+    }
+
+    @Override @Nullable
+    public Entity getControllingPassenger()
+    {
+        return getFirstPassenger();
+    }
+
+    @Override
+    public void travel(float strafe, float vertical, float forward)
+    {
         motionY *= 0.80000001192092896d;
+
+        Entity ridingEntity = getControllingPassenger();
+
+        if (ridingEntity instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer)ridingEntity;
+
+            baseSpeed = 1.95d;
+
+            updateMoveSpeed();
+
+            player.lastTickPosY = 0.0d;
+
+            prevRotationYaw = rotationYaw = player.rotationYaw;
+
+            prevRotationPitch = rotationPitch = 0.0f;
+
+            float f = 1.0f;
+
+            double moveSpeed = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue();
+
+            if (moveSpeed > 0.01d && moveSpeed < 10.0d)
+            {
+                f = (float)moveSpeed;
+            }
+
+            forward = (player.moveForward / f) * (float)getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() * 4.95f;
+
+            strafe = (player.moveStrafing / f) * (float)getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() * 4.95f;
+
+            if (onGround && (forward != 0.0f || strafe != 0.0f))
+            {
+                motionY += 0.16100040078163147d;
+            }
+
+            if (forward == 0.0f || strafe == 0.0f)
+            {
+                isJumping = false;
+
+                gallopTime = 0;
+            }
+
+            if (forward != 0.0f && gallopTime++ > 10)
+            {
+                gallopTime = 0;
+
+                if (handleWaterMovement())
+                {
+                    playSound(CreepsSoundHandler.giraffeSplashSound, getSoundVolume(), 1.2f);
+                }
+                else
+                {
+                    playSound(CreepsSoundHandler.giraffeGallopSound, getSoundVolume(), 1.2f);
+                }
+            }
+
+            if (onGround && !isJumping)
+            {
+                isJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, player, 40);
+
+                if (isJumping)
+                {
+                    motionY += 0.37000000476837158d;
+                }
+            }
+
+            if (onGround && isJumping)
+            {
+                double d = Math.abs(Math.sqrt(motionX * motionX + motionZ * motionZ));
+
+                if (d > 0.13d)
+                {
+                    double d2 = 0.13d / d;
+
+                    motionX = motionX * d2;
+
+                    motionZ = motionZ * d2;
+                }
+
+                motionX *= 6.9500000000000002d;
+                motionZ *= 6.9500000000000002d;
+            }
+
+            if (MoreCreepsAndWeirdos.proxy.isJumpKeyDown() && posY < 120.0d)
+            {
+                motionY += 0.15049999952316284d;
+
+                double d1 = -MathHelper.sin((player.rotationYaw * (float)Math.PI) / 180.0f);
+
+                double d3 = MathHelper.cos((player.rotationYaw * (float)Math.PI) / 180.0f);
+
+                motionX += d1 * 0.15999999642372131d;
+
+                motionZ += d3 * 0.15999999642372131d;
+
+                if (blastOffTimer-- < 0)
+                {
+                    playSound(CreepsSoundHandler.horseHeadBlastOffSound, 1.0f, 1.0f);
+
+                    blastOffTimer = 10;
+                }
+
+                if (world.isRemote)
+                {
+                    // TODO: smoke
+                }
+            }
+
+            super.travel(strafe, vertical, forward);
+        }
+        else
+        {
+            baseSpeed = 0.95;
+
+            updateMoveSpeed();
+
+            super.travel(strafe, vertical, forward);
+        }
     }
 }

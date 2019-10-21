@@ -11,4 +11,6 @@ public interface IProxy
     void init(FMLInitializationEvent event);
 
     void postInit(FMLPostInitializationEvent event);
+
+    boolean isJumpKeyDown();
 }

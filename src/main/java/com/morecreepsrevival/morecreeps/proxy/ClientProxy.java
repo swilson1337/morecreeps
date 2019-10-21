@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.command.LevelUpTamedCreature;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.client.render.*;
 import com.morecreepsrevival.morecreeps.common.entity.*;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy implements IProxy
@@ -84,5 +86,11 @@ public class ClientProxy implements IProxy
     @Override
     public void postInit(FMLPostInitializationEvent event)
     {
+    }
+
+    @Override
+    public boolean isJumpKeyDown()
+    {
+        return Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
     }
 }
