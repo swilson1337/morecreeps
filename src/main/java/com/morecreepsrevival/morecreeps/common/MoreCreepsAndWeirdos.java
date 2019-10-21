@@ -7,6 +7,7 @@ import com.morecreepsrevival.morecreeps.common.networking.message.MessagePlayWel
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.world.WorldGenStructures;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -27,7 +28,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.*;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.*;
 
@@ -140,7 +143,8 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityThief.class, "thief", MoreCreepsConfig.thiefSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityFloob.class, "floob", MoreCreepsConfig.floobSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRay.class, "ray", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
         );
     }
 
@@ -271,6 +275,24 @@ public class MoreCreepsAndWeirdos
         if (MoreCreepsConfig.playWelcomeSound)
         {
             CreepsPacketHandler.INSTANCE.sendTo(new MessagePlayWelcomeSound(), (EntityPlayerMP)event.player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerTick(TickEvent.PlayerTickEvent event)
+    {
+        if (event.side != Side.CLIENT)
+        {
+            return;
+        }
+
+        boolean isJumping = Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
+
+        if (isJumping)
+        {
+        }
+        else
+        {
         }
     }
 }

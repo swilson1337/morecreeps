@@ -71,6 +71,8 @@ public class MoreCreepsConfig
 
     public static boolean sendDiscordLink = true;
 
+    public static int horseHeadSpawnAmt = 0;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -156,6 +158,8 @@ public class MoreCreepsConfig
             floobSpawnAmt = config.get(spawnNbr, "Floob", 7).getInt();
 
             floobShipSpawnAmt = config.get(spawnNbr, "Floob Ship", 2).getInt();
+
+            horseHeadSpawnAmt = config.get(spawnNbr, "Horse Head", 8).getInt();
 
             config.save();
         }
