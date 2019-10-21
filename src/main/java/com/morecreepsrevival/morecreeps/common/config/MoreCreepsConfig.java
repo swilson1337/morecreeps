@@ -65,6 +65,14 @@ public class MoreCreepsConfig
 
     public static int floobShipSpawnAmt = 0;
 
+    public static boolean sendWelcomeMessage = true;
+
+    public static boolean sendVersionInfo = true;
+
+    public static boolean sendDiscordLink = true;
+
+    public static int horseHeadSpawnAmt = 0;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -86,6 +94,12 @@ public class MoreCreepsConfig
             config.load();
 
             playWelcomeSound = config.get(miscProperty, "Play Welcome Sound", true, "Toggles the playing of the welcome sound when you load the world.").getBoolean();
+
+            sendVersionInfo = config.get(miscProperty, "Send Version Info", true, "Sends the current version of MoreCreeps in the chat when a player joins.").getBoolean();
+
+            sendWelcomeMessage = config.get(miscProperty, "Send Welcome Message", true, "Sends a welcome message in the chat to each player joining.").getBoolean();
+
+            sendDiscordLink = config.get(miscProperty, "Send Discord Link", true, "Sends a link to the official MoreCreeps Discord when a player joins.").getBoolean();
 
             unlimitedSpawn = config.get("Spawn", "Unlimited Spawn Length", false, "Once activated, you can set what value you want for mob spawning.").getBoolean();
 
@@ -144,6 +158,8 @@ public class MoreCreepsConfig
             floobSpawnAmt = config.get(spawnNbr, "Floob", 7).getInt();
 
             floobShipSpawnAmt = config.get(spawnNbr, "Floob Ship", 2).getInt();
+
+            horseHeadSpawnAmt = config.get(spawnNbr, "Horse Head", 8).getInt();
 
             config.save();
         }

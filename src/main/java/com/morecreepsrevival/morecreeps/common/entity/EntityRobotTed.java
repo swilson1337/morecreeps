@@ -18,9 +18,9 @@ public class EntityRobotTed extends EntityCreepBase
 
         setModelSize(2.5f);
 
-        setSize(1.875f, 4.625f);
+        setSize(2.5f * 0.75f, 2.5f * 1.85f);
 
-        baseHealth = 45.0f;
+        baseHealth = (float)rand.nextInt(20) + 25.0f;
 
         baseSpeed = 0.25d;
 

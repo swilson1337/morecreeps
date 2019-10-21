@@ -28,7 +28,7 @@ public class EntityMummy extends EntityCreepBase
 
         creatureType = EnumCreatureType.MONSTER;
 
-        baseHealth = 30.0f;
+        baseHealth = (float)rand.nextInt(10) + 20.0f;
 
         baseSpeed = 0.25d;
 

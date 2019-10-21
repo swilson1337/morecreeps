@@ -286,6 +286,18 @@ public class CreepsSoundHandler
 
     public static final SoundEvent floobShipSpawnSound = createSound("floobshipspawn");
 
+    public static final SoundEvent horseHeadSound = createSound("horsehead");
+
+    public static final SoundEvent hippoHurtSound = createSound("hippohurt");
+
+    public static final SoundEvent hippoDeathSound = createSound("hippodeath");
+
+    public static final SoundEvent giraffeSplashSound = createSound("giraffesplash");
+
+    public static final SoundEvent giraffeGallopSound = createSound("giraffegallop");
+
+    public static final SoundEvent horseHeadBlastOffSound = createSound("horseheadblastoff");
+
     public static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -434,7 +446,13 @@ public class CreepsSoundHandler
                 floobDeathSound,
                 floobShipSound,
                 floobShipDeathSound,
-                floobShipSpawnSound
+                floobShipSpawnSound,
+                horseHeadSound,
+                hippoHurtSound,
+                hippoDeathSound,
+                giraffeSplashSound,
+                giraffeGallopSound,
+                horseHeadBlastOffSound
         );
     }
 }

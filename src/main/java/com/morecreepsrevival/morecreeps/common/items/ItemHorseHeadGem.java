@@ -1,10 +1,12 @@
 package com.morecreepsrevival.morecreeps.common.items;
 
+import com.morecreepsrevival.morecreeps.common.entity.EntityHorseHead;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -29,7 +31,19 @@ public class ItemHorseHeadGem extends CreepsItem
 
         if (!world.isRemote)
         {
-            // TODO: spawn horse head entity
+            double d = -MathHelper.sin((player.rotationYaw * (float)Math.PI) / 180f);
+
+            double d1 = MathHelper.cos((player.rotationYaw * (float)Math.PI) / 180f);
+
+            EntityHorseHead horseHead = new EntityHorseHead(world);
+
+            horseHead.setLocationAndAngles(player.posX + d * 1.0d, player.posY + 1.0d, player.posZ + d1 * 1.0d, player.rotationYaw, 0.0f);
+
+            horseHead.determineBaseTexture();
+
+            horseHead.setInitialHealth();
+
+            world.spawnEntity(horseHead);
         }
 
         return super.onItemRightClick(world, player, hand);

@@ -392,7 +392,7 @@ public class JailManager
 
             int stackSize = itemStack.getCount();
 
-            chest1.setInventorySlotContents(i, new ItemStack(itemStack.getItem(), stackSize));
+            chest1.setInventorySlotContents(i, itemStack.copy());
 
             itemStack.shrink(stackSize);
         }

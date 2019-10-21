@@ -1055,6 +1055,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             {
                 world.spawnParticle(EnumParticleTypes.HEART, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + 0.5D + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
             }
+
+            updateEntityActionState();
         }
 
         int speedBoost = getSpeedBoost();
@@ -1794,5 +1796,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public boolean isLeftHanded()
     {
         return false;
+    }
+
+    protected Entity getFirstPassenger()
+    {
+        for (Entity entity : getPassengers())
+        {
+            return entity;
+        }
+
+        return null;
     }
 }

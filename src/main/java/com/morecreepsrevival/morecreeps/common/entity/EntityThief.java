@@ -35,7 +35,7 @@ public class EntityThief extends EntityCreepBase
 
         setCreepTypeName("Thief");
 
-        baseHealth = 30.0f;
+        baseHealth = (float)rand.nextInt(20) + 10.0f;
 
         baseSpeed = 0.35d;
 
@@ -281,25 +281,27 @@ public class EntityThief extends EntityCreepBase
 
     public void findPlayerToAttack()
     {
-        if (!getStolen())
+        if (getStolen() || getAttackTarget() != null)
         {
-            EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
+            return;
+        }
 
-            if (player != null)
+        EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
+
+        if (player != null)
+        {
+            for (ItemStack itemStack : player.inventory.mainInventory)
             {
-                for (ItemStack itemStack : player.inventory.mainInventory)
+                if (!itemStack.isEmpty())
                 {
-                    if (!itemStack.isEmpty())
+                    if (rand.nextInt(2) == 0)
                     {
-                        if (rand.nextInt(2) == 0)
-                        {
-                            playSound(CreepsSoundHandler.thiefFindPlayerSound, getSoundVolume(), getSoundPitch());
-                        }
-
-                        setAttackTarget(player);
-
-                        return;
+                        playSound(CreepsSoundHandler.thiefFindPlayerSound, getSoundVolume(), getSoundPitch());
                     }
+
+                    setAttackTarget(player);
+
+                    return;
                 }
             }
         }
@@ -345,5 +347,10 @@ public class EntityThief extends EntityCreepBase
         {
             entityDropItem(itemStack, 0.0f);
         }
+    }
+
+    @Override
+    protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier)
+    {
     }
 }

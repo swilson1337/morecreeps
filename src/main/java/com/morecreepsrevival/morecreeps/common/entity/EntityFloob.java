@@ -21,7 +21,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 
         setCreepTypeName("Floob");
 
-        baseHealth = 25.0f;
+        baseHealth = (float)rand.nextInt(15) + 10.0f;
 
         baseSpeed = 0.3d;
 
