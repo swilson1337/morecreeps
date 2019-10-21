@@ -5,13 +5,11 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -117,6 +115,14 @@ public class EntityHorseHead extends EntityCreepBase
     @Override
     public void onUpdate()
     {
+        if (world.isRemote)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, (posY - 0.5d) + rand.nextGaussian() * 0.2d, posZ, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+            }
+        }
+
         if (isEntityInsideOpaqueBlock())
         {
             posY += 2.5d;
@@ -139,6 +145,14 @@ public class EntityHorseHead extends EntityCreepBase
             motionX += d * 0.10999999940395355d;
 
             motionZ += d1 * 0.10999999940395355d;
+
+            if (world.isRemote)
+            {
+                for (int i = 0; i < 25; i++)
+                {
+                    world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, (posY - 0.5d) + rand.nextGaussian() * 0.2d, posZ, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+                }
+            }
 
             if (posY > 100.0d)
             {
@@ -270,7 +284,7 @@ public class EntityHorseHead extends EntityCreepBase
                 motionY += 0.16100040078163147d;
             }
 
-            if (forward == 0.0f || strafe == 0.0f)
+            if (forward == 0.0f && strafe == 0.0f)
             {
                 isJumping = false;
 
@@ -339,7 +353,10 @@ public class EntityHorseHead extends EntityCreepBase
 
                 if (world.isRemote)
                 {
-                    // TODO: smoke
+                    for (int i = 0; i < 25; i++)
+                    {
+                        world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, (posY - 0.5d) + rand.nextGaussian() * 0.2d, posZ, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+                    }
                 }
             }
 
