@@ -304,8 +304,6 @@ public class CreepsSoundHandler
 
     public static final SoundEvent hotdogDeathSound = createSound("hotdogdeath");
 
-    public static final SoundEvent digBugSound = createSound("digbug");
-
     public static final SoundEvent digBugDigSound = createSound("digbugdig");
 
     public static final SoundEvent digBugCallSound = createSound("digbugcall");
@@ -313,6 +311,12 @@ public class CreepsSoundHandler
     public static final SoundEvent digBugHurtSound = createSound("digbughurt");
 
     public static final SoundEvent digBugDeathSound = createSound("digbugdeath");
+
+    public static final SoundEvent bubbleScumSound = createSound("bubblescum");
+
+    public static final SoundEvent bubbleScumHurtSound = createSound("bubblescumhurt");
+
+    public static final SoundEvent bubbleScumDeathSound = createSound("bubblescumdeath");
 
     public static SoundEvent createSound(String soundName)
     {
@@ -472,11 +476,13 @@ public class CreepsSoundHandler
                 hotdogSound,
                 hotdogHurtSound,
                 hotdogDeathSound,
-                digBugSound,
                 digBugDigSound,
                 digBugCallSound,
                 digBugHurtSound,
-                digBugDeathSound
+                digBugDeathSound,
+                bubbleScumSound,
+                bubbleScumHurtSound,
+                bubbleScumDeathSound
         );
     }
 }
