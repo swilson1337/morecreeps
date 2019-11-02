@@ -34,7 +34,7 @@ public class EntityCastleGuard extends EntityCreepBase
 
         baseHealth = 20.0f;
 
-        baseSpeed = 0.35d;
+        baseSpeed = 0.25d;
 
         updateAttributes();
     }

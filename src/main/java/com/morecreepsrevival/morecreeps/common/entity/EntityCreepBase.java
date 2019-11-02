@@ -1401,7 +1401,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public int getMaxLevel()
     {
-        return 20;
+        return 1;
     }
 
     protected void setExperience(int i)

@@ -24,7 +24,7 @@ public class EntityCastleCritter extends EntityCreepBase
 
         baseHealth = 6.0f;
 
-        baseSpeed = 0.4d;
+        baseSpeed = 0.25d;
 
         updateAttributes();
     }

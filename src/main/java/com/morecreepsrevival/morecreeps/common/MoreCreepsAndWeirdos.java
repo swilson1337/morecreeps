@@ -144,7 +144,8 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityFloob.class, "floob", MoreCreepsConfig.floobSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRay.class, "ray", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityHotdog.class, "hotdog", MoreCreepsConfig.hotdogSpawnAmt, 1, 2, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
         );
     }
 

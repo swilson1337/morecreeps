@@ -64,7 +64,8 @@ public class EntityGuineaPig extends EntityCreepBase
             "Hyuna",
             "Mini",
             "Kai",
-            "GlockBoyKari"
+            "GlockBoyKari",
+            "Wonho"
     };
 
     private static final String[] levelNames = {
@@ -795,5 +796,11 @@ public class EntityGuineaPig extends EntityCreepBase
         props.setBoolean("HotelBuilt", getHotelBuilt());
 
         compound.setTag("MoreCreepsGuineaPig", props);
+    }
+
+    @Override
+    public int getMaxLevel()
+    {
+        return 20;
     }
 }
