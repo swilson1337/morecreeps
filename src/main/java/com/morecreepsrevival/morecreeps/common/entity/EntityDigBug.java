@@ -106,9 +106,9 @@ public class EntityDigBug extends EntityCreepBase
 
         if (prevPosX != posX || prevPosY != posY)
         {
-            skinFrame++;
-
             updateTexture();
+
+            skinFrame++;
 
             if (skinFrame > 3)
             {

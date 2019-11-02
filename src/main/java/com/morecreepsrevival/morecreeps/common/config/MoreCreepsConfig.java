@@ -73,6 +73,10 @@ public class MoreCreepsConfig
 
     public static int horseHeadSpawnAmt = 0;
 
+    public static int digBugSpawnAmt = 0;
+
+    public static int bubbleScumSpawnAmt = 0;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -160,6 +164,10 @@ public class MoreCreepsConfig
             floobShipSpawnAmt = config.get(spawnNbr, "Floob Ship", 2).getInt();
 
             horseHeadSpawnAmt = config.get(spawnNbr, "Horse Head", 8).getInt();
+
+            digBugSpawnAmt = config.get(spawnNbr, "Dig Bug", 7).getInt();
+
+            bubbleScumSpawnAmt = config.get(spawnNbr, "Bubble Scum", 8).getInt();
 
             config.save();
         }
