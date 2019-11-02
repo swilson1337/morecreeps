@@ -1,11 +1,9 @@
 name: Build
-
 on:
   push:
     branches:
       - alpha
       - master
-
 jobs:
   build:
     runs-on: ubuntu-latest
