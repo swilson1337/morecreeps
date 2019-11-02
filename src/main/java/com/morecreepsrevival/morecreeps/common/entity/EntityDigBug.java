@@ -158,8 +158,6 @@ public class EntityDigBug extends EntityCreepBase
     {
         switch (dataManager.get(digStage))
         {
-            case 0:
-                return CreepsSoundHandler.digBugSound;
             case 1:
             case 4:
                 return CreepsSoundHandler.digBugDigSound;

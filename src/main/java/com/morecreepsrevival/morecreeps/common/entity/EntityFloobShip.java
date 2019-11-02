@@ -1,10 +1,14 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.MoverType;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
@@ -12,17 +16,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityFloobShip extends EntityCreepBase
 {
-    private int lifespan;
+    private static final DataParameter<Integer> lifespan = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.VARINT);
 
-    private int floobCounter;
+    private static final DataParameter<Integer> floobCounter = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.VARINT);
 
-    private boolean landed = false;
+    private static final DataParameter<Boolean> landed = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.BOOLEAN);
 
-    private float bump = 2.0f;
+    private static final DataParameter<Float> bump = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.FLOAT);
 
-    private boolean firstReset = false;
+    private static final DataParameter<Boolean> firstReset = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.BOOLEAN);
 
     public EntityFloobShip(World worldIn)
     {
@@ -40,11 +46,23 @@ public class EntityFloobShip extends EntityCreepBase
 
         motionZ = rand.nextFloat() * 0.8f;
 
-        lifespan = rand.nextInt(10000) + 1500;
-
-        floobCounter = rand.nextInt(500) + 400;
-
         updateAttributes();
+    }
+
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+
+        dataManager.register(lifespan, rand.nextInt(10000) + 1500);
+
+        dataManager.register(floobCounter, rand.nextInt(500) + 400);
+
+        dataManager.register(landed, false);
+
+        dataManager.register(bump, 2.0f);
+
+        dataManager.register(firstReset, false);
     }
 
     @Override
@@ -163,7 +181,12 @@ public class EntityFloobShip extends EntityCreepBase
     @Override
     protected SoundEvent getDeathSound()
     {
-        return CreepsSoundHandler.floobShipDeathSound;
+        if (dataManager.get(lifespan) > 0)
+        {
+            return CreepsSoundHandler.floobShipDeathSound;
+        }
+
+        return null;
     }
 
     @Override
@@ -173,15 +196,20 @@ public class EntityFloobShip extends EntityCreepBase
 
         if (!world.isRemote)
         {
-            if (floobCounter > 0)
+            if (dataManager.get(floobCounter) > 0)
             {
-                floobCounter--;
+                dataManager.set(floobCounter, dataManager.get(floobCounter) - 1);
             }
 
-            if (lifespan > 0)
+            if (dataManager.get(lifespan) > 0)
             {
-                lifespan--;
+                dataManager.set(lifespan, dataManager.get(lifespan) - 1);
             }
+        }
+
+        if (dataManager.get(lifespan) < 1)
+        {
+            setDead();
         }
 
         if (handleWaterMovement())
@@ -193,27 +221,27 @@ public class EntityFloobShip extends EntityCreepBase
             motionX += 0.97999999999999998d;
         }
 
-        if (isJumping || landed)
+        if (isJumping || dataManager.get(landed))
         {
-            motionY = 0.d;
+            motionY = 0.0d;
 
-            bump = 0.0f;
+            dataManager.set(bump, 0.0f);
         }
 
-        if (!landed || !onGround)
+        if (!dataManager.get(landed) || !onGround)
         {
-            if (posY < 100.0d && !firstReset)
+            if (posY < 100.0d && !dataManager.get(firstReset))
             {
                 motionY = 4.0d;
 
-                bump = 4.0f;
+                dataManager.set(bump, 4.0f);
 
-                firstReset = true;
+                dataManager.set(firstReset, true);
             }
 
-            motionY = -0.2f + bump;
+            motionY = -0.2f + dataManager.get(bump);
 
-            bump *= 0.95999999999999996d;
+            dataManager.set(bump, dataManager.get(bump) * 0.95999999999999996f);
 
             motionX *= 0.97999999999999998d;
 
@@ -227,7 +255,7 @@ public class EntityFloobShip extends EntityCreepBase
                 {
                     thrusters();
 
-                    bump = 3.0f;
+                    dataManager.set(bump, 3.0f);
 
                     motionX = rand.nextFloat() * 2.8f;
 
@@ -237,15 +265,15 @@ public class EntityFloobShip extends EntityCreepBase
                 }
                 else
                 {
-                    landed = true;
+                    dataManager.set(landed, true);
                 }
             }
         }
-        else if (floobCounter < 1)
+        else if (dataManager.get(floobCounter) < 1)
         {
             thrusters();
 
-            floobCounter = rand.nextInt(300) + 400;
+            dataManager.set(floobCounter, rand.nextInt(300) + 400);
 
             playSound(CreepsSoundHandler.floobShipSpawnSound, getSoundVolume(), getSoundPitch());
 
@@ -301,6 +329,17 @@ public class EntityFloobShip extends EntityCreepBase
 
                 world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width - (double)i, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)i - (double)width, d, d1, d2);
             }
+        }
+    }
+
+    @Override
+    public void onDeath(@Nullable DamageSource cause)
+    {
+        super.onDeath(cause);
+
+        if (!world.isRemote && dataManager.get(lifespan) > 0 && MoreCreepsConfig.floobShipExplode)
+        {
+            world.createExplosion(null, posX, posY, posZ, 8.0f, true);
         }
     }
 }

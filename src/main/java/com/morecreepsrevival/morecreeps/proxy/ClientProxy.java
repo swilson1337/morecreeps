@@ -79,6 +79,8 @@ public class ClientProxy implements IProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityHotdog.class, new RenderHotdogFactory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityDigBug.class, new RenderDigBugFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityBubbleScum.class, new RenderBubbleScumFactory());
     }
 
     @Override
