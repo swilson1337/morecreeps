@@ -23,6 +23,8 @@ public class EntityHotdog extends EntityCreepBase
 {
     private static final DataParameter<Boolean> angryDog = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
 
+    private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
+
     private static final String[] textures = {
             "textures/entity/hotdg1",
             "textures/entity/hotdg2",
@@ -70,6 +72,8 @@ public class EntityHotdog extends EntityCreepBase
         super.entityInit();
 
         dataManager.register(angryDog, false);
+
+        dataManager.register(heavenBuilt, false);
     }
 
     @Override
@@ -191,11 +195,11 @@ public class EntityHotdog extends EntityCreepBase
                             player.sendMessage(new TextComponentString("Put your Hotdog down before building the Hotdog Heaven!"));
                         }
                     }
-                    /*else if (!getHotelBuilt())
+                    else if (!getHeavenBuilt())
                     {
                         if (getLevel() >= 20)
                         {
-                            if (createHotel(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
+                            /*if (createHotel(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
                             {
                                 //player.playSound(MoreCreepsAndWeirdos.achievementSound, 1.0f, 1.0f);
                                 // TODO: add achievements bro
@@ -203,19 +207,19 @@ public class EntityHotdog extends EntityCreepBase
                                 playSound(SoundEvents.ENTITY_TNT_PRIMED, 1.0f, 0.5f);
 
                                 itemStack.shrink(1);
-                            }
+                            }*/
                         }
                         else if (!world.isRemote)
                         {
-                            player.sendMessage(new TextComponentString("Your Guinea Pig must be level 20 to build a Hotel."));
+                            player.sendMessage(new TextComponentString("Your Hotdog must be level 20 to build a Hotdog Heaven."));
 
                             player.sendMessage(new TextComponentString("\247b" + getCreepName() + " is only level \247f" + getLevel() + "."));
                         }
                     }
                     else if (!world.isRemote)
                     {
-                        player.sendMessage(new TextComponentString("\247b" + getCreepName() + "\247f has already built a Hotel."));
-                    }*/
+                        player.sendMessage(new TextComponentString("\247b" + getCreepName() + "\247f has already built a Hotdog Heaven."));
+                    }
 
                     return true;
                 }
@@ -403,5 +407,21 @@ public class EntityHotdog extends EntityCreepBase
         }
 
         setModelSize(dogSize);
+    }
+
+    protected void setHeavenBuilt(boolean b)
+    {
+        dataManager.set(heavenBuilt, b);
+    }
+
+    public boolean getHeavenBuilt()
+    {
+        return dataManager.get(heavenBuilt);
+    }
+
+    @Override
+    protected boolean canUseTamableMenu()
+    {
+        return true;
     }
 }
