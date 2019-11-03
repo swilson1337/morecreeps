@@ -126,9 +126,11 @@ public class GuiTamableEntityTraining extends GuiScreen
 
         drawWorldBackground(1);
 
+        String creepType = entity.getCreepTypeName();
+
         drawCenteredString(fontRenderer, "\2476" + entity.getCreepName() + "\'s TRAINING", width / 2, height / 4 - 40, 0xffffff);
 
-        drawCenteredString(fontRenderer, "\247fGUINEA PIG LEVEL: \2473" + entity.getLevel(), width / 2, height / 4 - 25, 0xffffff);
+        drawCenteredString(fontRenderer, "\247f" + creepType + " LEVEL: \2473" + entity.getLevel(), width / 2, height / 4 - 25, 0xffffff);
 
         drawString(fontRenderer, buildStat(entity.getSkillAttack()), width / 2 - 107 + k, height / 4 + 38 + byte0, 0xff8d13);
 
@@ -138,9 +140,23 @@ public class GuiTamableEntityTraining extends GuiScreen
 
         drawString(fontRenderer, buildStat(entity.getSkillSpeed()), width / 2 + 16 + k, height / 4 + 95 + byte0, 0xff8d13);
 
-        drawCenteredString(fontRenderer, "\247fWHEAT REMAINING: \2473" + InventoryHelper.getItemCount(mc.player.inventory, Items.WHEAT), width / 2 + 2 + k, height / 4 + 120 + byte0, 0xff8d13);
+        switch (creepType)
+        {
+            case "Guinea Pig":
+                drawCenteredString(fontRenderer, "\247fWHEAT REMAINING: \2473" + InventoryHelper.getItemCount(mc.player.inventory, Items.WHEAT), width / 2 + 2 + k, height / 4 + 120 + byte0, 0xff8d13);
 
-        drawCenteredString(fontRenderer, "\2476Each level costs five wheat", width / 2 + 2 + k, height / 4 + 140 + byte0, 0xff8d13);
+                drawCenteredString(fontRenderer, "\2476Each level costs five wheat", width / 2 + 2 + k, height / 4 + 140 + byte0, 0xff8d13);
+
+                break;
+            case "Hotdog":
+                drawCenteredString(fontRenderer, "\247fBONES REMAINING: \2473" + InventoryHelper.getItemCount(mc.player.inventory, Items.BONE), width / 2 + 2 + k, height / 4 + 120 + byte0, 0xff8d13);
+
+                drawCenteredString(fontRenderer, "\2476Each level costs five bones", width / 2 + 2 + k, height / 4 + 140 + byte0, 0xff8d13);
+
+                break;
+            default:
+                break;
+        }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

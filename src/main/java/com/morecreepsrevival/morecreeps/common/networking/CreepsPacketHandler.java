@@ -35,6 +35,8 @@ public class CreepsPacketHandler
         registerMessage(MessagePlayPyramidDiscoveredSound.MessageHandler.class, MessagePlayPyramidDiscoveredSound.class, Side.CLIENT);
 
         registerMessage(MessagePlayBattleCastleSound.MessageHandler.class, MessagePlayBattleCastleSound.class, Side.CLIENT);
+
+        registerMessage(MessageLevelUpHotdogSkill.MessageHandler.class, MessageLevelUpHotdogSkill.class, Side.SERVER);
     }
 
     public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType, Side side)
