@@ -170,6 +170,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         updateTexture();
 
         updateAttackStrength();
+
+        updateModelSize();
+    }
+
+    protected void updateModelSize()
+    {
     }
 
     @Override
