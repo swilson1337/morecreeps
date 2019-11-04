@@ -64,7 +64,7 @@ public class EntityRobotTodd extends EntityCreepBase
 
         tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-        tasks.addTask(6, new EntityAIWatchClosest(this, EntityRobotTodd.class, 8.0f));
+        tasks.addTask(6, new EntityAIWatchClosest(this, EntityRobotTed.class, 8.0f));
 
         tasks.addTask(6, new EntityAILookIdle(this));
 

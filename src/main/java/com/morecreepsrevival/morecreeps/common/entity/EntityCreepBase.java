@@ -170,6 +170,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         updateTexture();
 
         updateAttackStrength();
+
+        updateModelSize();
+    }
+
+    protected void updateModelSize()
+    {
     }
 
     @Override
@@ -814,11 +820,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
                     if ((((EntityLivingBase)entity).getHealth() - damageDealt) <= 0.0f)
                     {
-                        SoundEvent angrySound = getAngrySound();
+                        SoundEvent killSound = getKillSound();
 
-                        if (angrySound != null)
+                        if (killSound != null)
                         {
-                            playSound(angrySound, getSoundVolume(), getSoundPitch());
+                            playSound(killSound, getSoundVolume(), getSoundPitch());
                         }
                     }
 
@@ -851,6 +857,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             }
 
             initEntityAI();
+
+            onMount();
         }
     }
 
@@ -875,6 +883,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         initEntityAI();
+
+        onUnmount();
+    }
+
+    protected void onMount()
+    {
+    }
+
+    protected void onUnmount()
+    {
     }
 
     @Override
@@ -1346,11 +1364,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         setWanderState(2);
 
-        SoundEvent fullSound = getFullSound();
+        SoundEvent tamedSound = getTamedSound();
 
-        if (fullSound != null)
+        if (tamedSound != null)
         {
-            playSound(fullSound, getSoundVolume(), getSoundPitch());
+            playSound(tamedSound, getSoundVolume(), getSoundPitch());
         }
 
         if (!world.isRemote)
@@ -1805,6 +1823,21 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             return entity;
         }
 
+        return null;
+    }
+
+    protected SoundEvent getKillSound()
+    {
+        return null;
+    }
+
+    protected SoundEvent getMissSound()
+    {
+        return null;
+    }
+
+    protected SoundEvent getTamedSound()
+    {
         return null;
     }
 }

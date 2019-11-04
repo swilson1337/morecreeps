@@ -1,14 +1,30 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class EntityHotdog extends EntityCreepBase
 {
+    private static final DataParameter<Boolean> angryDog = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
+
+    private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
+
     private static final String[] textures = {
             "textures/entity/hotdg1",
             "textures/entity/hotdg2",
@@ -41,11 +57,23 @@ public class EntityHotdog extends EntityCreepBase
 
         setSize(0.5f, 0.75f);
 
+        setModelSize(0.6f);
+
         baseHealth = (float)rand.nextInt(15) + 5.0f;
 
         baseSpeed = 0.35f;
 
         updateAttributes();
+    }
+
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+
+        dataManager.register(angryDog, false);
+
+        dataManager.register(heavenBuilt, false);
     }
 
     @Override
@@ -85,6 +113,54 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
+    protected SoundEvent getMountSound()
+    {
+        return CreepsSoundHandler.hotdogPickupSound;
+    }
+
+    @Override
+    protected SoundEvent getUnmountSound()
+    {
+        return CreepsSoundHandler.hotdogPutDownSound;
+    }
+
+    @Override
+    protected SoundEvent getEatSound()
+    {
+        return CreepsSoundHandler.hotdogEatSound;
+    }
+
+    @Override
+    protected SoundEvent getKillSound()
+    {
+        return CreepsSoundHandler.hotdogKillSound;
+    }
+
+    @Override
+    protected SoundEvent getAngrySound()
+    {
+        return CreepsSoundHandler.hotdogAttackSound;
+    }
+
+    @Override
+    protected SoundEvent getLevelUpSound()
+    {
+        return CreepsSoundHandler.guineaPigLevelUpSound;
+    }
+
+    @Override
+    protected SoundEvent getSpeedUpSound()
+    {
+        return CreepsSoundHandler.guineaPigSpeedUpSound;
+    }
+
+    @Override
+    protected SoundEvent getSpeedDownSound()
+    {
+        return CreepsSoundHandler.guineaPigSpeedDownSound;
+    }
+
+    @Override
     protected void dropItemsOnDeath()
     {
         dropItem(Items.PORKCHOP, 1);
@@ -104,6 +180,12 @@ public class EntityHotdog extends EntityCreepBase
 
     @Override
     public boolean isTamable()
+    {
+        return true;
+    }
+
+    @Override
+    protected boolean isStackable()
     {
         return true;
     }
@@ -130,5 +212,276 @@ public class EntityHotdog extends EntityCreepBase
     public int getMaxLevel()
     {
         return 25;
+    }
+
+    private void setAngryDog(boolean b)
+    {
+        dataManager.set(angryDog, b);
+    }
+
+    public boolean getAngryDog()
+    {
+        return dataManager.get(angryDog);
+    }
+
+    @Override
+    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+        if (hand == EnumHand.OFF_HAND)
+        {
+            return super.processInteract(player, hand);
+        }
+
+        ItemStack itemStack = player.getHeldItem(hand);
+
+        if (!itemStack.isEmpty())
+        {
+            Item item = itemStack.getItem();
+
+            if (isTamed() && isPlayerOwner(player))
+            {
+                if (item == Items.DIAMOND)
+                {
+                    if (isRiding())
+                    {
+                        if (!world.isRemote)
+                        {
+                            player.sendMessage(new TextComponentString("Put your Hotdog down before building the Hotdog Heaven!"));
+                        }
+                    }
+                    else if (!getHeavenBuilt())
+                    {
+                        if (getLevel() >= 20)
+                        {
+                            /*if (createHotel(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
+                            {
+                                //player.playSound(MoreCreepsAndWeirdos.achievementSound, 1.0f, 1.0f);
+                                // TODO: add achievements bro
+
+                                playSound(SoundEvents.ENTITY_TNT_PRIMED, 1.0f, 0.5f);
+
+                                itemStack.shrink(1);
+                            }*/
+                        }
+                        else if (!world.isRemote)
+                        {
+                            player.sendMessage(new TextComponentString("Your Hotdog must be level 20 to build a Hotdog Heaven."));
+
+                            player.sendMessage(new TextComponentString("\247b" + getCreepName() + " is only level \247f" + getLevel() + "."));
+                        }
+                    }
+                    else if (!world.isRemote)
+                    {
+                        player.sendMessage(new TextComponentString("\247b" + getCreepName() + "\247f has already built a Hotdog Heaven."));
+                    }
+
+                    return true;
+                }
+                else if (item == Item.getItemFromBlock(Blocks.RED_FLOWER) || item == Item.getItemFromBlock(Blocks.YELLOW_FLOWER))
+                {
+                    smokePlain();
+
+                    switch (getWanderState())
+                    {
+                        case 0:
+                            if (!world.isRemote)
+                            {
+                                player.sendMessage(new TextComponentString("\2473" + getCreepName() + "\2476 will \247dWANDER\2476 around and have fun."));
+                            }
+
+                            setWanderState(1);
+
+                            break;
+                        case 1:
+                            if (!world.isRemote)
+                            {
+                                player.sendMessage(new TextComponentString("\2473" + getCreepName() + "\2476 will \247dFIGHT\2476 and follow you!"));
+                            }
+
+                            setWanderState(2);
+
+                            break;
+                        case 2:
+                            if (!world.isRemote)
+                            {
+                                player.sendMessage(new TextComponentString("\2473" + getCreepName() + "\2476 will \247dSTAY\2476 right here."));
+                            }
+
+                            setWanderState(0);
+
+                            break;
+                        default:
+                            break;
+                    }
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+                else if (item == Items.REEDS)
+                {
+                    giveSpeedBoost(13000);
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+                else if (item == Items.LEATHER_BOOTS || item == Items.LEATHER_CHESTPLATE || item == Items.LEATHER_HELMET || item == Items.LEATHER_LEGGINGS)
+                {
+                    setArmor(1);
+
+                    setHealth(getMaxHealth());
+
+                    smoke();
+
+                    playSound(CreepsSoundHandler.guineaPigArmorSound, 1.0f, (rand.nextFloat() - rand.nextFloat()) * 0.2f + 1.0f);
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+                else if (item == Items.GOLDEN_BOOTS || item == Items.GOLDEN_CHESTPLATE || item == Items.GOLDEN_HELMET || item == Items.GOLDEN_LEGGINGS)
+                {
+                    setArmor(2);
+
+                    setHealth(getMaxHealth());
+
+                    smoke();
+
+                    playSound(CreepsSoundHandler.guineaPigArmorSound, 1.0f, (rand.nextFloat() - rand.nextFloat()) * 0.2f + 1.0f);
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+                else if (item == Items.IRON_BOOTS || item == Items.IRON_CHESTPLATE || item == Items.IRON_HELMET || item == Items.IRON_LEGGINGS)
+                {
+                    setArmor(3);
+
+                    setHealth(getMaxHealth());
+
+                    smoke();
+
+                    playSound(CreepsSoundHandler.guineaPigArmorSound, 1.0f, (rand.nextFloat() - rand.nextFloat()) * 0.2f + 1.0f);
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+                else if (item == Items.DIAMOND_BOOTS || item == Items.DIAMOND_CHESTPLATE || item == Items.DIAMOND_HELMET || item == Items.DIAMOND_LEGGINGS)
+                {
+                    setArmor(4);
+
+                    setHealth(getMaxHealth());
+
+                    smoke();
+
+                    playSound(CreepsSoundHandler.guineaPigArmorSound, 1.0f, (rand.nextFloat() - rand.nextFloat()) * 0.2f + 1.0f);
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+            }
+
+            if (item == Items.EGG)
+            {
+                playSound(SoundEvents.ENTITY_TNT_PRIMED, 1.0f, 0.5f);
+
+                setLocationAndAngles(player.posX, player.posY + (double)player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
+
+                motionX = -MathHelper.sin((rotationYaw / 180F) * (float)Math.PI) * MathHelper.cos((rotationPitch / 180F) * (float)Math.PI);
+
+                motionZ = MathHelper.cos((rotationYaw / 180F) * (float)Math.PI) * MathHelper.cos((rotationPitch / 180F) * (float)Math.PI);
+
+                double d = motionX / 100.0d;
+
+                double d1 = motionZ / 100.0d;
+
+                for (int i = 0; i < 2000; i++)
+                {
+                    move(MoverType.SELF, d, 0.0d, d1);
+
+                    world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+                }
+
+                world.createExplosion(null, posX, posY, posZ, 1.1f, true);
+
+                //interest = 0;
+
+                setDead();
+
+                itemStack.shrink(1);
+
+                return true;
+            }
+            else if (item == Items.BONE)
+            {
+                feed(player,10, 15);
+
+                smoke();
+
+                itemStack.shrink(1);
+
+                return true;
+            }
+            else if (item == Items.PORKCHOP)
+            {
+                feed(player,15, 30);
+
+                smoke();
+
+                itemStack.shrink(1);
+
+                return true;
+            }
+            else if (item == Items.COOKED_PORKCHOP)
+            {
+                feed(player,25, 55);
+
+                smoke();
+
+                itemStack.shrink(1);
+
+                return true;
+            }
+        }
+
+        return super.processInteract(player, hand);
+    }
+
+    @Override
+    protected void updateModelSize()
+    {
+        float dogSize = 0.6f + ((getLevel() - 1) * 0.05f);
+
+        if (dogSize > 1.5f)
+        {
+            dogSize = 1.5f;
+        }
+
+        setModelSize(dogSize);
+    }
+
+    protected void setHeavenBuilt(boolean b)
+    {
+        dataManager.set(heavenBuilt, b);
+    }
+
+    public boolean getHeavenBuilt()
+    {
+        return dataManager.get(heavenBuilt);
+    }
+
+    @Override
+    protected boolean canUseTamableMenu()
+    {
+        return true;
+    }
+
+    @Override
+    protected SoundEvent getTamedSound()
+    {
+        return CreepsSoundHandler.hotdogTamedSound;
     }
 }

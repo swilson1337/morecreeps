@@ -16,7 +16,9 @@ public class ModelBubbleScum extends ModelBase
     public ModelRenderer eyeR;
     public ModelRenderer mouth;
 
-    public boolean isSneak = false;
+    public boolean heldItemLeft;
+    public boolean heldItemRight;
+    public boolean isSneak;
 
     public ModelBubbleScum()
     {
@@ -30,6 +32,10 @@ public class ModelBubbleScum extends ModelBase
 
     public ModelBubbleScum(float f, float f1)
     {
+        heldItemLeft = false;
+        heldItemRight = false;
+        isSneak = false;
+
         f1 = 2.0F;
         bipedBody = new ModelRenderer(this, 0, 0);
         bipedBody.addBox(-4F, 0.0F, -4F, 8, 8, 8, f);
@@ -95,8 +101,43 @@ public class ModelBubbleScum extends ModelBase
             bipedLeftLeg.rotateAngleY = -((float)Math.PI / 10F);
         }
 
+        if (heldItemLeft)
+        {
+            bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F);
+        }
+
+        if (heldItemRight)
+        {
+            bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F);
+        }
+
         bipedRightArm.rotateAngleY = 0.0F;
         bipedLeftArm.rotateAngleY = 0.0F;
+
+        if (swingProgress > -9990F)
+        {
+            float f6 = swingProgress;
+            bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt(f6) * (float)Math.PI * 2.0F) * 0.2F;
+            eyeL.rotateAngleY = bipedBody.rotateAngleY;
+            eyeR.rotateAngleY = bipedBody.rotateAngleY;
+            mouth.rotateAngleY = bipedBody.rotateAngleY;
+            bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 5F;
+            bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 5F;
+            bipedLeftArm.rotationPointZ = -MathHelper.sin(bipedBody.rotateAngleY) * 5F;
+            bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 5F;
+            bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
+            bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
+            bipedLeftArm.rotateAngleX += bipedBody.rotateAngleX;
+            f6 = 1.0F - swingProgress;
+            f6 *= f6;
+            f6 *= f6;
+            f6 = 1.0F - f6;
+            float f7 = MathHelper.sin(f6 * (float)Math.PI);
+            float f8 = MathHelper.sin(swingProgress * (float)Math.PI) * 0.75F;
+            bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+            bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+            bipedRightArm.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
+        }
 
         if (isSneak)
         {
