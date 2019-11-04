@@ -318,6 +318,38 @@ public class CreepsSoundHandler
 
     public static final SoundEvent bubbleScumDeathSound = createSound("bubblescumdeath");
 
+    public static final SoundEvent hotdogTrainSound = createSound("hotdogtrain");
+
+    public static final SoundEvent hotdogNoBonesSound = createSound("hotdognobones");
+
+    public static final SoundEvent hotdog5LevelSound = createSound("hotdog5level");
+
+    public static final SoundEvent hotdog10LevelSound = createSound("hotdog10level");
+
+    public static final SoundEvent hotdog15LevelSound = createSound("hotdog15level");
+
+    public static final SoundEvent hotdog20LevelSound = createSound("hotdog20level");
+
+    public static final SoundEvent hotdogPickupSound = createSound("hotdogpickup");
+
+    public static final SoundEvent hotdogPutDownSound = createSound("hotdogputdown");
+
+    public static final SoundEvent hotdogEatSound = createSound("hotdogeat");
+
+    public static final SoundEvent hotdogAttackSound = createSound("hotdogattack");
+
+    public static final SoundEvent hotdogKillSound = createSound("hotdogkill");
+
+    public static final SoundEvent hotdogTamedSound = createSound("hotdogtamed");
+
+    public static final SoundEvent digBugEatSound = createSound("digbugeat");
+
+    public static final SoundEvent digBugFullSound = createSound("digbugfull");
+
+    public static final SoundEvent bubbleScumPickupSound = createSound("bubblescumpickup");
+
+    public static final SoundEvent bubbleScumPutDownSound = createSound("bubblescumputdown");
+
     public static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -482,7 +514,23 @@ public class CreepsSoundHandler
                 digBugDeathSound,
                 bubbleScumSound,
                 bubbleScumHurtSound,
-                bubbleScumDeathSound
+                bubbleScumDeathSound,
+                hotdogTrainSound,
+                hotdogNoBonesSound,
+                hotdog5LevelSound,
+                hotdog10LevelSound,
+                hotdog15LevelSound,
+                hotdog20LevelSound,
+                hotdogPickupSound,
+                hotdogPutDownSound,
+                hotdogEatSound,
+                hotdogAttackSound,
+                hotdogKillSound,
+                hotdogTamedSound,
+                digBugEatSound,
+                digBugFullSound,
+                bubbleScumPickupSound,
+                bubbleScumPutDownSound
         );
     }
 }

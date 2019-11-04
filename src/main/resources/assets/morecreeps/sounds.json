@@ -1822,6 +1822,15 @@
 			}
 		]
 	},
+	"digbugeat": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:digbugeat",
+				"stream": false
+			}
+		]
+	},
 	"digbugdeath": {
 		"category": "master",
 		"sounds": [

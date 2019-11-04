@@ -113,6 +113,54 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
+    protected SoundEvent getMountSound()
+    {
+        return CreepsSoundHandler.hotdogPickupSound;
+    }
+
+    @Override
+    protected SoundEvent getUnmountSound()
+    {
+        return CreepsSoundHandler.hotdogPutDownSound;
+    }
+
+    @Override
+    protected SoundEvent getEatSound()
+    {
+        return CreepsSoundHandler.hotdogEatSound;
+    }
+
+    @Override
+    protected SoundEvent getKillSound()
+    {
+        return CreepsSoundHandler.hotdogKillSound;
+    }
+
+    @Override
+    protected SoundEvent getAngrySound()
+    {
+        return CreepsSoundHandler.hotdogAttackSound;
+    }
+
+    @Override
+    protected SoundEvent getLevelUpSound()
+    {
+        return CreepsSoundHandler.guineaPigLevelUpSound;
+    }
+
+    @Override
+    protected SoundEvent getSpeedUpSound()
+    {
+        return CreepsSoundHandler.guineaPigSpeedUpSound;
+    }
+
+    @Override
+    protected SoundEvent getSpeedDownSound()
+    {
+        return CreepsSoundHandler.guineaPigSpeedDownSound;
+    }
+
+    @Override
     protected void dropItemsOnDeath()
     {
         dropItem(Items.PORKCHOP, 1);
@@ -132,6 +180,12 @@ public class EntityHotdog extends EntityCreepBase
 
     @Override
     public boolean isTamable()
+    {
+        return true;
+    }
+
+    @Override
+    protected boolean isStackable()
     {
         return true;
     }
@@ -423,5 +477,11 @@ public class EntityHotdog extends EntityCreepBase
     protected boolean canUseTamableMenu()
     {
         return true;
+    }
+
+    @Override
+    protected SoundEvent getTamedSound()
+    {
+        return CreepsSoundHandler.hotdogTamedSound;
     }
 }

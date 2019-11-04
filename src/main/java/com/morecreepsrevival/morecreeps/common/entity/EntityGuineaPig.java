@@ -208,6 +208,18 @@ public class EntityGuineaPig extends EntityCreepBase
     }
 
     @Override
+    protected SoundEvent getKillSound()
+    {
+        return CreepsSoundHandler.guineaPigAngrySound;
+    }
+
+    @Override
+    protected SoundEvent getTamedSound()
+    {
+        return CreepsSoundHandler.guineaPigFullSound;
+    }
+
+    @Override
     public int getMaxSpawnedInChunk()
     {
         return 2;
