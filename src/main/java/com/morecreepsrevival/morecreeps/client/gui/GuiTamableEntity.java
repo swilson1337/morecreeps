@@ -143,7 +143,7 @@ public class GuiTamableEntity extends GuiScreen
 
         drawWorldBackground(1);
 
-        drawCenteredString(fontRenderer, "GUINEA PIG COMMAND CENTER", width / 2, height / 4 - 40, 0xffffff);
+        drawCenteredString(fontRenderer, entity.getCreepTypeName().toUpperCase() + " COMMAND CENTER", width / 2, height / 4 - 40, 0xffffff);
 
         nameScreen.drawTextBox();
 

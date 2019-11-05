@@ -1,6 +1,7 @@
 package com.morecreepsrevival.morecreeps.common;
 
 import com.morecreepsrevival.morecreeps.common.entity.*;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
 import com.morecreepsrevival.morecreeps.proxy.IProxy;
 import com.morecreepsrevival.morecreeps.common.capabilities.CreepsCapabilityHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessagePlayWelcomeSound;
@@ -27,10 +28,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.relauncher.Side;
+import org.lwjgl.input.Mouse;
 
 import java.util.*;
 
@@ -41,7 +44,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.8";
+    public static final String version = "1.0.9";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -137,14 +140,17 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityRobotTodd.class, "robot_todd", MoreCreepsConfig.robotToddSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xA4A4A4, 0xFFC500, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityLawyerFromHell.class, "lawyer_from_hell", MoreCreepsConfig.lawyerFromHellSpawnAmt, 1, 4, EnumCreatureType.CREATURE, 0x7A7D7B, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityMoney.class, "money", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntityBigBaby.class, "bigbaby", MoreCreepsConfig.bigBabySpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityBigBaby.class, "bigbaby", MoreCreepsConfig.bigBabySpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xC2B76E, 0xF8A9FF, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityShrink.class, "shrink", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntitySchlump.class, "schlump", 0, 0, 0, EnumCreatureType.CREATURE),
-                createEntity(EntityThief.class, "thief", MoreCreepsConfig.thiefSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityFloob.class, "floob", MoreCreepsConfig.floobSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntitySchlump.class, "schlump", 0, 0, 0, EnumCreatureType.CREATURE, 0x69572A, 0x000000),
+                createEntity(EntityThief.class, "thief", MoreCreepsConfig.thiefSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xDC9E22, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityFloob.class, "floob", MoreCreepsConfig.floobSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x29FF17, 0xE5E7E4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRay.class, "ray", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xF9C41C, 0xEAF72A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF07F3, 0x84653A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityHotdog.class, "hotdog", MoreCreepsConfig.hotdogSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0x7C5C32, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityDigBug.class, "digbug", MoreCreepsConfig.digBugSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x58BA4C, 0xE6DD58, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityBubbleScum.class, "bubblescum", MoreCreepsConfig.bubbleScumSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xCE51BE, 0x67E6ED, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
         );
     }
 
@@ -286,13 +292,36 @@ public class MoreCreepsAndWeirdos
             return;
         }
 
-        boolean isJumping = Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
+        Minecraft minecraft = Minecraft.getMinecraft();
+
+        boolean isJumping = minecraft.gameSettings.keyBindJump.isKeyDown();
 
         if (isJumping)
         {
         }
         else
         {
+        }
+    }
+
+    @SubscribeEvent
+    public static void mouseInputEvent(InputEvent.MouseInputEvent event)
+    {
+        Minecraft minecraft = Minecraft.getMinecraft();
+
+        if (Mouse.getEventButton() == 1)
+        {
+            for (Entity entity : minecraft.player.getPassengers())
+            {
+                if (entity instanceof EntityBubbleScum && ((EntityBubbleScum)entity).getUnmountTimer() < 1)
+                {
+                    ((EntityBubbleScum)entity).dismount();
+
+                    CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(entity.getEntityId()));
+
+                    break;
+                }
+            }
         }
     }
 }

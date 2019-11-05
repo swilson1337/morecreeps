@@ -67,6 +67,8 @@ entity.schlump.name=Schlump
 entity.floob.name=Floob
 entity.floobship.name=Floob Ship
 entity.horsehead.name=Horse Head
+entity.digbug.name=Dig Bug
+entity.bubblescum.name=Bubble Scum
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

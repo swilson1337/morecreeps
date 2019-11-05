@@ -30,6 +30,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
@@ -112,6 +113,17 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
+    public boolean isEntityInvulnerable(@Nonnull DamageSource damageSource)
+    {
+        if (isRiding())
+        {
+            return true;
+        }
+
+        return super.isEntityInvulnerable(damageSource);
+    }
+
+    @Override
     protected void entityInit()
     {
         super.entityInit();
@@ -170,6 +182,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         updateTexture();
 
         updateAttackStrength();
+
+        updateModelSize();
+    }
+
+    protected void updateModelSize()
+    {
     }
 
     @Override
@@ -586,7 +604,18 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         addInterest(interestToAdd, player);
 
-        SoundEvent eatSound = ((getHealth() >= getMaxHealth()) ? getFullSound() : getEatSound());
+        SoundEvent fullSound = getFullSound();
+
+        SoundEvent eatSound = null;
+
+        if (getHealth() >= getMaxHealth() && fullSound != null)
+        {
+            eatSound = fullSound;
+        }
+        else
+        {
+            eatSound = getEatSound();
+        }
 
         if (eatSound != null)
         {
@@ -814,11 +843,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
                     if ((((EntityLivingBase)entity).getHealth() - damageDealt) <= 0.0f)
                     {
-                        SoundEvent angrySound = getAngrySound();
+                        SoundEvent killSound = getKillSound();
 
-                        if (angrySound != null)
+                        if (killSound != null)
                         {
-                            playSound(angrySound, getSoundVolume(), getSoundPitch());
+                            playSound(killSound, getSoundVolume(), getSoundPitch());
                         }
                     }
 
@@ -850,7 +879,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 player.playSound(mountSound, getSoundVolume(), getSoundPitch());
             }
 
+            dataManager.set(unmountTimer, 20);
+
             initEntityAI();
+
+            onMount(player);
         }
     }
 
@@ -865,6 +898,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         dataManager.set(unmountTimer, 20);
 
+        Entity riding = getRidingEntity();
+
         dismountRidingEntity();
 
         SoundEvent unmountSound = getUnmountSound();
@@ -875,6 +910,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         initEntityAI();
+
+        onUnmount(riding);
+    }
+
+    protected void onMount(Entity entity)
+    {
+    }
+
+    protected void onUnmount(Entity entity)
+    {
     }
 
     @Override
@@ -1346,11 +1391,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         setWanderState(2);
 
-        SoundEvent fullSound = getFullSound();
+        SoundEvent tamedSound = getTamedSound();
 
-        if (fullSound != null)
+        if (tamedSound != null)
         {
-            playSound(fullSound, getSoundVolume(), getSoundPitch());
+            playSound(tamedSound, getSoundVolume(), getSoundPitch());
         }
 
         if (!world.isRemote)
@@ -1401,7 +1446,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public int getMaxLevel()
     {
-        return 20;
+        return 1;
     }
 
     protected void setExperience(int i)
@@ -1806,5 +1851,25 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         return null;
+    }
+
+    protected SoundEvent getKillSound()
+    {
+        return null;
+    }
+
+    protected SoundEvent getMissSound()
+    {
+        return null;
+    }
+
+    protected SoundEvent getTamedSound()
+    {
+        return null;
+    }
+
+    public int getUnmountTimer()
+    {
+        return dataManager.get(unmountTimer);
     }
 }
