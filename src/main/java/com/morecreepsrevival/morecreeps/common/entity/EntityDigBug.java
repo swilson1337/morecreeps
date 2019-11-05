@@ -238,10 +238,6 @@ public class EntityDigBug extends EntityCreepBase
                 {
                     block = Blocks.COAL_ORE;
                 }
-                else if (block == Blocks.GRASS)
-                {
-                    block = Blocks.DIRT;
-                }
 
                 if (block != Blocks.SAND && block != Blocks.LOG)
                 {
@@ -249,7 +245,7 @@ public class EntityDigBug extends EntityCreepBase
 
                     for (int i = 0; i < randInt; i++)
                     {
-                        EntityItem entityItem = new EntityItem(world, dataManager.get(holePos).getX() + dataManager.get(digPosition).getX(), (dataManager.get(holePos).getY() - dataManager.get(digPosition).getY()) + 1.0d, dataManager.get(holePos).getZ() + dataManager.get(digPosition).getZ(), new ItemStack(block, 1, 1));
+                        EntityItem entityItem = new EntityItem(world, dataManager.get(holePos).getX() + dataManager.get(digPosition).getX(), (dataManager.get(holePos).getY() - dataManager.get(digPosition).getY()) + 1.0d, dataManager.get(holePos).getZ() + dataManager.get(digPosition).getZ(), new ItemStack(block, 1));
 
                         if (!world.isRemote)
                         {
