@@ -30,6 +30,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
@@ -109,6 +110,17 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         return SoundCategory.NEUTRAL;
+    }
+
+    @Override
+    public boolean isEntityInvulnerable(@Nonnull DamageSource damageSource)
+    {
+        if (isRiding())
+        {
+            return true;
+        }
+
+        return super.isEntityInvulnerable(damageSource);
     }
 
     @Override
@@ -592,7 +604,18 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         addInterest(interestToAdd, player);
 
-        SoundEvent eatSound = ((getHealth() >= getMaxHealth()) ? getFullSound() : getEatSound());
+        SoundEvent fullSound = getFullSound();
+
+        SoundEvent eatSound = null;
+
+        if (getHealth() >= getMaxHealth() && fullSound != null)
+        {
+            eatSound = fullSound;
+        }
+        else
+        {
+            eatSound = getEatSound();
+        }
 
         if (eatSound != null)
         {
@@ -856,9 +879,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 player.playSound(mountSound, getSoundVolume(), getSoundPitch());
             }
 
+            dataManager.set(unmountTimer, 20);
+
             initEntityAI();
 
-            onMount();
+            onMount(player);
         }
     }
 
@@ -873,6 +898,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         dataManager.set(unmountTimer, 20);
 
+        Entity riding = getRidingEntity();
+
         dismountRidingEntity();
 
         SoundEvent unmountSound = getUnmountSound();
@@ -884,14 +911,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         initEntityAI();
 
-        onUnmount();
+        onUnmount(riding);
     }
 
-    protected void onMount()
+    protected void onMount(Entity entity)
     {
     }
 
-    protected void onUnmount()
+    protected void onUnmount(Entity entity)
     {
     }
 
@@ -1839,5 +1866,10 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     protected SoundEvent getTamedSound()
     {
         return null;
+    }
+
+    public int getUnmountTimer()
+    {
+        return dataManager.get(unmountTimer);
     }
 }

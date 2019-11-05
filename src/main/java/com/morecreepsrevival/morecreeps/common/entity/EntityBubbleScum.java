@@ -64,8 +64,6 @@ public class EntityBubbleScum extends EntityCreepBase
     {
         if (getAttackTarget() instanceof EntityPlayer)
         {
-            playSound(CreepsSoundHandler.kidNoPickupSound, getSoundVolume(), getSoundPitch());
-
             return;
         }
 
@@ -81,7 +79,7 @@ public class EntityBubbleScum extends EntityCreepBase
     @Override
     public int getMaxSpawnedInChunk()
     {
-        return 12;
+        return 2;
     }
 
     @Override
@@ -132,5 +130,21 @@ public class EntityBubbleScum extends EntityCreepBase
     protected SoundEvent getUnmountSound()
     {
         return CreepsSoundHandler.bubbleScumPutDownSound;
+    }
+
+    @Override
+    protected void onUnmount(Entity entity)
+    {
+        double d = -MathHelper.sin((entity.rotationYaw * (float)Math.PI) / 180.0f);
+
+        double d1 = MathHelper.cos((entity.rotationYaw * (float)Math.PI) / 180.0f);
+
+        double d2 = -MathHelper.sin((entity.rotationPitch / 180.0f) * (float)Math.PI);
+
+        motionX = 1.0d * d;
+
+        motionZ = 1.0d * d1;
+
+        motionY = 1.0d * d2;
     }
 }
