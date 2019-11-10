@@ -8,14 +8,14 @@
   "key": {
     "x": {
       "item": "minecraft:dye",
-      "data": 2
+      "data": 4
     },
     "a": {
-      "item": "minecraft:paper"
+      "item": "minecraft:clay_ball"
     }
   },
   "result": {
-    "item": "morecreeps:money",
-    "count": 10
+    "item": "morecreeps:frisbee",
+    "count": 4
   }
 }

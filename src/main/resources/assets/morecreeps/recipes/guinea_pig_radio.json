@@ -7,15 +7,14 @@
   ],
   "key": {
     "x": {
-      "item": "minecraft:dye",
-      "data": 2
+      "item": "minecraft:wheat"
     },
     "a": {
-      "item": "minecraft:paper"
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "morecreeps:money",
-    "count": 10
+    "item": "morecreeps:guinea_pig_radio",
+    "count": 1
   }
 }
