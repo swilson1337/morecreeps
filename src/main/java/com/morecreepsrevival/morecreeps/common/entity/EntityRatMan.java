@@ -23,7 +23,7 @@ public class EntityRatMan extends EntityCreepBase
 
         baseHealth = 7.0f;
 
-        baseSpeed = 0.25d;
+        baseSpeed = 0.3d;
 
         updateAttributes();
     }
@@ -57,7 +57,7 @@ public class EntityRatMan extends EntityCreepBase
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, true));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
     @Override

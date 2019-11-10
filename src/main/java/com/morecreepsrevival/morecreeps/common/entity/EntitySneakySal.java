@@ -1,13 +1,15 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -24,6 +26,8 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         setSize(1.5f, 4.0f);
 
         setModelSize(1.5f);
+
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.gun));
 
         baseHealth = (float)rand.nextInt(50) + 50.0f;
 

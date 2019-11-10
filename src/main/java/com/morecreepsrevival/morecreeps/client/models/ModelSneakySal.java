@@ -1,18 +1,14 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelSneakySal extends ModelBase
+import javax.annotation.Nonnull;
+
+public class ModelSneakySal extends ModelBiped
 {
-    public ModelRenderer bipedLeftLeg;
-    public ModelRenderer bipedRightLeg;
-    public ModelRenderer body;
-    public ModelRenderer tonyHead;
-    public ModelRenderer bipedLeftArm;
-    public ModelRenderer bipedRightArm;
     public ModelRenderer footR;
     public ModelRenderer footL;
     public ModelRenderer cigar;
@@ -30,20 +26,20 @@ public class ModelSneakySal extends ModelBase
         bipedRightLeg = new ModelRenderer(this, 16, 22);
         bipedRightLeg.addBox(-1.5F, 0.0F, -1.5F, 3, 7, 3, 0.0F);
         bipedRightLeg.setRotationPoint(-4F, 17F, 0.0F);
-        body = new ModelRenderer(this, 28, 16);
-        body.addBox(-6.5F, -4.5F, -3.5F, 11, 9, 7, 1.5F);
-        body.setRotationPoint(1.0F, 12.6F, -0.5F);
-        body.rotateAngleX = 0.118628F;
-        body.rotateAngleY = 0.0F;
-        body.rotateAngleZ = 0.0F;
-        body.mirror = false;
-        tonyHead = new ModelRenderer(this, 0, 0);
-        tonyHead.addBox(-3F, -4F, -4F, 6, 4, 6, 0.0F);
-        tonyHead.setRotationPoint(0.0F, 7F, 0.0F);
-        tonyHead.rotateAngleX = -0.06981317F;
-        tonyHead.rotateAngleY = 0.0F;
-        tonyHead.rotateAngleZ = 0.0F;
-        tonyHead.mirror = false;
+        bipedBody = new ModelRenderer(this, 28, 16);
+        bipedBody.addBox(-6.5F, -4.5F, -3.5F, 11, 9, 7, 1.5F);
+        bipedBody.setRotationPoint(1.0F, 12.6F, -0.5F);
+        bipedBody.rotateAngleX = 0.118628F;
+        bipedBody.rotateAngleY = 0.0F;
+        bipedBody.rotateAngleZ = 0.0F;
+        bipedBody.mirror = false;
+        bipedHead = new ModelRenderer(this, 0, 0);
+        bipedHead.addBox(-3F, -4F, -4F, 6, 4, 6, 0.0F);
+        bipedHead.setRotationPoint(0.0F, 7F, 0.0F);
+        bipedHead.rotateAngleX = -0.06981317F;
+        bipedHead.rotateAngleY = 0.0F;
+        bipedHead.rotateAngleZ = 0.0F;
+        bipedHead.mirror = false;
         bipedLeftArm = new ModelRenderer(this, 0, 20);
         bipedLeftArm.addBox(0.0F, 0.0F, -2F, 4, 8, 4, 0.0F);
         bipedLeftArm.setRotationPoint(7F, 8F, 0.0F);
@@ -103,13 +99,14 @@ public class ModelSneakySal extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
         bipedLeftLeg.render(f5);
         bipedRightLeg.render(f5);
-        body.render(f5);
-        tonyHead.render(f5);
+        bipedBody.render(f5);
+        bipedHead.render(f5);
         bipedLeftArm.render(f5);
         bipedRightArm.render(f5);
         footR.render(f5);
@@ -121,9 +118,9 @@ public class ModelSneakySal extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, @Nonnull Entity entity)
     {
-        cigar.rotateAngleY = hatBrim.rotateAngleY = hat.rotateAngleY = tonyHead.rotateAngleY = f3 / (180F / (float)Math.PI);
+        cigar.rotateAngleY = hatBrim.rotateAngleY = hat.rotateAngleY = bipedHead.rotateAngleY = f3 / (180F / (float)Math.PI);
         watch.rotateAngleX = bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
         bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
         bipedRightArm.rotateAngleZ = 0.0F;
