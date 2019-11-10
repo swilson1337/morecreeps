@@ -1,8 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.world;
 
-import com.morecreepsrevival.morecreeps.common.entity.EntityCreepBase;
-import com.morecreepsrevival.morecreeps.common.entity.EntityLawyerFromHell;
-import com.morecreepsrevival.morecreeps.common.entity.EntityMummy;
+import com.morecreepsrevival.morecreeps.common.entity.*;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
@@ -666,19 +664,49 @@ public class JailManager
             return;
         }
 
-        int k = rand.nextInt(5);
-
-        switch (k + 1)
+        switch (rand.nextInt(5) + 1)
         {
+            case 1:
+                EntityRatMan ratMan = new EntityRatMan(world);
+
+                ratMan.setLocationAndAngles(placeX, placeY, placeZ, player.rotationYaw, 0.0f);
+
+                ratMan.setInitialHealth();
+
+                ratMan.determineBaseTexture();
+
+                world.spawnEntity(ratMan);
+
+                break;
+            case 3:
+                // TODO: spawn camel jockey
+
+                break;
             case 4:
                 EntityMummy mummy = new EntityMummy(world);
 
                 mummy.setLocationAndAngles(placeX, placeY, placeZ, player.rotationYaw, 0.0f);
 
+                mummy.setInitialHealth();
+
+                mummy.determineBaseTexture();
+
                 world.spawnEntity(mummy);
 
                 break;
+            case 2:
+            case 5:
             default:
+                EntityPrisoner prisoner = new EntityPrisoner(world);
+
+                prisoner.setLocationAndAngles(placeX, placeY, placeZ, player.rotationYaw, 0.0f);
+
+                prisoner.setInitialHealth();
+
+                prisoner.determineBaseTexture();
+
+                world.spawnEntity(prisoner);
+
                 break;
         }
     }

@@ -104,4 +104,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     {
         return CreepsSoundHandler.salDeadSound;
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return 1;
+    }
 }
