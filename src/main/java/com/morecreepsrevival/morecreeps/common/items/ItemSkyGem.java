@@ -10,7 +10,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemSkyGem extends CreepsItem
 {
@@ -33,8 +33,8 @@ public class ItemSkyGem extends CreepsItem
         setMaxDamage(32);
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nullable EnumHand hand)
+    @Override @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
         player.playSound(CreepsSoundHandler.skyGemUpSound, 1.0f, 1.0f);
 

@@ -1,40 +1,34 @@
 package com.morecreepsrevival.morecreeps.common.items;
 
-import com.morecreepsrevival.morecreeps.common.entity.EntityMoney;
+import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class ItemMoney extends CreepsItem
+public class ItemLimbs extends CreepsItem
 {
-    public ItemMoney()
+    public ItemLimbs()
     {
-        super("money");
+        super("limbs");
 
-        setMaxStackSize(50);
+        setMaxStackSize(24);
     }
 
     @Override @Nonnull
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
+        player.playSound(CreepsSoundHandler.barfSound, 1.0f, 1.0f);
+
         player.getHeldItem(hand).shrink(1);
 
-        EntityMoney money = new EntityMoney(world, player);
+        player.attackEntityFrom(DamageSource.STARVE, 1.0f);
 
-        money.setDefaultPickupDelay();
-
-        money.setNoDespawn();
-
-        money.setThrower(player.getUniqueID().toString());
-
-        if (!world.isRemote)
-        {
-            world.spawnEntity(money);
-        }
+        // TODO: barf effect
 
         return super.onItemRightClick(world, player, hand);
     }

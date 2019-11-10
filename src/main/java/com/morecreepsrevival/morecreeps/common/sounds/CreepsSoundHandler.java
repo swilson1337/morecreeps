@@ -130,8 +130,6 @@ public class CreepsSoundHandler
 
     public static final SoundEvent pyramidDeathSound = createSound("pyramiddeath");
 
-    public static final SoundEvent randomBowSound = createMinecraftSound("random.bow");
-
     public static final SoundEvent raygunSound = createSound("raygun");
 
     public static final SoundEvent evilEggCluckSound = createSound("evileggcluck");
@@ -350,14 +348,9 @@ public class CreepsSoundHandler
 
     public static final SoundEvent bubbleScumPutDownSound = createSound("bubblescumputdown");
 
-    public static SoundEvent createSound(String soundName)
+    private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
-    }
-
-    public static SoundEvent createMinecraftSound(String soundName)
-    {
-        return (new SoundEvent(new ResourceLocation("minecraft", soundName))).setRegistryName(soundName);
     }
 
     @SubscribeEvent

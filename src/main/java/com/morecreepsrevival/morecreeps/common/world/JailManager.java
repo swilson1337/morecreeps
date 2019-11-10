@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class JailManager
 {
-    public static final int maxObstruct = 99999;
+    private static final int maxObstruct = 99999;
 
     public static boolean buildJail(EntityPlayer player, EntityLawyerFromHell lawyerIn, World world, Random rand)
     {
@@ -437,9 +437,9 @@ public class JailManager
         {
             for (int k = 0; k < 4; k++)
             {
-                int placeX = 0;
+                int placeX;
 
-                int placeZ = 0;
+                int placeZ;
 
                 switch (k + 1)
                 {
@@ -577,7 +577,7 @@ public class JailManager
     {
         int treasureIndex = rand.nextInt(12);
 
-        ItemStack itemStack = null;
+        ItemStack itemStack;
 
         switch (treasureIndex)
         {
