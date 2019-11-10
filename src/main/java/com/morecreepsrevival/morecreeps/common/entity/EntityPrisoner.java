@@ -71,7 +71,10 @@ public class EntityPrisoner extends EntityCreepBase
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        if (getEvil())
+        {
+            targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        }
     }
 
     @Override
