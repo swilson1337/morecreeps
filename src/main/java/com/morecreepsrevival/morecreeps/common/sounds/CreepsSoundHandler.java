@@ -348,6 +348,18 @@ public class CreepsSoundHandler
 
     public static final SoundEvent bubbleScumPutDownSound = createSound("bubblescumputdown");
 
+    public static final SoundEvent ratManSound = createSound("ratman");
+
+    public static final SoundEvent ratManScratchSound = createSound("ratmanscratch");
+
+    public static final SoundEvent ratManHurtSound = createSound("ratmanhurt");
+
+    public static final SoundEvent giraffeSound = createSound("giraffe");
+
+    public static final SoundEvent salHurtSound = createSound("salhurt");
+
+    public static final SoundEvent salDeadSound = createSound("saldead");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -523,7 +535,13 @@ public class CreepsSoundHandler
                 digBugEatSound,
                 digBugFullSound,
                 bubbleScumPickupSound,
-                bubbleScumPutDownSound
+                bubbleScumPutDownSound,
+                ratManSound,
+                ratManScratchSound,
+                ratManHurtSound,
+                giraffeSound,
+                salHurtSound,
+                salDeadSound
         );
     }
 }

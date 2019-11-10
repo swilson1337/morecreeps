@@ -70,6 +70,8 @@ entity.floobship.name=Floob Ship
 entity.horsehead.name=Horse Head
 entity.digbug.name=Dig Bug
 entity.bubblescum.name=Bubble Scum
+entity.sneakysal.name=Sneaky Sal
+entity.ratman.name=Rat Man
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

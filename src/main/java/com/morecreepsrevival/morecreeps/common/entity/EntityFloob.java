@@ -14,6 +14,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
 {
     public EntityFloob(World worldIn)
@@ -103,7 +105,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
     }
 
     @Override
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
+    public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor)
     {
         EntityRay ray = new EntityRay(world, this);
 
