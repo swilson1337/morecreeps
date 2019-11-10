@@ -14,7 +14,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemMiningGem extends CreepsItem
 {
@@ -27,8 +27,8 @@ public class ItemMiningGem extends CreepsItem
         setMaxDamage(64);
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nullable EnumHand hand)
+    @Override @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
         player.swingArm(hand);
         
@@ -46,11 +46,10 @@ public class ItemMiningGem extends CreepsItem
         float f5 = -MathHelper.cos(-f1 * 0.01745329F);
         float f6 = MathHelper.sin(-f1 * 0.01745329F);
         float f7 = f4 * f5;
-        float f8 = f6;
         float f9 = f3 * f5;
         double d9 = 5D;
 
-        Vec3d vec3d1 = vec3d.addVector((double)f7 * d9, (double)f8 * d9, (double)f9 * d9);
+        Vec3d vec3d1 = vec3d.addVector((double)f7 * d9, (double)f6 * d9, (double)f9 * d9);
 
         RayTraceResult rayTraceResult = world.rayTraceBlocks(vec3d, vec3d1, true);
 

@@ -1,14 +1,14 @@
 package com.morecreepsrevival.morecreeps.common.items;
 
 import com.morecreepsrevival.morecreeps.common.entity.EntityGooDonut;
-import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemGooDonut extends CreepsItem
 {
@@ -19,13 +19,14 @@ public class ItemGooDonut extends CreepsItem
         setMaxStackSize(16);
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nullable EnumHand hand)
+    @Override @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
         player.getHeldItem(hand).shrink(1);
 
         player.swingArm(hand);
 
-        player.playSound(CreepsSoundHandler.randomBowSound, getSoundVolume(), getSoundPitch());
+        player.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, getSoundVolume(), getSoundPitch());
 
         EntityGooDonut gooDonut = new EntityGooDonut(world, player);
 

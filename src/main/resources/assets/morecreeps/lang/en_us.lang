@@ -36,6 +36,7 @@ item.morecreeps.extinguisher.name=Extinguisher
 item.morecreeps.rocket.name=Rocket
 item.morecreeps.rayray.name=Ray
 item.morecreeps.floob_raygun.name=Raygun
+item.morecreeps.limbs.name=Limbs
 
 # Entities
 entity.guineapig.name=Guinea Pig
@@ -69,6 +70,8 @@ entity.floobship.name=Floob Ship
 entity.horsehead.name=Horse Head
 entity.digbug.name=Dig Bug
 entity.bubblescum.name=Bubble Scum
+entity.sneakysal.name=Sneaky Sal
+entity.ratman.name=Rat Man
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

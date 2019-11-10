@@ -1,13 +1,13 @@
 package com.morecreepsrevival.morecreeps.common.items;
 
-import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemFrisbee extends CreepsItem
 {
@@ -18,12 +18,12 @@ public class ItemFrisbee extends CreepsItem
         setMaxStackSize(1);
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nullable EnumHand hand)
+    @Override @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
         player.getHeldItem(hand).shrink(1);
 
-        player.playSound(CreepsSoundHandler.randomBowSound, getSoundVolume(), getSoundPitch());
+        player.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, getSoundVolume(), getSoundPitch());
 
         if (!world.isRemote)
         {

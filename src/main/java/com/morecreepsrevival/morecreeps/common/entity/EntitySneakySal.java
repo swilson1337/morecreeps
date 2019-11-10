@@ -5,7 +5,6 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.NodeProcessor;
@@ -16,19 +15,25 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
+public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 {
-    public EntityFloob(World worldIn)
+    public EntitySneakySal(World worldIn)
     {
         super(worldIn);
 
-        setCreepTypeName("Floob");
+        setCreepTypeName("Sneaky Sal");
 
-        baseHealth = (float)rand.nextInt(15) + 10.0f;
+        setSize(1.5f, 4.0f);
 
-        baseSpeed = 0.3d;
+        setModelSize(1.5f);
 
-        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.floobRaygun));
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.gun));
+
+        baseHealth = (float)rand.nextInt(50) + 50.0f;
+
+        baseAttackDamage = 3.0d;
+
+        baseSpeed = 0.3f;
 
         updateAttributes();
     }
@@ -36,7 +41,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
     @Override
     protected void updateTexture()
     {
-        setTexture("textures/entity/floob.png");
+        setTexture("textures/entity/sneakysal.png");
     }
 
     @Override
@@ -65,63 +70,38 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
         tasks.addTask(6, new EntityAILookIdle(this));
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true));
-    }
-
-    @Override
-    public int getMaxSpawnedInChunk()
-    {
-        return 1;
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound()
-    {
-        return CreepsSoundHandler.floobSound;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
-    {
-        return CreepsSoundHandler.floobHurtSound;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound()
-    {
-        return CreepsSoundHandler.floobDeathSound;
-    }
-
-    @Override
-    protected void dropItemsOnDeath()
-    {
-        if (rand.nextInt(6) == 0)
-        {
-            dropItem(CreepsItemHandler.raygun, 1);
-        }
     }
 
     @Override
     public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor)
     {
-        EntityRay ray = new EntityRay(world, this);
-
-        double d0 = target.posX - this.posX;
-        double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - ray.posY;
-        double d2 = target.posZ - this.posZ;
-
-        ray.shoot(d0, d1, d2, 1.6F, 0.0f);
-
-        world.spawnEntity(ray);
-
-        playSound(CreepsSoundHandler.raygunSound, getSoundVolume(), getSoundPitch());
     }
 
     @Override
     public void setSwingingArms(boolean swingingArms)
     {
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound()
+    {
+        if (rand.nextInt(10) == 0)
+        {
+            return CreepsSoundHandler.giraffeSound;
+        }
+
+        return null;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource)
+    {
+        return CreepsSoundHandler.salHurtSound;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound()
+    {
+        return CreepsSoundHandler.salDeadSound;
     }
 }
