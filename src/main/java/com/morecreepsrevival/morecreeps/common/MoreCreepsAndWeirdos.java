@@ -44,7 +44,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.9";
+    public static final String version = "1.0.10";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
