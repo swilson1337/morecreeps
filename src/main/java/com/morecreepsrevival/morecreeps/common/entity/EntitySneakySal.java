@@ -26,6 +26,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     private DataParameter<Float> salePrice = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.FLOAT);
 
+    private DataParameter<Boolean> shooting = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
+
+    private DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+
     public EntitySneakySal(World worldIn)
     {
         super(worldIn);
@@ -57,6 +61,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         dataManager.register(sale, rand.nextInt(2000) + 100);
 
         dataManager.register(salePrice, 0.0f);
+
+        dataManager.register(shooting, false);
+
+        dataManager.register(shootingDelay, 0);
     }
 
     @Override
@@ -96,6 +104,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor)
     {
+        dataManager.set(shooting, true);
+
+        dataManager.set(shootingDelay, 10);
     }
 
     @Override
@@ -158,6 +169,16 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void onLivingUpdate()
     {
+        if (dataManager.get(shootingDelay) > 0)
+        {
+            dataManager.set(shootingDelay, dataManager.get(shootingDelay) - 1);
+
+            if (dataManager.get(shootingDelay) < 1)
+            {
+                dataManager.set(shooting, false);
+            }
+        }
+
         if (dataManager.get(sale) > 0)
         {
             dataManager.set(sale, dataManager.get(sale) - 1);
@@ -171,6 +192,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     private void restock()
     {
+        dataManager.set(sale, rand.nextInt(2000) + 100);
+
+        dataManager.set(salePrice, 1.0f - (rand.nextFloat() * 0.25f - rand.nextFloat() * 0.25f));
     }
 
     @Override
@@ -188,5 +212,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         // TODO: smoke
 
         super.onDeath(cause);
+    }
+
+    public boolean getShooting()
+    {
+        return dataManager.get(shooting);
     }
 }
