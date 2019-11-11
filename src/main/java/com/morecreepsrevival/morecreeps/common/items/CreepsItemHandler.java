@@ -107,6 +107,8 @@ public class CreepsItemHandler
 
     public static final Item limbs = new ItemLimbs();
 
+    public static final Item bulletBullet = new CreepsItem("bulletbullet", true);
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -148,7 +150,8 @@ public class CreepsItemHandler
                 rayRay,
                 rocket,
                 floobRaygun,
-                limbs
+                limbs,
+                bulletBullet
         );
     }
 

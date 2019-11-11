@@ -7,6 +7,9 @@ import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -17,6 +20,16 @@ import javax.annotation.Nonnull;
 
 public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 {
+    private DataParameter<Integer> dissedMax = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+
+    private DataParameter<Integer> sale = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+
+    private DataParameter<Float> salePrice = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.FLOAT);
+
+    private DataParameter<Boolean> shooting = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
+
+    private DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+
     public EntitySneakySal(World worldIn)
     {
         super(worldIn);
@@ -36,6 +49,22 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         baseSpeed = 0.3f;
 
         updateAttributes();
+    }
+
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+
+        dataManager.register(dissedMax, rand.nextInt(4) + 1);
+
+        dataManager.register(sale, rand.nextInt(2000) + 100);
+
+        dataManager.register(salePrice, 0.0f);
+
+        dataManager.register(shooting, false);
+
+        dataManager.register(shootingDelay, 0);
     }
 
     @Override
@@ -75,6 +104,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor)
     {
+        dataManager.set(shooting, true);
+
+        dataManager.set(shootingDelay, 10);
     }
 
     @Override
@@ -103,5 +135,87 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.salDeadSound;
+    }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return 1;
+    }
+
+    @Override
+    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+        if (hand == EnumHand.OFF_HAND)
+        {
+            return super.processInteract(player, hand);
+        }
+        else if (dataManager.get(dissedMax) > 0)
+        {
+            if (dataManager.get(salePrice) == 0.0f || dataManager.get(sale) < 1)
+            {
+                restock();
+            }
+
+            if (!(getAttackTarget() instanceof EntityPlayer))
+            {
+                // TODO: open gui
+            }
+        }
+
+        return super.processInteract(player, hand);
+    }
+
+    @Override
+    public void onLivingUpdate()
+    {
+        if (dataManager.get(shootingDelay) > 0)
+        {
+            dataManager.set(shootingDelay, dataManager.get(shootingDelay) - 1);
+
+            if (dataManager.get(shootingDelay) < 1)
+            {
+                dataManager.set(shooting, false);
+            }
+        }
+
+        if (dataManager.get(sale) > 0)
+        {
+            dataManager.set(sale, dataManager.get(sale) - 1);
+        }
+
+        if (rand.nextInt(10) == 0)
+        {
+            // TODO: smoke
+        }
+    }
+
+    private void restock()
+    {
+        dataManager.set(sale, rand.nextInt(2000) + 100);
+
+        dataManager.set(salePrice, 1.0f - (rand.nextFloat() * 0.25f - rand.nextFloat() * 0.25f));
+    }
+
+    @Override
+    protected void dropItemsOnDeath()
+    {
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(CreepsItemHandler.rocket, rand.nextInt(5) + 1);
+        }
+    }
+
+    @Override
+    public void onDeath(@Nonnull DamageSource cause)
+    {
+        // TODO: smoke
+
+        super.onDeath(cause);
+    }
+
+    public boolean getShooting()
+    {
+        return dataManager.get(shooting);
     }
 }

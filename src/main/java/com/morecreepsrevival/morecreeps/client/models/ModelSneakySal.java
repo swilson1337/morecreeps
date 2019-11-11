@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
+import com.morecreepsrevival.morecreeps.common.entity.EntitySneakySal;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -15,8 +16,6 @@ public class ModelSneakySal extends ModelBiped
     public ModelRenderer hatBrim;
     public ModelRenderer hat;
     public ModelRenderer watch;
-
-    public boolean shooting;
 
     public ModelSneakySal()
     {
@@ -134,7 +133,7 @@ public class ModelSneakySal extends ModelBiped
         watch.rotateAngleX = bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
         bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
 
-        if (shooting)
+        if (((EntitySneakySal)entity).getShooting())
         {
             watch.rotateAngleX = bipedRightArm.rotateAngleX = -1.257079F;
         }

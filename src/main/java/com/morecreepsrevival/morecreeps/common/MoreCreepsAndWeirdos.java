@@ -152,7 +152,9 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityDigBug.class, "digbug", MoreCreepsConfig.digBugSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x58BA4C, 0xE6DD58, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityBubbleScum.class, "bubblescum", MoreCreepsConfig.bubbleScumSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xCE51BE, 0x67E6ED, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntitySneakySal.class, "sneakysal", MoreCreepsConfig.sneakySalSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.CREATURE)
+                createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.CREATURE),
+                createEntity(EntityPrisoner.class, "prisoner", 0, 1, 1, EnumCreatureType.CREATURE),
+                createEntity(EntityBullet.class, "bullet", 0, 0, 0, EnumCreatureType.AMBIENT)
         );
     }
 
