@@ -20,15 +20,15 @@ import javax.annotation.Nonnull;
 
 public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 {
-    private DataParameter<Integer> dissedMax = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> dissedMax = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
 
-    private DataParameter<Integer> sale = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> sale = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
 
-    private DataParameter<Float> salePrice = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> salePrice = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.FLOAT);
 
-    private DataParameter<Boolean> shooting = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> shooting = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
 
-    private DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
 
     public EntitySneakySal(World worldIn)
     {
