@@ -39,6 +39,8 @@ public class CreepsPacketHandler
         registerMessage(MessageLevelUpHotdogSkill.MessageHandler.class, MessageLevelUpHotdogSkill.class, Side.SERVER);
 
         registerMessage(MessageDismountEntity.MessageHandler.class, MessageDismountEntity.class, Side.SERVER);
+
+        registerMessage(MessageOpenGuiSneakySal.MessageHandler.class, MessageOpenGuiSneakySal.class, Side.CLIENT);
     }
 
     public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType, Side side)

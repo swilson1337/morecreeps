@@ -1,11 +1,14 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
+import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiSneakySal;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -159,8 +162,13 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
             if (!(getAttackTarget() instanceof EntityPlayer))
             {
-                // TODO: open gui
+                if (!world.isRemote)
+                {
+                    CreepsPacketHandler.INSTANCE.sendTo(new MessageOpenGuiSneakySal(getEntityId()), (EntityPlayerMP)player);
+                }
             }
+
+            return true;
         }
 
         return super.processInteract(player, hand);
