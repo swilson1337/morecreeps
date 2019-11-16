@@ -9,13 +9,16 @@ import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -32,6 +35,36 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     private static final DataParameter<Boolean> shooting = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
+
+    private static final DataParameter<NBTTagCompound> shopItems = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.COMPOUND_TAG);
+
+    public static final int[] itemPrices = {
+            10, 200, 100, 20, 175, 150, 225, 50, 350, 100,
+            150, 10, 200, 150, 250
+    };
+
+    public static final String[] itemDescriptions = {
+            "BLORP COLA", "ARMY GEM", "HORSE HEAD GEM", "BAND AID", "SHRINK RAY", "EXTINGUISHER", "GROW RAY", "FRISBEE", "LIFE GEM", "GUN",
+            "RAYGUN", "POPSICLE", "EARTH GEM", "FIRE GEM", "SKY GEM"
+    };
+
+    public static final Item[] itemDefinitions = {
+            CreepsItemHandler.blorpCola,
+            CreepsItemHandler.armyGem,
+            CreepsItemHandler.horseHeadGem,
+            CreepsItemHandler.bandaid,
+            CreepsItemHandler.shrinkRay,
+            CreepsItemHandler.extinguisher,
+            CreepsItemHandler.growRay,
+            CreepsItemHandler.frisbee,
+            CreepsItemHandler.lifeGem,
+            CreepsItemHandler.gun,
+            CreepsItemHandler.raygun,
+            CreepsItemHandler.popsicle,
+            CreepsItemHandler.earthGem,
+            CreepsItemHandler.fireGem,
+            CreepsItemHandler.skyGem
+    };
 
     public EntitySneakySal(World worldIn)
     {
@@ -68,6 +101,12 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         dataManager.register(shooting, false);
 
         dataManager.register(shootingDelay, 0);
+
+        dataManager.register(shopItems, new NBTTagCompound());
+
+        dataManager.get(shopItems).setIntArray("Items", new int[30]);
+
+        dataManager.setDirty(shopItems);
     }
 
     @Override
@@ -194,7 +233,19 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         if (rand.nextInt(10) == 0)
         {
-            // TODO: smoke
+            smoke();
+        }
+    }
+
+    @Override
+    public void smoke()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (posX + (double)(rand.nextFloat() * width * 2.0f)) - (double)width, posY + (double)(rand.nextFloat() * height) + (double)i, (posZ + (double)(rand.nextFloat() * width * 2.0f)) - (double)width, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+            }
         }
     }
 
@@ -203,6 +254,26 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         dataManager.set(sale, rand.nextInt(2000) + 100);
 
         dataManager.set(salePrice, 1.0f - (rand.nextFloat() * 0.25f - rand.nextFloat() * 0.25f));
+
+        int[] currentItems = dataManager.get(shopItems).getIntArray("Items");
+
+        for (int i = 0; i < itemDefinitions.length; i++)
+        {
+            currentItems[i] = i;
+        }
+
+        for (int i = 0; i < itemDefinitions.length; i++)
+        {
+            int k = rand.nextInt(itemDefinitions.length);
+
+            int l = currentItems[i];
+
+            currentItems[i] = currentItems[k];
+
+            currentItems[k] = l;
+        }
+
+        dataManager.setDirty(shopItems);
     }
 
     @Override
@@ -217,7 +288,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void onDeath(@Nonnull DamageSource cause)
     {
-        // TODO: smoke
+        smoke();
 
         super.onDeath(cause);
     }
@@ -225,5 +296,15 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     public boolean getShooting()
     {
         return dataManager.get(shooting);
+    }
+
+    public int[] getShopItems()
+    {
+        return dataManager.get(shopItems).getIntArray("Items");
+    }
+
+    public float getSalePrice()
+    {
+        return dataManager.get(salePrice);
     }
 }

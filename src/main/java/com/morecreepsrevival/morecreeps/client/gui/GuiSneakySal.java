@@ -1,15 +1,24 @@
 package com.morecreepsrevival.morecreeps.client.gui;
 
+import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.entity.EntitySneakySal;
+import com.morecreepsrevival.morecreeps.common.helpers.InventoryHelper;
+import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 public class GuiSneakySal extends GuiScreen
 {
     private final EntitySneakySal sal;
+
+    private final static ResourceLocation backgroundTexture = new ResourceLocation(MoreCreepsAndWeirdos.modid, "textures/gui/gui-screensal.png");
+
+    private int lastItem = 0;
 
     public GuiSneakySal(EntitySneakySal salIn)
     {
@@ -25,29 +34,35 @@ public class GuiSneakySal extends GuiScreen
 
         byte byte0 = -18;
 
+        int[] shopItems = sal.getShopItems();
+
+        lastItem = shopItems[0];
+
+        float salePrice = sal.getSalePrice();
+
         buttonList.add(new GuiButton(0, width / 2 - 100, height / 4 + 158 + byte0, 98, 20, "RIPOFF SAL"));
 
         buttonList.add(new GuiButton(1, width / 2 + 2, height / 4 + 158 + byte0, 98, 20, "DONE"));
 
-        buttonList.add(new GuiButton(2, width / 2 - 170, height / 4 + 8 + byte0, 155, 20, "Slot 0"));
+        buttonList.add(new GuiButton(2, width / 2 - 170, height / 4 + 8 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[0]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[0]]));
 
-        buttonList.add(new GuiButton(3, width / 2 + 2, height / 4 + 8 + byte0, 155, 20, "Slot 1"));
+        buttonList.add(new GuiButton(3, width / 2 + 2, height / 4 + 8 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[1]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[1]]));
 
-        buttonList.add(new GuiButton(4, width / 2 - 170, height / 4 + 35 + byte0, 155, 20, "Slot 2"));
+        buttonList.add(new GuiButton(4, width / 2 - 170, height / 4 + 35 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[2]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[2]]));
 
-        buttonList.add(new GuiButton(5, width / 2 + 2, height / 4 + 35 + byte0, 155, 20, "Slot 3"));
+        buttonList.add(new GuiButton(5, width / 2 + 2, height / 4 + 35 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[3]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[3]]));
 
-        buttonList.add(new GuiButton(6, width / 2 - 170, height / 4 + 65 + byte0, 155, 20, "Slot 4"));
+        buttonList.add(new GuiButton(6, width / 2 - 170, height / 4 + 65 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[4]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[4]]));
 
-        buttonList.add(new GuiButton(7, width / 2 + 2, height / 4 + 65 + byte0, 155, 20, "Slot 5"));
+        buttonList.add(new GuiButton(7, width / 2 + 2, height / 4 + 65 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[5]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[5]]));
 
-        buttonList.add(new GuiButton(8, width / 2 - 170, height / 4 + 95 + byte0, 155, 20, "Slot 6"));
+        buttonList.add(new GuiButton(8, width / 2 - 170, height / 4 + 95 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[6]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[6]]));
 
-        buttonList.add(new GuiButton(9, width / 2 + 2, height / 4 + 95 + byte0, 155, 20, "Slot 7"));
+        buttonList.add(new GuiButton(9, width / 2 + 2, height / 4 + 95 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[7]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[7]]));
 
-        buttonList.add(new GuiButton(10, width / 2 - 170, height / 4 + 125 + byte0, 155, 20, "Slot 8"));
+        buttonList.add(new GuiButton(10, width / 2 - 170, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[8]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[8]]));
 
-        buttonList.add(new GuiButton(11, width / 2 + 2, height / 4 + 125 + byte0, 155, 20, "Slot 9"));
+        buttonList.add(new GuiButton(11, width / 2 + 2, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[9]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[9]]));
 
         Minecraft.getMinecraft().player.playSound(CreepsSoundHandler.salGreetingSound, 1.0f, 1.0f);
     }
@@ -67,11 +82,44 @@ public class GuiSneakySal extends GuiScreen
         }
 
         mc.displayGuiScreen(null);
+
+        switch (button.id)
+        {
+            case 0:
+                // TODO: diss
+
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public boolean doesGuiPauseGame()
     {
         return false;
+    }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
+        if (sal.getShopItems()[0] != lastItem)
+        {
+            initGui();
+        }
+
+        drawWorldBackground(1);
+
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+        mc.renderEngine.bindTexture(backgroundTexture);
+
+        drawTexturedModalRect(20, 20, 0, 0, width + 400, height);
+
+        drawCenteredString(fontRenderer, "\2475******* \247fWELCOME TO SAL'S SHOP \2475*******", width / 2, height / 4 - 40, 0xffffff);
+
+        drawCenteredString(fontRenderer, "\247eYour cash: \2472$\2476" + InventoryHelper.getItemCount(mc.player.inventory, CreepsItemHandler.money), width / 2, height / 4 - 25, 0xffffff);
+
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

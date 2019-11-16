@@ -368,6 +368,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent salGreetingSound = createSound("salgreeting");
 
+    public static final SoundEvent growRaySound = createSound("growray");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
