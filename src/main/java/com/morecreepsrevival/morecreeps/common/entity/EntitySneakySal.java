@@ -147,6 +147,13 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         dataManager.set(shooting, true);
 
         dataManager.set(shootingDelay, 10);
+
+        EntityBullet bullet = new EntityBullet(world, this, 0.0f);
+
+        if (!world.isRemote)
+        {
+            world.spawnEntity(bullet);
+        }
     }
 
     @Override
@@ -233,6 +240,16 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             smoke();
         }
+
+        if (dataManager.get(dissedMax) < 1 && getAttackTarget() == null)
+        {
+            EntityPlayer player = world.getClosestPlayerToEntity(this, 16.0d);
+
+            if (player != null && canEntityBeSeen(player))
+            {
+                setAttackTarget(player);
+            }
+        }
     }
 
     @Override
@@ -308,6 +325,11 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     public void ripOff()
     {
+        if (dataManager.get(dissedMax) < 1)
+        {
+            return;
+        }
+
         dataManager.set(dissedMax, dataManager.get(dissedMax) - 1);
 
         if (rand.nextInt(9) == 0)
@@ -387,7 +409,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     public void buyItem(EntityPlayer player, int itemId)
     {
-        if (itemId < 0 || itemId >= itemDefinitions.length)
+        if (dataManager.get(dissedMax) < 1 || itemId < 0 || itemId >= itemDefinitions.length)
         {
             return;
         }
@@ -404,5 +426,55 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             playSound(CreepsSoundHandler.salNoMoneySound, 1.0f, 1.0f);
         }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsSneakySal");
+
+        props.setInteger("Sale", dataManager.get(sale));
+
+        props.setFloat("SalePrice", getSalePrice());
+
+        props.setInteger("DissedMax", dataManager.get(dissedMax));
+
+        compound.setTag("MoreCreepsSneakySal", props);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsSneakySal");
+
+        if (props.hasKey("Sale"))
+        {
+            dataManager.set(sale, props.getInteger("Sale"));
+        }
+
+        if (props.hasKey("SalePrice"))
+        {
+            dataManager.set(salePrice, props.getFloat("SalePrice"));
+        }
+
+        if (props.hasKey("DissedMax"))
+        {
+            dataManager.set(dissedMax, props.getInteger("DissedMax"));
+        }
+    }
+
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
+    {
+        if (damageSource.getTrueSource() instanceof EntityPlayer)
+        {
+            dataManager.set(dissedMax, 0);
+        }
+
+        return super.attackEntityFrom(damageSource, amt);
     }
 }
