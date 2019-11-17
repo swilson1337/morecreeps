@@ -125,6 +125,11 @@ public class GuiSneakySal extends GuiScreen
 
         drawCenteredString(fontRenderer, "\247eYour cash: \2472$\2476" + InventoryHelper.getItemCount(mc.player.inventory, CreepsItemHandler.money), width / 2, height / 4 - 25, 0xffffff);
 
+        if (sal.isBlackFriday())
+        {
+            drawCenteredString(fontRenderer, "IT'S BLACK FRIDAY - 50% OFF", width / 2, height / 4 - 55, 0xffffff);
+        }
+
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

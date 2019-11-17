@@ -279,7 +279,14 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     {
         dataManager.set(sale, rand.nextInt(2000) + 100);
 
-        dataManager.set(salePrice, 1.0f - (rand.nextFloat() * 0.25f - rand.nextFloat() * 0.25f));
+        if (isBlackFriday())
+        {
+            dataManager.set(salePrice, 0.5f);
+        }
+        else
+        {
+            dataManager.set(salePrice, 1.0f - (rand.nextFloat() * 0.25f - rand.nextFloat() * 0.25f));
+        }
 
         int[] currentItems = dataManager.get(shopItems).getIntArray("Items");
 
@@ -480,6 +487,8 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             dataManager.set(dissedMax, props.getInteger("DissedMax"));
         }
+
+        restock();
     }
 
     @Override
@@ -491,5 +500,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         }
 
         return super.attackEntityFrom(damageSource, amt);
+    }
+
+    public boolean isBlackFriday()
+    {
+        return dataManager.get(blackFriday);
     }
 }
