@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
@@ -47,25 +48,25 @@ public class GuiSneakySal extends GuiScreen
 
         buttonList.add(new GuiButton(1, width / 2 + 2, height / 4 + 158 + byte0, 98, 20, "DONE"));
 
-        buttonList.add(new GuiButton(2, width / 2 - 170, height / 4 + 8 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[0]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[0]]));
+        buttonList.add(new GuiButton(2, width / 2 - 170, height / 4 + 8 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[0]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[0].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(3, width / 2 + 2, height / 4 + 8 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[1]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[1]]));
+        buttonList.add(new GuiButton(3, width / 2 + 2, height / 4 + 8 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[1]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[1].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(4, width / 2 - 170, height / 4 + 35 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[2]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[2]]));
+        buttonList.add(new GuiButton(4, width / 2 - 170, height / 4 + 35 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[2]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[2].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(5, width / 2 + 2, height / 4 + 35 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[3]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[3]]));
+        buttonList.add(new GuiButton(5, width / 2 + 2, height / 4 + 35 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[3]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[3].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(6, width / 2 - 170, height / 4 + 65 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[4]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[4]]));
+        buttonList.add(new GuiButton(6, width / 2 - 170, height / 4 + 65 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[4]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[4].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(7, width / 2 + 2, height / 4 + 65 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[5]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[5]]));
+        buttonList.add(new GuiButton(7, width / 2 + 2, height / 4 + 65 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[5]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[5].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(8, width / 2 - 170, height / 4 + 95 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[6]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[6]]));
+        buttonList.add(new GuiButton(8, width / 2 - 170, height / 4 + 95 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[6]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[6].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(9, width / 2 + 2, height / 4 + 95 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[7]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[7]]));
+        buttonList.add(new GuiButton(9, width / 2 + 2, height / 4 + 95 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[7]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[7].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(10, width / 2 - 170, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[8]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[8]]));
+        buttonList.add(new GuiButton(10, width / 2 - 170, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[8]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[8].getUnlocalizedName() + ".name")));
 
-        buttonList.add(new GuiButton(11, width / 2 + 2, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[9]] * salePrice) + " \247f" + EntitySneakySal.itemDescriptions[shopItems[9]]));
+        buttonList.add(new GuiButton(11, width / 2 + 2, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[9]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[9].getUnlocalizedName() + ".name")));
 
         Minecraft.getMinecraft().player.playSound(CreepsSoundHandler.salGreetingSound, 1.0f, 1.0f);
     }
