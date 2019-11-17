@@ -29,7 +29,7 @@ public class ItemGun extends CreepsItem
 
         player.getHeldItem(hand).damageItem(2, player);
 
-        EntityBullet bullet = new EntityBullet(world, player, 0.0F);
+        EntityBullet bullet = new EntityBullet(world, player);
 
         if (!world.isRemote)
         {

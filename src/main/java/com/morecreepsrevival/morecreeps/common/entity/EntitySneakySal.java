@@ -148,7 +148,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         dataManager.set(shootingDelay, 10);
 
-        EntityBullet bullet = new EntityBullet(world, this, 0.0f);
+        playSound(CreepsSoundHandler.bulletSound, getSoundVolume(), getSoundPitch());
+
+        EntityBullet bullet = new EntityBullet(world, this, target.posX - posX, target.getEntityBoundingBox().minY + (target.height / 2.0f) - posY + (height / 2.0f), target.posZ - posZ);
 
         if (!world.isRemote)
         {
@@ -222,7 +224,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-        
+
         if (dataManager.get(shootingDelay) > 0)
         {
             dataManager.set(shootingDelay, dataManager.get(shootingDelay) - 1);
