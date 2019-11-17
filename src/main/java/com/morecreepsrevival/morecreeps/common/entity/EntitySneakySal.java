@@ -46,11 +46,6 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
             150, 10, 200, 150, 250
     };
 
-    public static final String[] itemDescriptions = {
-            "BLORP COLA", "ARMY GEM", "HORSE HEAD GEM", "BAND AID", "SHRINK RAY", "EXTINGUISHER", "GROW RAY", "FRISBEE", "LIFE GEM", "GUN",
-            "RAYGUN", "POPSICLE", "EARTH GEM", "FIRE GEM", "SKY GEM"
-    };
-
     public static final Item[] itemDefinitions = {
             CreepsItemHandler.blorpCola,
             CreepsItemHandler.armyGem,
