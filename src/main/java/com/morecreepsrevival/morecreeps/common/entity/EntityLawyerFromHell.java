@@ -7,7 +7,6 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,8 +25,6 @@ import javax.annotation.Nullable;
 public class EntityLawyerFromHell extends EntityCreepBase
 {
     private static final DataParameter<Boolean> undead = EntityDataManager.createKey(EntityLawyerFromHell.class, DataSerializers.BOOLEAN);
-
-    private static final DataParameter<Integer> lawyerState = EntityDataManager.createKey(EntityLawyerFromHell.class, DataSerializers.VARINT);
 
     public EntityLawyerFromHell(World world)
     {
@@ -48,8 +45,6 @@ public class EntityLawyerFromHell extends EntityCreepBase
         super.entityInit();
 
         dataManager.register(undead, false);
-
-        dataManager.register(lawyerState, 0);
     }
 
     @Override
@@ -79,9 +74,9 @@ public class EntityLawyerFromHell extends EntityCreepBase
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
-        if (getLawyerState() > 0)
+        if (getUndead())
         {
-            targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
+            targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
         }
     }
 
@@ -103,31 +98,21 @@ public class EntityLawyerFromHell extends EntityCreepBase
     {
         super.onUpdate();
 
-        if (getUndead())
+        if (!getUndead() && getAttackTarget() == null)
         {
-            setLawyerState(1);
-        }
-        else
-        {
-            EntityLivingBase entity = getRevengeTarget();
+            EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
 
-            if (entity instanceof EntityPlayer)
+            if (player != null)
             {
-                EntityPlayer player = (EntityPlayer)entity;
-
                 ILawyerFine capability = player.getCapability(LawyerFineProvider.capability, null);
 
                 if (capability != null)
                 {
                     int fine = capability.getFine();
 
-                    if (fine >= 2500)
+                    if (fine > 0)
                     {
-                        setLawyerState(5);
-                    }
-                    else if (fine > 0)
-                    {
-                        setLawyerState(1);
+                        setAttackTarget(player);
                     }
                 }
             }
@@ -153,28 +138,13 @@ public class EntityLawyerFromHell extends EntityCreepBase
         }
 
         updateAttributes();
+
+        initEntityAI();
     }
 
     public boolean getUndead()
     {
         return dataManager.get(undead);
-    }
-
-    protected void setLawyerState(int i)
-    {
-        if (getLawyerState() == i)
-        {
-            return;
-        }
-
-        dataManager.set(lawyerState, i);
-
-        initEntityAI();
-    }
-
-    protected int getLawyerState()
-    {
-        return dataManager.get(lawyerState);
     }
 
     @Override
@@ -275,7 +245,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
                     suckMoney(player);
                 }
 
-                if (getLawyerState() == 5 && !getUndead() && MoreCreepsConfig.jailActive && rand.nextInt(10) == 0 && fine >= 2500)
+                if (MoreCreepsConfig.jailActive && fine >= 2500 && !getUndead())
                 {
                     capability.setFine(0);
 
@@ -370,11 +340,6 @@ public class EntityLawyerFromHell extends EntityCreepBase
                 if (capability != null)
                 {
                     capability.addFine(50);
-                }
-
-                if (getLawyerState() == 0)
-                {
-                    setLawyerState(1);
                 }
 
                 setRevengeTarget(playerTarget);

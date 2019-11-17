@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class RenderLawyerFromHell<T extends EntityLawyerFromHell> extends RenderCreep<T>
 {
@@ -33,7 +33,7 @@ public class RenderLawyerFromHell<T extends EntityLawyerFromHell> extends Render
     }
 
     @Override
-    public void doRender(@Nullable T entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
 

@@ -299,11 +299,7 @@ public class MoreCreepsAndWeirdos
             return;
         }
 
-        Minecraft minecraft = Minecraft.getMinecraft();
-
-        boolean isJumping = minecraft.gameSettings.keyBindJump.isKeyDown();
-
-        if (isJumping)
+        if (proxy.isJumpKeyDown())
         {
         }
         else
