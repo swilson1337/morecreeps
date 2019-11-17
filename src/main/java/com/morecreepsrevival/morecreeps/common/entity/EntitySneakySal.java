@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.helpers.InventoryHelper;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiSneakySal;
@@ -9,6 +10,7 @@ import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,6 +22,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -194,7 +197,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         }
         else if (dataManager.get(dissedMax) > 0)
         {
-            if (dataManager.get(salePrice) == 0.0f || dataManager.get(sale) < 1)
+            if (getSalePrice() == 0.0f || dataManager.get(sale) < 1)
             {
                 restock();
             }
@@ -306,5 +309,105 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     public float getSalePrice()
     {
         return dataManager.get(salePrice);
+    }
+
+    public void ripOff()
+    {
+        dataManager.set(dissedMax, dataManager.get(dissedMax) - 1);
+
+        if (rand.nextInt(9) == 0)
+        {
+            playSound(SoundEvents.ENTITY_CHICKEN_EGG, getSoundVolume(), getSoundPitch());
+
+            switch (rand.nextInt(15) + 1)
+            {
+                case 1:
+                    dropItem(CreepsItemHandler.armyGem, 1);
+
+                    break;
+                case 2:
+                    dropItem(CreepsItemHandler.horseHeadGem, 1);
+
+                    break;
+                case 4:
+                    dropItem(CreepsItemHandler.shrinkRay, 1);
+
+                    break;
+                case 5:
+                    dropItem(CreepsItemHandler.extinguisher, 1);
+
+                    break;
+                case 6:
+                    dropItem(CreepsItemHandler.growRay, 1);
+
+                    break;
+                case 7:
+                    dropItem(CreepsItemHandler.frisbee, 1);
+
+                    break;
+                case 8:
+                    dropItem(CreepsItemHandler.lifeGem, 1);
+
+                    break;
+                case 9:
+                    dropItem(CreepsItemHandler.gun, 1);
+
+                    break;
+                case 10:
+                    dropItem(CreepsItemHandler.raygun, 1);
+
+                    break;
+                case 3:
+                default:
+                    dropItem(CreepsItemHandler.bandaid, 1);
+
+                    break;
+            }
+
+            return;
+        }
+
+        int randInt = rand.nextInt(15) + 5;
+
+        double d = -MathHelper.sin((rotationYaw * (float)Math.PI) / 180.0f);
+
+        double d1 = MathHelper.cos((rotationYaw * (float)Math.PI) / 180.0f);
+
+        for (int i = 0; i < randInt; i++)
+        {
+            EntityRatMan ratMan = new EntityRatMan(world);
+
+            ratMan.setLocationAndAngles((posX + d * 1.0d + (double)rand.nextInt(4)) - 2.0d, posY - 1.0d, (posZ + d1 * 1.0d + (double)rand.nextInt(4)) - 2.0d, rotationYaw, 0.0f);
+
+            ratMan.motionY = 1.0d;
+
+            if (!world.isRemote)
+            {
+                world.spawnEntity(ratMan);
+            }
+        }
+
+        playSound(CreepsSoundHandler.salRatsSound, 1.0f, 1.0f);
+    }
+
+    public void buyItem(EntityPlayer player, int itemId)
+    {
+        if (itemId < 0 || itemId >= itemDefinitions.length)
+        {
+            return;
+        }
+
+        int item = getShopItems()[itemId];
+
+        if (InventoryHelper.takeItem(player.inventory, CreepsItemHandler.money, Math.round((float)itemPrices[item] * getSalePrice())))
+        {
+            dropItem(itemDefinitions[item], 1);
+
+            playSound(CreepsSoundHandler.salSaleSound, 1.0f, 1.0f);
+        }
+        else
+        {
+            playSound(CreepsSoundHandler.salNoMoneySound, 1.0f, 1.0f);
+        }
     }
 }

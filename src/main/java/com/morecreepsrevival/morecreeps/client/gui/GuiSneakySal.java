@@ -4,6 +4,9 @@ import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.entity.EntitySneakySal;
 import com.morecreepsrevival.morecreeps.common.helpers.InventoryHelper;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
+import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageBuyItemFromSal;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageRipOffSal;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -83,14 +86,15 @@ public class GuiSneakySal extends GuiScreen
 
         mc.displayGuiScreen(null);
 
-        switch (button.id)
+        if (button.id == 0)
         {
-            case 0:
-                // TODO: diss
+            CreepsPacketHandler.INSTANCE.sendToServer(new MessageRipOffSal(sal.getEntityId()));
 
-                break;
-            default:
-                break;
+            return;
+        }
+        else if (button.id > 1 && button.id < 12)
+        {
+            CreepsPacketHandler.INSTANCE.sendToServer(new MessageBuyItemFromSal(sal.getEntityId(), button.id - 2));
         }
     }
 
