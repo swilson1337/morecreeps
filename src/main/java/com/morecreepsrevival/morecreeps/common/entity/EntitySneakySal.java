@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.helpers.InventoryHelper;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
@@ -40,6 +41,8 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     private static final DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
 
     private static final DataParameter<NBTTagCompound> shopItems = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.COMPOUND_TAG);
+
+    private static final DataParameter<Boolean> blackFriday = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
 
     public static final int[] itemPrices = {
             10, 200, 100, 20, 175, 150, 225, 50, 350, 100,
@@ -105,6 +108,8 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         dataManager.get(shopItems).setIntArray("Items", new int[30]);
 
         dataManager.setDirty(shopItems);
+
+        dataManager.register(blackFriday, false);
     }
 
     @Override
@@ -148,7 +153,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         dataManager.set(shootingDelay, 10);
 
-        EntityBullet bullet = new EntityBullet(world, this, 0.0f);
+        playSound(CreepsSoundHandler.bulletSound, getSoundVolume(), getSoundPitch());
+
+        EntityBullet bullet = new EntityBullet(world, this, target.posX - posX, target.getEntityBoundingBox().minY + (target.height / 2.0f) - posY + (height / 2.0f), target.posZ - posZ);
 
         if (!world.isRemote)
         {
@@ -222,7 +229,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-        
+
+        dataManager.set(blackFriday, MoreCreepsAndWeirdos.isBlackFriday());
+
         if (dataManager.get(shootingDelay) > 0)
         {
             dataManager.set(shootingDelay, dataManager.get(shootingDelay) - 1);
@@ -399,6 +408,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
             ratMan.setLocationAndAngles((posX + d * 1.0d + (double)rand.nextInt(4)) - 2.0d, posY - 1.0d, (posZ + d1 * 1.0d + (double)rand.nextInt(4)) - 2.0d, rotationYaw, 0.0f);
 
             ratMan.motionY = 1.0d;
+
+            ratMan.determineBaseTexture();
+
+            ratMan.setInitialHealth();
 
             if (!world.isRemote)
             {
