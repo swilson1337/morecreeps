@@ -130,7 +130,7 @@ public class EntityPrisoner extends EntityCreepBase
     @Override
     public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
     {
-        if (damageSource.getTrueSource() instanceof EntityPlayer)
+        if (damageSource.getTrueSource() instanceof EntityPlayer && !getEvil())
         {
             dataManager.set(evil, true);
 
