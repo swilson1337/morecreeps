@@ -35,6 +35,9 @@ import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Mouse;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 @Mod(modid = MoreCreepsAndWeirdos.modid, name = MoreCreepsAndWeirdos.name, version = MoreCreepsAndWeirdos.version, updateJSON = MoreCreepsAndWeirdos.updateJSON, useMetadata = true) @EventBusSubscriber(modid = MoreCreepsAndWeirdos.modid)
@@ -327,5 +330,12 @@ public class MoreCreepsAndWeirdos
                 }
             }
         }
+    }
+
+    public static boolean isBlackFriday()
+    {
+        LocalDate now = LocalDate.now();
+
+        return LocalDate.of(now.getYear(), 11, 1).with(TemporalAdjusters.dayOfWeekInMonth(4, DayOfWeek.THURSDAY)).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).equals(now);
     }
 }

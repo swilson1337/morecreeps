@@ -9,6 +9,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.*;
@@ -20,15 +23,15 @@ import java.util.List;
 
 public class EntityBullet extends Entity
 {
+    private static final DataParameter<Integer> shootingEntity = EntityDataManager.createKey(EntityBullet.class, DataSerializers.VARINT);
+
     protected int damage;
     protected boolean playerFire;
-    public Entity shootingEntity;
     private int xTile;
     private int yTile;
     private int zTile;
     private int inTile;
     private boolean inGround;
-    private int ticksAlive;
     private int ticksInAir;
     public double accelerationX;
     public double accelerationY;
@@ -49,8 +52,6 @@ public class EntityBullet extends Entity
         inGround = false;
 
         ticksInAir = 0;
-
-        ticksAlive = 0;
 
         accelerationX = 0.0d;
 
@@ -76,7 +77,7 @@ public class EntityBullet extends Entity
     {
         this(world);
 
-        shootingEntity = entityliving;
+        dataManager.set(shootingEntity, entityliving.getEntityId());
 
         if (entityliving instanceof EntityPlayer)
         {
@@ -97,7 +98,7 @@ public class EntityBullet extends Entity
 
         double par17 = zHeading * 0.5d;
 
-        double par9 = MathHelper.floor(par13 * par13 + par15 * par15 + par17 * par17);
+        double par9 = MathHelper.sin((float)(par13 * par13 + par15 * par15 + par17 * par17));
 
         accelerationX = par13 / par9 * 1.1d;
 
@@ -124,7 +125,7 @@ public class EntityBullet extends Entity
     {
         this(world);
 
-        shootingEntity = entityliving;
+        dataManager.set(shootingEntity, entityliving.getEntityId());
 
         // TODO: if loyal army guy damage = 6
 
@@ -135,13 +136,15 @@ public class EntityBullet extends Entity
 
         setLocationAndAngles(entityliving.posX, entityliving.posY, entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
 
+        motionX = motionY = motionZ = 0.0d;
+
         par3 += rand.nextGaussian() * 0.4d;
 
         par5 += rand.nextGaussian() * 0.4d;
 
         par7 += rand.nextGaussian() * 0.4d;
 
-        double par9 = MathHelper.floor(par3 * par3 + par5 * par5 + par7 * par7);
+        double par9 = MathHelper.sin((float)(par3 * par3 + par5 * par5 + par7 * par7));
 
         accelerationX = par3 / par9 * 1.1d;
 
@@ -153,6 +156,7 @@ public class EntityBullet extends Entity
     @Override
     protected void entityInit()
     {
+        dataManager.register(shootingEntity, 0);
     }
 
     @Override
@@ -194,8 +198,6 @@ public class EntityBullet extends Entity
     {
         blast();
 
-        shootingEntity = null;
-
         super.setDead();
     }
 
@@ -216,6 +218,13 @@ public class EntityBullet extends Entity
     public void onUpdate()
     {
         super.onUpdate();
+
+        if (ticksInAir > 75)
+        {
+            setDead();
+
+            return;
+        }
 
         Vec3d var15 = new Vec3d(posX, posY, posZ);
 
@@ -238,7 +247,7 @@ public class EntityBullet extends Entity
 
         for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(motionX, motionY, motionZ).expand(1.0d, 1.0d, 1.0d)))
         {
-            if (entity.canBeCollidedWith() && (!entity.equals(shootingEntity) || ticksInAir >= 25))
+            if (entity.canBeCollidedWith() && (!entity.equals(getShootingEntity()) || ticksInAir >= 25))
             {
                 float var10 = 0.3f;
 
@@ -267,7 +276,7 @@ public class EntityBullet extends Entity
 
         if (rtr != null)
         {
-            // TODO: call func
+            onHit(rtr);
         }
 
         posX += motionX;
@@ -328,5 +337,51 @@ public class EntityBullet extends Entity
         motionZ *= var17;
 
         setPosition(posX, posY, posZ);
+
+        ticksInAir++;
+    }
+
+    private void onHit(RayTraceResult rtr)
+    {
+        if (rtr.entityHit != null && rtr.entityHit == getShootingEntity())
+        {
+            return;
+        }
+
+        if (rtr.entityHit != null && rtr.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getShootingEntity()), damage))
+        {
+            if (MoreCreepsConfig.blood && !(rtr.entityHit instanceof EntityRobotTodd) && !(rtr.entityHit instanceof EntityRobotTed))
+            {
+                blood();
+            }
+        }
+
+        if (rtr.typeOfHit == RayTraceResult.Type.BLOCK)
+        {
+            BlockPos blockHitPos = rtr.getBlockPos();
+
+            if (!world.isAirBlock(blockHitPos))
+            {
+                Block blockHit = world.getBlockState(blockHitPos).getBlock();
+
+                if (blockHit == Blocks.ICE)
+                {
+                    world.setBlockState(blockHitPos, Blocks.WATER.getDefaultState());
+                }
+                else if (blockHit == Blocks.GLASS)
+                {
+                    world.setBlockToAir(blockHitPos);
+                }
+            }
+        }
+
+        playSound(CreepsSoundHandler.raygunSound, 0.2f, 1.0f / (rand.nextFloat() * 0.1f + 0.95f));
+
+        setDead();
+    }
+
+    public Entity getShootingEntity()
+    {
+        return world.getEntityByID(dataManager.get(shootingEntity));
     }
 }
