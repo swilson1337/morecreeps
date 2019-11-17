@@ -221,6 +221,8 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void onLivingUpdate()
     {
+        super.onLivingUpdate();
+        
         if (dataManager.get(shootingDelay) > 0)
         {
             dataManager.set(shootingDelay, dataManager.get(shootingDelay) - 1);
