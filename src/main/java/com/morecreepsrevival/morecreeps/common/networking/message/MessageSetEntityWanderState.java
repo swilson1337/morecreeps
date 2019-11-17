@@ -32,7 +32,7 @@ public class MessageSetEntityWanderState implements IMessage
     {
         buf.writeInt(entityId);
 
-        buf.writeInt(wanderState);
+        buf.writeShort(wanderState);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MessageSetEntityWanderState implements IMessage
     {
         entityId = buf.readInt();
 
-        wanderState = buf.readInt();
+        wanderState = buf.readShort();
     }
 
     public static class MessageHandler implements IMessageHandler<MessageSetEntityWanderState, IMessage>

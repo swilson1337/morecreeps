@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemSundae extends CreepsItemFood
 {
@@ -16,8 +16,8 @@ public class ItemSundae extends CreepsItemFood
         setMaxStackSize(32);
     }
 
-    @Override
-    public ItemStack onItemUseFinish(ItemStack itemStack, @Nullable World worldIn, EntityLivingBase entity)
+    @Override @Nonnull
+    public ItemStack onItemUseFinish(ItemStack itemStack, @Nonnull World worldIn, EntityLivingBase entity)
     {
         entity.playSound(CreepsSoundHandler.guineaPigEatSound, 1.0f, 1.0f);
 

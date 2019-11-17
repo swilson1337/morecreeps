@@ -2,7 +2,6 @@ package com.morecreepsrevival.morecreeps.common.items;
 
 import com.morecreepsrevival.morecreeps.common.entity.EntitySchlump;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -14,7 +13,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemBabyJarFull extends CreepsItem
 {
@@ -27,8 +26,8 @@ public class ItemBabyJarFull extends CreepsItem
         setMaxStackSize(1);
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nullable EnumHand hand)
+    @Override @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (player.isSneaking())
         {

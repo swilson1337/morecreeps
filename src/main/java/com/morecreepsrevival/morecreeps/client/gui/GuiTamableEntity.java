@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class GuiTamableEntity extends GuiScreen
 {
-    private EntityCreepBase entity;
+    private final EntityCreepBase entity;
 
     private GuiTextField nameScreen;
 

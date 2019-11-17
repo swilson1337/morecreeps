@@ -35,6 +35,9 @@ import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Mouse;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 @Mod(modid = MoreCreepsAndWeirdos.modid, name = MoreCreepsAndWeirdos.name, version = MoreCreepsAndWeirdos.version, updateJSON = MoreCreepsAndWeirdos.updateJSON, useMetadata = true) @EventBusSubscriber(modid = MoreCreepsAndWeirdos.modid)
@@ -44,7 +47,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.9";
+    public static final String version = "1.0.10";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -131,9 +134,9 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityKid.class, "kid", MoreCreepsConfig.kidSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF5B4D, 0x9E9E9E, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityLolliman.class, "lolliman", MoreCreepsConfig.lollimanSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF0000, 0x00FFEC, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityPyramidGuardian.class, "pyramid_guardian", 0, 0, 0, EnumCreatureType.MONSTER),
-                createEntity(EntityEvilCreature.class, "evilcreature", 1, 1, 1, EnumCreatureType.MONSTER, 0x3BBD62, 0x90702D),
-                createEntity(EntityCastleGuard.class, "castleguard", 1, 1, 2, EnumCreatureType.CREATURE, 0xFB91F2, 0xF691FB),
-                createEntity(EntityCastleCritter.class, "castlecritter", 1, 1, 2, EnumCreatureType.CREATURE, 0xE32C2C, 0x000000),
+                createEntity(EntityEvilCreature.class, "evilcreature", 0, 1, 1, EnumCreatureType.MONSTER, 0x3BBD62, 0x90702D),
+                createEntity(EntityCastleGuard.class, "castleguard", 0, 1, 2, EnumCreatureType.CREATURE, 0xFB91F2, 0xF691FB),
+                createEntity(EntityCastleCritter.class, "castlecritter", 0, 1, 2, EnumCreatureType.CREATURE, 0xE32C2C, 0x000000),
                 createEntity(EntityCastleKing.class, "castleking", 0, 0, 0, EnumCreatureType.CREATURE),
                 createEntity(EntityG.class, "g", MoreCreepsConfig.gSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF9700, 0x00FF08, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRobotTed.class, "robot_ted", MoreCreepsConfig.robotTedSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x0068FF, 0xA4A4A4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
@@ -150,7 +153,11 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF07F3, 0x84653A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityHotdog.class, "hotdog", MoreCreepsConfig.hotdogSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0x7C5C32, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityDigBug.class, "digbug", MoreCreepsConfig.digBugSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x58BA4C, 0xE6DD58, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityBubbleScum.class, "bubblescum", MoreCreepsConfig.bubbleScumSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xCE51BE, 0x67E6ED, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityBubbleScum.class, "bubblescum", MoreCreepsConfig.bubbleScumSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xCE51BE, 0x67E6ED, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntitySneakySal.class, "sneakysal", MoreCreepsConfig.sneakySalSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.CREATURE),
+                createEntity(EntityPrisoner.class, "prisoner", 0, 1, 1, EnumCreatureType.CREATURE),
+                createEntity(EntityBullet.class, "bullet", 0, 0, 0, EnumCreatureType.AMBIENT)
         );
     }
 
@@ -292,11 +299,7 @@ public class MoreCreepsAndWeirdos
             return;
         }
 
-        Minecraft minecraft = Minecraft.getMinecraft();
-
-        boolean isJumping = minecraft.gameSettings.keyBindJump.isKeyDown();
-
-        if (isJumping)
+        if (proxy.isJumpKeyDown())
         {
         }
         else
@@ -323,5 +326,12 @@ public class MoreCreepsAndWeirdos
                 }
             }
         }
+    }
+
+    public static boolean isBlackFriday()
+    {
+        LocalDate now = LocalDate.now();
+
+        return LocalDate.of(now.getYear(), 11, 1).with(TemporalAdjusters.dayOfWeekInMonth(4, DayOfWeek.THURSDAY)).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).equals(now);
     }
 }

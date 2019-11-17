@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xax",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "a": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "morecreeps:frisbee",
+    "count": 4
+  }
+}

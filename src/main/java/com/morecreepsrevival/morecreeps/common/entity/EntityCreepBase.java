@@ -1014,7 +1014,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public void onDeath(@Nullable DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         if (!dead && !world.isRemote)
         {

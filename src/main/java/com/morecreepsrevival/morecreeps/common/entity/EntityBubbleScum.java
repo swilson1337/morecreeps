@@ -79,7 +79,7 @@ public class EntityBubbleScum extends EntityCreepBase
     @Override
     public int getMaxSpawnedInChunk()
     {
-        return 2;
+        return 1;
     }
 
     @Override

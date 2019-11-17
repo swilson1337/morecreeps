@@ -130,8 +130,6 @@ public class CreepsSoundHandler
 
     public static final SoundEvent pyramidDeathSound = createSound("pyramiddeath");
 
-    public static final SoundEvent randomBowSound = createMinecraftSound("random.bow");
-
     public static final SoundEvent raygunSound = createSound("raygun");
 
     public static final SoundEvent evilEggCluckSound = createSound("evileggcluck");
@@ -350,14 +348,37 @@ public class CreepsSoundHandler
 
     public static final SoundEvent bubbleScumPutDownSound = createSound("bubblescumputdown");
 
-    public static SoundEvent createSound(String soundName)
+    public static final SoundEvent ratManSound = createSound("ratman");
+
+    public static final SoundEvent ratManScratchSound = createSound("ratmanscratch");
+
+    public static final SoundEvent ratManHurtSound = createSound("ratmanhurt");
+
+    public static final SoundEvent giraffeSound = createSound("giraffe");
+
+    public static final SoundEvent salHurtSound = createSound("salhurt");
+
+    public static final SoundEvent salDeadSound = createSound("saldead");
+
+    public static final SoundEvent prisonerSound = createSound("prisoner");
+
+    public static final SoundEvent prisonerHurtSound = createSound("prisonerhurt");
+
+    public static final SoundEvent prisonerDeathSound = createSound("prisonerdeath");
+
+    public static final SoundEvent salGreetingSound = createSound("salgreeting");
+
+    public static final SoundEvent growRaySound = createSound("growray");
+
+    public static final SoundEvent salRatsSound = createSound("salrats");
+
+    public static final SoundEvent salNoMoneySound = createSound("salnomoney");
+
+    public static final SoundEvent salSaleSound = createSound("salsale");
+
+    private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
-    }
-
-    public static SoundEvent createMinecraftSound(String soundName)
-    {
-        return (new SoundEvent(new ResourceLocation("minecraft", soundName))).setRegistryName(soundName);
     }
 
     @SubscribeEvent
@@ -530,7 +551,21 @@ public class CreepsSoundHandler
                 digBugEatSound,
                 digBugFullSound,
                 bubbleScumPickupSound,
-                bubbleScumPutDownSound
+                bubbleScumPutDownSound,
+                ratManSound,
+                ratManScratchSound,
+                ratManHurtSound,
+                giraffeSound,
+                salHurtSound,
+                salDeadSound,
+                prisonerSound,
+                prisonerHurtSound,
+                prisonerDeathSound,
+                salGreetingSound,
+                growRaySound,
+                salRatsSound,
+                salNoMoneySound,
+                salSaleSound
         );
     }
 }

@@ -6,10 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ItemHealingGem extends CreepsItem
 {
@@ -24,8 +23,8 @@ public class ItemHealingGem extends CreepsItem
         setMaxDamage(16);
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nullable EnumHand hand)
+    @Override @Nonnull
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (player.getHealth() < 20)
         {
@@ -40,8 +39,6 @@ public class ItemHealingGem extends CreepsItem
                 double d = itemRand.nextGaussian() * 0.02D;
                 double d1 = itemRand.nextGaussian() * 0.02D;
                 double d2 = itemRand.nextGaussian() * 0.02D;
-                double d3 = -MathHelper.sin((player.rotationYaw * (float)Math.PI) / 180F);
-                double d4 = MathHelper.cos((player.rotationYaw * (float)Math.PI) / 180F);
                 world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (player.posX + itemRand.nextGaussian() * 0.5D) - itemRand.nextGaussian() * 0.5D, ((player.posY - 0.5D) + itemRand.nextGaussian() * 0.5D) - itemRand.nextGaussian() * 0.5D, (player.posZ + itemRand.nextGaussian() * 0.5D) - itemRand.nextGaussian() * 0.5D, d, d1, d2);
                 world.spawnParticle(EnumParticleTypes.HEART, (player.posX + itemRand.nextGaussian() * 0.5D) - itemRand.nextGaussian() * 0.5D, ((player.posY - 0.5D) + itemRand.nextGaussian() * 0.5D) - itemRand.nextGaussian() * 0.5D, (player.posZ + itemRand.nextGaussian() * 0.5D) - itemRand.nextGaussian() * 0.5D, d, d1, d2);
             }
