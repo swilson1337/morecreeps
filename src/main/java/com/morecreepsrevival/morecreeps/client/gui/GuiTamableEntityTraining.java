@@ -13,7 +13,7 @@ import org.lwjgl.input.Keyboard;
 
 public class GuiTamableEntityTraining extends GuiScreen
 {
-    private EntityCreepBase entity;
+    private final EntityCreepBase entity;
 
     public GuiTamableEntityTraining(EntityCreepBase entityIn)
     {

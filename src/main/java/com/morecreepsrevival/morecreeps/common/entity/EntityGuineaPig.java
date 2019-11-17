@@ -62,10 +62,12 @@ public class EntityGuineaPig extends EntityCreepBase
             "Soobin",
             "Solar",
             "Hyuna",
+            "DAWN",
             "Mini",
             "Kai",
             "GlockBoyKari",
-            "Wonho"
+            "Wonho",
+            "ㅇㅅㅇ"
     };
 
     private static final String[] levelNames = {

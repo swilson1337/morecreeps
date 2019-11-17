@@ -366,6 +366,16 @@ public class CreepsSoundHandler
 
     public static final SoundEvent prisonerDeathSound = createSound("prisonerdeath");
 
+    public static final SoundEvent salGreetingSound = createSound("salgreeting");
+
+    public static final SoundEvent growRaySound = createSound("growray");
+
+    public static final SoundEvent salRatsSound = createSound("salrats");
+
+    public static final SoundEvent salNoMoneySound = createSound("salnomoney");
+
+    public static final SoundEvent salSaleSound = createSound("salsale");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -550,7 +560,12 @@ public class CreepsSoundHandler
                 salDeadSound,
                 prisonerSound,
                 prisonerHurtSound,
-                prisonerDeathSound
+                prisonerDeathSound,
+                salGreetingSound,
+                growRaySound,
+                salRatsSound,
+                salNoMoneySound,
+                salSaleSound
         );
     }
 }

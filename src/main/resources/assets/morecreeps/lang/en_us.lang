@@ -38,6 +38,7 @@ item.morecreeps.rayray.name=Ray
 item.morecreeps.floob_raygun.name=Raygun
 item.morecreeps.limbs.name=Limbs
 item.morecreeps.bulletbullet.name=Bullet
+item.morecreeps.grow_ray.name=Grow Ray
 
 # Entities
 entity.guineapig.name=Guinea Pig
