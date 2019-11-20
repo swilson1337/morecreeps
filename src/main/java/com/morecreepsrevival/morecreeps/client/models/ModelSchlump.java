@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
+import com.morecreepsrevival.morecreeps.common.entity.EntitySchlump;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -487,7 +488,7 @@ public class ModelSchlump extends ModelBase
         earL.render(f5);
         nose.render(f5);
 
-        int age = 0;
+        int age = ((EntitySchlump)entity).getAge();
 
         if (age > 100)
         {
@@ -780,10 +781,6 @@ public class ModelSchlump extends ModelBase
 
         if (swingProgress > -9990F)
         {
-            float f6 = 1.0F - swingProgress;
-            f6 *= f6;
-            f6 *= f6;
-            f6 = 1.0F - f6;
             armR.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
         }
 
