@@ -5,6 +5,7 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.DamageSource;
@@ -110,6 +111,8 @@ public class EntityHorseHead extends EntityCreepBase
     protected void initEntityAI()
     {
         clearAITasks();
+
+        tasks.addTask(1, new EntityAISwimming(this));
     }
 
     @Override
@@ -117,7 +120,7 @@ public class EntityHorseHead extends EntityCreepBase
     {
         if (world.isRemote)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 2; i++)
             {
                 world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, (posY - 0.5d) + rand.nextGaussian() * 0.2d, posZ, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
             }
@@ -148,7 +151,7 @@ public class EntityHorseHead extends EntityCreepBase
 
             if (world.isRemote)
             {
-                for (int i = 0; i < 25; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, (posY - 0.5d) + rand.nextGaussian() * 0.2d, posZ, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
                 }
@@ -353,7 +356,7 @@ public class EntityHorseHead extends EntityCreepBase
 
                 if (world.isRemote)
                 {
-                    for (int i = 0; i < 25; i++)
+                    for (int i = 0; i < 5; i++)
                     {
                         world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, (posY - 0.5d) + rand.nextGaussian() * 0.2d, posZ, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
                     }

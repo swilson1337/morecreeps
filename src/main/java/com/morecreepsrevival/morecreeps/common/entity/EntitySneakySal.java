@@ -143,7 +143,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         tasks.addTask(6, new EntityAILookIdle(this));
 
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
     }
 
     @Override
@@ -249,7 +249,11 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         if (rand.nextInt(10) == 0)
         {
-            smoke();
+            double xHeading = -MathHelper.sin(rotationYaw * (float)Math.PI / 180.0f);
+
+            double zHeading = MathHelper.cos(rotationYaw * (float)Math.PI / 180.0f);
+
+            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + xHeading * 0.5d, posY + 2.0d, posZ + zHeading * 0.5d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
         }
 
         if (dataManager.get(dissedMax) < 1 && getAttackTarget() == null)
@@ -270,7 +274,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             for (int j = 0; j < 10; j++)
             {
-                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (posX + (double)(rand.nextFloat() * width * 2.0f)) - (double)width, posY + (double)(rand.nextFloat() * height) + (double)i, (posZ + (double)(rand.nextFloat() * width * 2.0f)) - (double)width, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+                world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0f)) - (double)width, posY + (double)(rand.nextFloat() * height) + (double)i, (posZ + (double)(rand.nextFloat() * width * 2.0f)) - (double)width, rand.nextGaussian() * 0.06d, rand.nextGaussian() * 0.06d, rand.nextGaussian() * 0.06d);
             }
         }
     }

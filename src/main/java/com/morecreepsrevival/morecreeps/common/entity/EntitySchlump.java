@@ -22,6 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntitySchlump extends EntityCreepBase
@@ -113,8 +114,6 @@ public class EntitySchlump extends EntityCreepBase
         {
             if (getAge() < 22000)
             {
-                System.out.println(getAge());
-
                 setAge(getAge() + 1);
             }
 
@@ -647,7 +646,7 @@ public class EntitySchlump extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nullable DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         super.onDeath(cause);
 
