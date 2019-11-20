@@ -55,7 +55,7 @@ public class EntityBubbleScum extends EntityCreepBase
 
             tasks.addTask(6, new EntityAILookIdle(this));
 
-            targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+            targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         }
     }
 

@@ -20,7 +20,7 @@ public class EntityRobotTodd extends EntityCreepBase
 
         setModelSize(2.5f);
 
-        baseSpeed = 0.4d;
+        baseSpeed = 0.25d;
 
         baseHealth = (float)rand.nextInt(20) + 25.0f;
 
@@ -68,7 +68,7 @@ public class EntityRobotTodd extends EntityCreepBase
 
         tasks.addTask(6, new EntityAILookIdle(this));
 
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 

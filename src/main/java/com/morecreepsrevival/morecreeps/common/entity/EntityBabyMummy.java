@@ -81,7 +81,7 @@ public class EntityBabyMummy extends EntityCreepBase
 
         tasks.addTask(6, new EntityAILookIdle(this));
 
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }

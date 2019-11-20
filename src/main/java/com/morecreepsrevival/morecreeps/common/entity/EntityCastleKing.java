@@ -73,9 +73,9 @@ public class EntityCastleKing extends EntityCreepBase
 
         tasks.addTask(5, new EntityAILookIdle(this));
 
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 
     @Override
