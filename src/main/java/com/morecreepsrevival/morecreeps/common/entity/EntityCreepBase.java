@@ -1768,7 +1768,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public float getBlockPathWeight(@Nullable BlockPos blockPos)
+    public float getBlockPathWeight(BlockPos blockPos)
     {
         if (getCreatureType() == EnumCreatureType.MONSTER)
         {
