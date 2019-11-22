@@ -82,7 +82,7 @@ public class EntityCastleGuard extends EntityCreepBase
     @Override
     protected SoundEvent getAmbientSound()
     {
-        if (dataManager.get(attacked) && rand.nextInt(5) == 0)
+        if (getAttacked() && rand.nextInt(5) == 0)
         {
             return CreepsSoundHandler.castleGuardMadSound;
         }
@@ -92,6 +92,11 @@ public class EntityCastleGuard extends EntityCreepBase
         }
 
         return null;
+    }
+
+    public boolean getAttacked()
+    {
+        return dataManager.get(attacked);
     }
 
     @Override

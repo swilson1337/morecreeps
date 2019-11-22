@@ -115,7 +115,7 @@ public class EntityGooGoat extends EntityCreepBase
     {
         super.onLivingUpdate();
 
-        if (dataManager.get(hungry))
+        if (getHungry())
         {
             BlockPos blockPos = new BlockPos(MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) - 1, MathHelper.floor(posZ));
 
@@ -183,5 +183,10 @@ public class EntityGooGoat extends EntityCreepBase
         {
             dropItem(CreepsItemHandler.gooDonut, i);
         }
+    }
+
+    public boolean getHungry()
+    {
+        return dataManager.get(hungry);
     }
 }
