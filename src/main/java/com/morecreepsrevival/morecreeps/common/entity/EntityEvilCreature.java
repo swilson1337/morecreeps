@@ -140,7 +140,7 @@ public class EntityEvilCreature extends EntityCreepBase
     @Override
     protected void doAttackJump(Entity entity)
     {
-        if (dataManager.get(jumping))
+        if (getJumping())
         {
             dataManager.set(jumping, false);
 
@@ -187,5 +187,10 @@ public class EntityEvilCreature extends EntityCreepBase
         }
 
         return super.attackEntityAsMob(entity);
+    }
+
+    public boolean getJumping()
+    {
+        return dataManager.get(jumping);
     }
 }

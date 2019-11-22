@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class EntityFloobShip extends EntityCreepBase
 {
@@ -221,16 +221,16 @@ public class EntityFloobShip extends EntityCreepBase
             motionX += 0.97999999999999998d;
         }
 
-        if (isJumping || dataManager.get(landed))
+        if (isJumping || getLanded())
         {
             motionY = 0.0d;
 
             dataManager.set(bump, 0.0f);
         }
 
-        if (!dataManager.get(landed) || !onGround)
+        if (!getLanded() || !onGround)
         {
-            if (posY < 100.0d && !dataManager.get(firstReset))
+            if (posY < 100.0d && !getFirstReset())
             {
                 motionY = 4.0d;
 
@@ -333,7 +333,7 @@ public class EntityFloobShip extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nullable DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         super.onDeath(cause);
 
@@ -341,5 +341,15 @@ public class EntityFloobShip extends EntityCreepBase
         {
             world.createExplosion(null, posX, posY, posZ, 8.0f, true);
         }
+    }
+
+    public boolean getLanded()
+    {
+        return dataManager.get(landed);
+    }
+
+    public boolean getFirstReset()
+    {
+        return dataManager.get(firstReset);
     }
 }

@@ -115,50 +115,44 @@ public class EntityGooGoat extends EntityCreepBase
     {
         super.onLivingUpdate();
 
-        try
+        if (getHungry())
         {
-            if (dataManager.get(hungry))
+            BlockPos blockPos = new BlockPos(MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) - 1, MathHelper.floor(posZ));
+
+            if (world.getBlockState(blockPos).getBlock() == Blocks.GRASS && rand.nextInt(10) == 0)
             {
-                BlockPos blockPos = new BlockPos(MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) - 1, MathHelper.floor(posZ));
+                world.setBlockState(blockPos, Blocks.DIRT.getDefaultState());
 
-                if (world.getBlockState(blockPos).getBlock() == Blocks.GRASS && rand.nextInt(10) == 0)
+                dataManager.set(hungryTime, dataManager.get(hungryTime) + rand.nextInt(100) + 25);
+
+                if (dataManager.get(hungryTime) > 300 && getLevel() < 5)
                 {
-                    world.setBlockState(blockPos, Blocks.DIRT.getDefaultState());
-
-                    dataManager.set(hungryTime, dataManager.get(hungryTime) + rand.nextInt(100) + 25);
-
-                    if (dataManager.get(hungryTime) > 300 && getLevel() < 5)
-                    {
-                        dataManager.set(hungry, false);
-
-                        dataManager.set(hungryTime, 0);
-
-                        setModelSize(getModelSize() + 0.2f);
-
-                        setLevel(getLevel() + 1);
-
-                        baseAttackDamage += 1.0d;
-
-                        updateAttributes();
-
-                        playSound(CreepsSoundHandler.gooGoatStretchSound, getSoundVolume(), getSoundPitch());
-                    }
-                }
-            }
-            else
-            {
-                dataManager.set(hungryTime, dataManager.get(hungryTime) - 1);
-
-                if (dataManager.get(hungryTime) < 1)
-                {
-                    dataManager.set(hungry, true);
+                    dataManager.set(hungry, false);
 
                     dataManager.set(hungryTime, 0);
+
+                    setModelSize(getModelSize() + 0.2f);
+
+                    setLevel(getLevel() + 1);
+
+                    baseAttackDamage += 1.0d;
+
+                    updateAttributes();
+
+                    playSound(CreepsSoundHandler.gooGoatStretchSound, getSoundVolume(), getSoundPitch());
                 }
             }
         }
-        catch (Exception ignored)
+        else
         {
+            dataManager.set(hungryTime, dataManager.get(hungryTime) - 1);
+
+            if (dataManager.get(hungryTime) < 1)
+            {
+                dataManager.set(hungry, true);
+
+                dataManager.set(hungryTime, 0);
+            }
         }
     }
 
@@ -189,5 +183,10 @@ public class EntityGooGoat extends EntityCreepBase
         {
             dropItem(CreepsItemHandler.gooDonut, i);
         }
+    }
+
+    public boolean getHungry()
+    {
+        return dataManager.get(hungry);
     }
 }
