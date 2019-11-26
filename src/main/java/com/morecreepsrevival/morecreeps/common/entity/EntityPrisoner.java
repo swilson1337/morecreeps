@@ -118,7 +118,15 @@ public class EntityPrisoner extends EntityCreepBase
 
     public boolean getEvil()
     {
-        return dataManager.get(evil);
+        try
+        {
+            return dataManager.get(evil);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override

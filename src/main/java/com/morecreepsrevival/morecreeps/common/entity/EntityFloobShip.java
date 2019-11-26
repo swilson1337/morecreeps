@@ -345,11 +345,27 @@ public class EntityFloobShip extends EntityCreepBase
 
     public boolean getLanded()
     {
-        return dataManager.get(landed);
+        try
+        {
+            return dataManager.get(landed);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     public boolean getFirstReset()
     {
-        return dataManager.get(firstReset);
+        try
+        {
+            return dataManager.get(firstReset);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 }
