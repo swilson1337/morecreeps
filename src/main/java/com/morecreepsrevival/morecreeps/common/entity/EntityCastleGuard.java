@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class EntityCastleGuard extends EntityCreepBase
 {
@@ -96,7 +96,15 @@ public class EntityCastleGuard extends EntityCreepBase
 
     public boolean getAttacked()
     {
-        return dataManager.get(attacked);
+        try
+        {
+            return dataManager.get(attacked);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override
@@ -133,9 +141,9 @@ public class EntityCastleGuard extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityFrom(@Nullable DamageSource damageSource, float amt)
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
     {
-        if (damageSource != null && damageSource.getTrueSource() instanceof EntityPlayer)
+        if (damageSource.getTrueSource() instanceof EntityPlayer)
         {
             dataManager.set(attacked, true);
         }

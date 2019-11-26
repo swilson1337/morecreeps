@@ -156,7 +156,7 @@ public class EntityBigBaby extends EntityCreepBase
 
             int iSkin = dataManager.get(skin);
 
-            iSkin += (dataManager.get(skinDirection) ? 1 : -1);
+            iSkin += (getSkinDirection() ? 1 : -1);
 
             if (getAttackTarget() != null)
             {
@@ -218,5 +218,18 @@ public class EntityBigBaby extends EntityCreepBase
         }
 
         return super.attackEntityAsMob(entity);
+    }
+
+    private boolean getSkinDirection()
+    {
+        try
+        {
+            return dataManager.get(skinDirection);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 }

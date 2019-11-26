@@ -144,7 +144,15 @@ public class EntityLawyerFromHell extends EntityCreepBase
 
     public boolean getUndead()
     {
-        return dataManager.get(undead);
+        try
+        {
+            return dataManager.get(undead);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override

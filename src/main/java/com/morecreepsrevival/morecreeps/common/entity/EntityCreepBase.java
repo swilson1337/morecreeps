@@ -1732,7 +1732,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public boolean getNoDespawn()
     {
-        return dataManager.get(noDespawn);
+        try
+        {
+            return dataManager.get(noDespawn);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override

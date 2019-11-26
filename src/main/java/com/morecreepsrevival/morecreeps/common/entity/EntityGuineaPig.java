@@ -770,7 +770,15 @@ public class EntityGuineaPig extends EntityCreepBase
 
     public boolean getHotelBuilt()
     {
-        return dataManager.get(hotelBuilt);
+        try
+        {
+            return dataManager.get(hotelBuilt);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     protected void setHotelBuilt(boolean b)

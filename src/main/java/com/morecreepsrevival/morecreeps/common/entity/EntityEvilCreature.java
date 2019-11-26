@@ -191,6 +191,14 @@ public class EntityEvilCreature extends EntityCreepBase
 
     public boolean getJumping()
     {
-        return dataManager.get(jumping);
+        try
+        {
+            return dataManager.get(jumping);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 }

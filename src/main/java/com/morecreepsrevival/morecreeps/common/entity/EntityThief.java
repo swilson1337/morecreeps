@@ -276,7 +276,15 @@ public class EntityThief extends EntityCreepBase
 
     public boolean getStolen()
     {
-        return dataManager.get(stolen);
+        try
+        {
+            return dataManager.get(stolen);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     public void findPlayerToAttack()

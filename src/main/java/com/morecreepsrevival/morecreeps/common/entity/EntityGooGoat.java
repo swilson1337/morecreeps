@@ -187,6 +187,14 @@ public class EntityGooGoat extends EntityCreepBase
 
     public boolean getHungry()
     {
-        return dataManager.get(hungry);
+        try
+        {
+            return dataManager.get(hungry);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 }

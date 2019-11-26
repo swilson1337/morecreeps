@@ -21,8 +21,6 @@ import net.minecraft.world.World;
 
 public class EntityHotdog extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> angryDog = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
-
     private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
 
     private static final String[] textures = {
@@ -70,8 +68,6 @@ public class EntityHotdog extends EntityCreepBase
     protected void entityInit()
     {
         super.entityInit();
-
-        dataManager.register(angryDog, false);
 
         dataManager.register(heavenBuilt, false);
     }
@@ -212,16 +208,6 @@ public class EntityHotdog extends EntityCreepBase
     public int getMaxLevel()
     {
         return 25;
-    }
-
-    private void setAngryDog(boolean b)
-    {
-        dataManager.set(angryDog, b);
-    }
-
-    public boolean getAngryDog()
-    {
-        return dataManager.get(angryDog);
     }
 
     @Override

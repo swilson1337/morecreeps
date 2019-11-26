@@ -146,7 +146,15 @@ public class EntityLolliman extends EntityCreepBase
 
     public boolean getKidMounted()
     {
-        return dataManager.get(kidMounted);
+        try
+        {
+            return dataManager.get(kidMounted);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override
