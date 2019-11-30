@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class RenderLawyerFromHell<T extends EntityLawyerFromHell> extends RenderCreep<T>
 {
@@ -33,11 +34,11 @@ public class RenderLawyerFromHell<T extends EntityLawyerFromHell> extends Render
     }
 
     @Override
-    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nullable T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
-        if (entity.getUndead() || entity.getDistanceSq(renderManager.renderViewEntity) > 400)
+        if (entity == null || entity.getUndead() || entity.getDistanceSq(renderManager.renderViewEntity) > 400)
         {
             return;
         }

@@ -270,7 +270,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityFrom(@Nullable DamageSource damageSource, float amt)
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
     {
         if (!getUndead())
         {
@@ -392,7 +392,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nullable DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         if (!getUndead())
         {

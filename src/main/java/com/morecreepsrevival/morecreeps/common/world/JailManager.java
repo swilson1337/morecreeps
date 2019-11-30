@@ -355,15 +355,17 @@ public class JailManager
             }
         }
 
-        BlockPos chest1Pos = new BlockPos(jailX + 12, jailY, jailZ + 13);
+        BlockPos chest1Pos = new BlockPos(jailX + 12, jailY, jailZ + 12);
 
         world.setBlockState(chest1Pos, Blocks.CHEST.getDefaultState());
+
+        world.setBlockState(new BlockPos(jailX + 12, jailY, jailZ + 13), Blocks.CHEST.getDefaultState());
 
         TileEntityChest chest1 = new TileEntityChest();
 
         world.setTileEntity(chest1Pos, chest1);
 
-        BlockPos chest2Pos = new BlockPos(jailX+ 12, jailY, jailZ + 1);
+        BlockPos chest2Pos = new BlockPos(jailX + 12, jailY, jailZ + 1);
 
         world.setBlockState(chest2Pos, Blocks.CHEST.getDefaultState());
 
@@ -379,33 +381,75 @@ public class JailManager
 
         world.setTileEntity(chest3Pos, chest3);
 
+        BlockPos chest4Pos = new BlockPos(jailX, jailY, jailZ + 1);
+
+        world.setBlockState(chest4Pos, Blocks.CHEST.getDefaultState());
+
+        TileEntityChest chest4 = new TileEntityChest();
+
+        world.setTileEntity(chest4Pos, chest4);
+
+        int chestOffset = 0;
+
+        System.out.println(chest1.getSizeInventory());
+
         for (int i = 0; i < player.inventory.mainInventory.size(); i++)
         {
-            if ((i + 1) > chest1.getSizeInventory())
+            if ((chestOffset + i + 1) > chest1.getSizeInventory())
             {
                 break;
             }
 
             ItemStack itemStack = player.inventory.mainInventory.get(i);
 
-            int stackSize = itemStack.getCount();
+            chest1.setInventorySlotContents(chestOffset + i, itemStack.copy());
 
-            chest1.setInventorySlotContents(i, itemStack.copy());
-
-            itemStack.shrink(stackSize);
+            itemStack.shrink(itemStack.getCount());
         }
 
-        for (int i = 1; i < chest3.getSizeInventory(); i++)
+        chestOffset += player.inventory.mainInventory.size() - 1;
+
+        for (int i = 0; i < player.inventory.armorInventory.size(); i++)
+        {
+            if ((chestOffset + i + 1) > chest1.getSizeInventory())
+            {
+                break;
+            }
+
+            ItemStack itemStack = player.inventory.armorInventory.get(i);
+
+            chest1.setInventorySlotContents(chestOffset + i, itemStack.copy());
+
+            itemStack.shrink(itemStack.getCount());
+        }
+
+        chestOffset += player.inventory.armorInventory.size() - 1;
+
+        for (int i = 0; i < player.inventory.offHandInventory.size(); i++)
+        {
+            if ((chestOffset + i + 1) > chest1.getSizeInventory())
+            {
+                break;
+            }
+
+            ItemStack itemStack = player.inventory.offHandInventory.get(i);
+
+            chest1.setInventorySlotContents(chestOffset + i, itemStack.copy());
+
+            itemStack.shrink(itemStack.getCount());
+        }
+
+        for (int i = 1; i < chest4.getSizeInventory(); i++)
         {
             int r = rand.nextInt(10);
 
             if (r == 1)
             {
-                chest3.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.bandaid, rand.nextInt(2) + 1));
+                chest4.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.bandaid, rand.nextInt(2) + 1));
             }
             else if (r == 2)
             {
-                chest3.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.money, rand.nextInt(24) + 1));
+                chest4.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.money, rand.nextInt(24) + 1));
             }
         }
 
@@ -419,13 +463,13 @@ public class JailManager
 
         mobSpawner.getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntitySkeleton.class));
 
-        chest1.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.STONE_PICKAXE, 1));
+        chest2.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.STONE_PICKAXE, 1));
 
-        chest1.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Items.APPLE, 1));
+        chest2.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Items.APPLE, 1));
 
-        chest2.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Item.getItemFromBlock(Blocks.TORCH), rand.nextInt(16)));
+        chest3.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Item.getItemFromBlock(Blocks.TORCH), rand.nextInt(16)));
 
-        chest2.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.APPLE, 1));
+        chest3.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.APPLE, 1));
 
         world.setBlockState(new BlockPos(jailX + 6, jailY + 2, jailZ + 9), Blocks.TORCH.getDefaultState());
 

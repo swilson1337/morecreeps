@@ -1,7 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -182,9 +181,7 @@ public class EntityShrink extends EntityThrowable
 
         if (aoLightValueZPos)
         {
-            Block i = world.getBlockState(new BlockPos(hitX, hitY, hitZ)).getBlock();
-
-            if (i != blockHit)
+            if (world.getBlockState(new BlockPos(hitX, hitY, hitZ)) != blockHit)
             {
                 aoLightValueZPos = false;
 

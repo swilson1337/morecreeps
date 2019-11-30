@@ -103,17 +103,20 @@ public class EntityGooGoat extends EntityCreepBase
     }
 
     @Override
-    protected void setModelSize(float f)
-    {
-        super.setModelSize(f);
-
-        setSize(f * 0.75f, f * 1.5f);
-    }
-
-    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
+
+        float modelSize = getModelSize();
+
+        float w = modelSize * 0.75f;
+
+        float h = modelSize * 1.5f;
+
+        if (width != w || height != h)
+        {
+            setSize(w, h);
+        }
 
         if (getHungry())
         {

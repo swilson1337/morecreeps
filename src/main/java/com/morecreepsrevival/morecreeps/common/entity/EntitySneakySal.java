@@ -260,10 +260,17 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             EntityPlayer player = world.getClosestPlayerToEntity(this, 16.0d);
 
-            if (player != null && canEntityBeSeen(player))
+            if (player != null && canEntityBeSeen(player) && !player.capabilities.disableDamage)
             {
                 setAttackTarget(player);
             }
+        }
+
+        EntityLivingBase target = getAttackTarget();
+
+        if (target instanceof EntityPlayer && ((EntityPlayer)target).capabilities.disableDamage)
+        {
+            setAttackTarget(null);
         }
     }
 

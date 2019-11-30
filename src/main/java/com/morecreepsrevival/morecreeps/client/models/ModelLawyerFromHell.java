@@ -5,6 +5,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
+import javax.annotation.Nonnull;
+
 public class ModelLawyerFromHell extends ModelBiped
 {
     public ModelRenderer headLawyer;
@@ -76,7 +78,7 @@ public class ModelLawyerFromHell extends ModelBiped
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         headLawyer.render(f5);
@@ -95,7 +97,7 @@ public class ModelLawyerFromHell extends ModelBiped
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, @Nonnull Entity entity)
     {
         glasses.rotateAngleY = headLawyer.rotateAngleY = f3 / (180F / (float)Math.PI);
         glasses.rotateAngleX = headLawyer.rotateAngleX = f4 / (180F / (float)Math.PI);
