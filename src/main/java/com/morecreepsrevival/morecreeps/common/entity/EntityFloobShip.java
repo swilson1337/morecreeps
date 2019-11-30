@@ -71,7 +71,7 @@ public class EntityFloobShip extends EntityCreepBase
     }
 
     @Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    protected void updateFallState(double y, boolean onGroundIn, @Nonnull IBlockState state, @Nonnull BlockPos pos)
     {
     }
 
@@ -117,9 +117,9 @@ public class EntityFloobShip extends EntityCreepBase
             }
 
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= (double)f;
-            this.motionY *= (double)f;
-            this.motionZ *= (double)f;
+            this.motionX *= f;
+            this.motionY *= f;
+            this.motionZ *= f;
         }
 
         this.prevLimbSwingAmount = this.limbSwingAmount;

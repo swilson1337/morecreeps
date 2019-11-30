@@ -17,6 +17,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityBigBaby extends EntityCreepBase
 {
     private static final DataParameter<Integer> skin = EntityDataManager.createKey(EntityBigBaby.class, DataSerializers.VARINT);
@@ -210,7 +212,7 @@ public class EntityBigBaby extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (getHammerSwing() == 0.0f)
         {

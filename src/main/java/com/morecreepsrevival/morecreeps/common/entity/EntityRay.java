@@ -42,7 +42,6 @@ public class EntityRay extends Entity implements IProjectile
             return p_apply_1_.canBeCollidedWith();
         }
     });
-
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityArrow.class, DataSerializers.BYTE);
     private int xTile;
     private int yTile;
@@ -451,7 +450,7 @@ public class EntityRay extends Entity implements IProjectile
     protected Entity findEntityOnPath(Vec3d start, Vec3d end)
     {
         Entity entity = null;
-        List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), ARROW_TARGETS);
+        List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), ARROW_TARGETS::test);
         double d0 = 0.0D;
 
         for (int i = 0; i < list.size(); ++i)

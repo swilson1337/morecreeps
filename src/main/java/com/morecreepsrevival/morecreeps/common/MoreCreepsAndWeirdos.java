@@ -218,12 +218,7 @@ public class MoreCreepsAndWeirdos
     {
         ArrayList<Biome> biomes = new ArrayList<>();
 
-        HashSet<Type> typesHash = new HashSet<>();
-
-        for (Type type : types)
-        {
-            typesHash.add(type);
-        }
+        HashSet<Type> typesHash = new HashSet<>(Arrays.asList(types));
 
         for (Type type : BiomeDictionary.Type.getAll())
         {

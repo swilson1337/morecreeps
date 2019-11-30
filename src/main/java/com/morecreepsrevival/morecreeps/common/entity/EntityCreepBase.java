@@ -733,7 +733,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (onGround && shouldJumpWhileAttacking(entity))
         {

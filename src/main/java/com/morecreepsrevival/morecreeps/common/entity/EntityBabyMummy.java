@@ -14,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityBabyMummy extends EntityCreepBase
 {
     private static final String[] textures = {
@@ -139,7 +141,7 @@ public class EntityBabyMummy extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         double dist = getDistanceSq(entity);
 

@@ -450,13 +450,6 @@ public class EntitySchlump extends EntityCreepBase
 
         if (!checkHouse())
         {
-            if (owner != null)
-            {
-                owner.sendMessage(new TextComponentString("This is not a good location for your Schlump. It will die here!"));
-            }
-
-            playSound(CreepsSoundHandler.schlumpSucksSound, getSoundVolume(), getSoundPitch());
-
             dataManager.set(deathTimer, 200);
 
             return;
