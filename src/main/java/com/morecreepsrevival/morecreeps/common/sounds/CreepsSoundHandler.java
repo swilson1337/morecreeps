@@ -376,6 +376,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent salSaleSound = createSound("salsale");
 
+    public static final SoundEvent floobShipClangSound = createSound("floobshipclang");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -565,7 +567,8 @@ public class CreepsSoundHandler
                 growRaySound,
                 salRatsSound,
                 salNoMoneySound,
-                salSaleSound
+                salSaleSound,
+                floobShipClangSound
         );
     }
 }

@@ -5,7 +5,9 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -194,17 +196,14 @@ public class EntityFloobShip extends EntityCreepBase
     {
         super.onLivingUpdate();
 
-        if (!world.isRemote)
+        if (dataManager.get(floobCounter) > 0)
         {
-            if (dataManager.get(floobCounter) > 0)
-            {
-                dataManager.set(floobCounter, dataManager.get(floobCounter) - 1);
-            }
+            dataManager.set(floobCounter, dataManager.get(floobCounter) - 1);
+        }
 
-            if (dataManager.get(lifespan) > 0)
-            {
-                dataManager.set(lifespan, dataManager.get(lifespan) - 1);
-            }
+        if (dataManager.get(lifespan) > 0)
+        {
+            dataManager.set(lifespan, dataManager.get(lifespan) - 1);
         }
 
         if (dataManager.get(lifespan) < 1)
@@ -221,7 +220,7 @@ public class EntityFloobShip extends EntityCreepBase
             motionX += 0.97999999999999998d;
         }
 
-        if (isJumping || getLanded())
+        if (getLanded())
         {
             motionY = 0.0d;
 
@@ -249,7 +248,7 @@ public class EntityFloobShip extends EntityCreepBase
 
             if (onGround)
             {
-                Block block = world.getBlockState(new BlockPos(MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY), MathHelper.floor(posZ))).getBlock();
+                Block block = world.getBlockState(new BlockPos(MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) - 1, MathHelper.floor(posZ))).getBlock();
 
                 if (block == Blocks.FLOWING_WATER || block == Blocks.WATER || block == Blocks.LEAVES || block == Blocks.CACTUS)
                 {
@@ -299,6 +298,43 @@ public class EntityFloobShip extends EntityCreepBase
                 }
             }
         }
+    }
+
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
+    {
+        if (damageSource.getTrueSource() instanceof EntityPlayer)
+        {
+            thrusters();
+
+            playSound(CreepsSoundHandler.floobShipClangSound, 1.0f, getSoundPitch());
+        }
+
+        if (rand.nextInt(10) == 0)
+        {
+            dataManager.set(bump, (float)rand.nextInt(3));
+
+            motionX = rand.nextFloat() * 0.8f;
+
+            motionZ = rand.nextFloat() * 0.8f;
+        }
+
+        Block block = world.getBlockState(new BlockPos(MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) - 1, MathHelper.floor(posZ))).getBlock();
+
+        if (block == Blocks.FLOWING_WATER || block == Blocks.WATER || block == Blocks.LEAVES || block == Blocks.CACTUS)
+        {
+            thrusters();
+
+            dataManager.set(bump, 3.0f);
+
+            motionX = rand.nextFloat() * 0.8f;
+
+            motionY = rand.nextFloat() * 0.8f;
+
+            motionZ = rand.nextFloat() * 0.8f;
+        }
+
+        return super.attackEntityFrom(damageSource, amt);
     }
 
     private void thrusters()
@@ -367,5 +403,51 @@ public class EntityFloobShip extends EntityCreepBase
         }
 
         return false;
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsFloobShip");
+
+        props.setBoolean("Landed", getLanded());
+
+        props.setInteger("FloobCounter", dataManager.get(floobCounter));
+
+        props.setBoolean("FirstReset", getFirstReset());
+
+        props.setInteger("Lifespan", dataManager.get(lifespan));
+
+        compound.setTag("MoreCreepsFloobShip", props);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsFloobShip");
+
+        if (props.hasKey("Landed"))
+        {
+            dataManager.set(landed, props.getBoolean("Landed"));
+        }
+
+        if (props.hasKey("FloobCounter"))
+        {
+            dataManager.set(floobCounter, props.getInteger("FloobCounter"));
+        }
+
+        if (props.hasKey("FirstReset"))
+        {
+            dataManager.set(firstReset, props.getBoolean("FirstReset"));
+        }
+
+        if (props.hasKey("Lifespan"))
+        {
+            dataManager.set(lifespan, props.getInteger("Lifespan"));
+        }
     }
 }
