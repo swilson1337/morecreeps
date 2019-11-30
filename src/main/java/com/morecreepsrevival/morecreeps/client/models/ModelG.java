@@ -127,12 +127,6 @@ public class ModelG extends ModelBase
 
         if (swingProgress > -9990F)
         {
-            float f6 = swingProgress;
-            f6 = 1.0F - swingProgress;
-            f6 *= f6;
-            f6 *= f6;
-            f6 = 1.0F - f6;
-            float f7 = MathHelper.sin(f6 * (float)Math.PI);
             bipedRightArm.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
         }
 

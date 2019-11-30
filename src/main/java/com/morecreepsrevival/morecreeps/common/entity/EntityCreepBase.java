@@ -101,7 +101,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         updateAttributes();
     }
 
-    @Override
+    @Override @Nonnull
     public SoundCategory getSoundCategory()
     {
         if (getCreatureType() == EnumCreatureType.MONSTER)
@@ -606,7 +606,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         SoundEvent fullSound = getFullSound();
 
-        SoundEvent eatSound = null;
+        SoundEvent eatSound;
 
         if (getHealth() >= getMaxHealth() && fullSound != null)
         {
@@ -733,7 +733,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (onGround && shouldJumpWhileAttacking(entity))
         {

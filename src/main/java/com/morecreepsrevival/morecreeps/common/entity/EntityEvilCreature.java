@@ -17,6 +17,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.entity.ai.*;
 
+import javax.annotation.Nonnull;
+
 public class EntityEvilCreature extends EntityCreepBase
 {
     private static final DataParameter<Boolean> jumping = EntityDataManager.createKey(EntityEvilCreature.class, DataSerializers.BOOLEAN);
@@ -175,7 +177,7 @@ public class EntityEvilCreature extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         AxisAlignedBB myBB = getEntityBoundingBox();
 

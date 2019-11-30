@@ -23,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class WorldGenCastle extends WorldGenerator
@@ -35,7 +36,7 @@ public class WorldGenCastle extends WorldGenerator
 
     private int floor = 1;
 
-    public boolean generate(World world, Random rand, BlockPos pos)
+    public boolean generate(@Nonnull World world, Random rand, BlockPos pos)
     {
         int x = pos.getX();
 

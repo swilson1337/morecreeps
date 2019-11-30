@@ -9,17 +9,18 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.IClientCommand;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class LevelUpTamedCreature extends CommandBase implements IClientCommand
 {
-    @Override
+    @Override @Nonnull
     public String getName()
     {
         return "levelupcreature";
     }
 
-    @Override
+    @Override @Nonnull
     public String getUsage(@Nullable ICommandSender sender)
     {
         return "/levelupcreature";

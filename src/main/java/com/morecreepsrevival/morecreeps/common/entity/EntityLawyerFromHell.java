@@ -20,6 +20,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityLawyerFromHell extends EntityCreepBase
@@ -228,7 +229,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (entity instanceof EntityPlayer)
         {
@@ -269,7 +270,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityFrom(@Nullable DamageSource damageSource, float amt)
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
     {
         if (!getUndead())
         {
@@ -391,7 +392,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nullable DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         if (!getUndead())
         {

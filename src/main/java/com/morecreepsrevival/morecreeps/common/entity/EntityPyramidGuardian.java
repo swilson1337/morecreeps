@@ -17,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityPyramidGuardian extends EntityCreepBase
 {
     public EntityPyramidGuardian(World world)
@@ -71,7 +73,7 @@ public class EntityPyramidGuardian extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         if (!dead && !world.isRemote)
         {
@@ -80,10 +82,6 @@ public class EntityPyramidGuardian extends EntityCreepBase
             int y = MathHelper.floor(getEntityBoundingBox().minY);
 
             int z = MathHelper.floor(posZ);
-
-            int columns = 35;
-
-            int rows = 35;
 
             int bedrockCounter = 0;
 

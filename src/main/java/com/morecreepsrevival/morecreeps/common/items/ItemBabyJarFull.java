@@ -53,10 +53,9 @@ public class ItemBabyJarFull extends CreepsItem
             float f5 = -MathHelper.cos(-f1 * 0.01745329f);
             float f6 = MathHelper.sin(-f1 * 0.01745329f);
             float f7 = f4 * f5;
-            float f8 = f6;
             float f9 = f3 * f5;
             double d5 = 5d;
-            Vec3d vec3d1 = vec3d.addVector((double)f7 * d5, (double)f8 * d5, (double)f9 * d5);
+            Vec3d vec3d1 = vec3d.addVector((double)f7 * d5, (double)f6 * d5, (double)f9 * d5);
 
             RayTraceResult rtr = world.rayTraceBlocks(vec3d, vec3d1, true);
 

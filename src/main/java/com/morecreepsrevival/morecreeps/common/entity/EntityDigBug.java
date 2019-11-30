@@ -345,10 +345,10 @@ public class EntityDigBug extends EntityCreepBase
 
                 int max = 20 + dataManager.get(digTimer);
 
-                for (int i = 0; i < max; i++)
+                /*for (int i = 0; i < max; i++)
                 {
                     // TODO: bubble
-                }
+                }*/
 
                 dataManager.set(digTimer, 50);
 

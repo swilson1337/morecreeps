@@ -6,6 +6,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
+import javax.annotation.Nonnull;
+
 public class ModelCastleKing extends ModelBiped
 {
     public ModelRenderer bipedHead;
@@ -61,7 +63,7 @@ public class ModelCastleKing extends ModelBiped
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         setRotationAngles(f, f1, f2, f3, f4, f, entity);
         bipedHead.render(f5);
@@ -76,7 +78,7 @@ public class ModelCastleKing extends ModelBiped
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, @Nonnull Entity entity)
     {
         crown.rotateAngleY = bipedHead.rotateAngleY = f3 / (180F / (float)Math.PI);
         crown.rotateAngleX = bipedHead.rotateAngleX = f4 / (180F / (float)Math.PI);
