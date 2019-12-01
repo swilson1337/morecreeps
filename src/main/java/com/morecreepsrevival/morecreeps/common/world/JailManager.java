@@ -357,13 +357,19 @@ public class JailManager
 
         BlockPos chest1Pos = new BlockPos(jailX + 12, jailY, jailZ + 12);
 
+        BlockPos chest1Pos2 = new BlockPos(jailX + 12, jailY, jailZ + 13);
+
         world.setBlockState(chest1Pos, Blocks.CHEST.getDefaultState());
 
-        world.setBlockState(new BlockPos(jailX + 12, jailY, jailZ + 13), Blocks.CHEST.getDefaultState());
+        world.setBlockState(chest1Pos2, Blocks.CHEST.getDefaultState());
 
         TileEntityChest chest1 = new TileEntityChest();
 
         world.setTileEntity(chest1Pos, chest1);
+
+        TileEntityChest chest12 = new TileEntityChest();
+
+        world.setTileEntity(chest1Pos2, chest12);
 
         BlockPos chest2Pos = new BlockPos(jailX + 12, jailY, jailZ + 1);
 
@@ -389,54 +395,84 @@ public class JailManager
 
         world.setTileEntity(chest4Pos, chest4);
 
-        int chestOffset = 0;
+        int chestIndex = 0;
 
-        System.out.println(chest1.getSizeInventory());
+        int chest1Size = chest1.getSizeInventory();
+
+        TileEntityChest chestToUse = chest1;
 
         for (int i = 0; i < player.inventory.mainInventory.size(); i++)
         {
-            if ((chestOffset + i + 1) > chest1.getSizeInventory())
-            {
-                break;
-            }
-
             ItemStack itemStack = player.inventory.mainInventory.get(i);
 
-            chest1.setInventorySlotContents(chestOffset + i, itemStack.copy());
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
 
-            itemStack.shrink(itemStack.getCount());
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
         }
-
-        chestOffset += player.inventory.mainInventory.size() - 1;
 
         for (int i = 0; i < player.inventory.armorInventory.size(); i++)
         {
-            if ((chestOffset + i + 1) > chest1.getSizeInventory())
-            {
-                break;
-            }
-
             ItemStack itemStack = player.inventory.armorInventory.get(i);
 
-            chest1.setInventorySlotContents(chestOffset + i, itemStack.copy());
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
 
-            itemStack.shrink(itemStack.getCount());
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
         }
-
-        chestOffset += player.inventory.armorInventory.size() - 1;
 
         for (int i = 0; i < player.inventory.offHandInventory.size(); i++)
         {
-            if ((chestOffset + i + 1) > chest1.getSizeInventory())
-            {
-                break;
-            }
-
             ItemStack itemStack = player.inventory.offHandInventory.get(i);
 
-            chest1.setInventorySlotContents(chestOffset + i, itemStack.copy());
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
 
-            itemStack.shrink(itemStack.getCount());
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
+        }
+
+        for (ItemStack itemStack : player.getEquipmentAndArmor())
+        {
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
+
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
         }
 
         for (int i = 1; i < chest4.getSizeInventory(); i++)
