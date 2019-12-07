@@ -157,13 +157,16 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntitySneakySal.class, "sneakysal", MoreCreepsConfig.sneakySalSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.CREATURE),
                 createEntity(EntityPrisoner.class, "prisoner", 0, 1, 1, EnumCreatureType.CREATURE),
-                createEntity(EntityBullet.class, "bullet", 0, 0, 0, EnumCreatureType.AMBIENT)
+                createEntity(EntityBullet.class, "bullet", 0, 0, 0, EnumCreatureType.AMBIENT),
+                createEntity(EntitySnowDevil.class, "snowdevil", MoreCreepsConfig.snowDevilSpawnAmt, 1, 2, EnumCreatureType.MONSTER),
+                createEntity(EntityEvilChicken.class, "evilchicken", 0, 0, 0, EnumCreatureType.MONSTER),
+                createEntity(EntityEvilPig.class, "evilpig", 0, 0, 0, EnumCreatureType.MONSTER)
         );
     }
 
     public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor, Biome... biomes)
     {
-        EntityEntryBuilder builder = EntityEntryBuilder.create().entity(classz).name(name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true);
+        EntityEntryBuilder<?> builder = EntityEntryBuilder.create().entity(classz).name(name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true);
 
         if (EntityCreepBase.class.isAssignableFrom(classz))
         {

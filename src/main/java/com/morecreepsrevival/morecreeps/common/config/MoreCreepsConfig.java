@@ -79,6 +79,8 @@ public class MoreCreepsConfig
 
     public static int sneakySalSpawnAmt = 0;
 
+    public static int snowDevilSpawnAmt = 0;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -172,6 +174,8 @@ public class MoreCreepsConfig
             bubbleScumSpawnAmt = config.get(spawnNbr, "Bubble Scum", 8).getInt();
 
             sneakySalSpawnAmt = config.get(spawnNbr, "Sneaky Sal", 8).getInt();
+
+            snowDevilSpawnAmt = config.get(spawnNbr, "Snow Devil", 8).getInt();
 
             config.save();
         }
