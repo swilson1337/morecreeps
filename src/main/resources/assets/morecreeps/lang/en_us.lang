@@ -76,6 +76,8 @@ entity.sneakysal.name=Sneaky Sal
 entity.ratman.name=Rat Man
 entity.prisoner.name=Prisoner
 entity.snowdevil.name=Snow Devil
+entity.evilchicken.name=Evil Chicken
+entity.evilpig.name=Evil Pig
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

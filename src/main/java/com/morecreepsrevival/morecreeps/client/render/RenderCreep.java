@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.model.ModelBase;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
 {
@@ -152,7 +152,7 @@ public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
     }
 
     @Override
-    public void doRender(@Nullable T entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         shadowSize = getShadowSize(entity);
 
