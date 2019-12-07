@@ -28,10 +28,6 @@ public class EntitySnowDevil extends EntityCreepBase
 
         setSize(width * 1.6f, height * 1.6f);
 
-        width = 2.0f;
-
-        height = 2.0f;
-
         baseHealth = (float)rand.nextInt(50) + 15.0f;
 
         baseAttackDamage = 3.0d;
