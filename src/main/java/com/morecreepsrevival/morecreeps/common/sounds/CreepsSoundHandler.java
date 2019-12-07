@@ -378,6 +378,12 @@ public class CreepsSoundHandler
 
     public static final SoundEvent floobShipClangSound = createSound("floobshipclang");
 
+    public static final SoundEvent snowDevilSound = createSound("snowdevil");
+
+    public static final SoundEvent snowDevilHurtSound = createSound("snowdevilhurt");
+
+    public static final SoundEvent snowDevilDeathSound = createSound("snowdevildeath");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -568,7 +574,10 @@ public class CreepsSoundHandler
                 salRatsSound,
                 salNoMoneySound,
                 salSaleSound,
-                floobShipClangSound
+                floobShipClangSound,
+                snowDevilSound,
+                snowDevilHurtSound,
+                snowDevilDeathSound
         );
     }
 }
