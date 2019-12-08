@@ -386,6 +386,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent evilEggBirthSound = createSound("evileggbirth");
 
+    public static final SoundEvent hotdogHeavenSound = createSound("hotdogheaven");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -580,7 +582,8 @@ public class CreepsSoundHandler
                 snowDevilSound,
                 snowDevilHurtSound,
                 snowDevilDeathSound,
-                evilEggBirthSound
+                evilEggBirthSound,
+                hotdogHeavenSound
         );
     }
 }
