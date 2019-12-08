@@ -1,7 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import net.minecraft.block.Block;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -509,8 +508,6 @@ public class EntityHotdog extends EntityCreepBase
 
         byte byte1 = 40;
 
-        boolean flag = false;
-
         int l = (105 - y) / 2;
 
         int i1 = 0;
@@ -529,6 +526,218 @@ public class EntityHotdog extends EntityCreepBase
             }
         }
 
-        return true;
+        if (i1 < 3000)
+        {
+            setHeavenBuilt(true);
+
+            playSound(CreepsSoundHandler.hotdogHeavenSound, getSoundVolume(), getSoundPitch());
+
+            if (!world.isRemote)
+            {
+                player.sendMessage(new TextComponentString("HOT DOG HEAVEN HAS BEEN BUILT!"));
+            }
+
+            world.setBlockState(new BlockPos(x, y, z), Blocks.PLANKS.getDefaultState());
+
+            world.setBlockState(new BlockPos(x, y + 1, z), Blocks.TORCH.getDefaultState());
+
+            world.setBlockState(new BlockPos(x + 5, y, z), Blocks.PLANKS.getDefaultState());
+
+            world.setBlockState(new BlockPos(x + 5, y + 1, z), Blocks.PLANKS.getDefaultState());
+
+            for (int i = 0; i < l; i++)
+            {
+                for (int q = 0; q < 4; q++)
+                {
+                    world.setBlockState(new BlockPos(x + q + 1, y + q, z + q), Blocks.OAK_STAIRS.getDefaultState());
+
+                    // TODO: metadata 2
+                }
+            }
+
+            for (int i = 0; i < (l - 1); i++)
+            {
+                for (int q = 0; q < 4; q++)
+                {
+                    world.setBlockState(new BlockPos(x - q, y + l + i, (z + l) - i), Blocks.OAK_STAIRS.getDefaultState());
+
+                    // TODO: metadata 3
+                }
+            }
+
+            boolean flag = false;
+
+            for (int i = 0; i < 10; i++)
+            {
+                world.setBlockState(new BlockPos((x - i) + 5, y + l, z + l + 6), Blocks.OAK_FENCE.getDefaultState());
+
+                for (int q = 0; q < 7; q++)
+                {
+                    world.setBlockState(new BlockPos(x + 5, y + l, z + l + q), Blocks.OAK_FENCE.getDefaultState());
+
+                    world.setBlockState(new BlockPos(x - 4, y + l, z + l + q), Blocks.OAK_FENCE.getDefaultState());
+
+                    flag = !flag;
+
+                    if (flag)
+                    {
+                        world.setBlockState(new BlockPos(x + 5, y + l + 1, z + l + q), Blocks.TORCH.getDefaultState());
+
+                        world.setBlockState(new BlockPos(x - 4, y + l + 1, z + l + q), Blocks.TORCH.getDefaultState());
+                    }
+
+                    world.setBlockState(new BlockPos((x - i) + 5, (y + l) - 1, z + l + q), Blocks.PLANKS.getDefaultState());
+                }
+            }
+
+            for (int i = 0; i < byte0; i++)
+            {
+                for (int q = 0; q < byte1; q++)
+                {
+                    for (int k = (-rand.nextInt(3) - 2); k < 1; k++)
+                    {
+                        if (k < 0)
+                        {
+                            world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2 + k) - 2, (z + q) - byte1), Blocks.DIRT.getDefaultState());
+                        }
+                        else
+                        {
+                            world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2 + k) - 2, ((z + q) - byte1) + 2), Blocks.GRASS.getDefaultState());
+                        }
+                    }
+                }
+            }
+
+            int randInt = rand.nextInt(10) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6)), Blocks.DEADBUSH.getDefaultState());
+            }
+
+            randInt = rand.nextInt(10) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6)), Blocks.YELLOW_FLOWER.getDefaultState());
+            }
+
+            randInt = rand.nextInt(10) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, (z + rand.nextInt(byte1 - 6)) - byte1), Blocks.RED_FLOWER.getDefaultState());
+            }
+
+            randInt = rand.nextInt(30) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                int j6 = rand.nextInt(byte0 - 12);
+
+                int l7 = rand.nextInt(byte1 - 8);
+
+                BlockPos blockPos = new BlockPos((x + j6) - byte0 / 2, (y + l * 2) - 1, (z + l7) - byte1);
+
+                if (world.isAirBlock(blockPos))
+                {
+                    world.setBlockState(blockPos, Blocks.DEADBUSH.getDefaultState());
+
+                    // TODO: metadata 2
+                }
+            }
+
+            randInt = rand.nextInt(50) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                int k6 = rand.nextInt(byte0 - 12);
+
+                int i8 = rand.nextInt(byte1 - 8);
+
+                BlockPos blockPos = new BlockPos((x + k6) - byte0 / 2, (y + l * 2) - 1, (z + i8) - byte1);
+
+                if (world.isAirBlock(blockPos))
+                {
+                    world.setBlockState(blockPos, Blocks.DEADBUSH.getDefaultState());
+
+                    // TODO: metadata 1
+                }
+            }
+
+            for (int i = 1; i < (byte0 - 1); i++)
+            {
+                world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 1, (z - byte1) + 3), Blocks.OAK_FENCE.getDefaultState());
+
+                world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 1, z), Blocks.OAK_FENCE.getDefaultState());
+
+                flag = !flag;
+
+                if (flag)
+                {
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, y + l * 2, (z - byte1) + 3), Blocks.TORCH.getDefaultState());
+
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, y + l * 2, z), Blocks.TORCH.getDefaultState());
+                }
+            }
+
+            for (int i = 4; i < byte1; i++)
+            {
+                world.setBlockState(new BlockPos((x - byte0 / 2) + 1, (y + l * 2) - 1, (z + i) - byte1), Blocks.OAK_FENCE.getDefaultState());
+
+                world.setBlockState(new BlockPos((x + byte0) - byte0 / 2 - 2, (y + l * 2) - 1, (z + i) - byte1), Blocks.OAK_FENCE.getDefaultState());
+
+                flag = !flag;
+
+                if (flag)
+                {
+                    world.setBlockState(new BlockPos((x - byte0 / 2) + 1, y + l * 2, (z + i) - byte1), Blocks.TORCH.getDefaultState());
+
+                    world.setBlockState(new BlockPos((x + byte0) - byte0 / 2 - 2, y + l * 2, (z + i) - byte1), Blocks.TORCH.getDefaultState());
+                }
+            }
+
+            world.setBlockState(new BlockPos(x - 1, (y + l * 2) - 1, z), Blocks.OAK_FENCE_GATE.getDefaultState());
+
+            world.setBlockState(new BlockPos(x - 2, (y + l * 2) - 1, z), Blocks.OAK_FENCE_GATE.getDefaultState());
+
+            for (int i = 0; i < 6; i++)
+            {
+                // TODO: spawn dog house
+            }
+
+            randInt = rand.nextInt(15) + 5;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                int l6 = rand.nextInt(byte0 - 10) + 3;
+
+                int j8 = rand.nextInt(byte1 - 6) + 3;
+
+                world.setBlockState(new BlockPos((x + l6) - byte0 / 2, (y + l * 2) - 1, (z + j8) - byte1), Blocks.SAPLING.getDefaultState());
+
+                // TODO: spawn sapling?
+            }
+
+            randInt = ((byte0 / 2 + rand.nextInt(10)) - 5) + 8;
+
+            for (int i = ((byte0 / 2 + rand.nextInt(8)) - 8); i < randInt; i++)
+            {
+                int randInt2 = ((byte1 / 2 + rand.nextInt(10)) - 5) + 8;
+
+                for (int q = ((byte1 / 2 + rand.nextInt(8)) - 8); q < randInt2; q++)
+                {
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 2, (z + q) - byte1), Blocks.WATER.getDefaultState());
+
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 3, (z + q) - byte1), Blocks.WATER.getDefaultState());
+                }
+            }
+        }
+        else if (!world.isRemote)
+        {
+            player.sendMessage(new TextComponentString("Too many obstructions, choose another spot!"));
+        }
+
+        return false;
     }
 }
