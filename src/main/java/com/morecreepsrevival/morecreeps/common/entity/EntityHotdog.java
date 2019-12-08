@@ -1,6 +1,7 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.block.Block;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -8,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -15,6 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -211,6 +214,28 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
+    public void onRevive(NBTTagCompound compound)
+    {
+        super.onRevive(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsHotDog");
+
+        setHeavenBuilt(props.getBoolean("HeavenBuilt"));
+    }
+
+    @Override
+    public void onTombstoneCreate(NBTTagCompound compound)
+    {
+        super.onTombstoneCreate(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsHotDog");
+
+        props.setBoolean("HeavenBuilt", getHeavenBuilt());
+
+        compound.setTag("MoreCreepsHeavenBuilt", props);
+    }
+
+    @Override
     protected boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
@@ -237,9 +262,9 @@ public class EntityHotdog extends EntityCreepBase
                     }
                     else if (!getHeavenBuilt())
                     {
-                        if (getLevel() >= 20)
+                        if (getLevel() >= 25)
                         {
-                            /*if (createHotel(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
+                            if (buildHeaven(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
                             {
                                 //player.playSound(MoreCreepsAndWeirdos.achievementSound, 1.0f, 1.0f);
                                 // TODO: add achievements bro
@@ -247,11 +272,11 @@ public class EntityHotdog extends EntityCreepBase
                                 playSound(SoundEvents.ENTITY_TNT_PRIMED, 1.0f, 0.5f);
 
                                 itemStack.shrink(1);
-                            }*/
+                            }
                         }
                         else if (!world.isRemote)
                         {
-                            player.sendMessage(new TextComponentString("Your Hotdog must be level 20 to build a Hotdog Heaven."));
+                            player.sendMessage(new TextComponentString("Your Hotdog must be level 25 to build a Hotdog Heaven."));
 
                             player.sendMessage(new TextComponentString("\247b" + getCreepName() + " is only level \247f" + getLevel() + "."));
                         }
@@ -469,5 +494,41 @@ public class EntityHotdog extends EntityCreepBase
     protected SoundEvent getTamedSound()
     {
         return CreepsSoundHandler.hotdogTamedSound;
+    }
+
+    private boolean buildHeaven(EntityPlayer player, int x, int y, int z)
+    {
+        if (y > 95)
+        {
+            player.sendMessage(new TextComponentString("You are too far up to build Hotdog Heaven!"));
+
+            return false;
+        }
+
+        byte byte0 = 40;
+
+        byte byte1 = 40;
+
+        boolean flag = false;
+
+        int l = (105 - y) / 2;
+
+        int i1 = 0;
+
+        for (int j1 = 0; j1 < l * 2; j1++)
+        {
+            for (int i5 = -2; i5 < byte0 + 2; i5++)
+            {
+                for (int j7 = -2; j7 < byte1 + 2; j7++)
+                {
+                    if (!world.isAirBlock(new BlockPos(x + i5, y + j1, z + j7)))
+                    {
+                        i1++;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }
