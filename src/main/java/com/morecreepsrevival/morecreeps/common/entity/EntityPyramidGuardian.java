@@ -29,8 +29,6 @@ public class EntityPyramidGuardian extends EntityCreepBase
 
         setSize(0.4f, 0.4f);
 
-        creatureType = EnumCreatureType.MONSTER;
-
         baseSpeed = 0.0d;
 
         baseHealth = 15.0f;

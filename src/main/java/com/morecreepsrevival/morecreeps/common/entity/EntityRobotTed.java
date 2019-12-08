@@ -1,6 +1,7 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.NodeProcessor;
@@ -15,6 +16,8 @@ public class EntityRobotTed extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Robot Ted");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         setModelSize(2.5f);
 

@@ -2,6 +2,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
@@ -31,6 +32,8 @@ public class EntityCastleGuard extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Castle Guard");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = 20.0f;
 

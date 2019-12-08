@@ -3,6 +3,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.entity.ai.EntityAIThief;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,11 +36,19 @@ public class EntityThief extends EntityCreepBase
 
         setCreepTypeName("Thief");
 
+        creatureType = EnumCreatureType.MONSTER;
+
         baseHealth = (float)rand.nextInt(20) + 10.0f;
 
         baseSpeed = 0.35d;
 
         updateAttributes();
+    }
+
+    @Override
+    public boolean canDespawn()
+    {
+        return !getStolen();
     }
 
     @Override

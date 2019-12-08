@@ -10,7 +10,6 @@ import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.world.WorldGenStructures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
@@ -134,48 +133,43 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityGooGoat.class, "googoat", MoreCreepsConfig.gooGoatSpawnAmt, 1, 4, EnumCreatureType.CREATURE, 0x24F50F, 0xC5FFDE, getBiomesForType(Type.FOREST, Type.PLAINS, Type.HILLS, Type.MOUNTAIN, Type.SAVANNA)),
                 createEntity(EntityKid.class, "kid", MoreCreepsConfig.kidSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF5B4D, 0x9E9E9E, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityLolliman.class, "lolliman", MoreCreepsConfig.lollimanSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF0000, 0x00FFEC, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityPyramidGuardian.class, "pyramid_guardian", 0, 0, 0, EnumCreatureType.MONSTER),
+                createEntity(EntityPyramidGuardian.class, "pyramid_guardian", 0, 0, 0, EnumCreatureType.CREATURE),
                 createEntity(EntityEvilCreature.class, "evilcreature", 0, 1, 1, EnumCreatureType.MONSTER, 0x3BBD62, 0x90702D),
-                createEntity(EntityCastleGuard.class, "castleguard", 0, 1, 2, EnumCreatureType.CREATURE, 0xFB91F2, 0xF691FB),
-                createEntity(EntityCastleCritter.class, "castlecritter", 0, 1, 2, EnumCreatureType.CREATURE, 0xE32C2C, 0x000000),
+                createEntity(EntityCastleGuard.class, "castleguard", 0, 1, 2, EnumCreatureType.MONSTER, 0xFB91F2, 0xF691FB),
+                createEntity(EntityCastleCritter.class, "castlecritter", 0, 1, 2, EnumCreatureType.MONSTER, 0xE32C2C, 0x000000),
                 createEntity(EntityCastleKing.class, "castleking", 0, 0, 0, EnumCreatureType.CREATURE),
-                createEntity(EntityG.class, "g", MoreCreepsConfig.gSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF9700, 0x00FF08, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityRobotTed.class, "robot_ted", MoreCreepsConfig.robotTedSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x0068FF, 0xA4A4A4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityRobotTodd.class, "robot_todd", MoreCreepsConfig.robotToddSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xA4A4A4, 0xFFC500, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityLawyerFromHell.class, "lawyer_from_hell", MoreCreepsConfig.lawyerFromHellSpawnAmt, 1, 4, EnumCreatureType.CREATURE, 0x7A7D7B, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createAmbientEntity(EntityMoney.class, "money"),
-                createEntity(EntityBigBaby.class, "bigbaby", MoreCreepsConfig.bigBabySpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xC2B76E, 0xF8A9FF, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createAmbientEntity(EntityShrink.class, "shrink"),
+                createEntity(EntityG.class, "g", MoreCreepsConfig.gSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xFF9700, 0x00FF08, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityRobotTed.class, "robot_ted", MoreCreepsConfig.robotTedSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0x0068FF, 0xA4A4A4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityRobotTodd.class, "robot_todd", MoreCreepsConfig.robotToddSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xA4A4A4, 0xFFC500, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityLawyerFromHell.class, "lawyer_from_hell", MoreCreepsConfig.lawyerFromHellSpawnAmt, 1, 4, EnumCreatureType.MONSTER, 0x7A7D7B, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityMoney.class, "money", 0, 0, 0, EnumCreatureType.AMBIENT),
+                createEntity(EntityBigBaby.class, "bigbaby", MoreCreepsConfig.bigBabySpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xC2B76E, 0xF8A9FF, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityShrink.class, "shrink", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntitySchlump.class, "schlump", 0, 0, 0, EnumCreatureType.CREATURE, 0x69572A, 0x000000),
-                createEntity(EntityThief.class, "thief", MoreCreepsConfig.thiefSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xDC9E22, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityFloob.class, "floob", MoreCreepsConfig.floobSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x29FF17, 0xE5E7E4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createAmbientEntity(EntityRay.class, "ray"),
-                createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xF9C41C, 0xEAF72A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityThief.class, "thief", MoreCreepsConfig.thiefSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xDC9E22, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityFloob.class, "floob", MoreCreepsConfig.floobSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0x29FF17, 0xE5E7E4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityRay.class, "ray", 0, 0, 0, EnumCreatureType.AMBIENT),
+                createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.floobShipSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xF9C41C, 0xEAF72A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.horseHeadSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF07F3, 0x84653A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityHotdog.class, "hotdog", MoreCreepsConfig.hotdogSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0x7C5C32, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityDigBug.class, "digbug", MoreCreepsConfig.digBugSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0x58BA4C, 0xE6DD58, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityBubbleScum.class, "bubblescum", MoreCreepsConfig.bubbleScumSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xCE51BE, 0x67E6ED, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntitySneakySal.class, "sneakysal", MoreCreepsConfig.sneakySalSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.CREATURE),
+                createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.MONSTER),
                 createEntity(EntityPrisoner.class, "prisoner", 0, 1, 1, EnumCreatureType.CREATURE),
-                createAmbientEntity(EntityBullet.class, "bullet"),
+                createEntity(EntityBullet.class, "bullet", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntitySnowDevil.class, "snowdevil", MoreCreepsConfig.snowDevilSpawnAmt, 1, 2, EnumCreatureType.MONSTER),
                 createEntity(EntityEvilChicken.class, "evilchicken", 0, 0, 0, EnumCreatureType.MONSTER),
                 createEntity(EntityEvilPig.class, "evilpig", 0, 0, 0, EnumCreatureType.MONSTER)
         );
     }
 
-    public static EntityEntry createEntity(Class<? extends EntityLiving> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor, Biome... biomes)
+    public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor, Biome... biomes)
     {
         EntityEntryBuilder<?> builder = EntityEntryBuilder.create().entity(classz).name(name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true);
 
         if (EntityCreepBase.class.isAssignableFrom(classz))
         {
-            for (Biome biome : biomes)
-            {
-                biome.getSpawnableList(creatureType).add(new Biome.SpawnListEntry(classz, weight, min, max));
-            }
-
             builder.spawn(creatureType, weight, min, max, biomes);
         }
 
@@ -187,24 +181,19 @@ public class MoreCreepsAndWeirdos
         return builder.build();
     }
 
-    public static EntityEntry createEntity(Class<? extends EntityLiving> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor)
+    public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor)
     {
         return createEntity(classz, name, weight, min, max, creatureType, primaryColor, secondaryColor, Biomes.VOID);
     }
 
-    public static EntityEntry createEntity(Class<? extends EntityLiving> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, Biome... biomes)
+    public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, Biome... biomes)
     {
         return createEntity(classz, name, weight, min, max, creatureType, -1, -1, biomes);
     }
 
-    public static EntityEntry createEntity(Class<? extends EntityLiving> classz, String name, int weight, int min, int max, EnumCreatureType creatureType)
+    public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType)
     {
         return createEntity(classz, name, weight, min, max, creatureType, -1, -1, Biomes.VOID);
-    }
-
-    public static EntityEntry createAmbientEntity(Class<? extends Entity> classz, String name)
-    {
-        return EntityEntryBuilder.create().entity(classz).name(name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true).build();
     }
 
     public static Biome[] getBiomesForType(Type... types)

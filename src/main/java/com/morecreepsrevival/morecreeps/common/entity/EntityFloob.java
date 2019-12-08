@@ -3,6 +3,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityVillager;
@@ -23,6 +24,8 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
         super(worldIn);
 
         setCreepTypeName("Floob");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = (float)rand.nextInt(15) + 10.0f;
 

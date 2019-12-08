@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -37,6 +38,8 @@ public class EntityFloobShip extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Floob Ship");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = (float)rand.nextInt(100) + 50.0f;
 
