@@ -2,6 +2,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -17,6 +18,8 @@ public class EntityCastleCritter extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Castle Critter");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         setSize(0.6f, 0.6f);
 

@@ -7,6 +7,7 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -32,6 +33,8 @@ public class EntityLawyerFromHell extends EntityCreepBase
         super(world);
 
         setCreepTypeName("Lawyer From Hell");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = (float)rand.nextInt(40) + 40.0f;
 
