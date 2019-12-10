@@ -5,6 +5,7 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityMummy extends EntityCreepBase
+public class EntityMummy extends EntityCreepBase implements IMob
 {
     public EntityMummy(World world)
     {

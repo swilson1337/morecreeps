@@ -10,6 +10,7 @@ import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGui
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -861,6 +862,17 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return flag;
     }
 
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount)
+    {
+        if (isEntityInvulnerable(source))
+        {
+            return false;
+        }
+
+        return super.attackEntityFrom(source, amount);
+    }
+
     public void mountPlayer(EntityPlayer player)
     {
         if (isRiding())
@@ -923,7 +935,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -1248,6 +1260,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         return false;
+    }
+
+    @Override
+    public int getTalkInterval()
+    {
+        return 120;
     }
 
     public void resetTarget()
@@ -1783,7 +1801,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             return (0.5f - world.getLightBrightness(blockPos));
         }
 
-        return 0.0f;
+        return (world.getLightBrightness(blockPos) - 0.5f);
     }
 
     protected boolean isValidLightLevel()
@@ -1879,5 +1897,10 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public int getUnmountTimer()
     {
         return dataManager.get(unmountTimer);
+    }
+
+    public boolean isPreventingPlayerRest(EntityPlayer playerIn)
+    {
+        return (getCreatureType() == EnumCreatureType.MONSTER);
     }
 }

@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityCastleGuard extends EntityCreepBase
+public class EntityCastleGuard extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> attacked = EntityDataManager.createKey(EntityCastleGuard.class, DataSerializers.BOOLEAN);
 

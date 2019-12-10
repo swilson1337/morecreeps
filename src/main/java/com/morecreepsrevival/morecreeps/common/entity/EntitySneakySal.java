@@ -198,7 +198,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
