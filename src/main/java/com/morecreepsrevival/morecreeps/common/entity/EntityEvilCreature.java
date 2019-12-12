@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,7 +20,7 @@ import net.minecraft.entity.ai.*;
 
 import javax.annotation.Nonnull;
 
-public class EntityEvilCreature extends EntityCreepBase
+public class EntityEvilCreature extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> jumping = EntityDataManager.createKey(EntityEvilCreature.class, DataSerializers.BOOLEAN);
 

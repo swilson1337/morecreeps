@@ -240,7 +240,7 @@ public class EntityPyramidGuardian extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         playSound(CreepsSoundHandler.pyramidCurseSound, getSoundVolume(), getSoundPitch());
 

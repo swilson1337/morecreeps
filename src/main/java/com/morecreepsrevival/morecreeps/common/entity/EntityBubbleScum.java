@@ -60,14 +60,14 @@ public class EntityBubbleScum extends EntityCreepBase
     }
 
     @Override
-    public void mountPlayer(EntityPlayer player)
+    public boolean canMount(Entity entity)
     {
         if (getAttackTarget() instanceof EntityPlayer)
         {
-            return;
+            return false;
         }
 
-        super.mountPlayer(player);
+        return super.canMount(entity);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class EntityBubbleScum extends EntityCreepBase
     }
 
     @Override
-    protected void onUnmount(Entity entity)
+    protected void onDismount(Entity entity)
     {
         double d = -MathHelper.sin((entity.rotationYaw * (float)Math.PI) / 180.0f);
 

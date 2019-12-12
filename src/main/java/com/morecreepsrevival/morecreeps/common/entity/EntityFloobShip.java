@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityFloobShip extends EntityCreepBase
+public class EntityFloobShip extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Integer> lifespan = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.VARINT);
 

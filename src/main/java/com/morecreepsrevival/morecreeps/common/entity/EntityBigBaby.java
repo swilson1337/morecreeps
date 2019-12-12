@@ -5,6 +5,7 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityBigBaby extends EntityCreepBase
+public class EntityBigBaby extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Integer> skin = EntityDataManager.createKey(EntityBigBaby.class, DataSerializers.VARINT);
 
@@ -185,7 +186,7 @@ public class EntityBigBaby extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         ItemStack itemStack = player.getHeldItem(hand);
 

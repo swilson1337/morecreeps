@@ -34,7 +34,8 @@ public class EntityHotdog extends EntityCreepBase
     private static final String[] names = {
             "Pogo", "Spot", "King", "Prince", "Bosco", "Ralph", "Wendy", "Trixie", "Bowser", "The Heat",
             "Weiner", "Wendon the Weiner", "Wallace the Weiner", "William the Weiner", "Terrance", "Elijah", "Good Boy", "Boy", "Girl", "Tennis Shoe",
-            "Rusty", "Mean Joe Green", "Lawrence", "Foxy", "SlyFoxHound", "Leroy Brown"
+            "Rusty", "Mean Joe Green", "Lawrence", "Foxy", "SlyFoxHound", "Leroy Brown",
+            "Mickey", "Holly", "Yeontan"
     };
 
     private static final String[] levelNames = {
@@ -183,7 +184,7 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return true;
     }
@@ -235,7 +236,7 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {

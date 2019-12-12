@@ -9,6 +9,7 @@ import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityLawyerFromHell extends EntityCreepBase
+public class EntityLawyerFromHell extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> undead = EntityDataManager.createKey(EntityLawyerFromHell.class, DataSerializers.BOOLEAN);
 

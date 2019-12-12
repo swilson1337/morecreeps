@@ -7,6 +7,7 @@ import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIOwnerHurtT
 import com.morecreepsrevival.morecreeps.common.helpers.EffectHelper;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiTamableEntity;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -112,6 +113,36 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return SoundCategory.NEUTRAL;
     }
 
+    protected void onDismount(Entity entity)
+    {
+    }
+
+    @Override
+    public void dismountRidingEntity()
+    {
+        fallDistance = -25.0f;
+
+        dataManager.set(unmountTimer, 20);
+
+        SoundEvent unmountSound = getUnmountSound();
+
+        if (unmountSound != null)
+        {
+            playSound(unmountSound, getSoundVolume(), getSoundPitch());
+        }
+
+        Entity entity = getRidingEntity();
+
+        super.dismountRidingEntity();
+
+        onDismount(entity);
+
+        if (entity != null && entity != getRidingEntity() && entity instanceof EntityPlayer && entity.isInsideOfMaterial(Material.WATER) && isPlayerOwner((EntityPlayer)entity) && !world.isRemote)
+        {
+            entity.sendMessage(new TextComponentString("\2474>>\247f Your " + getCreepTypeName() + " has jumped off of your head, they hate being underwater! \2474<<"));
+        }
+    }
+
     @Override
     public boolean isEntityInvulnerable(@Nonnull DamageSource damageSource)
     {
@@ -201,70 +232,67 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         nodeProcessor.setCanEnterDoors(true);
 
-        if (!isRiding())
+        switch (getWanderState())
         {
-            switch (getWanderState())
-            {
-                case 0:
-                    tasks.addTask(1, new EntityAISwimming(this));
+            case 0:
+                tasks.addTask(1, new EntityAISwimming(this));
 
-                    tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+                tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
 
-                    tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+                tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-                    tasks.addTask(3, new EntityAILookIdle(this));
+                tasks.addTask(3, new EntityAILookIdle(this));
 
-                    if (isTamed())
-                    {
-                        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-                    }
+                if (isTamed())
+                {
+                    targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+                }
 
-                    break;
-                case 1:
-                    tasks.addTask(1, new EntityAISwimming(this));
+                break;
+            case 1:
+                tasks.addTask(1, new EntityAISwimming(this));
 
-                    tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+                tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
 
-                    tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0d));
+                tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0d));
 
-                    tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+                tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-                    tasks.addTask(4, new EntityAILookIdle(this));
+                tasks.addTask(4, new EntityAILookIdle(this));
 
-                    if (isTamed())
-                    {
-                        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-                    }
+                if (isTamed())
+                {
+                    targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+                }
 
-                    break;
-                case 2:
-                    tasks.addTask(1, new EntityAISwimming(this));
+                break;
+            case 2:
+                tasks.addTask(1, new EntityAISwimming(this));
 
-                    tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+                tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
 
-                    tasks.addTask(3, new EntityCreepAIFollowOwner(this, 1.0d, 6.0f, 2.0f));
+                tasks.addTask(3, new EntityCreepAIFollowOwner(this, 1.0d, 6.0f, 2.0f));
 
-                    tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
+                tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
 
-                    tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+                tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-                    tasks.addTask(5, new EntityAILookIdle(this));
+                tasks.addTask(5, new EntityAILookIdle(this));
 
-                    if (isTamed())
-                    {
-                        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+                if (isTamed())
+                {
+                    targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
-                        targetTasks.addTask(2, new EntityCreepAIOwnerHurtByTarget(this));
+                    targetTasks.addTask(2, new EntityCreepAIOwnerHurtByTarget(this));
 
-                        targetTasks.addTask(3, new EntityCreepAIOwnerHurtTarget(this));
+                    targetTasks.addTask(3, new EntityCreepAIOwnerHurtTarget(this));
 
-                        targetTasks.addTask(4, new EntityCreepAIFollowOwnerTarget(this));
-                    }
+                    targetTasks.addTask(4, new EntityCreepAIFollowOwnerTarget(this));
+                }
 
-                    break;
-                default:
-                    break;
-            }
+                break;
+            default:
+                break;
         }
     }
 
@@ -861,69 +889,51 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return flag;
     }
 
-    public void mountPlayer(EntityPlayer player)
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount)
     {
-        if (isRiding())
+        if (isEntityInvulnerable(source))
         {
-            dismountRidingEntity();
+            return false;
         }
 
-        if (startRiding(player, isStackable()))
+        return super.attackEntityFrom(source, amount);
+    }
+
+    public boolean canMount(Entity entity)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean startRiding(@Nonnull Entity entity, boolean force)
+    {
+        if (!force && !canMount(entity))
         {
-            rotationYaw = player.rotationYaw;
+            return false;
+        }
+
+        boolean flag = super.startRiding(entity, force);
+
+        if (flag)
+        {
+            rotationYaw = entity.rotationYaw;
 
             SoundEvent mountSound = getMountSound();
 
             if (mountSound != null)
             {
-                player.playSound(mountSound, getSoundVolume(), getSoundPitch());
+                playSound(mountSound, getSoundVolume(), getSoundPitch());
             }
 
             dataManager.set(unmountTimer, 20);
-
-            initEntityAI();
-
-            onMount(player);
-        }
-    }
-
-    public void dismount()
-    {
-        if (!isRiding())
-        {
-            return;
         }
 
-        fallDistance = -25.0f;
-
-        dataManager.set(unmountTimer, 20);
-
-        Entity riding = getRidingEntity();
-
-        dismountRidingEntity();
-
-        SoundEvent unmountSound = getUnmountSound();
-
-        if (unmountSound != null)
-        {
-            playSound(unmountSound, getSoundVolume(), getSoundPitch());
-        }
-
-        initEntityAI();
-
-        onUnmount(riding);
-    }
-
-    protected void onMount(Entity entity)
-    {
-    }
-
-    protected void onUnmount(Entity entity)
-    {
+        return flag;
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -949,11 +959,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 {
                     if (!player.equals(getRidingEntity()))
                     {
-                        mountPlayer(player);
+                        startRiding(player, isStackable());
                     }
                     else
                     {
-                        dismount();
+                        dismountRidingEntity();
                     }
 
                     return true;
@@ -1072,6 +1082,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         super.onLivingUpdate();
 
         updateArmSwingProgress();
+
+        if (isRiding() && isInsideOfMaterial(Material.WATER))
+        {
+            dismountRidingEntity();
+        }
 
         if (getBrightness() > 0.5f)
         {
@@ -1250,6 +1265,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return false;
     }
 
+    @Override
+    public int getTalkInterval()
+    {
+        return 120;
+    }
+
     public void resetTarget()
     {
         setAttackTarget(null);
@@ -1410,11 +1431,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     public boolean isTamable()
-    {
-        return false;
-    }
-
-    public boolean isMountable()
     {
         return false;
     }
@@ -1700,7 +1716,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
     }
 
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return false;
     }
@@ -1783,7 +1799,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             return (0.5f - world.getLightBrightness(blockPos));
         }
 
-        return 0.0f;
+        return (world.getLightBrightness(blockPos) - 0.5f);
     }
 
     protected boolean isValidLightLevel()
