@@ -184,7 +184,7 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return true;
     }

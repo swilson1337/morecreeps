@@ -44,7 +44,7 @@ public class ItemGuineaPigRadio extends CreepsItem
                         {
                             if (entity instanceof EntityGuineaPig)
                             {
-                                ((EntityGuineaPig)entity).dismount();
+                                entity.dismountRidingEntity();
                             }
                         }
 
@@ -56,7 +56,7 @@ public class ItemGuineaPigRadio extends CreepsItem
 
                         for (EntityGuineaPig guineaPig : world.getEntities(EntityGuineaPig.class, (entity) -> entity != null && entity.isPlayerOwner(player) && !entity.isRiding() && !player.equals(entity.getRidingEntity())))
                         {
-                            guineaPig.mountPlayer(player);
+                            guineaPig.startRiding(player, true);
                         }
 
                         capability.setPickedUp(true);

@@ -316,7 +316,7 @@ public class MoreCreepsAndWeirdos
             {
                 if (entity instanceof EntityBubbleScum && ((EntityBubbleScum)entity).getUnmountTimer() < 1)
                 {
-                    ((EntityBubbleScum)entity).dismount();
+                    entity.dismountRidingEntity();
 
                     CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(entity.getEntityId()));
 

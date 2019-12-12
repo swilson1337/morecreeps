@@ -202,16 +202,16 @@ public class EntityKid extends EntityCreepBase
     }
 
     @Override
-    public void mountPlayer(EntityPlayer player)
+    public boolean canMount(Entity entity)
     {
         if (getAttackTarget() instanceof EntityPlayer)
         {
             playSound(CreepsSoundHandler.kidNoPickupSound, getSoundVolume(), getSoundPitch());
 
-            return;
+            return false;
         }
 
-        super.mountPlayer(player);
+        return super.canMount(entity);
     }
 
     @Override

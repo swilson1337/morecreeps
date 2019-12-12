@@ -763,7 +763,7 @@ public class EntityGuineaPig extends EntityCreepBase
     }
 
     @Override
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return true;
     }
