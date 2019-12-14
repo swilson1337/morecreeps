@@ -4,6 +4,8 @@ import com.morecreepsrevival.morecreeps.common.capabilities.ILawyerFine;
 import com.morecreepsrevival.morecreeps.common.capabilities.LawyerFineProvider;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
+import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageClearLawyerFine;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
@@ -11,6 +13,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
@@ -23,7 +26,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class EntityLawyerFromHell extends EntityCreepBase implements IMob
 {
@@ -258,14 +260,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                     suckMoney(player);
                 }
 
-                if (MoreCreepsConfig.jailActive && fine >= 2500 && !getUndead())
+                if (!world.isRemote && MoreCreepsConfig.jailActive && fine >= 2500 && !getUndead() && JailManager.buildJail(player, world, rand))
                 {
                     capability.setFine(0);
 
-                    if (!world.isRemote)
-                    {
-                        JailManager.buildJail(player, this, world, rand);
-                    }
+                    CreepsPacketHandler.INSTANCE.sendTo(new MessageClearLawyerFine(), (EntityPlayerMP)player);
                 }
             }
         }
