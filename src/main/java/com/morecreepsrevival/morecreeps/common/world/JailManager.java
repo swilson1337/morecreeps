@@ -27,7 +27,7 @@ public class JailManager
 {
     private static final int maxObstruct = 99999;
 
-    public static boolean buildJail(EntityPlayer player, EntityLawyerFromHell lawyerIn, World world, Random rand)
+    public static boolean buildJail(EntityPlayer player, World world, Random rand)
     {
         int randInt = rand.nextInt(200) - 100;
 
@@ -285,7 +285,7 @@ public class JailManager
 
             world.setBlockState(new BlockPos(jailX + 5, jailY + 1, jailZ - i * 7 - 5), Blocks.OAK_DOOR.getDefaultState().withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER).withProperty(BlockDoor.FACING, EnumFacing.WEST).withProperty(BlockDoor.HINGE, BlockDoor.EnumHingePosition.RIGHT));
 
-            world.setBlockState(new BlockPos(jailX + 9, jailY + 1, jailZ - i * 7 - 7), Blocks.IRON_DOOR.getDefaultState().withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER));
+            world.setBlockState(new BlockPos(jailX + 9, jailY + 1, jailZ - i * 7 - 7), Blocks.IRON_BARS.getDefaultState());
 
             world.setBlockToAir(new BlockPos(jailX + 9, jailY, jailZ - i * 7 - 5));
 

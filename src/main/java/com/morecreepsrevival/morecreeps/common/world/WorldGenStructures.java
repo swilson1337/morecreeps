@@ -24,11 +24,6 @@ public class WorldGenStructures implements IWorldGenerator
     @Override
     public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        /*if (chunkProvider.isChunkGeneratedAt(chunkX, chunkZ))
-        {
-            return;
-        }*/
-
         generateStructures(world, rand, chunkX, chunkZ);
     }
 

@@ -3,6 +3,8 @@ package com.morecreepsrevival.morecreeps.common.config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import java.lang.reflect.Field;
+
 public class MoreCreepsConfig
 {
     public static boolean pyramidGen = false;
@@ -215,6 +217,19 @@ public class MoreCreepsConfig
         if (blorpMaxSize < 6 || blorpMaxSize > 99)
         {
             blorpMaxSize = 6;
+        }
+    }
+
+    public void setConfigOption(String option, Object value)
+    {
+        try
+        {
+            Field field = getClass().getField(option);
+
+            field.set(MoreCreepsConfig.class, value);
+        }
+        catch (Exception ignored)
+        {
         }
     }
 }

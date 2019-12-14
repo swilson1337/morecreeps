@@ -1,6 +1,10 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,10 +16,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
@@ -511,23 +513,23 @@ public class EntityHotdog extends EntityCreepBase
 
         int l = (105 - y) / 2;
 
-        int i1 = 0;
+        int area = 0;
 
-        for (int j1 = 0; j1 < l * 2; j1++)
+        for (int h = 0; h < l * 2; h++)
         {
-            for (int i5 = -2; i5 < byte0 + 2; i5++)
+            for (int i = -2; i < byte0 + 2; i++)
             {
-                for (int j7 = -2; j7 < byte1 + 2; j7++)
+                for (int j = -2; j < byte1 + 2; j++)
                 {
-                    if (!world.isAirBlock(new BlockPos(x + i5, y + j1, z + j7)))
+                    if (!world.isAirBlock(new BlockPos(x + i, y + h, z + j)))
                     {
-                        i1++;
+                        area++;
                     }
                 }
             }
         }
 
-        if (i1 < 3000)
+        if (area < 3000)
         {
             setHeavenBuilt(true);
 
@@ -550,9 +552,7 @@ public class EntityHotdog extends EntityCreepBase
             {
                 for (int q = 0; q < 4; q++)
                 {
-                    world.setBlockState(new BlockPos(x + q + 1, y + q, z + q), Blocks.OAK_STAIRS.getDefaultState());
-
-                    // TODO: metadata 2
+                    world.setBlockState(new BlockPos(x + q + 1, y + i, z + i), Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
                 }
             }
 
@@ -560,9 +560,7 @@ public class EntityHotdog extends EntityCreepBase
             {
                 for (int q = 0; q < 4; q++)
                 {
-                    world.setBlockState(new BlockPos(x - q, y + l + i, (z + l) - i), Blocks.OAK_STAIRS.getDefaultState());
-
-                    // TODO: metadata 3
+                    world.setBlockState(new BlockPos(x - q, y + l + i, (z + l) - i), Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
                 }
             }
 
@@ -613,14 +611,14 @@ public class EntityHotdog extends EntityCreepBase
 
             for (int i = 0; i < randInt; i++)
             {
-                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6)), Blocks.DEADBUSH.getDefaultState());
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6) - byte1), Blocks.DEADBUSH.getDefaultState());
             }
 
             randInt = rand.nextInt(10) + 2;
 
             for (int i = 0; i < randInt; i++)
             {
-                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6)), Blocks.YELLOW_FLOWER.getDefaultState());
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6) - byte1), Blocks.YELLOW_FLOWER.getDefaultState());
             }
 
             randInt = rand.nextInt(10) + 2;
@@ -642,9 +640,7 @@ public class EntityHotdog extends EntityCreepBase
 
                 if (world.isAirBlock(blockPos))
                 {
-                    world.setBlockState(blockPos, Blocks.DEADBUSH.getDefaultState());
-
-                    // TODO: metadata 2
+                    world.setBlockState(blockPos, Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS));
                 }
             }
 
@@ -660,9 +656,7 @@ public class EntityHotdog extends EntityCreepBase
 
                 if (world.isAirBlock(blockPos))
                 {
-                    world.setBlockState(blockPos, Blocks.DEADBUSH.getDefaultState());
-
-                    // TODO: metadata 1
+                    world.setBlockState(blockPos, Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.FERN));
                 }
             }
 
@@ -704,7 +698,15 @@ public class EntityHotdog extends EntityCreepBase
 
             for (int i = 0; i < 6; i++)
             {
-                // TODO: spawn dog house
+                EntityDogHouse dogHouse = new EntityDogHouse(world);
+
+                dogHouse.setLocationAndAngles(x + 15, (y + l * 2) - 1, z - 7 - i * 5, 90.0f, 0.0f);
+
+                dogHouse.setInitialHealth();
+
+                dogHouse.determineBaseTexture();
+
+                world.spawnEntity(dogHouse);
             }
 
             randInt = rand.nextInt(15) + 5;
@@ -715,9 +717,11 @@ public class EntityHotdog extends EntityCreepBase
 
                 int j8 = rand.nextInt(byte1 - 6) + 3;
 
-                world.setBlockState(new BlockPos((x + l6) - byte0 / 2, (y + l * 2) - 1, (z + j8) - byte1), Blocks.SAPLING.getDefaultState());
+                BlockPos blockPos = new BlockPos((x + l6) - byte0 / 2, (y + l * 2) - 1, (z + j8) - byte1);
 
-                // TODO: spawn sapling?
+                world.setBlockState(blockPos, Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.STAGE, 1));
+
+                ((BlockSapling)Blocks.SAPLING).grow(world, blockPos, world.getBlockState(blockPos), rand);
             }
 
             randInt = ((byte0 / 2 + rand.nextInt(10)) - 5) + 8;
@@ -732,6 +736,74 @@ public class EntityHotdog extends EntityCreepBase
 
                     world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 3, (z + q) - byte1), Blocks.WATER.getDefaultState());
                 }
+            }
+
+            BlockPos chest1Pos = new BlockPos(x + 7, (y + l * 2) - 1, z - 5);
+
+            world.setBlockState(chest1Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest1 = new TileEntityChest();
+
+            world.setTileEntity(chest1Pos, chest1);
+
+            BlockPos chest2Pos = new BlockPos(x + 7, (y + l * 2) - 1, z - 6);
+
+            world.setBlockState(chest2Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest2 = new TileEntityChest();
+
+            world.setTileEntity(chest2Pos, chest2);
+
+            int maxI = chest1.getSizeInventory() - 9;
+
+            for (int i = 0; i < maxI; i++)
+            {
+                chest1.setInventorySlotContents(i, new ItemStack(Items.BONE, 32));
+
+                chest2.setInventorySlotContents(i, new ItemStack(Items.REDSTONE, 32));
+            }
+
+            maxI = chest1.getSizeInventory();
+
+            for (int i = (maxI - 9); i < maxI; i++)
+            {
+                chest1.setInventorySlotContents(i, new ItemStack(Items.GOLDEN_HELMET, 1));
+
+                chest2.setInventorySlotContents(i, new ItemStack(Items.GOLD_INGOT, 1));
+            }
+
+            BlockPos chest3Pos = new BlockPos(x - 7, (y + l * 2) - 1, z - 5);
+
+            world.setBlockState(chest3Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest3 = new TileEntityChest();
+
+            world.setTileEntity(chest3Pos, chest3);
+
+            BlockPos chest4Pos = new BlockPos(x - 7, (y + l * 2) - 1, z - 6);
+
+            world.setBlockState(chest4Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest4 = new TileEntityChest();
+
+            world.setTileEntity(chest4Pos, chest4);
+
+            maxI = chest3.getSizeInventory() - 9;
+
+            for (int i = 0; i < maxI; i++)
+            {
+                chest3.setInventorySlotContents(i, new ItemStack(Items.BONE, 32));
+
+                chest4.setInventorySlotContents(i, new ItemStack(Items.REDSTONE, 32));
+            }
+
+            maxI = chest3.getSizeInventory();
+
+            for (int i = (maxI - 9); i < maxI; i++)
+            {
+                chest3.setInventorySlotContents(i, new ItemStack(Items.DIAMOND_HELMET, 1));
+
+                chest4.setInventorySlotContents(i, new ItemStack(Items.DIAMOND, 1));
             }
         }
         else if (!world.isRemote)
