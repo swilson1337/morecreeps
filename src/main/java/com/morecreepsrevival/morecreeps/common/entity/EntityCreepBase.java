@@ -950,7 +950,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
                     return true;
                 }
-                else if (canRidePlayer() && (!isTamable() || (isTamed() && isPlayerOwner(player))))
+                else if (canRidePlayer() && canRidePlayer(player))
                 {
                     if (!player.equals(getRidingEntity()))
                     {
@@ -961,6 +961,10 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                         dismountRidingEntity();
                     }
 
+                    return true;
+                }
+                else if (isRideable() && canPlayerRide(player) && !player.equals(getFirstPassenger()) && player.startRiding(this))
+                {
                     return true;
                 }
             }
@@ -1069,6 +1073,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         return false;
+    }
+
+    @Override
+    public boolean canBeSteered()
+    {
+        return (isRideable() && getControllingPassenger() instanceof EntityLivingBase);
     }
 
     @Override
@@ -1252,7 +1262,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     protected boolean canDespawn()
     {
-        if (getCreatureType() == EnumCreatureType.MONSTER && !getNoDespawn())
+        if (getCreatureType() == EnumCreatureType.MONSTER && !getNoDespawn() && !isTamed())
         {
             return true;
         }
@@ -1433,6 +1443,21 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public boolean canRidePlayer()
     {
         return false;
+    }
+
+    public boolean canRidePlayer(EntityPlayer player)
+    {
+        return (!isTamable() || (isTamed() && isPlayerOwner(player)));
+    }
+
+    public boolean isRideable()
+    {
+        return false;
+    }
+
+    public boolean canPlayerRide(EntityPlayer player)
+    {
+        return true;
     }
 
     protected boolean shouldOpenTamableMenu(Item item)

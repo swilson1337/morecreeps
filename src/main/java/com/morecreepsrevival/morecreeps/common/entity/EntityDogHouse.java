@@ -182,29 +182,32 @@ public class EntityDogHouse extends EntityCreepBase
         {
             return super.processInteract(player, hand);
         }
-        else if (isBeingRidden())
+        else if (player.getHeldItem(hand).isEmpty())
         {
-            Entity entity = getFirstPassenger();
-
-            if (entity instanceof EntityHotdog && ((EntityHotdog)entity).isPlayerOwner(player))
+            if (isBeingRidden())
             {
-                if (entity.startRiding(player, true))
+                Entity entity = getFirstPassenger();
+
+                if (entity instanceof EntityHotdog && ((EntityHotdog)entity).isPlayerOwner(player))
                 {
+                    if (entity.startRiding(player, true))
+                    {
+                        return true;
+                    }
+
+                    entity.dismountRidingEntity();
+
                     return true;
                 }
-
-                entity.dismountRidingEntity();
-
-                return true;
             }
-        }
-        else
-        {
-            for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(16.0d, 16.0d, 16.0d)))
+            else
             {
-                if (entity instanceof EntityHotdog && ((EntityHotdog)entity).isTamed() && entity.startRiding(this, true))
+                for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(16.0d, 16.0d, 16.0d)))
                 {
-                    return true;
+                    if (entity instanceof EntityHotdog && ((EntityHotdog)entity).isTamed() && entity.startRiding(this, true))
+                    {
+                        return true;
+                    }
                 }
             }
         }
