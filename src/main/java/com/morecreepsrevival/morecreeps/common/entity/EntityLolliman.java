@@ -179,6 +179,8 @@ public class EntityLolliman extends EntityCreepBase
         motionZ = (d1 / f) * 0.20000000000000001d * (0.80000001192092896d + motionZ * 0.20000000298023224d);
 
         motionY = 0.10000000596246449d;
+
+        fallDistance = -25.0f;
     }
 
     @Override

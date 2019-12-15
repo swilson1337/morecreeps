@@ -594,11 +594,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public void addHealth(float amt)
     {
         setHealth(Math.max(0, Math.min(getMaxHealth(), getHealth() + amt)));
-
-        /*if (getHealth() > 0)
-        {
-            isDead = false;
-        }*/
     }
 
     protected void setInterest(int i)
@@ -758,6 +753,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         motionZ = (d1 / f) * 0.5d * 0.800000011920929d + motionZ * 0.20000000298023224d;
 
         motionY = 0.40000000596046448f;
+
+        fallDistance = -25.0f;
     }
 
     @Override
@@ -766,8 +763,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         if (onGround && shouldJumpWhileAttacking(entity))
         {
             doAttackJump(entity);
-
-            fallDistance = -25.0f;
         }
 
         if (rand.nextInt(5) == 0)

@@ -134,11 +134,13 @@ public class EntityBabyMummy extends EntityCreepBase implements IMob
 
         double d1 = entity.posZ - posZ;
 
-        double f = (double)MathHelper.sqrt(d0 * d0 + d1 * d1);
+        double f = MathHelper.sqrt(d0 * d0 + d1 * d1);
 
         motionX = (d0 / f) * 0.5d * 0.8000000019209289d + motionX * 0.18000000098023225d;
 
         motionZ = (d1 / f) * 0.5d * 0.70000000192092893d + motionZ * 0.18000000098023225d;
+
+        fallDistance = -25.0f;
     }
 
     @Override
