@@ -78,6 +78,9 @@ entity.prisoner.name=Prisoner
 entity.snowdevil.name=Snow Devil
 entity.evilchicken.name=Evil Chicken
 entity.evilpig.name=Evil Pig
+entity.doghouse.name=Dog House
+entity.blorp.name=Blorp
+entity.camel.name=Camel
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps
