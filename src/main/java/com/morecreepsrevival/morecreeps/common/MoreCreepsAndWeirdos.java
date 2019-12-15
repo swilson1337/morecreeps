@@ -158,11 +158,12 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityRatMan.class, "ratman", 0, 1, 2, EnumCreatureType.MONSTER),
                 createEntity(EntityPrisoner.class, "prisoner", 0, 1, 1, EnumCreatureType.CREATURE),
                 createEntity(EntityBullet.class, "bullet", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntitySnowDevil.class, "snowdevil", MoreCreepsConfig.snowDevilSpawnAmt, 1, 2, EnumCreatureType.MONSTER),
+                createEntity(EntitySnowDevil.class, "snowdevil", MoreCreepsConfig.snowDevilSpawnAmt, 1, 2, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityEvilChicken.class, "evilchicken", 0, 0, 0, EnumCreatureType.MONSTER),
                 createEntity(EntityEvilPig.class, "evilpig", 0, 0, 0, EnumCreatureType.MONSTER),
                 createEntity(EntityDogHouse.class, "doghouse", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntityBlorp.class, "blorp", MoreCreepsConfig.blorpSpawnAmt, 1, 3, EnumCreatureType.CREATURE)
+                createEntity(EntityBlorp.class, "blorp", MoreCreepsConfig.blorpSpawnAmt, 1, 3, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityCamel.class, "camel", MoreCreepsConfig.camelSpawnAmt, 1, 4, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
         );
     }
 

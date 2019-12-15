@@ -8,6 +8,22 @@ import net.minecraft.world.World;
 
 public class EntityCamel extends EntityCreepBase
 {
+    private static final String[] textures = {
+            "textures/entity/camel",
+            "textures/entity/camel",
+            "textures/entity/camel",
+            "textures/entity/camel",
+            "textures/entity/camelwhite",
+            "textures/entity/camelblack",
+            "textures/entity/camelbrown",
+            "textures/entity/camelgrey",
+            "textures/entity/camel",
+            "textures/entity/camel",
+            "textures/entity/camel",
+            "textures/entity/camel",
+            "textures/entity/camelwhite"
+    };
+
     public EntityCamel(World worldIn)
     {
         super(worldIn);
@@ -25,6 +41,12 @@ public class EntityCamel extends EntityCreepBase
         baseSpeed = 0.2d;
 
         updateAttributes();
+    }
+
+    @Override
+    protected String[] getAvailableTextures()
+    {
+        return textures;
     }
 
     @Override
