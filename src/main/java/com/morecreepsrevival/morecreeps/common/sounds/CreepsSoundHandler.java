@@ -394,6 +394,12 @@ public class CreepsSoundHandler
 
     public static final SoundEvent blorpDeathSound = createSound("blorpdeath");
 
+    public static final SoundEvent camelSound = createSound("camel");
+
+    public static final SoundEvent camelHurtSound = createSound("camelhurt");
+
+    public static final SoundEvent camelDeathSound = createSound("cameldeath");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -592,7 +598,10 @@ public class CreepsSoundHandler
                 hotdogHeavenSound,
                 blorpSound,
                 blorpHurtSound,
-                blorpDeathSound
+                blorpDeathSound,
+                camelSound,
+                camelHurtSound,
+                camelDeathSound
         );
     }
 }

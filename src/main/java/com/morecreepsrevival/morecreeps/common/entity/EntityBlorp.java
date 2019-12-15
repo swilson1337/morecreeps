@@ -22,6 +22,8 @@ public class EntityBlorp extends EntityCreepBase
     {
         super(worldIn);
 
+        setCreepTypeName("Blorp");
+
         setSize(width * 1.5f, height * 2.5f);
 
         baseAttackDamage = 2.0d;
