@@ -83,6 +83,10 @@ public class MoreCreepsConfig
 
     public static int snowDevilSpawnAmt = 0;
 
+    public static boolean classicMode = true;
+
+    public static int blorpSpawnAmt = 0;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -178,6 +182,10 @@ public class MoreCreepsConfig
             sneakySalSpawnAmt = config.get(spawnNbr, "Sneaky Sal", 8).getInt();
 
             snowDevilSpawnAmt = config.get(spawnNbr, "Snow Devil", 8).getInt();
+
+            classicMode = config.get(miscProperty, "Classic Mode", true, "Keep this on if you want to play the mod the way Freakstritch intended it. Turning this off will add additional content the original mod didn't have.").getBoolean();
+
+            blorpSpawnAmt = config.get(spawnNbr, "Blorp", 8).getInt();
 
             config.save();
         }

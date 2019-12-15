@@ -161,7 +161,8 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntitySnowDevil.class, "snowdevil", MoreCreepsConfig.snowDevilSpawnAmt, 1, 2, EnumCreatureType.MONSTER),
                 createEntity(EntityEvilChicken.class, "evilchicken", 0, 0, 0, EnumCreatureType.MONSTER),
                 createEntity(EntityEvilPig.class, "evilpig", 0, 0, 0, EnumCreatureType.MONSTER),
-                createEntity(EntityDogHouse.class, "doghouse", 0, 0, 0, EnumCreatureType.AMBIENT)
+                createEntity(EntityDogHouse.class, "doghouse", 0, 0, 0, EnumCreatureType.AMBIENT),
+                createEntity(EntityBlorp.class, "blorp", MoreCreepsConfig.blorpSpawnAmt, 1, 3, EnumCreatureType.CREATURE)
         );
     }
 
