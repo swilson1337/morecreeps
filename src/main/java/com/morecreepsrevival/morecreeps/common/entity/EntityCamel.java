@@ -24,6 +24,12 @@ public class EntityCamel extends EntityCreepBase
             "textures/entity/camelwhite"
     };
 
+    private static final String[] names = {
+            "Stanley", "Cid", "Hunchy", "The Heat", "Herman the Hump", "Dr. Hump", "Little Lousie", "Spoony G", "Mixmaster C", "The Maestro",
+            "Duncan the Dude", "Charlie Camel", "Chip", "Charles Angstrom III", "Mr. Charles", "Cranky Carl", "Carl the Rooster", "Tiny the Peach", "Desert Dan", "Dungby",
+            "Doofus"
+    };
+
     public EntityCamel(World worldIn)
     {
         super(worldIn);
@@ -107,5 +113,11 @@ public class EntityCamel extends EntityCreepBase
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.camelDeathSound;
+    }
+
+    @Override
+    protected String[] getTamedNames()
+    {
+        return names;
     }
 }
