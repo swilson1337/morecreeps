@@ -104,4 +104,16 @@ public class EntityRocketGiraffe extends EntityCreepBase
 
         super.onDeath(damageSource);
     }
+
+    @Override
+    public boolean isTamable()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isRideable()
+    {
+        return true;
+    }
 }

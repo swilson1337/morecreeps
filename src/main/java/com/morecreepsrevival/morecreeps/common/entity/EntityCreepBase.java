@@ -1457,7 +1457,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public boolean canPlayerRide(EntityPlayer player)
     {
-        return true;
+        return (!isTamable() || (isTamed() && isPlayerOwner(player)));
     }
 
     protected boolean shouldOpenTamableMenu(Item item)

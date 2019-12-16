@@ -1,9 +1,12 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IJumpingMount;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +16,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -108,10 +112,7 @@ public class EntityCamel extends EntityCreepBase
     @Override
     public void onLivingUpdate()
     {
-        if (getModelSize() > 1.75f)
-        {
-            ignoreFrustumCheck = true;
-        }
+        ignoreFrustumCheck = (getModelSize() > 1.0f);
 
         super.onLivingUpdate();
     }
@@ -214,12 +215,6 @@ public class EntityCamel extends EntityCreepBase
     }
 
     @Override
-    public boolean canPlayerRide(EntityPlayer player)
-    {
-        return true;
-    }
-
-    @Override
     public void travel(float strafe, float vertical, float forward)
     {
         if (isBeingRidden() && canBeSteered())
@@ -233,15 +228,90 @@ public class EntityCamel extends EntityCreepBase
 
             EntityLivingBase riddenByEntity = (EntityLivingBase)controllingPassenger;
 
+            baseSpeed = 1.95d;
+
+            updateMoveSpeed();
+
+            riddenByEntity.lastTickPosY = 0.0d;
+
             prevRotationYaw = rotationYaw = riddenByEntity.rotationYaw;
 
-            rotationPitch = riddenByEntity.rotationPitch * 0.5f;
+            prevRotationPitch = rotationPitch = 0.0f;
 
-            setRotation(rotationYaw, rotationPitch);
+            float f = 1.0f;
 
-            rotationYawHead = renderYawOffset = rotationYaw;
+            double moveSpeed = riddenByEntity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue();
 
-            return;
+            if (moveSpeed > 0.01d && moveSpeed < 10.0d)
+            {
+                f = (float)moveSpeed;
+            }
+
+            forward = (riddenByEntity.moveForward / f) * (float)getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() * 1.95f;
+
+            strafe = (riddenByEntity.moveStrafing / f) * (float)getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue() * 1.95f;
+
+            if (onGround && (forward != 0.0f || strafe != 0.0f))
+            {
+                motionY += 0.16100040078163147d;
+            }
+
+            if (forward == 0.0f && strafe == 0.0f)
+            {
+                isJumping = false;
+
+                gallopTime = 0;
+            }
+
+            if (forward != 0.0f && gallopTime++ > 10)
+            {
+                gallopTime = 0;
+
+                if (handleWaterMovement())
+                {
+                    playSound(CreepsSoundHandler.giraffeSplashSound, getSoundVolume(), 1.2f);
+                }
+                else
+                {
+                    playSound(CreepsSoundHandler.giraffeGallopSound, getSoundVolume(), 1.2f);
+                }
+            }
+
+            if (onGround && !isJumping)
+            {
+                if (MoreCreepsAndWeirdos.proxy.isJumpKeyDown())
+                {
+                    isJumping = true;
+                }
+
+                if (isJumping)
+                {
+                    motionY += 0.37000000476837158d;
+                }
+            }
+
+            if (onGround && isJumping)
+            {
+                double d = Math.abs(Math.sqrt(motionX * motionX + motionZ * motionZ));
+
+                if (d > 0.13d)
+                {
+                    double d2 = 0.13d / d;
+
+                    motionX = motionX * d2;
+
+                    motionZ = motionZ * d2;
+                }
+
+                motionX *= 2.95d;
+                motionZ *= 2.95d;
+            }
+        }
+        else
+        {
+            baseSpeed = 0.2d;
+
+            updateMoveSpeed();
         }
 
         super.travel(strafe, vertical, forward);
