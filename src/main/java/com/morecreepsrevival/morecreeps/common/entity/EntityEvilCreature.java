@@ -174,6 +174,8 @@ public class EntityEvilCreature extends EntityCreepBase implements IMob
 
         motionY = 0.35000000196046449f;
 
+        fallDistance = -25.0f;
+
         dataManager.set(jumping, true);
     }
 

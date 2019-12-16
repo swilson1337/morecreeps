@@ -362,16 +362,14 @@ public class EntityHorseHead extends EntityCreepBase
                     }
                 }
             }
-
-            super.travel(strafe, vertical, forward);
         }
         else
         {
             baseSpeed = 0.95;
 
             updateMoveSpeed();
-
-            super.travel(strafe, vertical, forward);
         }
+
+        super.travel(strafe, vertical, forward);
     }
 }
