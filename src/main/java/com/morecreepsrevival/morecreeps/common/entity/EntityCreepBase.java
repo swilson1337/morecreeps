@@ -1395,7 +1395,9 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         setOwner(player);
 
-        spawnTrophy(player);
+        //spawnTrophy(player);
+
+        // TODO: only spawn trophy when the player gets an achievement
 
         if (getCreepName().length() < 1)
         {
@@ -1426,7 +1428,9 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         if (!world.isRemote)
         {
-            player.sendMessage(new TextComponentString("You have successfully tamed a new creature!"));
+            //player.sendMessage(new TextComponentString("You have successfully tamed a new creature!"));
+
+            player.sendMessage(new TextComponentString("\2476" + getCreepName() + " \247fhas been tamed!"));
         }
     }
 
