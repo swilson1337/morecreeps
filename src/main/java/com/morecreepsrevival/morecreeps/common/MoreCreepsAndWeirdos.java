@@ -163,9 +163,9 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityEvilPig.class, "evilpig", 0, 0, 0, EnumCreatureType.MONSTER, 0x5FDD5F, 0xF4AFFF),
                 createEntity(EntityDogHouse.class, "doghouse", 0, 0, 0, EnumCreatureType.AMBIENT, 0x5EDAEB, 0xDBA0E9),
                 createEntity(EntityBlorp.class, "blorp", MoreCreepsConfig.blorpSpawnAmt, 1, 3, EnumCreatureType.CREATURE, 0xCE00FF, 0xFFB200, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityCamel.class, "camel", MoreCreepsConfig.camelSpawnAmt, 1, 4, EnumCreatureType.CREATURE, 0xD6BF8C, 0xFFFFFF, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityCamel.class, "camel", MoreCreepsConfig.camelSpawnAmt, 1, 4, EnumCreatureType.CREATURE, 0xD6BF8C, 0xFFFFFF, getBiomesForType(Type.SANDY, Type.MESA)),
                 createEntity(EntityZebra.class, "zebra", MoreCreepsConfig.zebraSpawnAmt, 1, 5, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityRocketGiraffe.class, "rocketgiraffe", MoreCreepsConfig.rocketGiraffeSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityRocketGiraffe.class, "rocketgiraffe", MoreCreepsConfig.rocketGiraffeSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesForType(Type.SANDY, Type.MESA))
         );
     }
 
