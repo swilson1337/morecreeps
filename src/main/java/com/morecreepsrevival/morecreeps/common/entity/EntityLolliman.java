@@ -119,6 +119,11 @@ public class EntityLolliman extends EntityCreepBase
         {
             dropItem(CreepsItemHandler.lolly, rand.nextInt(3) + 1);
         }
+
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(CreepsItemHandler.sundae, rand.nextInt(3) + 1);
+        }
     }
 
     @Override
