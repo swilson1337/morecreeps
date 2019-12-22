@@ -10,6 +10,7 @@ import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.world.WorldGenStructures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
@@ -170,12 +171,18 @@ public class MoreCreepsAndWeirdos
         );
     }
 
+    @SuppressWarnings("unchecked")
     public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor, Biome... biomes)
     {
         EntityEntryBuilder<?> builder = EntityEntryBuilder.create().entity(classz).name(name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true);
 
         if (EntityCreepBase.class.isAssignableFrom(classz))
         {
+            for (Biome biome : biomes)
+            {
+                biome.getSpawnableList(creatureType).add(new Biome.SpawnListEntry((Class<? extends EntityLiving>)classz, weight, min, max));
+            }
+
             builder.spawn(creatureType, weight, min, max, biomes);
         }
 

@@ -1798,7 +1798,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             case AMBIENT:
                 return true;
             case MONSTER:
-                if (world.getDifficulty() == EnumDifficulty.PEACEFUL || (spawnOnlyAtNight && !isValidLightLevel()))
+                if (world.getDifficulty() == EnumDifficulty.PEACEFUL || !isValidLightLevel())
                 {
                     return false;
                 }
@@ -1808,7 +1808,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 break;
         }
 
-        return (world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this) && getBlockPathWeight(new BlockPos(posX, getEntityBoundingBox().minY, posZ)) >= 0.0f);
+        return super.getCanSpawnHere();
     }
 
     @Override
@@ -1825,7 +1825,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public float getBlockPathWeight(BlockPos blockPos)
     {
-        if (getCreatureType() == EnumCreatureType.MONSTER)
+        if (getCreatureType() == EnumCreatureType.MONSTER && spawnOnlyAtNight)
         {
             return (0.5f - world.getLightBrightness(blockPos));
         }
@@ -1835,6 +1835,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     protected boolean isValidLightLevel()
     {
+        if (!spawnOnlyAtNight)
+        {
+            return true;
+        }
+
         BlockPos blockPos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
 
         if (world.getLightFor(EnumSkyBlock.SKY, blockPos) > rand.nextInt(32))

@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityEvilScientist extends EntityCreepBase
+public class EntityEvilScientist extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Integer> stage = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.VARINT);
 
@@ -443,7 +444,7 @@ public class EntityEvilScientist extends EntityCreepBase
 
             int area = 0;
 
-            /*for (int i = 0; i < iTowerHeight; i++)
+            for (int i = 0; i < iTowerHeight; i++)
             {
                 for (int q = 0; q < 3; q++)
                 {
@@ -454,7 +455,7 @@ public class EntityEvilScientist extends EntityCreepBase
                         area += Block.getIdFromBlock(world.getBlockState(new BlockPos(towerX + q + 1, towerY + i, towerZ + k)).getBlock());
                     }
                 }
-            }*/
+            }
 
             boolean housesNear = false;
 
@@ -704,17 +705,17 @@ public class EntityEvilScientist extends EntityCreepBase
 
                         break;
                     case 1:
-                        EntityEvilScientist evilScientist = new EntityEvilScientist(world);
+                        EntityEvilCreature evilCreature = new EntityEvilCreature(world);
 
-                        evilScientist.setLocationAndAngles(towerX, towerY + iTowerHeight + 1, towerZ, rotationYaw, 0.0f);
+                        evilCreature.setLocationAndAngles(towerX, towerY + iTowerHeight + 1, towerZ, rotationYaw, 0.0f);
 
-                        evilScientist.determineBaseTexture();
+                        evilCreature.determineBaseTexture();
 
-                        evilScientist.setInitialHealth();
+                        evilCreature.setInitialHealth();
 
                         if (!world.isRemote)
                         {
-                            world.spawnEntity(evilScientist);
+                            world.spawnEntity(evilCreature);
                         }
 
                         break;
