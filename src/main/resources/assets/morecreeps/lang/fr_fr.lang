@@ -20,7 +20,7 @@ item.morecreeps.raygun.name=Pistolet Laser
 item.morecreeps.goo_donut.name=Donut Gluant
 item.morecreeps.evil_egg.name=Oeuf Maléfique
 item.morecreeps.earth_gem.name=Gemme de la Terre
-item.morecreeps.mining_gem.name=Gemme de Minage
+item.morecreeps.mining_gem.name=Gemme du Minage
 item.morecreeps.sky_gem.name=Gemme du Ciel
 item.morecreeps.healing_gem.name=Gemme Guérissante
 item.morecreeps.fire_gem.name=Gemme de Feu
@@ -38,6 +38,8 @@ item.morecreeps.rayray.name=Rayon Laser
 item.morecreeps.floob_raygun.name=Pistolet Laser
 item.morecreeps.limbs.name=Membre
 item.morecreeps.bulletbullet.name=Balle
+item.morecreeps.grow_ray.name=Rayon Aggrandissant
+item.morecreeps.zebra_hide.name=Peau de Zèbre
 
 # Entities
 entity.guineapig.name=Cochon d'Inde
@@ -74,6 +76,19 @@ entity.bubblescum.name=Amas de Bulles
 entity.sneakysal.name=Mafieux Sournois
 entity.ratman.name=Homme Rat
 entity.prisoner.name=Prisonnier
+entity.snowdevil.name=Démon des Neiges
+entity.evilchicken.name=Poulet Maléfique
+entity.evilpig.name=Cochon Maléfique
+entity.doghouse.name=Niche à Chien
+entity.blorp.name=Blorp
+entity.camel.name=Chameau
+entity.zebra.name=Zèbre
+entity.rocketgiraffe.name=Girafe Fusée
+entity.evilscientist.name=Scientifique Maléfique
+entity.mandog.name=Chien Homme
+entity.caveman.name=Homme des Cavernes
+entity.hunchback.name=Bossu
+entity.cameljockey.name=Cavalier de Chameau
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

@@ -94,25 +94,28 @@ public class EntityEvilScientist extends EntityCreepBase
 
         nodeProcessor.setCanSwim(true);
 
-        tasks.addTask(1, new EntityAISwimming(this));
-
-        tasks.addTask(2, new EntityAIBreakDoor(this));
-
-        tasks.addTask(3, new EntityAIAttackMelee(this, 1.0d, true));
-
-        tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
-
-        tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0d));
-
-        tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
-
-        tasks.addTask(6, new EntityAILookIdle(this));
-
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-
-        if (getTrulyEvil())
+        if (!getTowerBuilt())
         {
-            targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+            tasks.addTask(1, new EntityAISwimming(this));
+
+            tasks.addTask(2, new EntityAIBreakDoor(this));
+
+            tasks.addTask(3, new EntityAIAttackMelee(this, 1.0d, true));
+
+            tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
+
+            tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0d));
+
+            tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+
+            tasks.addTask(6, new EntityAILookIdle(this));
+
+            targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+
+            if (getTrulyEvil())
+            {
+                targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+            }
         }
     }
 
@@ -602,6 +605,8 @@ public class EntityEvilScientist extends EntityCreepBase
 
             updateMoveSpeed();
 
+            initEntityAI();
+
             if (getExperimentTimer() > 0)
             {
                 setExperimentTimer(getExperimentTimer() - 1);
@@ -609,7 +614,7 @@ public class EntityEvilScientist extends EntityCreepBase
 
             if (rand.nextInt(200) == 0)
             {
-                world.addWeatherEffect(new EntityLightningBolt(world, MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) + 3, MathHelper.floor(posZ), false));
+                //world.addWeatherEffect(new EntityLightningBolt(world, MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) + 3, MathHelper.floor(posZ), false));
             }
 
             if (rand.nextInt(150) == 0 && !getWater())
@@ -678,7 +683,7 @@ public class EntityEvilScientist extends EntityCreepBase
 
             for (int i = 0; i < randInt; i++)
             {
-                world.addWeatherEffect(new EntityLightningBolt(world, x + rand.nextInt(4) - 2, y + 6, z + rand.nextInt(4) - 2, false));
+                //world.addWeatherEffect(new EntityLightningBolt(world, x + rand.nextInt(4) - 2, y + 6, z + rand.nextInt(4) - 2, false));
             }
 
             playSound(CreepsSoundHandler.evilExperimentSound, getSoundVolume(), getSoundPitch());
