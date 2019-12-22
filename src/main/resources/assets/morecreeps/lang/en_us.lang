@@ -84,6 +84,11 @@ entity.blorp.name=Blorp
 entity.camel.name=Camel
 entity.zebra.name=Zebra
 entity.rocketgiraffe.name=Rocket Giraffe
+entity.evilscientist.name=Evil Scientist
+entity.mandog.name=Mandog
+entity.caveman.name=Caveman
+entity.hunchback.name=Hunchback
+entity.cameljockey.name=Camel Jockey
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

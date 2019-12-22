@@ -387,7 +387,7 @@ public class EntityCreepItem extends Entity
     }
 
     @Override @Nullable
-    public Entity changeDimension(int dimension, @Nullable ITeleporter teleporter)
+    public Entity changeDimension(int dimension, @Nonnull ITeleporter teleporter)
     {
         Entity entity = super.changeDimension(dimension, teleporter);
 

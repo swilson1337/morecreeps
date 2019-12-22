@@ -51,6 +51,12 @@ public class EntityRocketGiraffe extends EntityCreepBase
     }
 
     @Override
+    protected String[] getTamedNames()
+    {
+        return names;
+    }
+
+    @Override
     protected void entityInit()
     {
         super.entityInit();
@@ -61,7 +67,14 @@ public class EntityRocketGiraffe extends EntityCreepBase
     @Override
     protected void updateTexture()
     {
-        setTexture("textures/entity/rocketgiraffe.png");
+        if (isTamed())
+        {
+            setTexture("textures/entity/rocketgiraffetamed.png");
+        }
+        else
+        {
+            setTexture("textures/entity/rocketgiraffe.png");
+        }
     }
 
     @Override
@@ -294,7 +307,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
 
                 if (item == Items.COOKIE)
                 {
-                    playSound(CreepsSoundHandler.hotdogEatSound, getSoundVolume(), getSoundPitch());
+                    playSound(CreepsSoundHandler.giraffeChewSound, getSoundVolume(), getSoundPitch());
 
                     itemStack.shrink(1);
 
@@ -314,7 +327,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
                     {
                         if (!world.isRemote)
                         {
-                            player.sendMessage(new TextComponentString("You need \2476" + cookieCount + " cookie" + ((cookieCount == 1) ? "" : "s") + " \247fto tame this speedy Zebra."));
+                            player.sendMessage(new TextComponentString("You need \2476" + cookieCount + " cookie" + ((cookieCount == 1) ? "" : "s") + " \247fto tame this Rocket Giraffe."));
                         }
                     }
                     else
@@ -331,7 +344,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
             {
                 int cookieCount = getTamedCookies();
 
-                player.sendMessage(new TextComponentString("You need \2476" + cookieCount + " cookie" + ((cookieCount == 1) ? "" : "s") + " \247fto tame this speedy Zebra."));
+                player.sendMessage(new TextComponentString("You need \2476" + cookieCount + " cookie" + ((cookieCount == 1) ? "" : "s") + " \247fto tame this Rocket Giraffe."));
             }
         }
 
@@ -345,7 +358,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
         {
             if (!world.isRemote)
             {
-                player.sendMessage(new TextComponentString("Your Zebra is too small to ride!"));
+                player.sendMessage(new TextComponentString("Your Rocket Giraffe is too small to ride!"));
             }
 
             return false;
@@ -369,11 +382,11 @@ public class EntityRocketGiraffe extends EntityCreepBase
     {
         super.writeEntityToNBT(compound);
 
-        NBTTagCompound props = compound.getCompoundTag("MoreCreepsZebra");
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsRocketGiraffe");
 
         props.setInteger("TamedCookies", getTamedCookies());
 
-        compound.setTag("MoreCreepsZebra", props);
+        compound.setTag("MoreCreepsRocketGiraffe", props);
     }
 
     @Override
@@ -381,7 +394,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
     {
         super.readEntityFromNBT(compound);
 
-        NBTTagCompound props = compound.getCompoundTag("MoreCreepsZebra");
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsRocketGiraffe");
 
         if (props.hasKey("TamedCookies"))
         {
@@ -420,6 +433,6 @@ public class EntityRocketGiraffe extends EntityCreepBase
     @Override
     protected SoundEvent getTamedSound()
     {
-        return CreepsSoundHandler.guineaPigLevelUpSound;
+        return CreepsSoundHandler.giraffeTamedSound;
     }
 }
