@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -214,5 +215,25 @@ public class EntityEvilScientist extends EntityCreepBase
     public int getNumExperiments()
     {
         return dataManager.get(numExperiments);
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsEvilScientist");
+
+        props.setInteger("ExperimentTimer", getExperimentTimer());
+
+        props.setBoolean("ExperimentStart", getExperimentStart());
+
+        props.setInteger("Stage", getStage());
+
+        props.setInteger("NumExperiments", getNumExperiments());
+
+        props.setBoolean("TrulyEvil", getTrulyEvil());
+
+        props.setBoolean("TowerBuilt", getTowerBuilt());
     }
 }
