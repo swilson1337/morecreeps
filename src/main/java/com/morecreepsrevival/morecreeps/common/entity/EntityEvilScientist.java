@@ -94,29 +94,21 @@ public class EntityEvilScientist extends EntityCreepBase
 
         nodeProcessor.setCanSwim(true);
 
-        if (!getTowerBuilt())
-        {
-            tasks.addTask(1, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAISwimming(this));
 
-            tasks.addTask(2, new EntityAIBreakDoor(this));
+        tasks.addTask(2, new EntityAIBreakDoor(this));
 
-            tasks.addTask(3, new EntityAIAttackMelee(this, 1.0d, true));
+        tasks.addTask(3, new EntityAIAttackMelee(this, 1.0d, true));
 
-            tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
+        tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
 
-            tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0d));
+        tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0d));
 
-            tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+        tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-            tasks.addTask(6, new EntityAILookIdle(this));
+        tasks.addTask(6, new EntityAILookIdle(this));
 
-            targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-
-            if (getTrulyEvil())
-            {
-                targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-            }
-        }
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
     }
 
     @Override
@@ -145,8 +137,6 @@ public class EntityEvilScientist extends EntityCreepBase
     protected void setTrulyEvil(boolean b)
     {
         dataManager.set(trulyEvil, b);
-
-        updateAttributes();
     }
 
     @Override
@@ -232,7 +222,7 @@ public class EntityEvilScientist extends EntityCreepBase
             return;
         }
 
-        BlockPos blockPos = getTowerPos();
+        /*BlockPos blockPos = getTowerPos();
 
         int towerX = blockPos.getX();
 
@@ -261,7 +251,9 @@ public class EntityEvilScientist extends EntityCreepBase
                     world.setBlockToAir(new BlockPos(towerX + j + 1, towerY + i, towerZ + k));
                 }
             }
-        }
+        }*/
+
+        setTowerBuilt(false);
     }
 
     @Override
@@ -451,7 +443,7 @@ public class EntityEvilScientist extends EntityCreepBase
 
             int area = 0;
 
-            for (int i = 0; i < iTowerHeight; i++)
+            /*for (int i = 0; i < iTowerHeight; i++)
             {
                 for (int q = 0; q < 3; q++)
                 {
@@ -462,7 +454,7 @@ public class EntityEvilScientist extends EntityCreepBase
                         area += Block.getIdFromBlock(world.getBlockState(new BlockPos(towerX + q + 1, towerY + i, towerZ + k)).getBlock());
                     }
                 }
-            }
+            }*/
 
             boolean housesNear = false;
 
@@ -587,13 +579,7 @@ public class EntityEvilScientist extends EntityCreepBase
 
             int iTowerHeight = getTowerHeight();
 
-            posY = towerY + iTowerHeight;
-
-            posX = towerX + 2;
-
-            posZ = towerZ + 2;
-
-            setPosition(towerX + 2, towerY + iTowerHeight, towerZ + 2);
+            setPosition(towerX + 2, towerY + iTowerHeight + 1, towerZ + 2);
 
             motionX = 0.0d;
 
@@ -605,8 +591,6 @@ public class EntityEvilScientist extends EntityCreepBase
 
             updateMoveSpeed();
 
-            initEntityAI();
-
             if (getExperimentTimer() > 0)
             {
                 setExperimentTimer(getExperimentTimer() - 1);
@@ -614,7 +598,7 @@ public class EntityEvilScientist extends EntityCreepBase
 
             if (rand.nextInt(200) == 0)
             {
-                //world.addWeatherEffect(new EntityLightningBolt(world, MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) + 3, MathHelper.floor(posZ), false));
+                world.addWeatherEffect(new EntityLightningBolt(world, MathHelper.floor(posX), MathHelper.floor(getEntityBoundingBox().minY) + 3, MathHelper.floor(posZ), true));
             }
 
             if (rand.nextInt(150) == 0 && !getWater())
@@ -683,14 +667,20 @@ public class EntityEvilScientist extends EntityCreepBase
 
             for (int i = 0; i < randInt; i++)
             {
-                //world.addWeatherEffect(new EntityLightningBolt(world, x + rand.nextInt(4) - 2, y + 6, z + rand.nextInt(4) - 2, false));
+                world.addWeatherEffect(new EntityLightningBolt(world, x + rand.nextInt(4) - 2, y + 6, z + rand.nextInt(4) - 2, true));
             }
 
             playSound(CreepsSoundHandler.evilExperimentSound, getSoundVolume(), getSoundPitch());
 
             setTrulyEvil(true);
 
-            updateAttributes();
+            updateTexture();
+
+            setHealthBoost(50);
+
+            updateHealth();
+
+            addHealth(50.0f);
 
             randInt = rand.nextInt(4) + 1;
 
@@ -811,6 +801,8 @@ public class EntityEvilScientist extends EntityCreepBase
     protected void setTowerPos(BlockPos pos)
     {
         dataManager.set(towerPos, new BlockPos(pos.getX(), pos.getY(), pos.getZ()));
+
+        dataManager.setDirty(towerPos);
     }
 
     public BlockPos getTowerPos()
@@ -834,16 +826,5 @@ public class EntityEvilScientist extends EntityCreepBase
         }
 
         return false;
-    }
-
-    @Override
-    protected float getBaseHealth()
-    {
-        if (getTrulyEvil())
-        {
-            return 90.0f;
-        }
-
-        return super.getBaseHealth();
     }
 }
