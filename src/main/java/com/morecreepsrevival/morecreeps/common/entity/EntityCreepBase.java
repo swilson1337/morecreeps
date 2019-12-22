@@ -91,6 +91,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     protected EnumCreatureType creatureType = EnumCreatureType.CREATURE;
 
+    protected boolean spawnOnlyAtNight = false;
+
     public EntityCreepBase(World worldIn)
     {
         super(worldIn);
@@ -557,9 +559,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return 0.0f;
     }
 
+    protected float getBaseHealth()
+    {
+        return baseHealth;
+    }
+
     protected void updateHealth()
     {
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(baseHealth + (getLevelHealthMultiplier() * (getLevel() - 1)) + getHealthBoost() + getArmorHealthBonus(getArmor()));
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getBaseHealth() + (getLevelHealthMultiplier() * (getLevel() - 1)) + getHealthBoost() + getArmorHealthBonus(getArmor()));
     }
 
     protected void updateAttackStrength()
@@ -1791,7 +1798,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             case AMBIENT:
                 return true;
             case MONSTER:
-                if (world.getDifficulty() == EnumDifficulty.PEACEFUL || !isValidLightLevel())
+                if (world.getDifficulty() == EnumDifficulty.PEACEFUL || (spawnOnlyAtNight && !isValidLightLevel()))
                 {
                     return false;
                 }

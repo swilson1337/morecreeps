@@ -27,6 +27,8 @@ public class EntityBlackSoul extends EntityCreepBase implements IMob
 
         creatureType = EnumCreatureType.MONSTER;
 
+        spawnOnlyAtNight = true;
+
         baseHealth = 50.0f;
 
         baseSpeed = 0.33d;

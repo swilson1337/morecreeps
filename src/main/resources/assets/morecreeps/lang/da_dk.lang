@@ -27,7 +27,7 @@ item.morecreeps.fire_gem.name=Ild Krystal
 item.morecreeps.donut.name=Donut
 item.morecreeps.gem_sword.name=Krystal Sværd
 item.morecreeps.frisbee.name=Frisbee
-item.morecreeps.shrink_ray.name=Skrympe Pistol
+item.morecreeps.shrink_ray.name=Skrympe Laser
 item.morecreeps.horse_head_gem.name=Heste Krystal
 item.morecreeps.sundae.name=Sundae
 item.morecreeps.shrinkshrink.name=Skrymp
@@ -38,6 +38,8 @@ item.morecreeps.rayray.name=Laser
 item.morecreeps.floob_raygun.name=Laser Pistol
 item.morecreeps.limbs.name=Kropsdel
 item.morecreeps.bulletbullet.name=Patron
+item.morecreeps.grow_ray.name=Vokse Laser
+item.morecreeps.zebra_hide.name=Zebra Skin
 
 # Entities
 entity.guineapig.name=Marsvin
@@ -74,6 +76,19 @@ entity.bubblescum.name=Bubble Stoder
 entity.sneakysal.name=Snu Sal
 entity.ratman.name=Rotte Mand
 entity.prisoner.name=Fængselsfange
+entity.snowdevil.name=Sne Djævel
+entity.evilchicken.name=Ond Kyllign
+entity.evilpig.name=Ond Gris
+entity.doghouse.name=Hundehus
+entity.blorp.name=Plask
+entity.camel.name=Kamel
+entity.zebra.name=Zebra
+entity.rocketgiraffe.name=Raket Giraffe
+entity.evilscientist.name=Ond Videnskabsmand
+entity.mandog.name=Hunde Menneske
+entity.caveman.name=Hulemand
+entity.hunchback.name=Pukkelryg
+entity.cameljockey.name=Kamel Ridder
 
 # Creative Tabs
 itemGroup.creepsTab=Flere Stodere
