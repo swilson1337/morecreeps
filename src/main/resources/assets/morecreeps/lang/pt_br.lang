@@ -38,6 +38,8 @@ item.morecreeps.rayray.name=Raio
 item.morecreeps.floob_raygun.name=Arma de raio
 item.morecreeps.limbs.name=Membros
 item.morecreeps.bulletbullet.name=Bala
+item.morecreeps.grow_ray.name=Raio de aumentar
+item.morecreeps.zebra_hide.name=Couro de zebra
 
 # Entities
 entity.guineapig.name=Porquinho-da-índia
@@ -74,6 +76,18 @@ entity.bubblescum.name=Fazedor-de-bolhas
 entity.sneakysal.name=Sal o sorrateiro
 entity.ratman.name=Homem-rato
 entity.prisoner.name=Prisioneiro
+entity.snowdevil.name=Demônio da neve
+entity.evilchicken.name=Galinha maligna
+entity.evilpig.name=Porco maligno
+entity.doghouse.name=Casa de cachorro
+entity.blorp.name=Blorp
+entity.camel.name=Camelo
+entity.zebra.name=Zebra
+entity.rocketgiraffe.name=Girafa foguete
+entity.evilscientist.name=Cientista maligno
+entity.mandog.name=Homem-cachorro
+entity.caveman.name=Homem da caverna
+entity.cameljockey.name=Jóquei de camelo
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

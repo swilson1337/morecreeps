@@ -184,7 +184,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
     @Override
     protected SoundEvent getDeathSound()
     {
-        return CreepsSoundHandler.evilExperimentSound;
+        return CreepsSoundHandler.evilExplosionSound;
     }
 
     @Override
@@ -223,7 +223,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
             return;
         }
 
-        /*BlockPos blockPos = getTowerPos();
+        BlockPos blockPos = getTowerPos();
 
         int towerX = blockPos.getX();
 
@@ -231,28 +231,28 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
         int towerZ = blockPos.getZ();
 
-        for (int i = 0; i < getTowerHeight() + i; i++)
+        for (int b = 0; b < getTowerHeight() + 1; b++)
         {
-            world.setBlockToAir(new BlockPos(towerX, towerY + i, towerZ));
+            world.setBlockToAir(new BlockPos(towerX, towerY + b, towerZ));
 
-            for (int j = 0; j < 3; j++)
+            for (int c = 0; c < 3; c++)
             {
-                for (int k = 0; k < 3; k++)
+                for (int d = 0; d < 3; d++)
                 {
-                    for (int l = 0; l < 4; l++)
+                    for (int k = 0; k < 4; k++)
                     {
-                        for (int m = 0; m < 10; m++)
+                        for (int j = 0; j < 10; j++)
                         {
-                            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, ((double)(2.0F + (float)towerX) + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, (double)(1.0F + (float)towerY + (float)i) + (double)(rand.nextFloat() * height) + 2D, (2D + ((double)towerZ + (double)(rand.nextFloat() * width * 2.0F))) - (double)width, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
+                            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, ((double)(2.0F + (float)towerX) + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, (double)(1.0F + (float)towerY + (float)b) + (double)(rand.nextFloat() * height) + 2D, (2D + ((double)towerZ + (double)(rand.nextFloat() * width * 2.0F))) - (double)width, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
                         }
                     }
 
-                    world.setBlockToAir(new BlockPos(towerX + k, towerY + i, towerZ + j + 1));
+                    world.setBlockToAir(new BlockPos(towerX + d, towerY + b, towerZ + c + 1));
 
-                    world.setBlockToAir(new BlockPos(towerX + j + 1, towerY + i, towerZ + k));
+                    world.setBlockToAir(new BlockPos(towerX + c + 1, towerY + b, towerZ + d));
                 }
             }
-        }*/
+        }
 
         setTowerBuilt(false);
     }
@@ -671,7 +671,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
                 world.addWeatherEffect(new EntityLightningBolt(world, x + rand.nextInt(4) - 2, y + 6, z + rand.nextInt(4) - 2, true));
             }
 
-            playSound(CreepsSoundHandler.evilExperimentSound, getSoundVolume(), getSoundPitch());
+            playSound(CreepsSoundHandler.evilExplosionSound, getSoundVolume(), getSoundPitch());
 
             setTrulyEvil(true);
 
@@ -827,5 +827,16 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
         }
 
         return false;
+    }
+
+    @Override
+    protected boolean canDespawn()
+    {
+        if (getStage() != 0)
+        {
+            return false;
+        }
+
+        return super.canDespawn();
     }
 }

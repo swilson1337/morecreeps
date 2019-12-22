@@ -420,8 +420,6 @@ public class CreepsSoundHandler
 
     public static final SoundEvent evilHurtSound = createSound("evilhurt");
 
-    public static final SoundEvent evilExperimentSound = createSound("evilexperiment");
-
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -633,8 +631,7 @@ public class CreepsSoundHandler
                 giraffeTamedSound,
                 evilLaughSound,
                 evilExplosionSound,
-                evilHurtSound,
-                evilExperimentSound
+                evilHurtSound
         );
     }
 }
