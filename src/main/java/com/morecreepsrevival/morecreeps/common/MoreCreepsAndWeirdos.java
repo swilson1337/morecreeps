@@ -166,7 +166,8 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityCamel.class, "camel", MoreCreepsConfig.camelSpawnAmt, 1, 4, EnumCreatureType.CREATURE, 0xD6BF8C, 0xFFFFFF, getBiomesForType(Type.SANDY, Type.MESA)),
                 createEntity(EntityZebra.class, "zebra", MoreCreepsConfig.zebraSpawnAmt, 1, 5, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRocketGiraffe.class, "rocketgiraffe", MoreCreepsConfig.rocketGiraffeSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesForType(Type.SANDY, Type.MESA)),
-                createEntity(EntityEvilScientist.class, "evilscientist", MoreCreepsConfig.evilScientistSpawnAmt, 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityEvilScientist.class, "evilscientist", MoreCreepsConfig.evilScientistSpawnAmt, 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityFrisbee.class, "frisbee", 0, 0, 0, EnumCreatureType.AMBIENT)
         );
     }
 
