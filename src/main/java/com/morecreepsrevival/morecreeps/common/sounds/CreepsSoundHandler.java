@@ -420,6 +420,16 @@ public class CreepsSoundHandler
 
     public static final SoundEvent evilHurtSound = createSound("evilhurt");
 
+    public static final SoundEvent manDogSound = createSound("mandog");
+
+    public static final SoundEvent manDogHurtSound = createSound("mandoghurt");
+
+    public static final SoundEvent manDogDeathSound = createSound("mandogdeath");
+
+    public static final SoundEvent superDogNameSound = createSound("superdogname");
+
+    public static final SoundEvent manDogTamedSound = createSound("mandogtamed");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -631,7 +641,12 @@ public class CreepsSoundHandler
                 giraffeTamedSound,
                 evilLaughSound,
                 evilExplosionSound,
-                evilHurtSound
+                evilHurtSound,
+                manDogSound,
+                manDogHurtSound,
+                manDogDeathSound,
+                superDogNameSound,
+                manDogTamedSound
         );
     }
 }
