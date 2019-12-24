@@ -225,7 +225,7 @@ public class MoreCreepsConfig
 
             desertLizardSpawnAmt = config.get(spawnNbr, "Desert Lizard", 8).getInt();
 
-            evilScientistSpawnAmt = config.get(spawnNbr, "Evil Scientist", 8).getInt();
+            evilScientistSpawnAmt = config.get(spawnNbr, "Evil Scientist", 2).getInt();
 
             hippoSpawnAmt = config.get(spawnNbr, "Hippo", 8).getInt();
 
