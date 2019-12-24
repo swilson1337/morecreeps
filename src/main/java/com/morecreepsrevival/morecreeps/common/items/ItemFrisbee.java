@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.items;
 
+import com.morecreepsrevival.morecreeps.common.entity.EntityFrisbee;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -25,9 +26,11 @@ public class ItemFrisbee extends CreepsItem
 
         player.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, getSoundVolume(), getSoundPitch());
 
+        EntityFrisbee frisbee = new EntityFrisbee(world, player);
+
         if (!world.isRemote)
         {
-            // TODO: spawn frisbee entity
+            world.spawnEntity(frisbee);
         }
 
         return super.onItemRightClick(world, player, hand);
