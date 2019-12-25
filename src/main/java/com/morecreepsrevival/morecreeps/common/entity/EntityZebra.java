@@ -176,20 +176,11 @@ public class EntityZebra extends EntityCreepBase
     @Override
     public void updatePassenger(@Nonnull Entity passenger)
     {
-        if (isPassenger(passenger))
+        if (isPassenger(passenger) && passenger instanceof EntityPlayer)
         {
-            if (passenger instanceof EntityPlayer)
-            {
-                passenger.setPosition(posX, posY + 3.0d - (double)((1.75f - getModelSize()) * 2.0f), posZ);
+            passenger.setPosition(posX, posY + 2.5d - (double)((2.75f - getModelSize()) * 1.1f), posZ);
 
-                return;
-            }
-            else if (passenger instanceof EntityCamelJockey)
-            {
-                passenger.setPosition(posX, posY + 3.15000009536743163d - (double)((1.75f - getModelSize()) * 2.0f), posZ);
-
-                return;
-            }
+            return;
         }
 
         super.updatePassenger(passenger);

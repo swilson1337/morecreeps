@@ -206,4 +206,10 @@ public class EntityEvilCreature extends EntityCreepBase implements IMob
 
         return false;
     }
+
+    @Override
+    public boolean isImmuneToExplosions()
+    {
+        return true;
+    }
 }
