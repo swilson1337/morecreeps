@@ -456,6 +456,10 @@ public class CreepsSoundHandler
 
     public static final SoundEvent cavemanBuildSound = createSound("cavemanbuild");
 
+    public static final SoundEvent evilLightSound = createSound("evillight");
+
+    public static final SoundEvent rocketFireSound = createSound("rocketfire");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -685,7 +689,9 @@ public class CreepsSoundHandler
                 cavemanDeadSound,
                 cavewomanDeadSound,
                 caveDrumsSound,
-                cavemanBuildSound
+                cavemanBuildSound,
+                evilLightSound,
+                rocketFireSound
         );
     }
 }
