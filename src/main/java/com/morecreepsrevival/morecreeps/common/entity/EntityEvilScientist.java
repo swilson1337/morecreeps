@@ -617,7 +617,18 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
             if (rand.nextInt(8) == 0)
             {
-                // TODO: spawn evil light
+                EntityEvilLight evilLight = new EntityEvilLight(world);
+
+                evilLight.setLocationAndAngles(towerX, towerY + iTowerHeight, towerZ, rotationYaw, 0.0f);
+
+                evilLight.determineBaseTexture();
+
+                evilLight.setInitialHealth();
+
+                if (!world.isRemote)
+                {
+                    world.spawnEntity(evilLight);
+                }
             }
 
             if (rand.nextInt(10) == 0)
@@ -641,7 +652,18 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
                     }
                 }
 
-                // TODO: spawn evil light
+                EntityEvilLight evilLight = new EntityEvilLight(world);
+
+                evilLight.setLocationAndAngles(towerX, towerY + iTowerHeight + 10, towerZ, rotationYaw, 0.0f);
+
+                evilLight.determineBaseTexture();
+
+                evilLight.setInitialHealth();
+
+                if (!world.isRemote)
+                {
+                    world.spawnEntity(evilLight);
+                }
 
                 setExperimentStart(true);
             }

@@ -169,7 +169,8 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityEvilScientist.class, "evilscientist", MoreCreepsConfig.evilScientistSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xD7D7D7, 0x464347, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityFrisbee.class, "frisbee", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityManDog.class, "mandog", MoreCreepsConfig.mandogSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xB36209, 0xD1D8A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityCaveman.class, "caveman", MoreCreepsConfig.cavemanSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xC2880C, 0x33D8F0, getBiomesForType(Type.COLD, Type.SNOWY))
+                createEntity(EntityCaveman.class, "caveman", MoreCreepsConfig.cavemanSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xC2880C, 0x33D8F0, getBiomesForType(Type.COLD, Type.SNOWY)),
+                createEntity(EntityEvilLight.class, "evil_light", 0, 0, 0, EnumCreatureType.AMBIENT)
         );
     }
 

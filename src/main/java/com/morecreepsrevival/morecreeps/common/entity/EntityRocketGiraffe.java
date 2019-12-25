@@ -24,6 +24,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class EntityRocketGiraffe extends EntityCreepBase
 {
@@ -106,7 +107,12 @@ public class EntityRocketGiraffe extends EntityCreepBase
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return CreepsSoundHandler.giraffeSound;
+        if (rand.nextInt(10) == 0)
+        {
+            return CreepsSoundHandler.giraffeSound;
+        }
+
+        return null;
     }
 
     @Override
@@ -125,6 +131,25 @@ public class EntityRocketGiraffe extends EntityCreepBase
     public int getMaxSpawnedInChunk()
     {
         return 1;
+    }
+
+    @Override
+    public void onLivingUpdate()
+    {
+        ignoreFrustumCheck = true;
+
+        super.onLivingUpdate();
+    }
+
+    @Override
+    public boolean isEntityInsideOpaqueBlock()
+    {
+        if (getFirstPassenger() != null)
+        {
+            return false;
+        }
+
+        return super.isEntityInsideOpaqueBlock();
     }
 
     @Override
@@ -290,11 +315,34 @@ public class EntityRocketGiraffe extends EntityCreepBase
         }
         else if (isTamed())
         {
-            if (player.isSneaking() && isPlayerOwner(player))
+            if (isPlayerOwner(player))
             {
-                // TODO: open gui to change zebra
+                if (isBeingRidden())
+                {
+                    ItemStack itemStack = player.getHeldItem(hand);
 
-                return true;
+                    if (!itemStack.isEmpty() && itemStack.getItem() == CreepsItemHandler.rocket)
+                    {
+                        itemStack.shrink(1);
+
+                        playSound(CreepsSoundHandler.rocketFireSound, 1.0f, getSoundPitch());
+
+                        EntityRocket rocket = new EntityRocket(world, player, 0.0f);
+
+                        if (!world.isRemote)
+                        {
+                            world.spawnEntity(rocket);
+                        }
+
+                        return true;
+                    }
+                }
+                else if (player.isSneaking())
+                {
+                    // TODO: open gui to change zebra
+
+                    return true;
+                }
             }
         }
         else if (!isBeingRidden())
@@ -434,5 +482,11 @@ public class EntityRocketGiraffe extends EntityCreepBase
     protected SoundEvent getTamedSound()
     {
         return CreepsSoundHandler.giraffeTamedSound;
+    }
+
+    @Override @Nullable
+    public Entity getControllingPassenger()
+    {
+        return getFirstPassenger();
     }
 }

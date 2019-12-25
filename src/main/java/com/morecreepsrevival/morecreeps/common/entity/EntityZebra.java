@@ -375,6 +375,17 @@ public class EntityZebra extends EntityCreepBase
     }
 
     @Override
+    public boolean isEntityInsideOpaqueBlock()
+    {
+        if (getFirstPassenger() != null)
+        {
+            return false;
+        }
+
+        return super.isEntityInsideOpaqueBlock();
+    }
+
+    @Override
     public boolean canPlayerRide(EntityPlayer player)
     {
         if (isPlayerOwner(player) && getModelSize() < 1.0f)
