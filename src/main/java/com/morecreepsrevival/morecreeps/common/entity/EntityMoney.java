@@ -29,7 +29,7 @@ public class EntityMoney extends EntityCreepItem
 
         double d1 = MathHelper.cos((entity.rotationYaw * (float)Math.PI) / 180.0f);
 
-        setPosition(entity.posX + d * 0.80000000000000004d, entity.posY + 1, entity.posZ + d1 * 0.80000000000000004d);
+        setPosition(entity.posX + d * 0.80000000000000004d, entity.posY + 2, entity.posZ + d1 * 0.80000000000000004d);
 
         rotationYaw = entity.rotationYaw;
 
