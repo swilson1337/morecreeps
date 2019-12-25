@@ -2149,6 +2149,23 @@
 			}
 		]
 	},
+	"evillight": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:evillight1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evillight2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:evillight3",
+				"stream": false
+			}
+		]
+	},
 	"extinguisher": {
 		"category": "master",
 		"sounds": [

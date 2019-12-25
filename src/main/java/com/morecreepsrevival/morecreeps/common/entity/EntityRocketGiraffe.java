@@ -107,7 +107,12 @@ public class EntityRocketGiraffe extends EntityCreepBase
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return CreepsSoundHandler.giraffeSound;
+        if (rand.nextInt(10) == 0)
+        {
+            return CreepsSoundHandler.giraffeSound;
+        }
+
+        return null;
     }
 
     @Override
@@ -322,7 +327,12 @@ public class EntityRocketGiraffe extends EntityCreepBase
 
                         playSound(CreepsSoundHandler.rocketFireSound, 1.0f, getSoundPitch());
 
-                        // TODO: spawn rocket
+                        EntityRocket rocket = new EntityRocket(world, player, 0.0f);
+
+                        if (!world.isRemote)
+                        {
+                            world.spawnEntity(rocket);
+                        }
 
                         return true;
                     }
