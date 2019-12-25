@@ -2,7 +2,9 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -12,9 +14,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
-public class EntityCastleGuard extends EntityCreepBase
+public class EntityCastleGuard extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> attacked = EntityDataManager.createKey(EntityCastleGuard.class, DataSerializers.BOOLEAN);
 
@@ -31,6 +33,8 @@ public class EntityCastleGuard extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Castle Guard");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = 20.0f;
 
@@ -82,7 +86,7 @@ public class EntityCastleGuard extends EntityCreepBase
     @Override
     protected SoundEvent getAmbientSound()
     {
-        if (dataManager.get(attacked) && rand.nextInt(5) == 0)
+        if (getAttacked() && rand.nextInt(5) == 0)
         {
             return CreepsSoundHandler.castleGuardMadSound;
         }
@@ -92,6 +96,19 @@ public class EntityCastleGuard extends EntityCreepBase
         }
 
         return null;
+    }
+
+    public boolean getAttacked()
+    {
+        try
+        {
+            return dataManager.get(attacked);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override
@@ -128,9 +145,9 @@ public class EntityCastleGuard extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityFrom(@Nullable DamageSource damageSource, float amt)
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
     {
-        if (damageSource != null && damageSource.getTrueSource() instanceof EntityPlayer)
+        if (damageSource.getTrueSource() instanceof EntityPlayer)
         {
             dataManager.set(attacked, true);
         }

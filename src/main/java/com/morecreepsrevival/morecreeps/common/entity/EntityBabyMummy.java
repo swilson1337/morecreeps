@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -14,7 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityBabyMummy extends EntityCreepBase
+import javax.annotation.Nonnull;
+
+public class EntityBabyMummy extends EntityCreepBase implements IMob
 {
     private static final String[] textures = {
             "textures/entity/mummy1",
@@ -31,6 +34,8 @@ public class EntityBabyMummy extends EntityCreepBase
         setCreepTypeName("Baby Mummy");
 
         creatureType = EnumCreatureType.MONSTER;
+
+        spawnOnlyAtNight = true;
 
         baseHealth = 15.0f;
 
@@ -131,15 +136,17 @@ public class EntityBabyMummy extends EntityCreepBase
 
         double d1 = entity.posZ - posZ;
 
-        double f = (double)MathHelper.sqrt(d0 * d0 + d1 * d1);
+        double f = MathHelper.sqrt(d0 * d0 + d1 * d1);
 
         motionX = (d0 / f) * 0.5d * 0.8000000019209289d + motionX * 0.18000000098023225d;
 
         motionZ = (d1 / f) * 0.5d * 0.70000000192092893d + motionZ * 0.18000000098023225d;
+
+        fallDistance = -25.0f;
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         double dist = getDistanceSq(entity);
 

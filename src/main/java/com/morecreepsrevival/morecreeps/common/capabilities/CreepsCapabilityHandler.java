@@ -4,10 +4,12 @@ import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -19,14 +21,16 @@ public class CreepsCapabilityHandler
         CapabilityManager.INSTANCE.register(IGuineaPigPickedUp.class, new GuineaPigPickedUpStorage(), GuineaPigPickedUp::new);
 
         CapabilityManager.INSTANCE.register(ILawyerFine.class, new LawyerFineStorage(), LawyerFine::new);
+
+        CapabilityManager.INSTANCE.register(ICaveDrums.class, new CaveDrumsStorage(), CaveDrums::new);
     }
 
     @SubscribeEvent
     public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event)
     {
-        ItemStack itemStack = event.getObject();
+        Item item = event.getObject().getItem();
 
-        if (itemStack.getItem() == CreepsItemHandler.guineaPigRadio)
+        if (item == CreepsItemHandler.guineaPigRadio)
         {
             event.addCapability(new ResourceLocation(MoreCreepsAndWeirdos.modid, "guinea_pig_picked_up"), new GuineaPigPickedUpProvider());
         }
@@ -40,6 +44,8 @@ public class CreepsCapabilityHandler
         if (entity instanceof EntityPlayer)
         {
             event.addCapability(new ResourceLocation(MoreCreepsAndWeirdos.modid, "lawyer_fine"), new LawyerFineProvider());
+
+            event.addCapability(new ResourceLocation(MoreCreepsAndWeirdos.modid, "caveman_club_drums"), new CaveDrumsProvider());
         }
     }
 }

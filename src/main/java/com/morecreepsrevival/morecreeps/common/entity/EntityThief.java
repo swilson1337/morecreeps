@@ -3,8 +3,10 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.entity.ai.EntityAIThief;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -19,7 +21,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityThief extends EntityCreepBase
+public class EntityThief extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> stolen = EntityDataManager.createKey(EntityThief.class, DataSerializers.BOOLEAN);
 
@@ -35,11 +37,19 @@ public class EntityThief extends EntityCreepBase
 
         setCreepTypeName("Thief");
 
+        creatureType = EnumCreatureType.MONSTER;
+
         baseHealth = (float)rand.nextInt(20) + 10.0f;
 
         baseSpeed = 0.35d;
 
         updateAttributes();
+    }
+
+    @Override
+    public boolean canDespawn()
+    {
+        return !getStolen();
     }
 
     @Override
@@ -276,7 +286,15 @@ public class EntityThief extends EntityCreepBase
 
     public boolean getStolen()
     {
-        return dataManager.get(stolen);
+        try
+        {
+            return dataManager.get(stolen);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     public void findPlayerToAttack()

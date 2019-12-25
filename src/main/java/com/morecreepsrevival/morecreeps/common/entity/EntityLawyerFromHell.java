@@ -4,11 +4,16 @@ import com.morecreepsrevival.morecreeps.common.capabilities.ILawyerFine;
 import com.morecreepsrevival.morecreeps.common.capabilities.LawyerFineProvider;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
+import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageClearLawyerFine;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
@@ -20,9 +25,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
-public class EntityLawyerFromHell extends EntityCreepBase
+public class EntityLawyerFromHell extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> undead = EntityDataManager.createKey(EntityLawyerFromHell.class, DataSerializers.BOOLEAN);
 
@@ -31,6 +36,8 @@ public class EntityLawyerFromHell extends EntityCreepBase
         super(world);
 
         setCreepTypeName("Lawyer From Hell");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = (float)rand.nextInt(40) + 40.0f;
 
@@ -144,7 +151,15 @@ public class EntityLawyerFromHell extends EntityCreepBase
 
     public boolean getUndead()
     {
-        return dataManager.get(undead);
+        try
+        {
+            return dataManager.get(undead);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override
@@ -220,7 +235,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (entity instanceof EntityPlayer)
         {
@@ -245,14 +260,11 @@ public class EntityLawyerFromHell extends EntityCreepBase
                     suckMoney(player);
                 }
 
-                if (MoreCreepsConfig.jailActive && fine >= 2500 && !getUndead())
+                if (!world.isRemote && MoreCreepsConfig.jailActive && fine >= 2500 && !getUndead() && JailManager.buildJail(player, world, rand))
                 {
                     capability.setFine(0);
 
-                    if (!world.isRemote)
-                    {
-                        JailManager.buildJail(player, this, world, rand);
-                    }
+                    CreepsPacketHandler.INSTANCE.sendTo(new MessageClearLawyerFine(), (EntityPlayerMP)player);
                 }
             }
         }
@@ -261,7 +273,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityFrom(@Nullable DamageSource damageSource, float amt)
+    public boolean attackEntityFrom(@Nonnull DamageSource damageSource, float amt)
     {
         if (!getUndead())
         {
@@ -383,7 +395,7 @@ public class EntityLawyerFromHell extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nullable DamageSource cause)
+    public void onDeath(@Nonnull DamageSource cause)
     {
         if (!getUndead())
         {

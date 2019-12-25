@@ -207,7 +207,7 @@ public class EntityHorseHead extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -362,16 +362,14 @@ public class EntityHorseHead extends EntityCreepBase
                     }
                 }
             }
-
-            super.travel(strafe, vertical, forward);
         }
         else
         {
             baseSpeed = 0.95;
 
             updateMoveSpeed();
-
-            super.travel(strafe, vertical, forward);
         }
+
+        super.travel(strafe, vertical, forward);
     }
 }

@@ -1,7 +1,9 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.pathfinding.NodeProcessor;
@@ -9,13 +11,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityRatMan extends EntityCreepBase
+public class EntityRatMan extends EntityCreepBase implements IMob
 {
     public EntityRatMan(World worldIn)
     {
         super(worldIn);
 
         setCreepTypeName("Rat Man");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         setModelSize(0.75f);
 

@@ -27,7 +27,7 @@ public class JailManager
 {
     private static final int maxObstruct = 99999;
 
-    public static boolean buildJail(EntityPlayer player, EntityLawyerFromHell lawyerIn, World world, Random rand)
+    public static boolean buildJail(EntityPlayer player, World world, Random rand)
     {
         int randInt = rand.nextInt(200) - 100;
 
@@ -285,7 +285,7 @@ public class JailManager
 
             world.setBlockState(new BlockPos(jailX + 5, jailY + 1, jailZ - i * 7 - 5), Blocks.OAK_DOOR.getDefaultState().withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER).withProperty(BlockDoor.FACING, EnumFacing.WEST).withProperty(BlockDoor.HINGE, BlockDoor.EnumHingePosition.RIGHT));
 
-            world.setBlockState(new BlockPos(jailX + 9, jailY + 1, jailZ - i * 7 - 7), Blocks.IRON_DOOR.getDefaultState().withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.LOWER));
+            world.setBlockState(new BlockPos(jailX + 9, jailY + 1, jailZ - i * 7 - 7), Blocks.IRON_BARS.getDefaultState());
 
             world.setBlockToAir(new BlockPos(jailX + 9, jailY, jailZ - i * 7 - 5));
 
@@ -355,15 +355,23 @@ public class JailManager
             }
         }
 
-        BlockPos chest1Pos = new BlockPos(jailX + 12, jailY, jailZ + 13);
+        BlockPos chest1Pos = new BlockPos(jailX + 12, jailY, jailZ + 12);
+
+        BlockPos chest1Pos2 = new BlockPos(jailX + 12, jailY, jailZ + 13);
 
         world.setBlockState(chest1Pos, Blocks.CHEST.getDefaultState());
+
+        world.setBlockState(chest1Pos2, Blocks.CHEST.getDefaultState());
 
         TileEntityChest chest1 = new TileEntityChest();
 
         world.setTileEntity(chest1Pos, chest1);
 
-        BlockPos chest2Pos = new BlockPos(jailX+ 12, jailY, jailZ + 1);
+        TileEntityChest chest12 = new TileEntityChest();
+
+        world.setTileEntity(chest1Pos2, chest12);
+
+        BlockPos chest2Pos = new BlockPos(jailX + 12, jailY, jailZ + 1);
 
         world.setBlockState(chest2Pos, Blocks.CHEST.getDefaultState());
 
@@ -379,33 +387,105 @@ public class JailManager
 
         world.setTileEntity(chest3Pos, chest3);
 
+        BlockPos chest4Pos = new BlockPos(jailX, jailY, jailZ + 1);
+
+        world.setBlockState(chest4Pos, Blocks.CHEST.getDefaultState());
+
+        TileEntityChest chest4 = new TileEntityChest();
+
+        world.setTileEntity(chest4Pos, chest4);
+
+        int chestIndex = 0;
+
+        int chest1Size = chest1.getSizeInventory();
+
+        TileEntityChest chestToUse = chest1;
+
         for (int i = 0; i < player.inventory.mainInventory.size(); i++)
         {
-            if ((i + 1) > chest1.getSizeInventory())
-            {
-                break;
-            }
-
             ItemStack itemStack = player.inventory.mainInventory.get(i);
 
-            int stackSize = itemStack.getCount();
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
 
-            chest1.setInventorySlotContents(i, itemStack.copy());
+                    chestIndex = 0;
+                }
 
-            itemStack.shrink(stackSize);
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
         }
 
-        for (int i = 1; i < chest3.getSizeInventory(); i++)
+        for (int i = 0; i < player.inventory.armorInventory.size(); i++)
+        {
+            ItemStack itemStack = player.inventory.armorInventory.get(i);
+
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
+
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
+        }
+
+        for (int i = 0; i < player.inventory.offHandInventory.size(); i++)
+        {
+            ItemStack itemStack = player.inventory.offHandInventory.get(i);
+
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
+
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
+        }
+
+        for (ItemStack itemStack : player.getEquipmentAndArmor())
+        {
+            if (!itemStack.isEmpty())
+            {
+                if (chestToUse.equals(chest1) && (chestIndex + 1) > chest1Size)
+                {
+                    chestToUse = chest12;
+
+                    chestIndex = 0;
+                }
+
+                chestToUse.setInventorySlotContents(chestIndex++, itemStack.copy());
+
+                itemStack.shrink(itemStack.getCount());
+            }
+        }
+
+        for (int i = 1; i < chest4.getSizeInventory(); i++)
         {
             int r = rand.nextInt(10);
 
             if (r == 1)
             {
-                chest3.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.bandaid, rand.nextInt(2) + 1));
+                chest4.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.bandaid, rand.nextInt(2) + 1));
             }
             else if (r == 2)
             {
-                chest3.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.money, rand.nextInt(24) + 1));
+                chest4.setInventorySlotContents(i, new ItemStack(CreepsItemHandler.money, rand.nextInt(24) + 1));
             }
         }
 
@@ -419,13 +499,13 @@ public class JailManager
 
         mobSpawner.getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntitySkeleton.class));
 
-        chest1.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.STONE_PICKAXE, 1));
+        chest2.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.STONE_PICKAXE, 1));
 
-        chest1.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Items.APPLE, 1));
+        chest2.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Items.APPLE, 1));
 
-        chest2.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Item.getItemFromBlock(Blocks.TORCH), rand.nextInt(16)));
+        chest3.setInventorySlotContents(rand.nextInt(5) + 5, new ItemStack(Item.getItemFromBlock(Blocks.TORCH), rand.nextInt(16)));
 
-        chest2.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.APPLE, 1));
+        chest3.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.APPLE, 1));
 
         world.setBlockState(new BlockPos(jailX + 6, jailY + 2, jailZ + 9), Blocks.TORCH.getDefaultState());
 

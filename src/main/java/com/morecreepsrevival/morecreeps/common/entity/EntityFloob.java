@@ -3,8 +3,10 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,13 +18,15 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
+public class EntityFloob extends EntityCreepBase implements IRangedAttackMob, IMob
 {
     public EntityFloob(World worldIn)
     {
         super(worldIn);
 
         setCreepTypeName("Floob");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         baseHealth = (float)rand.nextInt(15) + 10.0f;
 
@@ -113,7 +117,7 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob
         double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - ray.posY;
         double d2 = target.posZ - this.posZ;
 
-        ray.shoot(d0, d1, d2, 1.6F, 0.0f);
+        ray.shoot(d0, d1, d2, 1.6F, (float)(14 - world.getDifficulty().getDifficultyId() * 4));
 
         world.spawnEntity(ray);
 

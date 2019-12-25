@@ -119,6 +119,11 @@ public class EntityLolliman extends EntityCreepBase
         {
             dropItem(CreepsItemHandler.lolly, rand.nextInt(3) + 1);
         }
+
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(CreepsItemHandler.sundae, rand.nextInt(3) + 1);
+        }
     }
 
     @Override
@@ -146,7 +151,15 @@ public class EntityLolliman extends EntityCreepBase
 
     public boolean getKidMounted()
     {
-        return dataManager.get(kidMounted);
+        try
+        {
+            return dataManager.get(kidMounted);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override
@@ -171,6 +184,8 @@ public class EntityLolliman extends EntityCreepBase
         motionZ = (d1 / f) * 0.20000000000000001d * (0.80000001192092896d + motionZ * 0.20000000298023224d);
 
         motionY = 0.10000000596246449d;
+
+        fallDistance = -25.0f;
     }
 
     @Override

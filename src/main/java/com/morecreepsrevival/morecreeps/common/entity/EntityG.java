@@ -2,7 +2,9 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -12,13 +14,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityG extends EntityCreepBase
+public class EntityG extends EntityCreepBase implements IMob
 {
     public EntityG(World worldIn)
     {
         super(worldIn);
 
         setCreepTypeName("G");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         setSize(width * 2.0f, height * 2.5f);
 

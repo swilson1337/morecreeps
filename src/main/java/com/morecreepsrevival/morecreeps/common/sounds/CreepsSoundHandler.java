@@ -376,6 +376,92 @@ public class CreepsSoundHandler
 
     public static final SoundEvent salSaleSound = createSound("salsale");
 
+    public static final SoundEvent floobShipClangSound = createSound("floobshipclang");
+
+    public static final SoundEvent snowDevilSound = createSound("snowdevil");
+
+    public static final SoundEvent snowDevilHurtSound = createSound("snowdevilhurt");
+
+    public static final SoundEvent snowDevilDeathSound = createSound("snowdevildeath");
+
+    public static final SoundEvent evilEggBirthSound = createSound("evileggbirth");
+
+    public static final SoundEvent hotdogHeavenSound = createSound("hotdogheaven");
+
+    public static final SoundEvent blorpSound = createSound("blorp");
+
+    public static final SoundEvent blorpHurtSound = createSound("blorphurt");
+
+    public static final SoundEvent blorpDeathSound = createSound("blorpdeath");
+
+    public static final SoundEvent camelSound = createSound("camel");
+
+    public static final SoundEvent camelHurtSound = createSound("camelhurt");
+
+    public static final SoundEvent camelDeathSound = createSound("cameldeath");
+
+    public static final SoundEvent blorpEatSound = createSound("blorpeat");
+
+    public static final SoundEvent blorpGrowSound = createSound("blorpgrow");
+
+    public static final SoundEvent blorpBounceSound = createSound("blorpbounce");
+
+    public static final SoundEvent giraffeHurtSound = createSound("giraffehurt");
+
+    public static final SoundEvent giraffeDeadSound = createSound("giraffedead");
+
+    public static final SoundEvent giraffeChewSound = createSound("giraffechew");
+
+    public static final SoundEvent giraffeTamedSound = createSound("giraffetamed");
+
+    public static final SoundEvent evilLaughSound = createSound("evillaugh");
+
+    public static final SoundEvent evilExplosionSound = createSound("evilexplosion");
+
+    public static final SoundEvent evilHurtSound = createSound("evilhurt");
+
+    public static final SoundEvent manDogSound = createSound("mandog");
+
+    public static final SoundEvent manDogHurtSound = createSound("mandoghurt");
+
+    public static final SoundEvent manDogDeathSound = createSound("mandogdeath");
+
+    public static final SoundEvent superDogNameSound = createSound("superdogname");
+
+    public static final SoundEvent manDogTamedSound = createSound("mandogtamed");
+
+    public static final SoundEvent snowDevilTamedSound = createSound("snowdeviltamed");
+
+    public static final SoundEvent cavemanNiceSound = createSound("cavemanice");
+
+    public static final SoundEvent cavemanEvilSound = createSound("cavemanevil");
+
+    public static final SoundEvent cavemanFreeSound = createSound("cavemanfree");
+
+    public static final SoundEvent cavewomanFreeSound = createSound("cavewomanfree");
+
+    public static final SoundEvent cavemanFrozenSound = createSound("cavemanfrozen");
+
+    public static final SoundEvent cavewomanFrozenSound = createSound("cavewomanfrozen");
+
+    public static final SoundEvent cavemanHurtSound = createSound("cavemanhurt");
+
+    public static final SoundEvent cavewomanHurtSound = createSound("cavewomanhurt");
+
+    public static final SoundEvent cavemanDeadSound = createSound("cavemandead");
+
+    public static final SoundEvent cavewomanDeadSound = createSound("cavewomandead");
+
+    public static final SoundEvent caveDrumsSound = createSound("cavedrums");
+
+    public static final SoundEvent cavemanBuildSound = createSound("cavemanbuild");
+
+    public static final SoundEvent evilLightSound = createSound("evillight");
+
+    public static final SoundEvent rocketFireSound = createSound("rocketfire");
+
+    public static final SoundEvent rocketExplodeSound = createSound("rocketexplode");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -565,7 +651,50 @@ public class CreepsSoundHandler
                 growRaySound,
                 salRatsSound,
                 salNoMoneySound,
-                salSaleSound
+                salSaleSound,
+                floobShipClangSound,
+                snowDevilSound,
+                snowDevilHurtSound,
+                snowDevilDeathSound,
+                evilEggBirthSound,
+                hotdogHeavenSound,
+                blorpSound,
+                blorpHurtSound,
+                blorpDeathSound,
+                camelSound,
+                camelHurtSound,
+                camelDeathSound,
+                blorpEatSound,
+                blorpGrowSound,
+                blorpBounceSound,
+                giraffeHurtSound,
+                giraffeDeadSound,
+                giraffeChewSound,
+                giraffeTamedSound,
+                evilLaughSound,
+                evilExplosionSound,
+                evilHurtSound,
+                manDogSound,
+                manDogHurtSound,
+                manDogDeathSound,
+                superDogNameSound,
+                manDogTamedSound,
+                snowDevilTamedSound,
+                cavemanEvilSound,
+                cavemanFreeSound,
+                cavemanFrozenSound,
+                cavemanNiceSound,
+                cavewomanFreeSound,
+                cavewomanFrozenSound,
+                cavemanHurtSound,
+                cavewomanHurtSound,
+                cavemanDeadSound,
+                cavewomanDeadSound,
+                caveDrumsSound,
+                cavemanBuildSound,
+                evilLightSound,
+                rocketFireSound,
+                rocketExplodeSound
         );
     }
 }

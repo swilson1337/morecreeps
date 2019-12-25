@@ -3,7 +3,9 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -17,7 +19,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class EntityBigBaby extends EntityCreepBase
+import javax.annotation.Nonnull;
+
+public class EntityBigBaby extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Integer> skin = EntityDataManager.createKey(EntityBigBaby.class, DataSerializers.VARINT);
 
@@ -30,6 +34,8 @@ public class EntityBigBaby extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Big Baby");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         setSize(width * 3.25f, height * 3.55f);
 
@@ -156,7 +162,7 @@ public class EntityBigBaby extends EntityCreepBase
 
             int iSkin = dataManager.get(skin);
 
-            iSkin += (dataManager.get(skinDirection) ? 1 : -1);
+            iSkin += (getSkinDirection() ? 1 : -1);
 
             if (getAttackTarget() != null)
             {
@@ -180,7 +186,7 @@ public class EntityBigBaby extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         ItemStack itemStack = player.getHeldItem(hand);
 
@@ -210,7 +216,7 @@ public class EntityBigBaby extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (getHammerSwing() == 0.0f)
         {
@@ -218,5 +224,18 @@ public class EntityBigBaby extends EntityCreepBase
         }
 
         return super.attackEntityAsMob(entity);
+    }
+
+    private boolean getSkinDirection()
+    {
+        try
+        {
+            return dataManager.get(skinDirection);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 }

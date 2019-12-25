@@ -79,6 +79,42 @@ public class MoreCreepsConfig
 
     public static int sneakySalSpawnAmt = 0;
 
+    public static int snowDevilSpawnAmt = 0;
+
+    public static boolean classicMode = true;
+
+    public static int blorpSpawnAmt = 0;
+
+    public static int camelSpawnAmt = 0;
+
+    public static int camelJockeySpawnAmt = 0;
+
+    public static int bumSpawnAmt = 0;
+
+    public static int cavemanSpawnAmt = 0;
+
+    public static int desertLizardSpawnAmt = 0;
+
+    public static int evilScientistSpawnAmt = 0;
+
+    public static int hippoSpawnAmt = 0;
+
+    public static int hunchbackSpawnAmt = 0;
+
+    public static int invisibleManSpawnAmt = 0;
+
+    public static int mandogSpawnAmt = 0;
+
+    public static int nonSwimmerSpawnAmt = 0;
+
+    public static int preacherSpawnAmt = 0;
+
+    public static int rockMonsterSpawnAmt = 0;
+
+    public static int rocketGiraffeSpawnAmt = 0;
+
+    public static int zebraSpawnAmt = 0;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -173,6 +209,42 @@ public class MoreCreepsConfig
 
             sneakySalSpawnAmt = config.get(spawnNbr, "Sneaky Sal", 8).getInt();
 
+            snowDevilSpawnAmt = config.get(spawnNbr, "Snow Devil", 8).getInt();
+
+            classicMode = config.get(miscProperty, "Classic Mode", true, "Keep this on if you want to play the mod the way Freakstritch intended it. Turning this off will add additional content the original mod didn't have.").getBoolean();
+
+            blorpSpawnAmt = config.get(spawnNbr, "Blorp", 8).getInt();
+
+            camelSpawnAmt = config.get(spawnNbr, "Camel", 8).getInt();
+
+            camelJockeySpawnAmt = config.get(spawnNbr, "Camel Jockey", 6).getInt();
+
+            bumSpawnAmt = config.get(spawnNbr, "Bum", 8).getInt();
+
+            cavemanSpawnAmt = config.get(spawnNbr, "Caveman", 5).getInt();
+
+            desertLizardSpawnAmt = config.get(spawnNbr, "Desert Lizard", 8).getInt();
+
+            evilScientistSpawnAmt = config.get(spawnNbr, "Evil Scientist", 2).getInt();
+
+            hippoSpawnAmt = config.get(spawnNbr, "Hippo", 8).getInt();
+
+            hunchbackSpawnAmt = config.get(spawnNbr, "Hunchback", 8).getInt();
+
+            invisibleManSpawnAmt = config.get(spawnNbr, "Invisible Man", 8).getInt();
+
+            mandogSpawnAmt = config.get(spawnNbr, "Mandog", 8).getInt();
+
+            nonSwimmerSpawnAmt = config.get(spawnNbr, "Non Swimmer", 6).getInt();
+
+            preacherSpawnAmt = config.get(spawnNbr, "Preacher", 8).getInt();
+
+            rockMonsterSpawnAmt = config.get(spawnNbr, "Rock Monster", 8).getInt();
+
+            rocketGiraffeSpawnAmt = config.get(spawnNbr, "Rocket Giraffe", 7).getInt();
+
+            zebraSpawnAmt = config.get(spawnNbr, "Zebra", 8).getInt();
+
             config.save();
         }
         finally
@@ -193,9 +265,184 @@ public class MoreCreepsConfig
             return;
         }
 
+        if (armyGuySpawnAmt < 0 || armyGuySpawnAmt > 12)
+        {
+            armyGuySpawnAmt = 5;
+        }
+
+        if (babyMummySpawnAmt < 0 || babyMummySpawnAmt > 12)
+        {
+            babyMummySpawnAmt = 7;
+        }
+
+        if (bigBabySpawnAmt < 0 || bigBabySpawnAmt > 12)
+        {
+            bigBabySpawnAmt = 5;
+        }
+
+        if (blorpSpawnAmt < 0 || blorpSpawnAmt > 12)
+        {
+            blorpSpawnAmt = 7;
+        }
+
+        if (bubbleScumSpawnAmt < 0 || bubbleScumSpawnAmt > 12)
+        {
+            bubbleScumSpawnAmt = 6;
+        }
+
+        if (bumSpawnAmt < 0 || bumSpawnAmt > 12)
+        {
+            bumSpawnAmt = 6;
+        }
+
+        if (camelSpawnAmt < 0 || camelSpawnAmt > 12)
+        {
+            camelSpawnAmt = 7;
+        }
+
+        if (camelJockeySpawnAmt < 0 || camelJockeySpawnAmt > 12)
+        {
+            camelJockeySpawnAmt = 6;
+        }
+
+        if (cavemanSpawnAmt < 0 || cavemanSpawnAmt > 12)
+        {
+            cavemanSpawnAmt = 5;
+        }
+
+        if (desertLizardSpawnAmt < 0 || desertLizardSpawnAmt > 12)
+        {
+            desertLizardSpawnAmt = 7;
+        }
+
+        if (digBugSpawnAmt < 0 || digBugSpawnAmt > 12)
+        {
+            digBugSpawnAmt = 7;
+        }
+
+        if (evilScientistSpawnAmt < 0 || evilScientistSpawnAmt > 12)
+        {
+            evilScientistSpawnAmt = 7;
+        }
+
+        if (floobSpawnAmt < 0 || floobShipSpawnAmt > 12)
+        {
+            floobSpawnAmt = 7;
+        }
+
+        if (floobShipSpawnAmt < 0 || floobShipSpawnAmt > 12)
+        {
+            floobShipSpawnAmt = 2;
+        }
+
+        if (gSpawnAmt < 0 || gSpawnAmt > 12)
+        {
+            gSpawnAmt = 7;
+        }
+
+        if (gooGoatSpawnAmt < 0 || gooGoatSpawnAmt > 12)
+        {
+            gooGoatSpawnAmt = 7;
+        }
+
         if (guineaPigSpawnAmt < 0 || guineaPigSpawnAmt > 12)
         {
             guineaPigSpawnAmt = 9;
+        }
+
+        if (hippoSpawnAmt < 0 || hippoSpawnAmt > 12)
+        {
+            hippoSpawnAmt = 7;
+        }
+
+        if (horseHeadSpawnAmt < 0 || horseHeadSpawnAmt > 12)
+        {
+            horseHeadSpawnAmt = 7;
+        }
+
+        if (hunchbackSpawnAmt < 0 || hunchbackSpawnAmt > 12)
+        {
+            hunchbackSpawnAmt = 7;
+        }
+
+        if (invisibleManSpawnAmt < 0 || invisibleManSpawnAmt > 12)
+        {
+            invisibleManSpawnAmt = 7;
+        }
+
+        if (kidSpawnAmt < 0 || kidSpawnAmt > 12)
+        {
+            kidSpawnAmt = 5;
+        }
+
+        if (lawyerFromHellSpawnAmt < 0 || lawyerFromHellSpawnAmt > 12)
+        {
+            lawyerFromHellSpawnAmt = 7;
+        }
+
+        if (lollimanSpawnAmt < 0 || lollimanSpawnAmt > 12)
+        {
+            lollimanSpawnAmt = 3;
+        }
+
+        if (mandogSpawnAmt < 0 || mandogSpawnAmt > 12)
+        {
+            mandogSpawnAmt = 7;
+        }
+
+        if (mummySpawnAmt < 0 || mummySpawnAmt > 12)
+        {
+            mummySpawnAmt = 5;
+        }
+
+        if (nonSwimmerSpawnAmt < 0 || nonSwimmerSpawnAmt > 12)
+        {
+            nonSwimmerSpawnAmt = 5;
+        }
+
+        if (sneakySalSpawnAmt < 0 || sneakySalSpawnAmt > 12)
+        {
+            sneakySalSpawnAmt = 6;
+        }
+
+        if (preacherSpawnAmt < 0 || preacherSpawnAmt > 12)
+        {
+            preacherSpawnAmt = 7;
+        }
+
+        if (robotTedSpawnAmt < 0 || robotTedSpawnAmt > 12)
+        {
+            robotTedSpawnAmt = 7;
+        }
+
+        if (robotToddSpawnAmt < 0 || robotToddSpawnAmt > 12)
+        {
+            robotToddSpawnAmt = 7;
+        }
+
+        if (rockMonsterSpawnAmt < 0 || rockMonsterSpawnAmt > 12)
+        {
+            rockMonsterSpawnAmt = 7;
+        }
+
+        if (rocketGiraffeSpawnAmt < 0 || rocketGiraffeSpawnAmt > 12)
+        {
+            rocketGiraffeSpawnAmt = 7;
+        }
+
+        if (snowDevilSpawnAmt < 0 || snowDevilSpawnAmt > 12)
+        {
+            snowDevilSpawnAmt = 7;
+        }
+
+        if (thiefSpawnAmt < 0 || thiefSpawnAmt > 12)
+        {
+            thiefSpawnAmt = 7;
+        }
+
+        if (zebraSpawnAmt < 0 || zebraSpawnAmt > 12)
+        {
+            zebraSpawnAmt = 6;
         }
 
         if (pyramidRarity < 1 || pyramidRarity > 10)

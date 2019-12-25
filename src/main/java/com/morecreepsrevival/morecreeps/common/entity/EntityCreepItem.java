@@ -23,6 +23,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ITeleporter;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
@@ -273,7 +274,7 @@ public class EntityCreepItem extends Entity
         }
     }
 
-    @Override
+    @Override @Nonnull
     public String getName()
     {
         return I18n.format("item." + getItem().getUnlocalizedName());
@@ -386,7 +387,7 @@ public class EntityCreepItem extends Entity
     }
 
     @Override @Nullable
-    public Entity changeDimension(int dimension, @Nullable ITeleporter teleporter)
+    public Entity changeDimension(int dimension, @Nonnull ITeleporter teleporter)
     {
         Entity entity = super.changeDimension(dimension, teleporter);
 
@@ -400,9 +401,9 @@ public class EntityCreepItem extends Entity
 
     private void searchForOtherItemsNearby()
     {
-        for (EntityCreepItem item : world.getEntitiesWithinAABB(EntityCreepItem.class, getEntityBoundingBox().grow(0.5d, 0.5d, 0.5d)))
+        /*for (EntityCreepItem item : world.getEntitiesWithinAABB(EntityCreepItem.class, getEntityBoundingBox().grow(0.5d, 0.5d, 0.5d)))
         {
-        }
+        }*/
     }
 
     public static void registerFixesItem(DataFixer fixer)

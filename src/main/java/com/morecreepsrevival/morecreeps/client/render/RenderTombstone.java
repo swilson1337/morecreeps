@@ -10,6 +10,9 @@ import com.morecreepsrevival.morecreeps.common.entity.EntityTombstone;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class RenderTombstone<T extends EntityTombstone> extends RenderCreep<T>
 {
     public RenderTombstone(RenderManager renderManager)
@@ -23,11 +26,11 @@ public class RenderTombstone<T extends EntityTombstone> extends RenderCreep<T>
         return false;
     }
 
-    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nullable T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
-        if (entity.getDistanceSq(renderManager.renderViewEntity) > 16)
+        if (entity == null || entity.getDistanceSq(renderManager.renderViewEntity) > 16)
         {
             return;
         }

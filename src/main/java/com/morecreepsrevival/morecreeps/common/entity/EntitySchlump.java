@@ -35,8 +35,6 @@ public class EntitySchlump extends EntityCreepBase
 
     private static final DataParameter<Integer> payoutTimer = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> saved = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.BOOLEAN);
-
     private static final DataParameter<Integer> waitTime = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.VARINT);
 
     private static final DataParameter<Integer> deathTimer = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.VARINT);
@@ -70,9 +68,7 @@ public class EntitySchlump extends EntityCreepBase
         dataManager.register(placed, false);
 
         dataManager.register(payoutTimer, 0);
-
-        dataManager.register(saved, false);
-
+        
         dataManager.register(waitTime, 0);
 
         dataManager.register(deathTimer, 0);
@@ -270,7 +266,15 @@ public class EntitySchlump extends EntityCreepBase
 
     public boolean getPlaced()
     {
-        return dataManager.get(placed);
+        try
+        {
+            return dataManager.get(placed);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     private boolean checkHouse()
@@ -446,13 +450,6 @@ public class EntitySchlump extends EntityCreepBase
 
         if (!checkHouse())
         {
-            if (owner != null)
-            {
-                owner.sendMessage(new TextComponentString("This is not a good location for your Schlump. It will die here!"));
-            }
-
-            playSound(CreepsSoundHandler.schlumpSucksSound, getSoundVolume(), getSoundPitch());
-
             dataManager.set(deathTimer, 200);
 
             return;
@@ -615,7 +612,7 @@ public class EntitySchlump extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {

@@ -228,7 +228,7 @@ public class EntityGuineaPig extends EntityCreepBase
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -763,14 +763,22 @@ public class EntityGuineaPig extends EntityCreepBase
     }
 
     @Override
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return true;
     }
 
     public boolean getHotelBuilt()
     {
-        return dataManager.get(hotelBuilt);
+        try
+        {
+            return dataManager.get(hotelBuilt);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     protected void setHotelBuilt(boolean b)
@@ -816,5 +824,17 @@ public class EntityGuineaPig extends EntityCreepBase
     public int getMaxLevel()
     {
         return 20;
+    }
+
+    @Override
+    public boolean canLevelUp()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canBeRevived()
+    {
+        return true;
     }
 }

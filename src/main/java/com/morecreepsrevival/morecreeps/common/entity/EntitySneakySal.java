@@ -198,7 +198,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -260,10 +260,17 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             EntityPlayer player = world.getClosestPlayerToEntity(this, 16.0d);
 
-            if (player != null && canEntityBeSeen(player))
+            if (player != null && canEntityBeSeen(player) && !player.capabilities.disableDamage)
             {
                 setAttackTarget(player);
             }
+        }
+
+        EntityLivingBase target = getAttackTarget();
+
+        if (target instanceof EntityPlayer && ((EntityPlayer)target).capabilities.disableDamage)
+        {
+            setAttackTarget(null);
         }
     }
 
@@ -332,7 +339,15 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     public boolean getShooting()
     {
-        return dataManager.get(shooting);
+        try
+        {
+            return dataManager.get(shooting);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     public int[] getShopItems()
@@ -508,6 +523,14 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     public boolean isBlackFriday()
     {
-        return dataManager.get(blackFriday);
+        try
+        {
+            return dataManager.get(blackFriday);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 }

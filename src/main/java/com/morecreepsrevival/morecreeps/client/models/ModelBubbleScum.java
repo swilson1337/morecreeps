@@ -27,16 +27,11 @@ public class ModelBubbleScum extends ModelBase
 
     public ModelBubbleScum(float f)
     {
-        this(f, 0.0f);
-    }
-
-    public ModelBubbleScum(float f, float f1)
-    {
         heldItemLeft = false;
         heldItemRight = false;
         isSneak = false;
 
-        f1 = 2.0F;
+        float f1 = 2.0F;
         bipedBody = new ModelRenderer(this, 0, 0);
         bipedBody.addBox(-4F, 0.0F, -4F, 8, 8, 8, f);
         bipedBody.setRotationPoint(0.0F, 8F + f1, 0.0F);

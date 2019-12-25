@@ -2,7 +2,9 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.pathfinding.NodeProcessor;
@@ -10,13 +12,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityCastleCritter extends EntityCreepBase
+public class EntityCastleCritter extends EntityCreepBase implements IMob
 {
     public EntityCastleCritter(World worldIn)
     {
         super(worldIn);
 
         setCreepTypeName("Castle Critter");
+
+        creatureType = EnumCreatureType.MONSTER;
 
         setSize(0.6f, 0.6f);
 

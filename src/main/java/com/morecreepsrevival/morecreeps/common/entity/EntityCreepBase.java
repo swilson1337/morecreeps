@@ -7,6 +7,7 @@ import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIOwnerHurtT
 import com.morecreepsrevival.morecreeps.common.helpers.EffectHelper;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiTamableEntity;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -90,6 +91,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     protected EnumCreatureType creatureType = EnumCreatureType.CREATURE;
 
+    protected boolean spawnOnlyAtNight = false;
+
     public EntityCreepBase(World worldIn)
     {
         super(worldIn);
@@ -101,7 +104,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         updateAttributes();
     }
 
-    @Override
+    @Override @Nonnull
     public SoundCategory getSoundCategory()
     {
         if (getCreatureType() == EnumCreatureType.MONSTER)
@@ -110,6 +113,36 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         return SoundCategory.NEUTRAL;
+    }
+
+    protected void onDismount(Entity entity)
+    {
+    }
+
+    @Override
+    public void dismountRidingEntity()
+    {
+        fallDistance = -25.0f;
+
+        dataManager.set(unmountTimer, 20);
+
+        SoundEvent unmountSound = getUnmountSound();
+
+        if (unmountSound != null)
+        {
+            playSound(unmountSound, getSoundVolume(), getSoundPitch());
+        }
+
+        Entity entity = getRidingEntity();
+
+        super.dismountRidingEntity();
+
+        onDismount(entity);
+
+        if (entity != null && entity != getRidingEntity() && entity instanceof EntityPlayer && entity.isInsideOfMaterial(Material.WATER) && isPlayerOwner((EntityPlayer)entity) && !world.isRemote)
+        {
+            entity.sendMessage(new TextComponentString("\2474>>\247f Your " + getCreepTypeName() + " has jumped off of your head, they hate being underwater! \2474<<"));
+        }
     }
 
     @Override
@@ -201,70 +234,67 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         nodeProcessor.setCanEnterDoors(true);
 
-        if (!isRiding())
+        switch (getWanderState())
         {
-            switch (getWanderState())
-            {
-                case 0:
-                    tasks.addTask(1, new EntityAISwimming(this));
+            case 0:
+                tasks.addTask(1, new EntityAISwimming(this));
 
-                    tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+                tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
 
-                    tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+                tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-                    tasks.addTask(3, new EntityAILookIdle(this));
+                tasks.addTask(3, new EntityAILookIdle(this));
 
-                    if (isTamed())
-                    {
-                        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-                    }
+                if (isTamed())
+                {
+                    targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+                }
 
-                    break;
-                case 1:
-                    tasks.addTask(1, new EntityAISwimming(this));
+                break;
+            case 1:
+                tasks.addTask(1, new EntityAISwimming(this));
 
-                    tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+                tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
 
-                    tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0d));
+                tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0d));
 
-                    tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+                tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-                    tasks.addTask(4, new EntityAILookIdle(this));
+                tasks.addTask(4, new EntityAILookIdle(this));
 
-                    if (isTamed())
-                    {
-                        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-                    }
+                if (isTamed())
+                {
+                    targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+                }
 
-                    break;
-                case 2:
-                    tasks.addTask(1, new EntityAISwimming(this));
+                break;
+            case 2:
+                tasks.addTask(1, new EntityAISwimming(this));
 
-                    tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+                tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
 
-                    tasks.addTask(3, new EntityCreepAIFollowOwner(this, 1.0d, 6.0f, 2.0f));
+                tasks.addTask(3, new EntityCreepAIFollowOwner(this, 1.0d, 6.0f, 2.0f));
 
-                    tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
+                tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
 
-                    tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
+                tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
 
-                    tasks.addTask(5, new EntityAILookIdle(this));
+                tasks.addTask(5, new EntityAILookIdle(this));
 
-                    if (isTamed())
-                    {
-                        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+                if (isTamed())
+                {
+                    targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
-                        targetTasks.addTask(2, new EntityCreepAIOwnerHurtByTarget(this));
+                    targetTasks.addTask(2, new EntityCreepAIOwnerHurtByTarget(this));
 
-                        targetTasks.addTask(3, new EntityCreepAIOwnerHurtTarget(this));
+                    targetTasks.addTask(3, new EntityCreepAIOwnerHurtTarget(this));
 
-                        targetTasks.addTask(4, new EntityCreepAIFollowOwnerTarget(this));
-                    }
+                    targetTasks.addTask(4, new EntityCreepAIFollowOwnerTarget(this));
+                }
 
-                    break;
-                default:
-                    break;
-            }
+                break;
+            default:
+                break;
         }
     }
 
@@ -529,9 +559,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return 0.0f;
     }
 
+    protected float getBaseHealth()
+    {
+        return baseHealth;
+    }
+
     protected void updateHealth()
     {
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(baseHealth + (getLevelHealthMultiplier() * (getLevel() - 1)) + getHealthBoost() + getArmorHealthBonus(getArmor()));
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getBaseHealth() + (getLevelHealthMultiplier() * (getLevel() - 1)) + getHealthBoost() + getArmorHealthBonus(getArmor()));
     }
 
     protected void updateAttackStrength()
@@ -566,11 +601,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public void addHealth(float amt)
     {
         setHealth(Math.max(0, Math.min(getMaxHealth(), getHealth() + amt)));
-
-        /*if (getHealth() > 0)
-        {
-            isDead = false;
-        }*/
     }
 
     protected void setInterest(int i)
@@ -606,7 +636,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         SoundEvent fullSound = getFullSound();
 
-        SoundEvent eatSound = null;
+        SoundEvent eatSound;
 
         if (getHealth() >= getMaxHealth() && fullSound != null)
         {
@@ -661,11 +691,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public void setWanderState(int i)
     {
-        if (i < 0 || i > 2)
-        {
-            i = 0;
-        }
-
         dataManager.set(wanderState, i);
 
         initEntityAI();
@@ -730,16 +755,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         motionZ = (d1 / f) * 0.5d * 0.800000011920929d + motionZ * 0.20000000298023224d;
 
         motionY = 0.40000000596046448f;
+
+        fallDistance = -25.0f;
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (onGround && shouldJumpWhileAttacking(entity))
         {
             doAttackJump(entity);
-
-            fallDistance = -25.0f;
         }
 
         if (rand.nextInt(5) == 0)
@@ -788,7 +813,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
             applyEnchantments(this, entity);
 
-            if (isTamed())
+            if (isTamed() && canLevelUp())
             {
                 int iSkillAttack = getSkillAttack();
 
@@ -861,69 +886,51 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return flag;
     }
 
-    public void mountPlayer(EntityPlayer player)
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount)
     {
-        if (isRiding())
+        if (isEntityInvulnerable(source))
         {
-            dismountRidingEntity();
+            return false;
         }
 
-        if (startRiding(player, isStackable()))
+        return super.attackEntityFrom(source, amount);
+    }
+
+    public boolean canMount(Entity entity)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean startRiding(@Nonnull Entity entity, boolean force)
+    {
+        if (!force && !canMount(entity))
         {
-            rotationYaw = player.rotationYaw;
+            return false;
+        }
+
+        boolean flag = super.startRiding(entity, force);
+
+        if (flag)
+        {
+            rotationYaw = entity.rotationYaw;
 
             SoundEvent mountSound = getMountSound();
 
             if (mountSound != null)
             {
-                player.playSound(mountSound, getSoundVolume(), getSoundPitch());
+                playSound(mountSound, getSoundVolume(), getSoundPitch());
             }
 
             dataManager.set(unmountTimer, 20);
-
-            initEntityAI();
-
-            onMount(player);
-        }
-    }
-
-    public void dismount()
-    {
-        if (!isRiding())
-        {
-            return;
         }
 
-        fallDistance = -25.0f;
-
-        dataManager.set(unmountTimer, 20);
-
-        Entity riding = getRidingEntity();
-
-        dismountRidingEntity();
-
-        SoundEvent unmountSound = getUnmountSound();
-
-        if (unmountSound != null)
-        {
-            playSound(unmountSound, getSoundVolume(), getSoundPitch());
-        }
-
-        initEntityAI();
-
-        onUnmount(riding);
-    }
-
-    protected void onMount(Entity entity)
-    {
-    }
-
-    protected void onUnmount(Entity entity)
-    {
+        return flag;
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -945,17 +952,21 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
                     return true;
                 }
-                else if (canRidePlayer() && (!isTamable() || (isTamed() && isPlayerOwner(player))))
+                else if (canRidePlayer() && canRidePlayer(player))
                 {
                     if (!player.equals(getRidingEntity()))
                     {
-                        mountPlayer(player);
+                        startRiding(player, isStackable());
                     }
                     else
                     {
-                        dismount();
+                        dismountRidingEntity();
                     }
 
+                    return true;
+                }
+                else if (isRideable() && canPlayerRide(player) && !player.equals(getFirstPassenger()) && player.startRiding(this))
+                {
                     return true;
                 }
             }
@@ -1018,7 +1029,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         if (!dead && !world.isRemote)
         {
-            if (isTamed())
+            if (isTamed() && canBeRevived())
             {
                 if (!(this instanceof EntityTombstone))
                 {
@@ -1067,11 +1078,29 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
+    public boolean canBeSteered()
+    {
+        return (isRideable() && getControllingPassenger() instanceof EntityLivingBase);
+    }
+
+    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
 
+        EntityLivingBase target = getAttackTarget();
+
+        if (target != null && target.equals(getOwner()))
+        {
+            setAttackTarget(null);
+        }
+
         updateArmSwingProgress();
+
+        if (isRiding() && isInsideOfMaterial(Material.WATER))
+        {
+            dismountRidingEntity();
+        }
 
         if (getBrightness() > 0.5f)
         {
@@ -1242,12 +1271,18 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     protected boolean canDespawn()
     {
-        if (getCreatureType() == EnumCreatureType.MONSTER && !getNoDespawn())
+        if (getCreatureType() == EnumCreatureType.MONSTER && !getNoDespawn() && !isTamed())
         {
             return true;
         }
 
         return false;
+    }
+
+    @Override
+    public int getTalkInterval()
+    {
+        return 120;
     }
 
     public void resetTarget()
@@ -1369,7 +1404,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         setOwner(player);
 
-        spawnTrophy(player);
+        //spawnTrophy(player);
+
+        // TODO: only spawn trophy when the player gets an achievement
+
+        boolean emptyName = true;
 
         if (getCreepName().length() < 1)
         {
@@ -1378,10 +1417,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             if (names.length > 0)
             {
                 setCreepName(names[rand.nextInt(names.length)]);
+
+                emptyName = false;
             }
             else
             {
-                setCreepName("Unnamed");
+                setCreepName("");
             }
         }
 
@@ -1400,7 +1441,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         if (!world.isRemote)
         {
-            player.sendMessage(new TextComponentString("You have successfully tamed a new creature!"));
+            if (emptyName)
+            {
+                player.sendMessage(new TextComponentString("You have successfully tamed: \2476" + getCreepTypeName()));
+            }
+            else
+            {
+                player.sendMessage(new TextComponentString("\2476" + getCreepName() + " \247fhas been tamed!"));
+            }
         }
     }
 
@@ -1414,14 +1462,24 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         return false;
     }
 
-    public boolean isMountable()
+    public boolean canRidePlayer()
     {
         return false;
     }
 
-    public boolean canRidePlayer()
+    public boolean canRidePlayer(EntityPlayer player)
+    {
+        return (!isTamable() || (isTamed() && isPlayerOwner(player)));
+    }
+
+    public boolean isRideable()
     {
         return false;
+    }
+
+    public boolean canPlayerRide(EntityPlayer player)
+    {
+        return (!isTamable() || (isTamed() && isPlayerOwner(player)));
     }
 
     protected boolean shouldOpenTamableMenu(Item item)
@@ -1700,7 +1758,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
     }
 
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return false;
     }
@@ -1732,7 +1790,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public boolean getNoDespawn()
     {
-        return dataManager.get(noDespawn);
+        try
+        {
+            return dataManager.get(noDespawn);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
     }
 
     @Override
@@ -1753,13 +1819,22 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 break;
         }
 
-        return (world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this) && getBlockPathWeight(new BlockPos(posX, getEntityBoundingBox().minY, posZ)) >= 0.0f);
+        return super.getCanSpawnHere();
     }
 
     @Override
     public void onUpdate()
     {
         super.onUpdate();
+
+        if (getHammerSwing() < 0.0f)
+        {
+            addHammerSwing(0.45f);
+        }
+        else
+        {
+            setHammerSwing(0.0f);
+        }
 
         if (getCreatureType() == EnumCreatureType.MONSTER && !world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL)
         {
@@ -1768,18 +1843,23 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public float getBlockPathWeight(@Nullable BlockPos blockPos)
+    public float getBlockPathWeight(BlockPos blockPos)
     {
-        if (getCreatureType() == EnumCreatureType.MONSTER)
+        if (getCreatureType() == EnumCreatureType.MONSTER && spawnOnlyAtNight)
         {
             return (0.5f - world.getLightBrightness(blockPos));
         }
 
-        return 0.0f;
+        return (world.getLightBrightness(blockPos) - 0.5f);
     }
 
     protected boolean isValidLightLevel()
     {
+        if (!spawnOnlyAtNight)
+        {
+            return true;
+        }
+
         BlockPos blockPos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
 
         if (world.getLightFor(EnumSkyBlock.SKY, blockPos) > rand.nextInt(32))
@@ -1871,5 +1951,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public int getUnmountTimer()
     {
         return dataManager.get(unmountTimer);
+    }
+
+    public boolean canLevelUp()
+    {
+        return false;
+    }
+
+    public boolean canBeRevived()
+    {
+        return false;
     }
 }

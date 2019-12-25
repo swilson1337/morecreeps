@@ -39,6 +39,8 @@ item.morecreeps.floob_raygun.name=Raygun
 item.morecreeps.limbs.name=Limbs
 item.morecreeps.bulletbullet.name=Bullet
 item.morecreeps.grow_ray.name=Grow Ray
+item.morecreeps.zebra_hide.name=Zebra Hide
+item.morecreeps.caveman_club.name=Caveman Club
 
 # Entities
 entity.guineapig.name=Guinea Pig
@@ -75,6 +77,18 @@ entity.bubblescum.name=Bubble Scum
 entity.sneakysal.name=Sneaky Sal
 entity.ratman.name=Rat Man
 entity.prisoner.name=Prisoner
+entity.snowdevil.name=Snow Devil
+entity.evilchicken.name=Evil Chicken
+entity.evilpig.name=Evil Pig
+entity.doghouse.name=Dog House
+entity.blorp.name=Blorp
+entity.camel.name=Camel
+entity.zebra.name=Zebra
+entity.rocketgiraffe.name=Rocket Giraffe
+entity.evilscientist.name=Evil Scientist
+entity.mandog.name=Mandog
+entity.caveman.name=Caveman
+entity.cameljockey.name=Camel Jockey
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

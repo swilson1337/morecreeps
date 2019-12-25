@@ -4,6 +4,7 @@ import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.network.datasync.DataParameter;
@@ -17,7 +18,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.entity.ai.*;
 
-public class EntityEvilCreature extends EntityCreepBase
+import javax.annotation.Nonnull;
+
+public class EntityEvilCreature extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Boolean> jumping = EntityDataManager.createKey(EntityEvilCreature.class, DataSerializers.BOOLEAN);
 
@@ -140,7 +143,7 @@ public class EntityEvilCreature extends EntityCreepBase
     @Override
     protected void doAttackJump(Entity entity)
     {
-        if (dataManager.get(jumping))
+        if (getJumping())
         {
             dataManager.set(jumping, false);
 
@@ -171,11 +174,13 @@ public class EntityEvilCreature extends EntityCreepBase
 
         motionY = 0.35000000196046449f;
 
+        fallDistance = -25.0f;
+
         dataManager.set(jumping, true);
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         AxisAlignedBB myBB = getEntityBoundingBox();
 
@@ -187,5 +192,24 @@ public class EntityEvilCreature extends EntityCreepBase
         }
 
         return super.attackEntityAsMob(entity);
+    }
+
+    public boolean getJumping()
+    {
+        try
+        {
+            return dataManager.get(jumping);
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isImmuneToExplosions()
+    {
+        return true;
     }
 }

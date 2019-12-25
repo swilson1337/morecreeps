@@ -1,6 +1,9 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -8,21 +11,19 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class EntityHotdog extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> angryDog = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
-
     private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
 
     private static final String[] textures = {
@@ -34,7 +35,8 @@ public class EntityHotdog extends EntityCreepBase
     private static final String[] names = {
             "Pogo", "Spot", "King", "Prince", "Bosco", "Ralph", "Wendy", "Trixie", "Bowser", "The Heat",
             "Weiner", "Wendon the Weiner", "Wallace the Weiner", "William the Weiner", "Terrance", "Elijah", "Good Boy", "Boy", "Girl", "Tennis Shoe",
-            "Rusty", "Mean Joe Green", "Lawrence", "Foxy", "SlyFoxHound", "Leroy Brown"
+            "Rusty", "Mean Joe Green", "Lawrence", "Foxy", "SlyFoxHound", "Leroy Brown",
+            "Mickey", "Holly", "Yeontan"
     };
 
     private static final String[] levelNames = {
@@ -70,8 +72,6 @@ public class EntityHotdog extends EntityCreepBase
     protected void entityInit()
     {
         super.entityInit();
-
-        dataManager.register(angryDog, false);
 
         dataManager.register(heavenBuilt, false);
     }
@@ -185,7 +185,7 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
-    protected boolean isStackable()
+    public boolean isStackable()
     {
         return true;
     }
@@ -214,18 +214,30 @@ public class EntityHotdog extends EntityCreepBase
         return 25;
     }
 
-    private void setAngryDog(boolean b)
+    @Override
+    public void onRevive(NBTTagCompound compound)
     {
-        dataManager.set(angryDog, b);
-    }
+        super.onRevive(compound);
 
-    public boolean getAngryDog()
-    {
-        return dataManager.get(angryDog);
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsHotDog");
+
+        setHeavenBuilt(props.getBoolean("HeavenBuilt"));
     }
 
     @Override
-    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    public void onTombstoneCreate(NBTTagCompound compound)
+    {
+        super.onTombstoneCreate(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsHotDog");
+
+        props.setBoolean("HeavenBuilt", getHeavenBuilt());
+
+        compound.setTag("MoreCreepsHeavenBuilt", props);
+    }
+
+    @Override
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -251,9 +263,9 @@ public class EntityHotdog extends EntityCreepBase
                     }
                     else if (!getHeavenBuilt())
                     {
-                        if (getLevel() >= 20)
+                        if (getLevel() >= 25)
                         {
-                            /*if (createHotel(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
+                            if (buildHeaven(player, MathHelper.floor(player.posX) + 2, MathHelper.floor(player.getEntityBoundingBox().minY), MathHelper.floor(player.posZ) + 2))
                             {
                                 //player.playSound(MoreCreepsAndWeirdos.achievementSound, 1.0f, 1.0f);
                                 // TODO: add achievements bro
@@ -261,11 +273,11 @@ public class EntityHotdog extends EntityCreepBase
                                 playSound(SoundEvents.ENTITY_TNT_PRIMED, 1.0f, 0.5f);
 
                                 itemStack.shrink(1);
-                            }*/
+                            }
                         }
                         else if (!world.isRemote)
                         {
-                            player.sendMessage(new TextComponentString("Your Hotdog must be level 20 to build a Hotdog Heaven."));
+                            player.sendMessage(new TextComponentString("Your Hotdog must be level 25 to build a Hotdog Heaven."));
 
                             player.sendMessage(new TextComponentString("\247b" + getCreepName() + " is only level \247f" + getLevel() + "."));
                         }
@@ -483,5 +495,333 @@ public class EntityHotdog extends EntityCreepBase
     protected SoundEvent getTamedSound()
     {
         return CreepsSoundHandler.hotdogTamedSound;
+    }
+
+    private boolean buildHeaven(EntityPlayer player, int x, int y, int z)
+    {
+        if (y > 95)
+        {
+            player.sendMessage(new TextComponentString("You are too far up to build Hotdog Heaven!"));
+
+            return false;
+        }
+
+        byte byte0 = 40;
+
+        byte byte1 = 40;
+
+        int l = (105 - y) / 2;
+
+        int area = 0;
+
+        for (int h = 0; h < l * 2; h++)
+        {
+            for (int i = -2; i < byte0 + 2; i++)
+            {
+                for (int j = -2; j < byte1 + 2; j++)
+                {
+                    if (!world.isAirBlock(new BlockPos(x + i, y + h, z + j)))
+                    {
+                        area++;
+                    }
+                }
+            }
+        }
+
+        if (area < 3000)
+        {
+            setHeavenBuilt(true);
+
+            playSound(CreepsSoundHandler.hotdogHeavenSound, getSoundVolume(), getSoundPitch());
+
+            if (!world.isRemote)
+            {
+                player.sendMessage(new TextComponentString("HOT DOG HEAVEN HAS BEEN BUILT!"));
+            }
+
+            world.setBlockState(new BlockPos(x, y, z), Blocks.PLANKS.getDefaultState());
+
+            world.setBlockState(new BlockPos(x, y + 1, z), Blocks.TORCH.getDefaultState());
+
+            world.setBlockState(new BlockPos(x + 5, y, z), Blocks.PLANKS.getDefaultState());
+
+            world.setBlockState(new BlockPos(x + 5, y + 1, z), Blocks.PLANKS.getDefaultState());
+
+            for (int i = 0; i < l; i++)
+            {
+                for (int q = 0; q < 4; q++)
+                {
+                    world.setBlockState(new BlockPos(x + q + 1, y + i, z + i), Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH));
+                }
+            }
+
+            for (int i = 0; i < (l - 1); i++)
+            {
+                for (int q = 0; q < 4; q++)
+                {
+                    world.setBlockState(new BlockPos(x - q, y + l + i, (z + l) - i), Blocks.OAK_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH));
+                }
+            }
+
+            boolean flag = false;
+
+            for (int i = 0; i < 10; i++)
+            {
+                world.setBlockState(new BlockPos((x - i) + 5, y + l, z + l + 6), Blocks.OAK_FENCE.getDefaultState());
+
+                for (int q = 0; q < 7; q++)
+                {
+                    world.setBlockState(new BlockPos(x + 5, y + l, z + l + q), Blocks.OAK_FENCE.getDefaultState());
+
+                    world.setBlockState(new BlockPos(x - 4, y + l, z + l + q), Blocks.OAK_FENCE.getDefaultState());
+
+                    flag = !flag;
+
+                    if (flag)
+                    {
+                        world.setBlockState(new BlockPos(x + 5, y + l + 1, z + l + q), Blocks.TORCH.getDefaultState());
+
+                        world.setBlockState(new BlockPos(x - 4, y + l + 1, z + l + q), Blocks.TORCH.getDefaultState());
+                    }
+
+                    world.setBlockState(new BlockPos((x - i) + 5, (y + l) - 1, z + l + q), Blocks.PLANKS.getDefaultState());
+                }
+            }
+
+            for (int i = 0; i < byte0; i++)
+            {
+                for (int q = 0; q < byte1; q++)
+                {
+                    for (int k = (-rand.nextInt(3) - 2); k < 1; k++)
+                    {
+                        if (k < 0)
+                        {
+                            world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2 + k) - 2, (z + q) - byte1), Blocks.DIRT.getDefaultState());
+                        }
+                        else
+                        {
+                            world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2 + k) - 2, ((z + q) - byte1) + 2), Blocks.GRASS.getDefaultState());
+                        }
+                    }
+                }
+            }
+
+            int randInt = rand.nextInt(10) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6) - byte1), Blocks.DEADBUSH.getDefaultState());
+            }
+
+            randInt = rand.nextInt(10) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, z + rand.nextInt(byte1 - 6) - byte1), Blocks.YELLOW_FLOWER.getDefaultState());
+            }
+
+            randInt = rand.nextInt(10) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                world.setBlockState(new BlockPos((x + rand.nextInt(byte0 - 10)) - byte0 / 2, (y + l * 2) - 1, (z + rand.nextInt(byte1 - 6)) - byte1), Blocks.RED_FLOWER.getDefaultState());
+            }
+
+            randInt = rand.nextInt(30) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                int j6 = rand.nextInt(byte0 - 12);
+
+                int l7 = rand.nextInt(byte1 - 8);
+
+                BlockPos blockPos = new BlockPos((x + j6) - byte0 / 2, (y + l * 2) - 1, (z + l7) - byte1);
+
+                if (world.isAirBlock(blockPos))
+                {
+                    world.setBlockState(blockPos, Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS));
+                }
+            }
+
+            randInt = rand.nextInt(50) + 2;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                int k6 = rand.nextInt(byte0 - 12);
+
+                int i8 = rand.nextInt(byte1 - 8);
+
+                BlockPos blockPos = new BlockPos((x + k6) - byte0 / 2, (y + l * 2) - 1, (z + i8) - byte1);
+
+                if (world.isAirBlock(blockPos))
+                {
+                    world.setBlockState(blockPos, Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.FERN));
+                }
+            }
+
+            for (int i = 1; i < (byte0 - 1); i++)
+            {
+                world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 1, (z - byte1) + 3), Blocks.OAK_FENCE.getDefaultState());
+
+                world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 1, z), Blocks.OAK_FENCE.getDefaultState());
+
+                flag = !flag;
+
+                if (flag)
+                {
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, y + l * 2, (z - byte1) + 3), Blocks.TORCH.getDefaultState());
+
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, y + l * 2, z), Blocks.TORCH.getDefaultState());
+                }
+            }
+
+            for (int i = 4; i < byte1; i++)
+            {
+                world.setBlockState(new BlockPos((x - byte0 / 2) + 1, (y + l * 2) - 1, (z + i) - byte1), Blocks.OAK_FENCE.getDefaultState());
+
+                world.setBlockState(new BlockPos((x + byte0) - byte0 / 2 - 2, (y + l * 2) - 1, (z + i) - byte1), Blocks.OAK_FENCE.getDefaultState());
+
+                flag = !flag;
+
+                if (flag)
+                {
+                    world.setBlockState(new BlockPos((x - byte0 / 2) + 1, y + l * 2, (z + i) - byte1), Blocks.TORCH.getDefaultState());
+
+                    world.setBlockState(new BlockPos((x + byte0) - byte0 / 2 - 2, y + l * 2, (z + i) - byte1), Blocks.TORCH.getDefaultState());
+                }
+            }
+
+            world.setBlockState(new BlockPos(x - 1, (y + l * 2) - 1, z), Blocks.OAK_FENCE_GATE.getDefaultState());
+
+            world.setBlockState(new BlockPos(x - 2, (y + l * 2) - 1, z), Blocks.OAK_FENCE_GATE.getDefaultState());
+
+            for (int i = 0; i < 6; i++)
+            {
+                EntityDogHouse dogHouse = new EntityDogHouse(world);
+
+                dogHouse.setLocationAndAngles(x + 15, (y + l * 2) - 1, z - 7 - i * 5, 90.0f, 0.0f);
+
+                dogHouse.setInitialHealth();
+
+                dogHouse.determineBaseTexture();
+
+                world.spawnEntity(dogHouse);
+            }
+
+            randInt = rand.nextInt(15) + 5;
+
+            for (int i = 0; i < randInt; i++)
+            {
+                int l6 = rand.nextInt(byte0 - 10) + 3;
+
+                int j8 = rand.nextInt(byte1 - 6) + 3;
+
+                BlockPos blockPos = new BlockPos((x + l6) - byte0 / 2, (y + l * 2) - 1, (z + j8) - byte1);
+
+                world.setBlockState(blockPos, Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.STAGE, 1));
+
+                ((BlockSapling)Blocks.SAPLING).grow(world, blockPos, world.getBlockState(blockPos), rand);
+            }
+
+            randInt = ((byte0 / 2 + rand.nextInt(10)) - 5) + 8;
+
+            for (int i = ((byte0 / 2 + rand.nextInt(8)) - 8); i < randInt; i++)
+            {
+                int randInt2 = ((byte1 / 2 + rand.nextInt(10)) - 5) + 8;
+
+                for (int q = ((byte1 / 2 + rand.nextInt(8)) - 8); q < randInt2; q++)
+                {
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 2, (z + q) - byte1), Blocks.WATER.getDefaultState());
+
+                    world.setBlockState(new BlockPos((x + i) - byte0 / 2, (y + l * 2) - 3, (z + q) - byte1), Blocks.WATER.getDefaultState());
+                }
+            }
+
+            BlockPos chest1Pos = new BlockPos(x + 7, (y + l * 2) - 1, z - 5);
+
+            world.setBlockState(chest1Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest1 = new TileEntityChest();
+
+            world.setTileEntity(chest1Pos, chest1);
+
+            BlockPos chest2Pos = new BlockPos(x + 7, (y + l * 2) - 1, z - 6);
+
+            world.setBlockState(chest2Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest2 = new TileEntityChest();
+
+            world.setTileEntity(chest2Pos, chest2);
+
+            int maxI = chest1.getSizeInventory() - 9;
+
+            for (int i = 0; i < maxI; i++)
+            {
+                chest1.setInventorySlotContents(i, new ItemStack(Items.BONE, 32));
+
+                chest2.setInventorySlotContents(i, new ItemStack(Items.REDSTONE, 32));
+            }
+
+            maxI = chest1.getSizeInventory();
+
+            for (int i = (maxI - 9); i < maxI; i++)
+            {
+                chest1.setInventorySlotContents(i, new ItemStack(Items.GOLDEN_HELMET, 1));
+
+                chest2.setInventorySlotContents(i, new ItemStack(Items.GOLD_INGOT, 1));
+            }
+
+            BlockPos chest3Pos = new BlockPos(x - 7, (y + l * 2) - 1, z - 5);
+
+            world.setBlockState(chest3Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest3 = new TileEntityChest();
+
+            world.setTileEntity(chest3Pos, chest3);
+
+            BlockPos chest4Pos = new BlockPos(x - 7, (y + l * 2) - 1, z - 6);
+
+            world.setBlockState(chest4Pos, Blocks.CHEST.getDefaultState());
+
+            TileEntityChest chest4 = new TileEntityChest();
+
+            world.setTileEntity(chest4Pos, chest4);
+
+            maxI = chest3.getSizeInventory() - 9;
+
+            for (int i = 0; i < maxI; i++)
+            {
+                chest3.setInventorySlotContents(i, new ItemStack(Items.BONE, 32));
+
+                chest4.setInventorySlotContents(i, new ItemStack(Items.REDSTONE, 32));
+            }
+
+            maxI = chest3.getSizeInventory();
+
+            for (int i = (maxI - 9); i < maxI; i++)
+            {
+                chest3.setInventorySlotContents(i, new ItemStack(Items.DIAMOND_HELMET, 1));
+
+                chest4.setInventorySlotContents(i, new ItemStack(Items.DIAMOND, 1));
+            }
+        }
+        else if (!world.isRemote)
+        {
+            player.sendMessage(new TextComponentString("Too many obstructions, choose another spot!"));
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canLevelUp()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canBeRevived()
+    {
+        return true;
     }
 }

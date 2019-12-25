@@ -52,7 +52,7 @@ public class MessageDismountEntity implements IMessage
 
                     if (player.isPassenger(entity))
                     {
-                        creep.dismount();
+                        creep.dismountRidingEntity();
                     }
                 }
             });

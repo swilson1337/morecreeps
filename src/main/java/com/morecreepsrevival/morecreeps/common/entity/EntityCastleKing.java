@@ -17,6 +17,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityCastleKing extends EntityCreepBase
 {
     private static final DataParameter<Integer> intruderCheck = EntityDataManager.createKey(EntityCastleKing.class, DataSerializers.VARINT);
@@ -76,21 +78,6 @@ public class EntityCastleKing extends EntityCreepBase
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-    }
-
-    @Override
-    public void onUpdate()
-    {
-        super.onUpdate();
-
-        if (getHammerSwing() < 0.0f)
-        {
-            addHammerSwing(0.45f);
-        }
-        else
-        {
-            setHammerSwing(0.0f);
-        }
     }
 
     @Override
@@ -187,7 +174,7 @@ public class EntityCastleKing extends EntityCreepBase
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity)
+    public boolean attackEntityAsMob(@Nonnull Entity entity)
     {
         if (getHammerSwing() == 0.0f)
         {

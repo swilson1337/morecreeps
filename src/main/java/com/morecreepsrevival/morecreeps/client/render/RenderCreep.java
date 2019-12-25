@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.model.ModelBase;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
 {
@@ -58,7 +58,15 @@ public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
             s += " \247c * WOUNDED *";
         }
 
-        s += " \2475<\2476" + entity.getLevel() + "\2475>";
+        if (entity.canLevelUp())
+        {
+            s += " \2475<\2476" + entity.getLevel() + "\2475>";
+        }
+
+        if (s.isEmpty())
+        {
+            return;
+        }
 
         FontRenderer fontrenderer = getFontRendererFromRenderManager();
 
@@ -88,9 +96,7 @@ public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
 
         BufferBuilder bufferBuilder = tessellator.getBuffer();
 
-        float f5 = (1.0F - (entity.getModelSize()) * 20F);
-
-        int i = 10 + (int)f5;
+        int i = getTamedNameOffset(entity);
 
         GlStateManager.disableTexture2D();
 
@@ -106,29 +112,32 @@ public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
 
         bufferBuilder.pos(j + 1, -1 + i, 0.0d).color(0.0f, 0.0f, 0.0f, 0.25f).endVertex();
 
-        float f6 = entity.getHealth();
+        if (shouldDrawHealthBar())
+        {
+            float f6 = entity.getHealth();
 
-        float f7 = entity.getMaxHealth();
+            float f7 = entity.getMaxHealth();
 
-        float f8 = f6 / f7;
+            float f8 = f6 / f7;
 
-        float f9 = 50F * f8;
+            float f9 = 50F * f8;
 
-        bufferBuilder.pos(-25.0f + f9, -10 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(-25.0f + f9, -10 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(-25.0f + f9, -6 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(-25.0f + f9, -6 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(25.0d, -6 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(25.0d, -6 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(25.0d, -10 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(25.0d, -10 + i, 0.0d).color(1.0f, 0.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(-25.0d, -10 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(-25.0d, -10 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(-25.0d, -6 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(-25.0d, -6 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(f9 - 25.0f, -6 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(f9 - 25.0f, -6 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
 
-        bufferBuilder.pos(f9 - 25.0f, -10 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
+            bufferBuilder.pos(f9 - 25.0f, -10 + i, 0.0d).color(0.0f, 1.0f, 0.0f, 1.0f).endVertex();
+        }
 
         tessellator.draw();
 
@@ -152,7 +161,7 @@ public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
     }
 
     @Override
-    public void doRender(@Nullable T entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         shadowSize = getShadowSize(entity);
 
@@ -195,5 +204,15 @@ public class RenderCreep<T extends EntityCreepBase> extends RenderLiving<T>
     protected float getShadowSize(T entity)
     {
         return shadowSize;
+    }
+
+    protected int getTamedNameOffset(T entity)
+    {
+        return 10 + (int)((1.0F - entity.getModelSize()) * 20F);
+    }
+
+    protected boolean shouldDrawHealthBar()
+    {
+        return true;
     }
 }
