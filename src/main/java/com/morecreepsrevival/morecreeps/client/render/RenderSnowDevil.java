@@ -10,4 +10,16 @@ public class RenderSnowDevil<T extends EntitySnowDevil> extends RenderCreep<T>
     {
         super(renderManager, new ModelSnowDevil(), 0.5f);
     }
+
+    @Override
+    protected int getTamedNameOffset(T entity)
+    {
+        return (int)((1.0f - entity.getModelSize()) * 55.0f);
+    }
+
+    @Override
+    protected boolean shouldDrawHealthBar()
+    {
+        return false;
+    }
 }

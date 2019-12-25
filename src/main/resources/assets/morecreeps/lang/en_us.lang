@@ -40,6 +40,7 @@ item.morecreeps.limbs.name=Limbs
 item.morecreeps.bulletbullet.name=Bullet
 item.morecreeps.grow_ray.name=Grow Ray
 item.morecreeps.zebra_hide.name=Zebra Hide
+item.morecreeps.caveman_club.name=Caveman Club
 
 # Entities
 entity.guineapig.name=Guinea Pig

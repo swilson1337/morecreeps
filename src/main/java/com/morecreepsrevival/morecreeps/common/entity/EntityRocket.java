@@ -265,7 +265,7 @@ public class EntityRocket extends Entity
                 continue;
             }
 
-            double d4 = vec3d.distanceTo(rtr.hitVec);
+            double d4 = vec3d.distanceTo(rtr1.hitVec);
 
             if (d4 < d3 || d3 == 0.0d)
             {
@@ -290,26 +290,6 @@ public class EntityRocket extends Entity
         {
             if (rtr.entityHit != null)
             {
-                if (rtr.entityHit instanceof EntityPlayer)
-                {
-                    int k = damage;
-
-                    EnumDifficulty difficulty = world.getDifficulty();
-
-                    if (difficulty == EnumDifficulty.PEACEFUL)
-                    {
-                        k = 0;
-                    }
-                    else if (difficulty == EnumDifficulty.EASY)
-                    {
-                        k = (k / 3) + 1;
-                    }
-                    else if (difficulty == EnumDifficulty.HARD)
-                    {
-                        k = (k * 3) / 2;
-                    }
-                }
-
                 if (rtr.entityHit instanceof EntityLiving && !(rtr.entityHit instanceof EntityRocketGiraffe))
                 {
                     rtr.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, entityToUse), damage);
@@ -317,7 +297,6 @@ public class EntityRocket extends Entity
                     playSound(CreepsSoundHandler.rocketExplodeSound, 1.0f, (rand.nextFloat() - rand.nextFloat()) * 0.2f + 1.0f);
 
                     world.createExplosion(null, posX, posY, posZ, 1.5f, true);
-
                 }
 
                 setDead();

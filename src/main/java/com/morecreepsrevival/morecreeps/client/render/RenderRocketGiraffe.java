@@ -10,4 +10,16 @@ public class RenderRocketGiraffe<T extends EntityRocketGiraffe> extends RenderCr
     {
         super(renderManager, new ModelRocketGiraffe(), 0.5f);
     }
+
+    @Override
+    protected int getTamedNameOffset(T entity)
+    {
+        return -150 + (int)((1.0f - entity.getModelSize()) * 160.0f);
+    }
+
+    @Override
+    protected boolean shouldDrawHealthBar()
+    {
+        return false;
+    }
 }
