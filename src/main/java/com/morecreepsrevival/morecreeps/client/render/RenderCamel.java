@@ -10,4 +10,16 @@ public class RenderCamel<T extends EntityCamel> extends RenderCreep<T>
     {
         super(renderManager, new ModelCamel(), 0.5f);
     }
+
+    @Override
+    protected int getTamedNameOffset(T entity)
+    {
+        return -140 + (int)((2.0f - entity.getModelSize()) * 80.0f);
+    }
+
+    @Override
+    protected boolean shouldDrawHealthBar()
+    {
+        return false;
+    }
 }

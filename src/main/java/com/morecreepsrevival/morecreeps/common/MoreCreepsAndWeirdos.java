@@ -293,7 +293,7 @@ public class MoreCreepsAndWeirdos
 
         if (MoreCreepsConfig.sendDiscordLink)
         {
-            event.player.sendMessage(new TextComponentString("Come join us on Discord! https://discord.gg/r3kdyTy"));
+            event.player.sendMessage(new TextComponentString("Come join us on Discord! https://discord.gg/r3kdyTy (For bug reporting, community, questions, etc.)"));
         }
 
         if (MoreCreepsConfig.playWelcomeSound)
