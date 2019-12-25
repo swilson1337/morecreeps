@@ -184,20 +184,23 @@ public class EntityRocketGiraffe extends EntityCreepBase
     @Override
     public void updatePassenger(@Nonnull Entity passenger)
     {
-        if (isPassenger(passenger))
+        if (isPassenger(passenger) && passenger instanceof EntityPlayer)
         {
-            if (passenger instanceof EntityPlayer)
-            {
-                passenger.setPosition(posX, posY + 3.0d - (double)((1.75f - getModelSize()) * 2.0f), posZ);
+            double d = Math.cos(((double)rotationYaw * Math.PI) / 180D) * 0.20000000000000001D;
+            double d1 = Math.sin(((double)rotationYaw * Math.PI) / 180D) * 0.20000000000000001D;
 
-                return;
-            }
-            else if (passenger instanceof EntityCamelJockey)
-            {
-                passenger.setPosition(posX, posY + 3.15000009536743163d - (double)((1.75f - getModelSize()) * 2.0f), posZ);
+            float size = getModelSize();
 
-                return;
+            float f = 1.8F - (1.0F - size) * 2.0F;
+
+            if (size > 1.0f)
+            {
+                f *= 1.1f;
             }
+
+            passenger.setPosition(posX + d, posY + (double)f, posZ + d1);
+
+            return;
         }
 
         super.updatePassenger(passenger);
