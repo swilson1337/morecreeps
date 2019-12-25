@@ -3,6 +3,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -17,6 +18,8 @@ public class EntityEvilLight extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Evil Light");
+
+        creatureType = EnumCreatureType.AMBIENT;
 
         lifespan = 200;
 
