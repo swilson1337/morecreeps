@@ -113,6 +113,8 @@ public class CreepsItemHandler
 
     public static final Item zebraHide = new ItemZebraHide();
 
+    public static final Item cavemanClub = new ItemCavemanClub();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -157,7 +159,8 @@ public class CreepsItemHandler
                 limbs,
                 bulletBullet,
                 growRay,
-                zebraHide
+                zebraHide,
+                cavemanClub
         );
     }
 

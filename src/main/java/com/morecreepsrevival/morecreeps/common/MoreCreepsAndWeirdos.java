@@ -164,11 +164,12 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityDogHouse.class, "doghouse", 0, 0, 0, EnumCreatureType.AMBIENT, 0x5EDAEB, 0xDBA0E9),
                 createEntity(EntityBlorp.class, "blorp", MoreCreepsConfig.blorpSpawnAmt, 1, 3, EnumCreatureType.CREATURE, 0xCE00FF, 0xFFB200, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityCamel.class, "camel", MoreCreepsConfig.camelSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xD6BF8C, 0xFFFFFF, getBiomesForType(Type.SANDY, Type.MESA)),
-                createEntity(EntityZebra.class, "zebra", MoreCreepsConfig.zebraSpawnAmt, 1, 5, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityRocketGiraffe.class, "rocketgiraffe", MoreCreepsConfig.rocketGiraffeSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesForType(Type.SANDY, Type.MESA)),
-                createEntity(EntityEvilScientist.class, "evilscientist", MoreCreepsConfig.evilScientistSpawnAmt, 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityZebra.class, "zebra", MoreCreepsConfig.zebraSpawnAmt, 1, 5, EnumCreatureType.CREATURE, 0xFFFFFF, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityRocketGiraffe.class, "rocketgiraffe", MoreCreepsConfig.rocketGiraffeSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xFF8E00, 0xFFEF00, getBiomesForType(Type.SANDY, Type.MESA)),
+                createEntity(EntityEvilScientist.class, "evilscientist", MoreCreepsConfig.evilScientistSpawnAmt, 1, 1, EnumCreatureType.MONSTER, 0xD7D7D7, 0x464347, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityFrisbee.class, "frisbee", 0, 0, 0, EnumCreatureType.AMBIENT),
-                createEntity(EntityManDog.class, "mandog", MoreCreepsConfig.mandogSpawnAmt, 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityManDog.class, "mandog", MoreCreepsConfig.mandogSpawnAmt, 1, 1, EnumCreatureType.CREATURE, 0xB36209, 0xD1D8A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityCaveman.class, "caveman", MoreCreepsConfig.cavemanSpawnAmt, 1, 2, EnumCreatureType.CREATURE, 0xC2880C, 0x33D8F0, getBiomesForType(Type.COLD, Type.SNOWY))
         );
     }
 

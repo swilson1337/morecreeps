@@ -825,4 +825,16 @@ public class EntityGuineaPig extends EntityCreepBase
     {
         return 20;
     }
+
+    @Override
+    public boolean canLevelUp()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canBeRevived()
+    {
+        return true;
+    }
 }

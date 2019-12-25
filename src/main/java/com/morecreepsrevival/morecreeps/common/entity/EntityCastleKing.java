@@ -81,21 +81,6 @@ public class EntityCastleKing extends EntityCreepBase
     }
 
     @Override
-    public void onUpdate()
-    {
-        super.onUpdate();
-
-        if (getHammerSwing() < 0.0f)
-        {
-            addHammerSwing(0.45f);
-        }
-        else
-        {
-            setHammerSwing(0.0f);
-        }
-    }
-
-    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();

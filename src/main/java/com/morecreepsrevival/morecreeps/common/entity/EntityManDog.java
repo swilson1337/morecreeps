@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -142,8 +143,10 @@ public class EntityManDog extends EntityCreepBase
         {
             Item item = itemStack.getItem();
 
-            if (item == Items.COOKED_PORKCHOP)
+            if (item == Items.COOKED_PORKCHOP && !isTamed())
             {
+                itemStack.shrink(1);
+
                 setTamedFood(getTamedFood() - 1);
 
                 smoke();
@@ -502,6 +505,65 @@ public class EntityManDog extends EntityCreepBase
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public boolean isTamable()
+    {
+        return true;
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsManDog");
+
+        props.setInteger("Attempts", getAttempts());
+
+        props.setBoolean("FrisbeeHold", getFrisbeeHold());
+
+        props.setBoolean("Chase", getChase());
+
+        props.setBoolean("Fetch", getFetch());
+
+        props.setInteger("TamedFood", getTamedFood());
+
+        compound.setTag("MoreCreepsManDog", props);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsManDog");
+
+        if (props.hasKey("Attempts"))
+        {
+            setAttempts(props.getInteger("Attempts"));
+        }
+
+        if (props.hasKey("FrisbeeHold"))
+        {
+            setFrisbeeHold(props.getBoolean("FrisbeeHold"));
+        }
+
+        if (props.hasKey("Chase"))
+        {
+            setChase(props.getBoolean("Chase"));
+        }
+
+        if (props.hasKey("Fetch"))
+        {
+            setFetch(props.getBoolean("Fetch"));
+        }
+
+        if (props.hasKey("TamedFood"))
+        {
+            setTamedFood(props.getInteger("TamedFood"));
         }
     }
 }

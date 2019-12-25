@@ -10,4 +10,10 @@ public class RenderManDog<T extends EntityManDog> extends RenderCreep<T>
     {
         super(renderManager, new ModelManDog(), 0.5f);
     }
+
+    @Override
+    protected boolean shouldDrawTamedStatus(T entity)
+    {
+        return false;
+    }
 }

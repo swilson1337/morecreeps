@@ -430,6 +430,32 @@ public class CreepsSoundHandler
 
     public static final SoundEvent manDogTamedSound = createSound("mandogtamed");
 
+    public static final SoundEvent snowDevilTamedSound = createSound("snowdeviltamed");
+
+    public static final SoundEvent cavemanNiceSound = createSound("cavemanice");
+
+    public static final SoundEvent cavemanEvilSound = createSound("cavemanevil");
+
+    public static final SoundEvent cavemanFreeSound = createSound("cavemanfree");
+
+    public static final SoundEvent cavewomanFreeSound = createSound("cavewomanfree");
+
+    public static final SoundEvent cavemanFrozenSound = createSound("cavemanfrozen");
+
+    public static final SoundEvent cavewomanFrozenSound = createSound("cavewomanfrozen");
+
+    public static final SoundEvent cavemanHurtSound = createSound("cavemanhurt");
+
+    public static final SoundEvent cavewomanHurtSound = createSound("cavewomanhurt");
+
+    public static final SoundEvent cavemanDeadSound = createSound("cavemandead");
+
+    public static final SoundEvent cavewomanDeadSound = createSound("cavewomandead");
+
+    public static final SoundEvent caveDrumsSound = createSound("cavedrums");
+
+    public static final SoundEvent cavemanBuildSound = createSound("cavemanbuild");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -646,7 +672,20 @@ public class CreepsSoundHandler
                 manDogHurtSound,
                 manDogDeathSound,
                 superDogNameSound,
-                manDogTamedSound
+                manDogTamedSound,
+                snowDevilTamedSound,
+                cavemanEvilSound,
+                cavemanFreeSound,
+                cavemanFrozenSound,
+                cavemanNiceSound,
+                cavewomanFreeSound,
+                cavewomanFrozenSound,
+                cavemanHurtSound,
+                cavewomanHurtSound,
+                cavemanDeadSound,
+                cavewomanDeadSound,
+                caveDrumsSound,
+                cavemanBuildSound
         );
     }
 }

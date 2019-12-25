@@ -691,11 +691,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public void setWanderState(int i)
     {
-        if (i < 0 || i > 2)
-        {
-            i = 0;
-        }
-
         dataManager.set(wanderState, i);
 
         initEntityAI();
@@ -818,7 +813,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
             applyEnchantments(this, entity);
 
-            if (isTamed())
+            if (isTamed() && canLevelUp())
             {
                 int iSkillAttack = getSkillAttack();
 
@@ -1034,7 +1029,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         if (!dead && !world.isRemote)
         {
-            if (isTamed())
+            if (isTamed() && canBeRevived())
             {
                 if (!(this instanceof EntityTombstone))
                 {
@@ -1092,6 +1087,13 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
+
+        EntityLivingBase target = getAttackTarget();
+
+        if (target != null && target.equals(getOwner()))
+        {
+            setAttackTarget(null);
+        }
 
         updateArmSwingProgress();
 
@@ -1406,6 +1408,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         // TODO: only spawn trophy when the player gets an achievement
 
+        boolean emptyName = true;
+
         if (getCreepName().length() < 1)
         {
             String[] names = getTamedNames();
@@ -1413,10 +1417,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
             if (names.length > 0)
             {
                 setCreepName(names[rand.nextInt(names.length)]);
+
+                emptyName = false;
             }
             else
             {
-                setCreepName("Unnamed");
+                setCreepName("");
             }
         }
 
@@ -1435,9 +1441,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         if (!world.isRemote)
         {
-            //player.sendMessage(new TextComponentString("You have successfully tamed a new creature!"));
-
-            player.sendMessage(new TextComponentString("\2476" + getCreepName() + " \247fhas been tamed!"));
+            if (emptyName)
+            {
+                player.sendMessage(new TextComponentString("You have successfully tamed: \2476" + getCreepTypeName()));
+            }
+            else
+            {
+                player.sendMessage(new TextComponentString("\2476" + getCreepName() + " \247fhas been tamed!"));
+            }
         }
     }
 
@@ -1816,6 +1827,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         super.onUpdate();
 
+        if (getHammerSwing() < 0.0f)
+        {
+            addHammerSwing(0.45f);
+        }
+        else
+        {
+            setHammerSwing(0.0f);
+        }
+
         if (getCreatureType() == EnumCreatureType.MONSTER && !world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL)
         {
             setDead();
@@ -1931,5 +1951,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public int getUnmountTimer()
     {
         return dataManager.get(unmountTimer);
+    }
+
+    public boolean canLevelUp()
+    {
+        return false;
+    }
+
+    public boolean canBeRevived()
+    {
+        return false;
     }
 }
