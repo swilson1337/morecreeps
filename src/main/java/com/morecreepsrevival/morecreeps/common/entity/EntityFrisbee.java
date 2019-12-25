@@ -61,7 +61,7 @@ public class EntityFrisbee extends Entity
         motionX = 0.59999999999999998D * d * (double)MathHelper.cos((entity.rotationPitch / 180F) * (float)Math.PI);
         motionY = -0.69999999999999996D * (double)MathHelper.sin((entity.rotationPitch / 180F) * (float)Math.PI);
         motionZ = 0.59999999999999998D * d1 * (double)MathHelper.cos((entity.rotationPitch / 180F) * (float)Math.PI);
-        setPosition(entity.posX + d * 0.80000000000000004D, entity.posY, entity.posZ + d1 * 0.80000000000000004D + (3D * d1 + d));
+        setPosition(entity.posX + d * 0.80000000000000004D, entity.posY + 2, entity.posZ + d1 * 0.80000000000000004D + (3D * d1 + d));
         prevPosX = posX;
         prevPosY = posY;
         prevPosZ = posZ;
