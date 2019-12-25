@@ -56,26 +56,6 @@ public class EntityEvilEgg extends EntityThrowable
         setPosition(x, y, z);
     }
 
-    private void func_20048_a(double d, double d1, double d2, float f, float f1)
-    {
-        float f2 = MathHelper.sqrt(d * d + d1 * d1 + d2 * d2);
-        d /= f2;
-        d1 /= f2;
-        d2 /= f2;
-        d += rand.nextGaussian() * 0.0074999998323619366D * (double)f1;
-        d1 += rand.nextGaussian() * 0.0074999998323619366D * (double)f1;
-        d2 += rand.nextGaussian() * 0.0074999998323619366D * (double)f1;
-        d *= f;
-        d1 *= f;
-        d2 *= f;
-        motionX = d;
-        motionY = d1;
-        motionZ = d2;
-        float f3 = MathHelper.sqrt(d * d + d2 * d2);
-        prevRotationYaw = rotationYaw = (float)((Math.atan2(d, d2) * 180D) / Math.PI);
-        prevRotationPitch = rotationPitch = (float)((Math.atan2(d1, f3) * 180D) / Math.PI);
-    }
-
     @Override
     public void setVelocity(double d, double d1, double d2)
     {
@@ -113,6 +93,8 @@ public class EntityEvilEgg extends EntityThrowable
             exploded = true;
 
             world.createExplosion(null, posX, posY, posZ, 2.0f, true);
+
+            setDead();
         }
     }
 
@@ -121,7 +103,6 @@ public class EntityEvilEgg extends EntityThrowable
     {
         double d = motionX;
         double d1 = motionY;
-        double d2 = motionZ;
         prevPosX = posX;
         prevPosY = posY;
         prevPosZ = posZ;
