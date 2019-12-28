@@ -302,7 +302,7 @@ public class EntityBlorp extends EntityCreepBase
     {
         super.setModelSize(f);
 
-        setSize(width * f, 2.0f + height * f);
+        setSize(0.6f * f, 2.0f + 1.8f * f);
     }
 
     @Override
