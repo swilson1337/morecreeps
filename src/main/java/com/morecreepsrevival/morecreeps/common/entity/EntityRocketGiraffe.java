@@ -32,7 +32,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
             "Rory", "Stan", "Clarence", "FirePower", "Lightning", "Rocket Jockey", "Rocket Ralph", "Tim"
     };
 
-    private static final DataParameter<Integer> tamedCookies = EntityDataManager.createKey(EntityCamel.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> tamedCookies = EntityDataManager.createKey(EntityRocketGiraffe.class, DataSerializers.VARINT);
 
     private int gallopTime = 0;
 
