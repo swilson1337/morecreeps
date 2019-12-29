@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 
 public class EntityRocket extends Entity
 {
-    private static final DataParameter<Integer> shootingEntity = EntityDataManager.createKey(EntityBullet.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> shootingEntity = EntityDataManager.createKey(EntityRocket.class, DataSerializers.VARINT);
 
     protected int hitX;
 
