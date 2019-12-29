@@ -37,7 +37,7 @@ public class EntityZebra extends EntityCreepBase
             "Doofus"
     };
 
-    private static final DataParameter<Integer> tamedCookies = EntityDataManager.createKey(EntityCamel.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> tamedCookies = EntityDataManager.createKey(EntityZebra.class, DataSerializers.VARINT);
 
     private int gallopTime = 0;
 

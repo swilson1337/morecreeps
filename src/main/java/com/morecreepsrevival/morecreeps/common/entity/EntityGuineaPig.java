@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 
 public class EntityGuineaPig extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> hotelBuilt = EntityDataManager.createKey(EntityCreepBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> hotelBuilt = EntityDataManager.createKey(EntityGuineaPig.class, DataSerializers.BOOLEAN);
 
     private static final String[] textures = {
             "textures/entity/ggpig1",

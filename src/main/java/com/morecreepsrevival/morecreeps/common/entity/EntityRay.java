@@ -42,7 +42,7 @@ public class EntityRay extends Entity implements IProjectile
             return p_apply_1_.canBeCollidedWith();
         }
     });
-    private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityArrow.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityRay.class, DataSerializers.BYTE);
     private int xTile;
     private int yTile;
     private int zTile;
