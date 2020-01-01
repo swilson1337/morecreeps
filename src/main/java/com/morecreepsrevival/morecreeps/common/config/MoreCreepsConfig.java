@@ -1,10 +1,25 @@
 package com.morecreepsrevival.morecreeps.common.config;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class MoreCreepsConfig
 {
+    private static Configuration config;
+
+    private static final String miscProperty = "Misc Property";
+
+    private static final String spawnNbr = "Spawn Number";
+
+    private static final String mobProperty = "Mob Property";
+
+    private static final String itemProperty = "Item Property";
+
+    private static final String worldGen = "World Gen";
+
+    private static final String worldGenRarity = "World Gen Rarity";
+
     public static boolean pyramidGen = false;
 
     public static int pyramidRarity = 0;
@@ -115,21 +130,11 @@ public class MoreCreepsConfig
 
     public static int zebraSpawnAmt = 0;
 
+    public static String hideUpdateGuiVersion = "";
+
     public static void preInit(FMLPreInitializationEvent event)
     {
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-
-        String miscProperty = "Misc Property";
-
-        String spawnNbr = "Spawn Number";
-
-        String mobProperty = "Mob Property";
-
-        String itemProperty = "Item Property";
-
-        String worldGen = "World Gen";
-
-        String worldGenRarity = "World Gen Rarity";
+        config = new Configuration(event.getSuggestedConfigurationFile());
 
         try
         {
@@ -244,6 +249,8 @@ public class MoreCreepsConfig
             rocketGiraffeSpawnAmt = config.get(spawnNbr, "Rocket Giraffe", 7).getInt();
 
             zebraSpawnAmt = config.get(spawnNbr, "Zebra", 8).getInt();
+
+            hideUpdateGuiVersion = config.get(miscProperty, "Hide Update for Version", "", "This property is set when you choose to ignore the Update Available popup with the version you're being offered.").getString();
 
             config.save();
         }
@@ -458,6 +465,28 @@ public class MoreCreepsConfig
         if (blorpMaxSize < 6 || blorpMaxSize > 99)
         {
             blorpMaxSize = 6;
+        }
+    }
+
+    public static boolean shouldShowUpdateGuiForVersion(String version)
+    {
+        return (!hideUpdateGuiVersion.equals(version));
+    }
+
+    public static void hideUpdateGuiForVersion(String version)
+    {
+        try
+        {
+            config.get(miscProperty, "Hide Update for Version", "").set(version);
+
+            config.save();
+        }
+        finally
+        {
+            if (config.hasChanged())
+            {
+                config.save();
+            }
         }
     }
 }

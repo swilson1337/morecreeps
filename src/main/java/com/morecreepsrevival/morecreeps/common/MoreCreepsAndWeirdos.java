@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common;
 
+import com.morecreepsrevival.morecreeps.client.gui.GuiUpdate;
 import com.morecreepsrevival.morecreeps.common.entity.*;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
 import com.morecreepsrevival.morecreeps.proxy.IProxy;
@@ -15,9 +16,12 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -33,6 +37,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 
 import java.time.DayOfWeek;
@@ -47,7 +52,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.13";
+    public static final String version = "1.0.14";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -60,6 +65,8 @@ public class MoreCreepsAndWeirdos
     private static int entityId = 0;
 
     private static final Random rand = new Random();
+
+    private static boolean checkedVersion = false;
 
     private static final String[] welcomeMessages = {
             "Now, go out there and have some fun!",
@@ -179,7 +186,7 @@ public class MoreCreepsAndWeirdos
 
     public static EntityEntry createEntity(Class<? extends Entity> classz, String name, int weight, int min, int max, EnumCreatureType creatureType, int primaryColor, int secondaryColor, Biome... biomes)
     {
-        EntityEntryBuilder<?> builder = EntityEntryBuilder.create().entity(classz).name(name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true);
+        EntityEntryBuilder<?> builder = EntityEntryBuilder.create().entity(classz).name(modid + "." + name).id(new ResourceLocation(modid, name), entityId++).tracker(40, 1, true);
 
         if (EntityCreepBase.class.isAssignableFrom(classz))
         {
@@ -344,5 +351,21 @@ public class MoreCreepsAndWeirdos
         LocalDate now = LocalDate.now();
 
         return LocalDate.of(now.getYear(), 11, 1).with(TemporalAdjusters.dayOfWeekInMonth(4, DayOfWeek.THURSDAY)).with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).equals(now);
+    }
+
+    @SubscribeEvent @SideOnly(Side.CLIENT)
+    public static void handleDrawScreenEventPost(GuiScreenEvent.DrawScreenEvent.Post event)
+    {
+        ForgeVersion.CheckResult result = ForgeVersion.getResult(Loader.instance().activeModContainer());
+
+        if (result.status != ForgeVersion.Status.PENDING && !MoreCreepsAndWeirdos.checkedVersion)
+        {
+            MoreCreepsAndWeirdos.checkedVersion = true;
+
+            if (result.status == ForgeVersion.Status.OUTDATED && result.target != null && MoreCreepsConfig.shouldShowUpdateGuiForVersion(result.target.toString()))
+            {
+                Minecraft.getMinecraft().displayGuiScreen(new GuiUpdate(result));
+            }
+        }
     }
 }
