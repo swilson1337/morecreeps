@@ -1352,6 +1352,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         dataManager.set(owner, player.getUniqueID().toString());
     }
 
+    protected void clearOwner()
+    {
+        dataManager.set(owner, "");
+    }
+
     @Nullable
     public UUID getOwnerId()
     {
