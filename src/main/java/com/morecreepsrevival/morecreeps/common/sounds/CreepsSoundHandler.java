@@ -462,6 +462,14 @@ public class CreepsSoundHandler
 
     public static final SoundEvent rocketExplodeSound = createSound("rocketexplode");
 
+    public static final SoundEvent hunchQuietSound = createSound("hunchquiet");
+
+    public static final SoundEvent hunchCakeSound = createSound("hunchcake");
+
+    public static final SoundEvent hunchHurtSound = createSound("hunchhurt");
+
+    public static final SoundEvent hunchDeathSound = createSound("hunchdeath");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -694,7 +702,11 @@ public class CreepsSoundHandler
                 cavemanBuildSound,
                 evilLightSound,
                 rocketFireSound,
-                rocketExplodeSound
+                rocketExplodeSound,
+                hunchQuietSound,
+                hunchCakeSound,
+                hunchHurtSound,
+                hunchDeathSound
         );
     }
 }

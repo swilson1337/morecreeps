@@ -101,6 +101,8 @@ public class EntityBlorp extends EntityCreepBase
 
                     updateAttributes();
 
+                    addHealth(getLevelHealthMultiplier());
+
                     playSound(CreepsSoundHandler.blorpGrowSound, getSoundVolume(), getSoundPitch());
                 }
 

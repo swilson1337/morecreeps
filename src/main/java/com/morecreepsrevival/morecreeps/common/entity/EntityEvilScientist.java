@@ -471,7 +471,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
             Block checkBlock = world.getBlockState(new BlockPos(towerX + 2, towerY - 1, towerZ + 2)).getBlock();
 
-            if (!housesNear && area == 0 && checkBlock != Blocks.AIR && checkBlock != Blocks.WATER && checkBlock != Blocks.FLOWING_WATER)
+            if (!housesNear && area == 0 && checkBlock != Blocks.AIR && checkBlock != Blocks.WATER && checkBlock != Blocks.FLOWING_WATER && world.getClosestPlayerToEntity(this, 20.0d) != null)
             {
                 setTowerBuilt(true);
 

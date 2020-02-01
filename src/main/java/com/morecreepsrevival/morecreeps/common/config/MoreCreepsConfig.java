@@ -132,6 +132,8 @@ public class MoreCreepsConfig
 
     public static String hideUpdateGuiVersion = "";
 
+    public static double globalSpawnRate = 1.0f;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         config = new Configuration(event.getSuggestedConfigurationFile());
@@ -149,6 +151,8 @@ public class MoreCreepsConfig
             sendDiscordLink = config.get(miscProperty, "Send Discord Link", true, "Sends a link to the official MoreCreeps Discord when a player joins.").getBoolean();
 
             unlimitedSpawn = config.get("Spawn", "Unlimited Spawn Length", false, "Once activated, you can set what value you want for mob spawning.").getBoolean();
+
+            globalSpawnRate = config.get("Spawn", "Global Spawn Rate", 1.0f, "This setting controls the overall spawn rate. The spawn rate of every mob is multiplied by this number. So 1.0 is the default rate, 2.0 is 2x the rate, 0.5 is half the rate, etc.").getDouble();
 
             pyramidGen = config.get(worldGen, "Enable Pyramid Gen", true).getBoolean();
 
@@ -488,5 +492,10 @@ public class MoreCreepsConfig
                 config.save();
             }
         }
+    }
+
+    public static int calculateSpawnRate(int baseRate)
+    {
+        return (int)Math.floor(baseRate * globalSpawnRate);
     }
 }
