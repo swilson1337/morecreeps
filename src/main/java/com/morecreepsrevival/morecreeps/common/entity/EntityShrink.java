@@ -443,17 +443,68 @@ public class EntityShrink extends EntityThrowable
                         {
                             sal.shrinkModelSize(0.2f);
 
+                            sal.setDissedMax(0);
+
                             if (rand.nextInt(2) == 0)
                             {
                                 sal.playSound(CreepsSoundHandler.salNobodyShrinksSound, 0.5f, 1.0f);
                             }
                         }
+                        else
+                        {
+                            sal.setDead();
+
+                            flag = true;
+                        }
                     }
-                    // TODO: EntitySneakySal
-                    // TODO: EntityArmyGuy
-                    // TODO: EntityEvilChicken
+                    else if (rtr.entityHit instanceof EntityArmyGuy)
+                    {
+                        EntityArmyGuy armyGuy = (EntityArmyGuy)rtr.entityHit;
+
+                        if (armyGuy.getModelSize() > 0.4f)
+                        {
+                            armyGuy.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            armyGuy.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilChicken)
+                    {
+                        EntityEvilChicken evilChicken = (EntityEvilChicken)rtr.entityHit;
+
+                        if (evilChicken.getModelSize() > 0.5f)
+                        {
+                            evilChicken.shrinkModelSize(0.4f);
+
+                            evilChicken.decreaseMoveSpeed(0.015f);
+                        }
+                        else
+                        {
+                            evilChicken.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityBum
-                    // TODO: EntityBubbleScum
+                    else if (rtr.entityHit instanceof EntityBubbleScum)
+                    {
+                        EntityBubbleScum bubbleScum = (EntityBubbleScum)rtr.entityHit;
+
+                        if (bubbleScum.getModelSize() > 0.3f)
+                        {
+                            bubbleScum.shrinkModelSize(0.15f);
+                        }
+                        else
+                        {
+                            bubbleScum.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityLawyerFromHell)
                     {
                         EntityLawyerFromHell lawyerFromHell = (EntityLawyerFromHell)rtr.entityHit;
