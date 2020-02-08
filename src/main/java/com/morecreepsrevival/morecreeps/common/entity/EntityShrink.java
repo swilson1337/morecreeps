@@ -568,9 +568,51 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityBlorp
-                    // TODO: EntityCamel
-                    // TODO: EntityCamelJockey
+                    else if (rtr.entityHit instanceof EntityBlorp)
+                    {
+                        EntityBlorp blorp = (EntityBlorp)rtr.entityHit;
+
+                        if (blorp.getModelSize() > 0.3f)
+                        {
+                            blorp.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            blorp.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCamel)
+                    {
+                        EntityCamel camel = (EntityCamel)rtr.entityHit;
+
+                        if (camel.getModelSize() > 0.3f)
+                        {
+                            camel.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            camel.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCamelJockey)
+                    {
+                        EntityCamelJockey camelJockey = (EntityCamelJockey)rtr.entityHit;
+
+                        if (camelJockey.getModelSize() > 0.3f)
+                        {
+                            camelJockey.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            camelJockey.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityCastleGuard)
                     {
                         EntityCastleGuard castleGuard = (EntityCastleGuard)rtr.entityHit;
@@ -586,9 +628,37 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityCaveman
+                    else if (rtr.entityHit instanceof EntityCaveman)
+                    {
+                        EntityCaveman caveman = (EntityCaveman)rtr.entityHit;
+
+                        if (caveman.getModelSize() > 0.3f)
+                        {
+                            caveman.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            caveman.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityDesertLizard
-                    // TODO: EntityDigBug
+                    else if (rtr.entityHit instanceof EntityDigBug)
+                    {
+                        EntityDigBug digBug = (EntityDigBug)rtr.entityHit;
+
+                        if (digBug.getModelSize() > 0.3f)
+                        {
+                            digBug.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            digBug.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityEvilCreature)
                     {
                         EntityEvilCreature evilCreature = (EntityEvilCreature)rtr.entityHit;
