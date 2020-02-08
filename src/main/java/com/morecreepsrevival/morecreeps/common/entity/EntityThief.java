@@ -4,7 +4,6 @@ import com.morecreepsrevival.morecreeps.common.entity.ai.EntityAIThief;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +22,7 @@ import net.minecraft.world.World;
 
 public class EntityThief extends EntityCreepBase implements IMob
 {
-    private static final DataParameter<Boolean> stolen = EntityDataManager.createKey(EntityThief.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> stolen = EntityDataManager.<Boolean>createKey(EntityThief.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityThief.class, DataSerializers.ITEM_STACK);
 
@@ -57,7 +56,7 @@ public class EntityThief extends EntityCreepBase implements IMob
     {
         super.entityInit();
 
-        dataManager.register(stolen, false);
+        dataManager.register(stolen, Boolean.valueOf(false));
 
         dataManager.register(ITEM, ItemStack.EMPTY);
     }
@@ -281,20 +280,12 @@ public class EntityThief extends EntityCreepBase implements IMob
 
     public void setStolen(boolean b)
     {
-        dataManager.set(stolen, b);
+        dataManager.set(stolen, Boolean.valueOf(b));
     }
 
     public boolean getStolen()
     {
-        try
-        {
-            return dataManager.get(stolen);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(stolen)).booleanValue();
     }
 
     public void findPlayerToAttack()

@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 
 public class EntityLawyerFromHell extends EntityCreepBase implements IMob
 {
-    private static final DataParameter<Boolean> undead = EntityDataManager.createKey(EntityLawyerFromHell.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> undead = EntityDataManager.<Boolean>createKey(EntityLawyerFromHell.class, DataSerializers.BOOLEAN);
 
     public EntityLawyerFromHell(World world)
     {
@@ -51,7 +51,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
     {
         super.entityInit();
 
-        dataManager.register(undead, false);
+        dataManager.register(undead, Boolean.valueOf(false));
     }
 
     @Override
@@ -133,7 +133,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
             return;
         }
 
-        dataManager.set(undead, b);
+        dataManager.set(undead, Boolean.valueOf(b));
 
         if (b)
         {
@@ -151,15 +151,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
 
     public boolean getUndead()
     {
-        try
-        {
-            return dataManager.get(undead);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(undead)).booleanValue();
     }
 
     @Override

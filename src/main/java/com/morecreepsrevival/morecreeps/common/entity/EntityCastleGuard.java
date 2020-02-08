@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 
 public class EntityCastleGuard extends EntityCreepBase implements IMob
 {
-    private static final DataParameter<Boolean> attacked = EntityDataManager.createKey(EntityCastleGuard.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> attacked = EntityDataManager.<Boolean>createKey(EntityCastleGuard.class, DataSerializers.BOOLEAN);
 
     private static final String[] textures = {
             "textures/entity/castleguard1",
@@ -48,7 +48,7 @@ public class EntityCastleGuard extends EntityCreepBase implements IMob
     {
         super.entityInit();
 
-        dataManager.register(attacked, false);
+        dataManager.register(attacked, Boolean.valueOf(false));
     }
 
     @Override
@@ -100,15 +100,12 @@ public class EntityCastleGuard extends EntityCreepBase implements IMob
 
     public boolean getAttacked()
     {
-        try
-        {
-            return dataManager.get(attacked);
-        }
-        catch (Exception ignored)
-        {
-        }
+        return ((Boolean)dataManager.get(attacked)).booleanValue();
+    }
 
-        return false;
+    private void setAttacked(boolean b)
+    {
+        dataManager.set(attacked, Boolean.valueOf(b));
     }
 
     @Override
@@ -149,7 +146,7 @@ public class EntityCastleGuard extends EntityCreepBase implements IMob
     {
         if (damageSource.getTrueSource() instanceof EntityPlayer)
         {
-            dataManager.set(attacked, true);
+            setAttacked(true);
         }
 
         return super.attackEntityFrom(damageSource, amt);

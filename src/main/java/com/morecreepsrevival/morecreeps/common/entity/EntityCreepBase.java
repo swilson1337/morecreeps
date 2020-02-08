@@ -77,7 +77,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     private static final DataParameter<Integer> unmountTimer = EntityDataManager.createKey(EntityCreepBase.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> noDespawn = EntityDataManager.createKey(EntityCreepBase.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> noDespawn = EntityDataManager.<Boolean>createKey(EntityCreepBase.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Float> hammerSwing = EntityDataManager.createKey(EntityCreepBase.class, DataSerializers.FLOAT);
 
@@ -201,7 +201,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         dataManager.register(unmountTimer, 0);
 
-        dataManager.register(noDespawn, false);
+        dataManager.register(noDespawn, Boolean.valueOf(false));
 
         dataManager.register(hammerSwing, 0.0f);
     }
@@ -1312,6 +1312,13 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         setModelSize(Math.max(0.0f, getModelSize() - f));
     }
 
+    public void decreaseMoveSpeed(float f)
+    {
+        baseSpeed -= f;
+
+        updateMoveSpeed();
+    }
+
     protected void setSpeedBoost(int i)
     {
         dataManager.set(speedBoost, i);
@@ -1790,20 +1797,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public void setNoDespawn(boolean b)
     {
-        dataManager.set(noDespawn, b);
+        dataManager.set(noDespawn, Boolean.valueOf(b));
     }
 
     public boolean getNoDespawn()
     {
-        try
-        {
-            return dataManager.get(noDespawn);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(noDespawn)).booleanValue();
     }
 
     @Override

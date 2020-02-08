@@ -36,13 +36,13 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     private static final DataParameter<Float> salePrice = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.FLOAT);
 
-    private static final DataParameter<Boolean> shooting = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> shooting = EntityDataManager.<Boolean>createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> shootingDelay = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
 
     private static final DataParameter<NBTTagCompound> shopItems = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.COMPOUND_TAG);
 
-    private static final DataParameter<Boolean> blackFriday = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> blackFriday = EntityDataManager.<Boolean>createKey(EntitySneakySal.class, DataSerializers.BOOLEAN);
 
     public static final int[] itemPrices = {
             10, 200, 100, 20, 175, 150, 225, 50, 350, 100,
@@ -99,7 +99,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         dataManager.register(salePrice, 0.0f);
 
-        dataManager.register(shooting, false);
+        dataManager.register(shooting, Boolean.valueOf(false));
 
         dataManager.register(shootingDelay, 0);
 
@@ -109,7 +109,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         dataManager.setDirty(shopItems);
 
-        dataManager.register(blackFriday, false);
+        dataManager.register(blackFriday, Boolean.valueOf(false));
     }
 
     @Override
@@ -149,7 +149,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     @Override
     public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor)
     {
-        dataManager.set(shooting, true);
+        setShooting(true);
 
         dataManager.set(shootingDelay, 10);
 
@@ -204,7 +204,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         {
             return super.processInteract(player, hand);
         }
-        else if (dataManager.get(dissedMax) > 0)
+        else if (getDissedMax() > 0)
         {
             if (getSalePrice() == 0.0f || dataManager.get(sale) < 1)
             {
@@ -230,7 +230,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     {
         super.onLivingUpdate();
 
-        dataManager.set(blackFriday, MoreCreepsAndWeirdos.isBlackFriday());
+        setBlackFriday(MoreCreepsAndWeirdos.isBlackFriday());
 
         if (dataManager.get(shootingDelay) > 0)
         {
@@ -238,7 +238,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
             if (dataManager.get(shootingDelay) < 1)
             {
-                dataManager.set(shooting, false);
+                setShooting(false);
             }
         }
 
@@ -256,7 +256,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
             world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + xHeading * 0.5d, posY + 2.0d, posZ + zHeading * 0.5d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d, rand.nextGaussian() * 0.02d);
         }
 
-        if (dataManager.get(dissedMax) < 1 && getAttackTarget() == null)
+        if (getDissedMax() < 1 && getAttackTarget() == null)
         {
             EntityPlayer player = world.getClosestPlayerToEntity(this, 16.0d);
 
@@ -337,17 +337,14 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         super.onDeath(cause);
     }
 
+    private void setShooting(boolean b)
+    {
+        dataManager.set(shooting, Boolean.valueOf(b));
+    }
+
     public boolean getShooting()
     {
-        try
-        {
-            return dataManager.get(shooting);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(shooting)).booleanValue();
     }
 
     public int[] getShopItems()
@@ -362,12 +359,12 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     public void ripOff()
     {
-        if (dataManager.get(dissedMax) < 1)
+        if (getDissedMax() < 1)
         {
             return;
         }
 
-        dataManager.set(dissedMax, dataManager.get(dissedMax) - 1);
+        setDissedMax(getDissedMax() - 1);
 
         if (rand.nextInt(9) == 0)
         {
@@ -450,7 +447,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
     public void buyItem(EntityPlayer player, int itemId)
     {
-        if (dataManager.get(dissedMax) < 1 || itemId < 0 || itemId >= itemDefinitions.length)
+        if (getDissedMax() < 1 || itemId < 0 || itemId >= itemDefinitions.length)
         {
             return;
         }
@@ -480,7 +477,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         props.setFloat("SalePrice", getSalePrice());
 
-        props.setInteger("DissedMax", dataManager.get(dissedMax));
+        props.setInteger("DissedMax", getDissedMax());
 
         compound.setTag("MoreCreepsSneakySal", props);
     }
@@ -504,7 +501,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         if (props.hasKey("DissedMax"))
         {
-            dataManager.set(dissedMax, props.getInteger("DissedMax"));
+            setDissedMax(props.getInteger("DissedMax"));
         }
 
         restock();
@@ -515,22 +512,29 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     {
         if (damageSource.getTrueSource() instanceof EntityPlayer)
         {
-            dataManager.set(dissedMax, 0);
+            setDissedMax(0);
         }
 
         return super.attackEntityFrom(damageSource, amt);
     }
 
+    private void setBlackFriday(boolean b)
+    {
+        dataManager.set(blackFriday, Boolean.valueOf(b));
+    }
+
     public boolean isBlackFriday()
     {
-        try
-        {
-            return dataManager.get(blackFriday);
-        }
-        catch (Exception ignored)
-        {
-        }
+        return ((Boolean)dataManager.get(blackFriday)).booleanValue();
+    }
 
-        return false;
+    public void setDissedMax(int i)
+    {
+        dataManager.set(dissedMax, i);
+    }
+
+    public int getDissedMax()
+    {
+        return dataManager.get(dissedMax);
     }
 }

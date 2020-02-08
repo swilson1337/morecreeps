@@ -94,7 +94,10 @@ public class EntityHunchback extends EntityCreepBase
     {
         super.onLivingUpdate();
 
-        // TODO: if target is instanceof EntityHunchbackSkeleton, set to NULL
+        if (getAttackTarget() instanceof EntityHunchbackSkeleton)
+        {
+            setAttackTarget(null);
+        }
 
         if (isTamed() && getCakeTimer() > 0 && rand.nextInt(10) == 0)
         {
