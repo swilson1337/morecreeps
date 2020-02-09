@@ -28,11 +28,11 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
 
     private static final DataParameter<Integer> floobCounter = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> landed = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> landed = EntityDataManager.<Boolean>createKey(EntityFloobShip.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Float> bump = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.FLOAT);
 
-    private static final DataParameter<Boolean> firstReset = EntityDataManager.createKey(EntityFloobShip.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> firstReset = EntityDataManager.<Boolean>createKey(EntityFloobShip.class, DataSerializers.BOOLEAN);
 
     public EntityFloobShip(World worldIn)
     {
@@ -64,11 +64,11 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
 
         dataManager.register(floobCounter, rand.nextInt(500) + 400);
 
-        dataManager.register(landed, false);
+        dataManager.register(landed, Boolean.valueOf(false));
 
         dataManager.register(bump, 2.0f);
 
-        dataManager.register(firstReset, false);
+        dataManager.register(firstReset, Boolean.valueOf(false));
     }
 
     @Override
@@ -239,7 +239,7 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
 
                 dataManager.set(bump, 4.0f);
 
-                dataManager.set(firstReset, true);
+                setFirstReset(true);
             }
 
             motionY = -0.2f + dataManager.get(bump);
@@ -268,7 +268,7 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
                 }
                 else
                 {
-                    dataManager.set(landed, true);
+                    setLanded(true);
                 }
             }
         }
@@ -383,30 +383,24 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
         }
     }
 
+    private void setLanded(boolean b)
+    {
+        dataManager.set(landed, Boolean.valueOf(b));
+    }
+
     public boolean getLanded()
     {
-        try
-        {
-            return dataManager.get(landed);
-        }
-        catch (Exception ignored)
-        {
-        }
+        return ((Boolean)dataManager.get(landed)).booleanValue();
+    }
 
-        return false;
+    private void setFirstReset(boolean b)
+    {
+        dataManager.set(firstReset, Boolean.valueOf(b));
     }
 
     public boolean getFirstReset()
     {
-        try
-        {
-            return dataManager.get(firstReset);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(firstReset)).booleanValue();
     }
 
     @Override
@@ -436,7 +430,7 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
 
         if (props.hasKey("Landed"))
         {
-            dataManager.set(landed, props.getBoolean("Landed"));
+            setLanded(props.getBoolean("Landed"));
         }
 
         if (props.hasKey("FloobCounter"))
@@ -446,7 +440,7 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
 
         if (props.hasKey("FirstReset"))
         {
-            dataManager.set(firstReset, props.getBoolean("FirstReset"));
+            setFirstReset(props.getBoolean("FirstReset"));
         }
 
         if (props.hasKey("Lifespan"))

@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 
 public class EntityManDog extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> superDog = EntityDataManager.createKey(EntityManDog.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> superDog = EntityDataManager.<Boolean>createKey(EntityManDog.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> tamedFood = EntityDataManager.createKey(EntityManDog.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> chase = EntityDataManager.createKey(EntityManDog.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> chase = EntityDataManager.<Boolean>createKey(EntityManDog.class, DataSerializers.BOOLEAN);
 
-    private static final DataParameter<Boolean> fetch = EntityDataManager.createKey(EntityManDog.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> fetch = EntityDataManager.<Boolean>createKey(EntityManDog.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> frisbeeTime = EntityDataManager.createKey(EntityManDog.class, DataSerializers.VARINT);
 
@@ -36,7 +36,7 @@ public class EntityManDog extends EntityCreepBase
 
     private static final DataParameter<Integer> attempts = EntityDataManager.createKey(EntityManDog.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> frisbeeHold = EntityDataManager.createKey(EntityManDog.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> frisbeeHold = EntityDataManager.<Boolean>createKey(EntityManDog.class, DataSerializers.BOOLEAN);
 
     private double dist = 0.0f;
 
@@ -88,13 +88,13 @@ public class EntityManDog extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(superDog, false);
+        dataManager.register(superDog, Boolean.valueOf(false));
 
         dataManager.register(tamedFood, rand.nextInt(3) + 1);
 
-        dataManager.register(chase, false);
+        dataManager.register(chase, Boolean.valueOf(false));
 
-        dataManager.register(fetch, false);
+        dataManager.register(fetch, Boolean.valueOf(false));
 
         dataManager.register(frisbeeTime, 0);
 
@@ -102,7 +102,7 @@ public class EntityManDog extends EntityCreepBase
 
         dataManager.register(attempts, 0);
 
-        dataManager.register(frisbeeHold, false);
+        dataManager.register(frisbeeHold, Boolean.valueOf(false));
     }
 
     @Override
@@ -196,20 +196,12 @@ public class EntityManDog extends EntityCreepBase
 
     protected void setSuperDog(boolean b)
     {
-        dataManager.set(superDog, b);
+        dataManager.set(superDog, Boolean.valueOf(b));
     }
 
     public boolean getSuperDog()
     {
-        try
-        {
-            return dataManager.get(superDog);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(superDog)).booleanValue();
     }
 
     protected void setTamedFood(int i)
@@ -224,38 +216,22 @@ public class EntityManDog extends EntityCreepBase
 
     protected void setChase(boolean b)
     {
-        dataManager.set(chase, b);
+        dataManager.set(chase, Boolean.valueOf(b));
     }
 
     public boolean getChase()
     {
-        try
-        {
-            return dataManager.get(chase);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(chase)).booleanValue();
     }
 
     protected void setFetch(boolean b)
     {
-        dataManager.set(fetch, b);
+        dataManager.set(fetch, Boolean.valueOf(b));
     }
 
     public boolean getFetch()
     {
-        try
-        {
-            return dataManager.get(fetch);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(fetch)).booleanValue();
     }
 
     protected void setFrisbeeTime(int i)
@@ -302,12 +278,12 @@ public class EntityManDog extends EntityCreepBase
 
     protected void setFrisbeeHold(boolean b)
     {
-        dataManager.set(frisbeeHold, b);
+        dataManager.set(frisbeeHold, Boolean.valueOf(b));
     }
 
     public boolean getFrisbeeHold()
     {
-        return dataManager.get(frisbeeHold);
+        return ((Boolean)dataManager.get(frisbeeHold)).booleanValue();
     }
 
     @Override

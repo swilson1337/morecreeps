@@ -29,13 +29,13 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 {
     private static final DataParameter<Integer> stage = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> trulyEvil = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> trulyEvil = EntityDataManager.<Boolean>createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
 
-    private static final DataParameter<Boolean> towerBuilt = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> towerBuilt = EntityDataManager.<Boolean>createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> experimentTimer = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> experimentStart = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> experimentStart = EntityDataManager.<Boolean>createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> numExperiments = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.VARINT);
 
@@ -43,7 +43,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
     private static final DataParameter<BlockPos> towerPos = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.BLOCK_POS);
 
-    private static final DataParameter<Boolean> water = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> water = EntityDataManager.<Boolean>createKey(EntityEvilScientist.class, DataSerializers.BOOLEAN);
 
     public EntityEvilScientist(World worldIn)
     {
@@ -69,21 +69,21 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
         dataManager.register(stage, 0);
 
-        dataManager.register(trulyEvil, false);
+        dataManager.register(trulyEvil, Boolean.valueOf(false));
 
         dataManager.register(experimentTimer, rand.nextInt(100) + 100);
 
         dataManager.register(numExperiments, rand.nextInt(3) + 1);
 
-        dataManager.register(towerBuilt, false);
+        dataManager.register(towerBuilt, Boolean.valueOf(false));
 
-        dataManager.register(experimentStart, false);
+        dataManager.register(experimentStart, Boolean.valueOf(false));
 
         dataManager.register(towerHeight, 0);
 
         dataManager.register(towerPos, new BlockPos(0, 0, 0));
 
-        dataManager.register(water, false);
+        dataManager.register(water, Boolean.valueOf(false));
     }
 
     @Override
@@ -137,7 +137,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
     protected void setTrulyEvil(boolean b)
     {
-        dataManager.set(trulyEvil, b);
+        dataManager.set(trulyEvil, Boolean.valueOf(b));
     }
 
     @Override
@@ -153,15 +153,7 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
     public boolean getTrulyEvil()
     {
-        try
-        {
-            return dataManager.get(trulyEvil);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(trulyEvil)).booleanValue();
     }
 
     @Override
@@ -265,38 +257,22 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
     protected void setTowerBuilt(boolean b)
     {
-        dataManager.set(towerBuilt, b);
+        dataManager.set(towerBuilt, Boolean.valueOf(b));
     }
 
     public boolean getTowerBuilt()
     {
-        try
-        {
-            return dataManager.get(towerBuilt);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(towerBuilt)).booleanValue();
     }
 
     protected void setExperimentStart(boolean b)
     {
-        dataManager.set(experimentStart, b);
+        dataManager.set(experimentStart, Boolean.valueOf(b));
     }
 
     public boolean getExperimentStart()
     {
-        try
-        {
-            return dataManager.get(experimentStart);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(experimentStart)).booleanValue();
     }
 
     protected void setExperimentTimer(int i)
@@ -835,20 +811,12 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
     protected void setWater(boolean b)
     {
-        dataManager.set(water, b);
+        dataManager.set(water, Boolean.valueOf(b));
     }
 
     public boolean getWater()
     {
-        try
-        {
-            return dataManager.get(water);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(water)).booleanValue();
     }
 
     @Override

@@ -31,7 +31,7 @@ public class EntitySchlump extends EntityCreepBase
 
     private static final DataParameter<Integer> ageTimer = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> placed = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> placed = EntityDataManager.<Boolean>createKey(EntitySchlump.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> payoutTimer = EntityDataManager.createKey(EntitySchlump.class, DataSerializers.VARINT);
 
@@ -65,7 +65,7 @@ public class EntitySchlump extends EntityCreepBase
 
         dataManager.register(ageTimer, 0);
 
-        dataManager.register(placed, false);
+        dataManager.register(placed, Boolean.valueOf(false));
 
         dataManager.register(payoutTimer, 0);
         
@@ -142,7 +142,7 @@ public class EntitySchlump extends EntityCreepBase
 
         if (!getPlaced())
         {
-            dataManager.set(placed, true);
+            setPlaced(true);
 
             if (!checkHouse())
             {
@@ -264,17 +264,14 @@ public class EntitySchlump extends EntityCreepBase
         return dataManager.get(age);
     }
 
+    private void setPlaced(boolean b)
+    {
+        dataManager.set(placed, Boolean.valueOf(b));
+    }
+
     public boolean getPlaced()
     {
-        try
-        {
-            return dataManager.get(placed);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(placed)).booleanValue();
     }
 
     private boolean checkHouse()

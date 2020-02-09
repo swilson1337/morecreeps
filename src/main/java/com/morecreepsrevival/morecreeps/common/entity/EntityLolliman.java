@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class EntityLolliman extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> kidMounted = EntityDataManager.createKey(EntityLolliman.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> kidMounted = EntityDataManager.<Boolean>createKey(EntityLolliman.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> kidCheck = EntityDataManager.createKey(EntityLolliman.class, DataSerializers.VARINT);
 
@@ -55,7 +55,7 @@ public class EntityLolliman extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(kidMounted, false);
+        dataManager.register(kidMounted, Boolean.valueOf(false));
 
         dataManager.register(kidCheck, 0);
 
@@ -146,20 +146,12 @@ public class EntityLolliman extends EntityCreepBase
 
     protected void setKidMounted(boolean b)
     {
-        dataManager.set(kidMounted, b);
+        dataManager.set(kidMounted, Boolean.valueOf(b));
     }
 
     public boolean getKidMounted()
     {
-        try
-        {
-            return dataManager.get(kidMounted);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(kidMounted)).booleanValue();
     }
 
     @Override

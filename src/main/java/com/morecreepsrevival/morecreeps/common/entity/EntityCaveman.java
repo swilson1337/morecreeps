@@ -28,9 +28,9 @@ import javax.annotation.Nonnull;
 
 public class EntityCaveman extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> caveGirl = EntityDataManager.createKey(EntityCaveman.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> caveGirl = EntityDataManager.<Boolean>createKey(EntityCaveman.class, DataSerializers.BOOLEAN);
 
-    private static final DataParameter<Boolean> evil = EntityDataManager.createKey(EntityCaveman.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> evil = EntityDataManager.<Boolean>createKey(EntityCaveman.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> frozenLevel = EntityDataManager.createKey(EntityCaveman.class, DataSerializers.VARINT);
 
@@ -97,9 +97,9 @@ public class EntityCaveman extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(caveGirl, rand.nextInt(100) > 50);
+        dataManager.register(caveGirl, Boolean.valueOf(rand.nextInt(100) > 50));
 
-        dataManager.register(evil, false);
+        dataManager.register(evil, Boolean.valueOf(false));
 
         dataManager.register(frozenLevel, 5);
 
@@ -110,38 +110,22 @@ public class EntityCaveman extends EntityCreepBase
 
     protected void setCaveGirl(boolean b)
     {
-        dataManager.set(caveGirl, b);
+        dataManager.set(caveGirl, Boolean.valueOf(b));
     }
 
     public boolean getCaveGirl()
     {
-        try
-        {
-            return dataManager.get(caveGirl);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(caveGirl)).booleanValue();
     }
 
     protected void setEvil(boolean b)
     {
-        dataManager.set(evil, b);
+        dataManager.set(evil, Boolean.valueOf(b));
     }
 
     public boolean getEvil()
     {
-        try
-        {
-            return dataManager.get(evil);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(evil)).booleanValue();
     }
 
     protected void setFrozenLevel(int i)

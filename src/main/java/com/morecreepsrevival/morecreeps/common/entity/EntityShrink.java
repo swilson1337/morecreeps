@@ -307,7 +307,23 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityRatMan
+                    else if (rtr.entityHit instanceof EntityRatMan)
+                    {
+                        EntityRatMan ratMan = (EntityRatMan)rtr.entityHit;
+
+                        if (ratMan.getModelSize() > 0.3f)
+                        {
+                            ratMan.shrinkModelSize(0.2f);
+
+                            ratMan.decreaseMoveSpeed(0.15f);
+                        }
+                        else
+                        {
+                            ratMan.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityGuineaPig)
                     {
                         EntityGuineaPig guineaPig = (EntityGuineaPig)rtr.entityHit;
@@ -346,7 +362,7 @@ public class EntityShrink extends EntityThrowable
                         {
                             robotTed.shrinkModelSize(0.5f);
 
-                            // TODO: subtract move speed by 0.25f
+                            robotTed.decreaseMoveSpeed(0.25f);
                         }
                         else
                         {
@@ -363,7 +379,7 @@ public class EntityShrink extends EntityThrowable
                         {
                             robotTodd.shrinkModelSize(0.4f);
 
-                            // TODO: subtract move speed by 0.15f
+                            robotTodd.decreaseMoveSpeed(0.15f);
                         }
                         else
                         {
@@ -380,7 +396,7 @@ public class EntityShrink extends EntityThrowable
                         {
                             gooGoat.shrinkModelSize(0.4f);
 
-                            // TODO: subtract move speed by 0.15f
+                            gooGoat.decreaseMoveSpeed(0.15f);
                         }
                         else
                         {
@@ -419,11 +435,76 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntitySneakySal
-                    // TODO: EntityArmyGuy
-                    // TODO: EntityEvilChicken
+                    else if (rtr.entityHit instanceof EntitySneakySal)
+                    {
+                        EntitySneakySal sal = (EntitySneakySal)rtr.entityHit;
+
+                        if (sal.getModelSize() > 0.6f)
+                        {
+                            sal.shrinkModelSize(0.2f);
+
+                            sal.setDissedMax(0);
+
+                            if (rand.nextInt(2) == 0)
+                            {
+                                sal.playSound(CreepsSoundHandler.salNobodyShrinksSound, 0.5f, 1.0f);
+                            }
+                        }
+                        else
+                        {
+                            sal.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityArmyGuy)
+                    {
+                        EntityArmyGuy armyGuy = (EntityArmyGuy)rtr.entityHit;
+
+                        if (armyGuy.getModelSize() > 0.4f)
+                        {
+                            armyGuy.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            armyGuy.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilChicken)
+                    {
+                        EntityEvilChicken evilChicken = (EntityEvilChicken)rtr.entityHit;
+
+                        if (evilChicken.getModelSize() > 0.5f)
+                        {
+                            evilChicken.shrinkModelSize(0.4f);
+
+                            evilChicken.decreaseMoveSpeed(0.015f);
+                        }
+                        else
+                        {
+                            evilChicken.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityBum
-                    // TODO: EntityBubbleScum
+                    else if (rtr.entityHit instanceof EntityBubbleScum)
+                    {
+                        EntityBubbleScum bubbleScum = (EntityBubbleScum)rtr.entityHit;
+
+                        if (bubbleScum.getModelSize() > 0.3f)
+                        {
+                            bubbleScum.shrinkModelSize(0.15f);
+                        }
+                        else
+                        {
+                            bubbleScum.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityLawyerFromHell)
                     {
                         EntityLawyerFromHell lawyerFromHell = (EntityLawyerFromHell)rtr.entityHit;
@@ -487,9 +568,51 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityBlorp
-                    // TODO: EntityCamel
-                    // TODO: EntityCamelJockey
+                    else if (rtr.entityHit instanceof EntityBlorp)
+                    {
+                        EntityBlorp blorp = (EntityBlorp)rtr.entityHit;
+
+                        if (blorp.getModelSize() > 0.3f)
+                        {
+                            blorp.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            blorp.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCamel)
+                    {
+                        EntityCamel camel = (EntityCamel)rtr.entityHit;
+
+                        if (camel.getModelSize() > 0.3f)
+                        {
+                            camel.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            camel.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCamelJockey)
+                    {
+                        EntityCamelJockey camelJockey = (EntityCamelJockey)rtr.entityHit;
+
+                        if (camelJockey.getModelSize() > 0.3f)
+                        {
+                            camelJockey.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            camelJockey.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityCastleGuard)
                     {
                         EntityCastleGuard castleGuard = (EntityCastleGuard)rtr.entityHit;
@@ -505,9 +628,37 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityCaveman
+                    else if (rtr.entityHit instanceof EntityCaveman)
+                    {
+                        EntityCaveman caveman = (EntityCaveman)rtr.entityHit;
+
+                        if (caveman.getModelSize() > 0.3f)
+                        {
+                            caveman.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            caveman.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityDesertLizard
-                    // TODO: EntityDigBug
+                    else if (rtr.entityHit instanceof EntityDigBug)
+                    {
+                        EntityDigBug digBug = (EntityDigBug)rtr.entityHit;
+
+                        if (digBug.getModelSize() > 0.3f)
+                        {
+                            digBug.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            digBug.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityEvilCreature)
                     {
                         EntityEvilCreature evilCreature = (EntityEvilCreature)rtr.entityHit;

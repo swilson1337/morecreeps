@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 
 public class EntityGuineaPig extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> hotelBuilt = EntityDataManager.createKey(EntityGuineaPig.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> hotelBuilt = EntityDataManager.<Boolean>createKey(EntityGuineaPig.class, DataSerializers.BOOLEAN);
 
     private static final String[] textures = {
             "textures/entity/ggpig1",
@@ -117,7 +117,7 @@ public class EntityGuineaPig extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(hotelBuilt, false);
+        dataManager.register(hotelBuilt, Boolean.valueOf(false));
     }
 
     @Override
@@ -783,20 +783,12 @@ public class EntityGuineaPig extends EntityCreepBase
 
     public boolean getHotelBuilt()
     {
-        try
-        {
-            return dataManager.get(hotelBuilt);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(hotelBuilt)).booleanValue();
     }
 
     protected void setHotelBuilt(boolean b)
     {
-        dataManager.set(hotelBuilt, b);
+        dataManager.set(hotelBuilt, Boolean.valueOf(b));
     }
 
     @Override

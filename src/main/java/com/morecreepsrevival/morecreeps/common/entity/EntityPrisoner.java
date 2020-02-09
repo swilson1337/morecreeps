@@ -25,7 +25,7 @@ public class EntityPrisoner extends EntityCreepBase
             "textures/entity/prisoner5"
     };
 
-    private static final DataParameter<Boolean> evil = EntityDataManager.createKey(EntityPrisoner.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> evil = EntityDataManager.<Boolean>createKey(EntityPrisoner.class, DataSerializers.BOOLEAN);
 
     public EntityPrisoner(World worldIn)
     {
@@ -45,7 +45,7 @@ public class EntityPrisoner extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(evil, rand.nextInt(2) == 0);
+        dataManager.register(evil, Boolean.valueOf(rand.nextInt(2) == 0));
     }
 
     @Override
@@ -116,17 +116,14 @@ public class EntityPrisoner extends EntityCreepBase
         return textures;
     }
 
+    private void setEvil(boolean b)
+    {
+        dataManager.set(evil, Boolean.valueOf(b));
+    }
+
     public boolean getEvil()
     {
-        try
-        {
-            return dataManager.get(evil);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(evil)).booleanValue();
     }
 
     @Override
@@ -140,7 +137,7 @@ public class EntityPrisoner extends EntityCreepBase
     {
         if (damageSource.getTrueSource() instanceof EntityPlayer && !getEvil())
         {
-            dataManager.set(evil, true);
+            setEvil(true);
 
             initEntityAI();
         }
@@ -169,7 +166,7 @@ public class EntityPrisoner extends EntityCreepBase
 
         if (props.hasKey("Evil"))
         {
-            dataManager.set(evil, props.getBoolean("Evil"));
+            setEvil(props.getBoolean("Evil"));
         }
     }
 

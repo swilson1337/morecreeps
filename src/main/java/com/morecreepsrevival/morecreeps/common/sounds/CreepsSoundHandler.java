@@ -470,6 +470,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent hunchDeathSound = createSound("hunchdeath");
 
+    public static final SoundEvent salNobodyShrinksSound = createSound("salnobodyshrinks");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -706,7 +708,8 @@ public class CreepsSoundHandler
                 hunchQuietSound,
                 hunchCakeSound,
                 hunchHurtSound,
-                hunchDeathSound
+                hunchDeathSound,
+                salNobodyShrinksSound
         );
     }
 }
