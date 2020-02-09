@@ -674,6 +674,21 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
+                    else if (rtr.entityHit instanceof EntityEvilPig)
+                    {
+                        EntityEvilPig evilPig = (EntityEvilPig)rtr.entityHit;
+
+                        if (evilPig.getModelSize() > 0.4f)
+                        {
+                            evilPig.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            evilPig.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityEvilPig
                     // TODO: EntityEvilScientist
                     // TODO: EntityEvilSnowman
