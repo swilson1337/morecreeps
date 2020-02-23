@@ -224,7 +224,13 @@ public class MoreCreepsAndWeirdos
 
         for (Type type : types)
         {
-            biomes.addAll(BiomeDictionary.getBiomes(type));
+            for (Biome biome : BiomeDictionary.getBiomes(type))
+            {
+                if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+                {
+                    biomes.add(biome);
+                }
+            }
         }
 
         int size = biomes.size();
@@ -249,7 +255,13 @@ public class MoreCreepsAndWeirdos
         {
             if (!typesHash.contains(type))
             {
-                biomes.addAll(BiomeDictionary.getBiomes(type));
+                for (Biome biome : BiomeDictionary.getBiomes(type))
+                {
+                    if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+                    {
+                        biomes.add(biome);
+                    }
+                }
             }
         }
 
@@ -275,7 +287,10 @@ public class MoreCreepsAndWeirdos
 
         for (Biome biome : biomes)
         {
-            biomesArray[i++] = biome;
+            if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+            {
+                biomesArray[i++] = biome;
+            }
         }
 
         return biomesArray;
