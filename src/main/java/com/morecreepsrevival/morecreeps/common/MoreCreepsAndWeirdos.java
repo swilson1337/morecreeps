@@ -226,7 +226,7 @@ public class MoreCreepsAndWeirdos
         {
             for (Biome biome : BiomeDictionary.getBiomes(type))
             {
-                if (Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+                if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
                 {
                     biomes.add(biome);
                 }
@@ -257,7 +257,7 @@ public class MoreCreepsAndWeirdos
             {
                 for (Biome biome : BiomeDictionary.getBiomes(type))
                 {
-                    if (Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+                    if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
                     {
                         biomes.add(biome);
                     }
@@ -287,7 +287,7 @@ public class MoreCreepsAndWeirdos
 
         for (Biome biome : biomes)
         {
-            if (Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+            if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
             {
                 biomesArray[i++] = biome;
             }
