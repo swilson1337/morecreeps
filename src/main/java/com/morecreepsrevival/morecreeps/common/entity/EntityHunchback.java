@@ -6,11 +6,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -76,7 +78,14 @@ public class EntityHunchback extends EntityCreepBase
     @Override
     protected void updateTexture()
     {
-        setTexture("textures/entity/hunchback.png");
+        if (isTamed())
+        {
+            setTexture("textures/entity/hunchbackcake.png");
+        }
+        else
+        {
+            setTexture("textures/entity/hunchback.png");
+        }
     }
 
     private void setCakeTimer(int i)
@@ -87,6 +96,70 @@ public class EntityHunchback extends EntityCreepBase
     public int getCakeTimer()
     {
         return dataManager.get(cakeTimer);
+    }
+
+    @Override
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+        if (hand == EnumHand.OFF_HAND)
+        {
+            return super.processInteract(player, hand);
+        }
+
+        ItemStack itemStack = player.getHeldItem(hand);
+
+        if (isEntityAlive())
+        {
+            if (isTamed())
+            {
+                if (itemStack.getItem() == Items.BONE)
+                {
+                    smoke();
+
+                    smoke();
+
+                    playSound(CreepsSoundHandler.guineaPigArmorSound, getSoundVolume(), getSoundPitch());
+
+                    playSound(CreepsSoundHandler.hunchArmySound, 2.0f, getSoundPitch());
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        EntityHunchbackSkeleton skeleton = new EntityHunchbackSkeleton(world);
+
+                        skeleton.setLocationAndAngles(posX + 3.0d, posY, posZ + (double)i, rotationYaw, 0.0f);
+
+                        skeleton.setModelSize(getModelSize());
+
+                        skeleton.determineBaseTexture();
+
+                        skeleton.setInitialHealth();
+
+                        world.spawnEntity(skeleton);
+                    }
+
+                    itemStack.shrink(1);
+
+                    return true;
+                }
+            }
+            else if (itemStack.getItem() == Items.CAKE || Item.getIdFromItem(itemStack.getItem()) == 92)
+            {
+                smoke();
+
+                tame(player);
+
+                if (getCakeTimer() < 4000)
+                {
+                    setCakeTimer(getCakeTimer() + rand.nextInt(500) + 250);
+                }
+
+                itemStack.shrink(1);
+
+                return true;
+            }
+        }
+
+        return super.processInteract(player, hand);
     }
 
     @Override
@@ -155,5 +228,24 @@ public class EntityHunchback extends EntityCreepBase
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.hunchDeathSound;
+    }
+
+    @Override
+    protected SoundEvent getTamedSound()
+    {
+        return CreepsSoundHandler.hunchThankYouSound;
+    }
+
+    @Override
+    protected float getBaseHealth()
+    {
+        float health = super.getBaseHealth();
+
+        if (isTamed())
+        {
+            health += 2.0f;
+        }
+
+        return health;
     }
 }
