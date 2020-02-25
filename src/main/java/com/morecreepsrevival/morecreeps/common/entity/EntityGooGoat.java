@@ -19,7 +19,7 @@ public class EntityGooGoat extends EntityCreepBase
 {
     private static final DataParameter<Integer> hungryTime = EntityDataManager.createKey(EntityGooGoat.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> hungry = EntityDataManager.createKey(EntityGooGoat.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> hungry = EntityDataManager.<Boolean>createKey(EntityGooGoat.class, DataSerializers.BOOLEAN);
 
     public EntityGooGoat(World world)
     {
@@ -47,7 +47,7 @@ public class EntityGooGoat extends EntityCreepBase
 
         dataManager.register(hungryTime, 0);
 
-        dataManager.register(hungry, false);
+        dataManager.register(hungry, Boolean.valueOf(false));
     }
 
     @Override
@@ -130,7 +130,7 @@ public class EntityGooGoat extends EntityCreepBase
 
                 if (dataManager.get(hungryTime) > 300 && getLevel() < 5)
                 {
-                    dataManager.set(hungry, false);
+                    setHungry(false);
 
                     dataManager.set(hungryTime, 0);
 
@@ -152,7 +152,7 @@ public class EntityGooGoat extends EntityCreepBase
 
             if (dataManager.get(hungryTime) < 1)
             {
-                dataManager.set(hungry, true);
+                setHungry(true);
 
                 dataManager.set(hungryTime, 0);
             }
@@ -188,16 +188,13 @@ public class EntityGooGoat extends EntityCreepBase
         }
     }
 
+    private void setHungry(boolean b)
+    {
+        dataManager.set(hungry, Boolean.valueOf(b));
+    }
+
     public boolean getHungry()
     {
-        try
-        {
-            return dataManager.get(hungry);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(hungry)).booleanValue();
     }
 }

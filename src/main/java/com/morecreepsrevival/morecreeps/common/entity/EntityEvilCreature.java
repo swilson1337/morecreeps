@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 public class EntityEvilCreature extends EntityCreepBase implements IMob
 {
-    private static final DataParameter<Boolean> jumping = EntityDataManager.createKey(EntityEvilCreature.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> jumping = EntityDataManager.<Boolean>createKey(EntityEvilCreature.class, DataSerializers.BOOLEAN);
 
     public EntityEvilCreature(World world)
     {
@@ -52,7 +52,7 @@ public class EntityEvilCreature extends EntityCreepBase implements IMob
     {
         super.entityInit();
 
-        dataManager.register(jumping, false);
+        dataManager.register(jumping, Boolean.valueOf(false));
     }
 
     @Override
@@ -194,17 +194,17 @@ public class EntityEvilCreature extends EntityCreepBase implements IMob
         return super.attackEntityAsMob(entity);
     }
 
+    @Override
+    public void setJumping(boolean b)
+    {
+        super.setJumping(b);
+
+        dataManager.set(jumping, Boolean.valueOf(b));
+    }
+
     public boolean getJumping()
     {
-        try
-        {
-            return dataManager.get(jumping);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(jumping)).booleanValue();
     }
 
     @Override

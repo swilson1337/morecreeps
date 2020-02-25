@@ -27,7 +27,7 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
 
     private static final DataParameter<Integer> skinTimer = EntityDataManager.createKey(EntityBigBaby.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Boolean> skinDirection = EntityDataManager.createKey(EntityBigBaby.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> skinDirection = EntityDataManager.<Boolean>createKey(EntityBigBaby.class, DataSerializers.BOOLEAN);
 
     public EntityBigBaby(World worldIn)
     {
@@ -59,7 +59,7 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
 
         dataManager.register(skinTimer, 0);
 
-        dataManager.register(skinDirection, true);
+        dataManager.register(skinDirection, Boolean.valueOf(true));
     }
 
     @Override
@@ -176,7 +176,7 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
 
             if (iSkin == 0 || iSkin == 4)
             {
-                dataManager.set(skinDirection, !dataManager.get(skinDirection));
+                setSkinDirection(!getSkinDirection());
             }
 
             dataManager.set(skin, iSkin);
@@ -226,16 +226,13 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
         return super.attackEntityAsMob(entity);
     }
 
+    private void setSkinDirection(boolean b)
+    {
+        dataManager.set(skinDirection, Boolean.valueOf(b));
+    }
+
     private boolean getSkinDirection()
     {
-        try
-        {
-            return dataManager.get(skinDirection);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(skinDirection)).booleanValue();
     }
 }

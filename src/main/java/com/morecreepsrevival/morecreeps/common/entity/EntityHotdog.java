@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 
 public class EntityHotdog extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.<Boolean>createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
 
     private static final String[] textures = {
             "textures/entity/hotdg1",
@@ -73,7 +73,7 @@ public class EntityHotdog extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(heavenBuilt, false);
+        dataManager.register(heavenBuilt, Boolean.valueOf(false));
     }
 
     @Override
@@ -477,12 +477,12 @@ public class EntityHotdog extends EntityCreepBase
 
     protected void setHeavenBuilt(boolean b)
     {
-        dataManager.set(heavenBuilt, b);
+        dataManager.set(heavenBuilt, Boolean.valueOf(b));
     }
 
     public boolean getHeavenBuilt()
     {
-        return dataManager.get(heavenBuilt);
+        return ((Boolean)dataManager.get(heavenBuilt)).booleanValue();
     }
 
     @Override

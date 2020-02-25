@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 public class EntityBlorp extends EntityCreepBase
 {
-    private static final DataParameter<Boolean> hungry = EntityDataManager.createKey(EntityBlorp.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> hungry = EntityDataManager.<Boolean>createKey(EntityBlorp.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Integer> hungryTime = EntityDataManager.createKey(EntityBlorp.class, DataSerializers.VARINT);
 
@@ -54,7 +54,7 @@ public class EntityBlorp extends EntityCreepBase
     {
         super.entityInit();
 
-        dataManager.register(hungry, false);
+        dataManager.register(hungry, Boolean.valueOf(false));
 
         dataManager.register(hungryTime, rand.nextInt(20) + 20);
     }
@@ -101,6 +101,8 @@ public class EntityBlorp extends EntityCreepBase
 
                     updateAttributes();
 
+                    addHealth(getLevelHealthMultiplier());
+
                     playSound(CreepsSoundHandler.blorpGrowSound, getSoundVolume(), getSoundPitch());
                 }
 
@@ -140,20 +142,12 @@ public class EntityBlorp extends EntityCreepBase
 
     private void setHungry(boolean b)
     {
-        dataManager.set(hungry, b);
+        dataManager.set(hungry, Boolean.valueOf(b));
     }
 
     public boolean getHungry()
     {
-        try
-        {
-            return dataManager.get(hungry);
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        return false;
+        return ((Boolean)dataManager.get(hungry)).booleanValue();
     }
 
     private void setHungryTime(int i)
