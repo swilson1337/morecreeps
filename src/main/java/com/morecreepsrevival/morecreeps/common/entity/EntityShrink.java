@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 public class EntityShrink extends EntityThrowable
 {
     protected int hitX;
-
+    
     protected int hitY;
 
     protected int hitZ;

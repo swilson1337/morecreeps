@@ -5,6 +5,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.AbstractSkeleton;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityTippedArrow;
@@ -75,9 +76,7 @@ public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedA
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-
-        targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityHunchbackSkeleton.class, true));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityLivingBase.class, true));
     }
 
     @Override
@@ -121,6 +120,15 @@ public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedA
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
+
+        EntityLivingBase target = getAttackTarget();
+
+        EntityPlayer owner = getOwner();
+
+        if (target != null && owner != null && (target.equals(owner) || (target instanceof EntityCreepBase && owner.equals(((EntityCreepBase)target).getOwner())) || (target instanceof EntityTameable && owner.equals(((EntityTameable)target).getOwner()))))
+        {
+            setAttackTarget(null);
+        }
 
         if (rand.nextInt(2) == 0)
         {

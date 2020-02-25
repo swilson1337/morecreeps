@@ -1,6 +1,9 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIFollowOwner;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,7 +17,10 @@ import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class EntityHunchback extends EntityCreepBase
 {
@@ -26,7 +32,7 @@ public class EntityHunchback extends EntityCreepBase
 
         setCreepTypeName("Hunchback");
 
-        baseSpeed = 0.2f;
+        baseSpeed = 0.3f;
 
         baseHealth = (float)rand.nextInt(30) + 10.0f;
 
@@ -58,7 +64,14 @@ public class EntityHunchback extends EntityCreepBase
 
         tasks.addTask(3, new EntityAIAttackMelee(this, 1.0d, true));
 
-        tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
+        if (isTamed())
+        {
+            tasks.addTask(4, new EntityCreepAIFollowOwner(this, 1.0d, 6.0f, 2.0f));
+        }
+        else
+        {
+            tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
+        }
 
         tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0d));
 
@@ -134,7 +147,12 @@ public class EntityHunchback extends EntityCreepBase
 
                         skeleton.setInitialHealth();
 
-                        world.spawnEntity(skeleton);
+                        skeleton.tame(player);
+
+                        if (!world.isRemote)
+                        {
+                            world.spawnEntity(skeleton);
+                        }
                     }
 
                     itemStack.shrink(1);
@@ -160,6 +178,46 @@ public class EntityHunchback extends EntityCreepBase
         }
 
         return super.processInteract(player, hand);
+    }
+
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount)
+    {
+        Entity entity = source.getTrueSource();
+
+        if (entity != null)
+        {
+            double d = -MathHelper.sin((entity.rotationYaw * (float)Math.PI) / 180.0f);
+
+            double d1 = MathHelper.cos((entity.rotationYaw * (float)Math.PI) / 180.0f);
+
+            if (entity instanceof EntityPlayer && isTamed())
+            {
+                motionY = rand.nextFloat() * 0.9f;
+
+                motionZ = d1 * 0.40000000596046448d;
+
+                motionX = d * 0.5d;
+
+                playSound(CreepsSoundHandler.hunchThankYouSound, 2.0f, getSoundPitch());
+
+                return super.attackEntityFrom(source, amount / 6);
+            }
+            else if (amount > 0 && entity instanceof EntityLivingBase)
+            {
+                motionY = (rand.nextFloat() - rand.nextFloat()) * 0.3f;
+
+                motionZ = d1 * 0.40000000596046448d;
+
+                motionX = d * 0.5d;
+
+                playSound(CreepsSoundHandler.hunchHurtSound, 2.0f, getSoundPitch());
+
+                setAttackTarget((EntityLivingBase)entity);
+            }
+        }
+
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override

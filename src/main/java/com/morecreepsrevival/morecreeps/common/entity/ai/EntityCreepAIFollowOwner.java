@@ -1,124 +1,145 @@
 package com.morecreepsrevival.morecreeps.common.entity.ai;
 
 import com.morecreepsrevival.morecreeps.common.entity.EntityCreepBase;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 
 public class EntityCreepAIFollowOwner extends EntityAIBase
 {
-    private final EntityCreepBase tamable;
-
+    private final EntityCreepBase tameable;
+    private EntityLivingBase owner;
+    World world;
     private final double followSpeed;
+    private final PathNavigate petPathfinder;
+    private int timeToRecalcPath;
+    float maxDist;
+    float minDist;
+    private float oldWaterCost;
 
-    private final float minDist;
-
-    private final float maxDist;
-
-    private int timeToRecalcPath = 0;
-
-    private float oldWaterCost = 0.0f;
-
-    public EntityCreepAIFollowOwner(EntityCreepBase tamableIn, double followSpeedIn, float minDistIn, float maxDistIn)
+    public EntityCreepAIFollowOwner(EntityCreepBase tameableIn, double followSpeedIn, float minDistIn, float maxDistIn)
     {
-        tamable = tamableIn;
+        this.tameable = tameableIn;
+        this.world = tameableIn.world;
+        this.followSpeed = followSpeedIn;
+        this.petPathfinder = tameableIn.getNavigator();
+        this.minDist = minDistIn;
+        this.maxDist = maxDistIn;
+        this.setMutexBits(3);
 
-        followSpeed = followSpeedIn;
-
-        minDist = minDistIn;
-
-        maxDist = maxDistIn;
-
-        setMutexBits(3);
+        if (!(tameableIn.getNavigator() instanceof PathNavigateGround) && !(tameableIn.getNavigator() instanceof PathNavigateFlying))
+        {
+            throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
+        }
     }
 
-    @Override
+    /**
+     * Returns whether the EntityAIBase should begin execution.
+     */
     public boolean shouldExecute()
     {
-        EntityPlayer owner = tamable.getOwner();
+        EntityPlayer entitylivingbase = this.tameable.getOwner();
 
-        if (owner == null || owner.isSpectator() || tamable.getDistanceSq(owner) < (double)(minDist * minDist))
+        if (entitylivingbase == null)
         {
             return false;
         }
-
-        return true;
-    }
-
-    @Override
-    public boolean shouldContinueExecuting()
-    {
-        EntityPlayer owner = tamable.getOwner();
-
-        return (!tamable.getNavigator().noPath() && owner != null && tamable.getDistanceSq(owner) > (double)(maxDist * maxDist));
-    }
-
-    @Override
-    public void startExecuting()
-    {
-        timeToRecalcPath = 0;
-
-        oldWaterCost = tamable.getPathPriority(PathNodeType.WATER);
-
-        tamable.setPathPriority(PathNodeType.WATER, 0.0f);
-    }
-
-    @Override
-    public void resetTask()
-    {
-        tamable.getNavigator().clearPath();
-
-        tamable.setPathPriority(PathNodeType.WATER, oldWaterCost);
-    }
-
-    @Override
-    public void updateTask()
-    {
-        tamable.getLookHelper().setLookPositionWithEntity(tamable.getOwner(), 10.f, (float)tamable.getVerticalFaceSpeed());
-
-        if (--timeToRecalcPath <= 0)
+        else if (entitylivingbase.isSpectator())
         {
-            timeToRecalcPath = 10;
-
-            PathNavigate navigator = tamable.getNavigator();
-
-            EntityPlayer owner = tamable.getOwner();
-
-            navigator.tryMoveToEntityLiving(owner, followSpeed);
-
-            /*if (!navigator.tryMoveToEntityLiving(owner, followSpeed) && !tamable.getLeashed() && !tamable.isRiding() && tamable.getDistanceSq(owner) >= 144.0d)
-            {
-                int i = MathHelper.floor(owner.posX) - 2;
-
-                int j = MathHelper.floor(owner.posZ) - 2;
-
-                int k = MathHelper.floor(owner.getEntityBoundingBox().minY);
-
-                for (int l = 0; l <= 4; ++l)
-                {
-                    for (int i1 = 0; i1 <= 4; ++i1)
-                    {
-                        if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && isTeleportFriendlyBlock(i, j, k, l, i1))
-                        {
-                            tamable.setLocationAndAngles((double)((float)(i + l) + 0.5f), (double)k, (double)((float)(j + i1) + 0.5f), tamable.rotationYaw, tamable.rotationPitch);
-
-                            navigator.clearPath();
-
-                            return;
-                        }
-                    }
-                }
-            }*/
+            return false;
+        }
+        else if (this.tameable.getDistanceSq(entitylivingbase) < (double)(this.minDist * this.minDist))
+        {
+            return false;
+        }
+        else
+        {
+            this.owner = entitylivingbase;
+            return true;
         }
     }
 
-    /*protected boolean isTeleportFriendlyBlock(int i, int j, int k, int yaw, int pitch)
+    /**
+     * Returns whether an in-progress EntityAIBase should continue executing
+     */
+    public boolean shouldContinueExecuting()
     {
-        BlockPos blockPos = new BlockPos(i + yaw, k - 1, j + pitch);
+        return !this.petPathfinder.noPath() && this.tameable.getDistanceSq(this.owner) > (double)(this.maxDist * this.maxDist);
+    }
 
-        IBlockState blockState = tamable.world.getBlockState(blockPos);
+    /**
+     * Execute a one shot task or start executing a continuous task
+     */
+    public void startExecuting()
+    {
+        this.timeToRecalcPath = 0;
+        this.oldWaterCost = this.tameable.getPathPriority(PathNodeType.WATER);
+        this.tameable.setPathPriority(PathNodeType.WATER, 0.0F);
+    }
 
-        return (blockState.getBlockFaceShape(tamable.world, blockPos, EnumFacing.DOWN) == BlockFaceShape.SOLID && blockState.canEntitySpawn(tamable) && tamable.world.isAirBlock(blockPos.up()) && tamable.world.isAirBlock(blockPos.up(2)));
-    }*/
+    /**
+     * Reset the task's internal state. Called when this task is interrupted by another one
+     */
+    public void resetTask()
+    {
+        this.owner = null;
+        this.petPathfinder.clearPath();
+        this.tameable.setPathPriority(PathNodeType.WATER, this.oldWaterCost);
+    }
+
+    /**
+     * Keep ticking a continuous task that has already been started
+     */
+    public void updateTask()
+    {
+        this.tameable.getLookHelper().setLookPositionWithEntity(this.owner, 10.0F, (float)this.tameable.getVerticalFaceSpeed());
+
+        if (--this.timeToRecalcPath <= 0)
+        {
+            this.timeToRecalcPath = 10;
+
+            if (!this.petPathfinder.tryMoveToEntityLiving(this.owner, this.followSpeed))
+            {
+                if (!this.tameable.getLeashed() && !this.tameable.isRiding())
+                {
+                    if (this.tameable.getDistanceSq(this.owner) >= 144.0D)
+                    {
+                        int i = MathHelper.floor(this.owner.posX) - 2;
+                        int j = MathHelper.floor(this.owner.posZ) - 2;
+                        int k = MathHelper.floor(this.owner.getEntityBoundingBox().minY);
+
+                        for (int l = 0; l <= 4; ++l)
+                        {
+                            for (int i1 = 0; i1 <= 4; ++i1)
+                            {
+                                if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.isTeleportFriendlyBlock(i, j, k, l, i1))
+                                {
+                                    this.tameable.setLocationAndAngles(((float)(i + l) + 0.5F), k, ((float)(j + i1) + 0.5F), this.tameable.rotationYaw, this.tameable.rotationPitch);
+                                    this.petPathfinder.clearPath();
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    protected boolean isTeleportFriendlyBlock(int x, int p_192381_2_, int y, int p_192381_4_, int p_192381_5_)
+    {
+        BlockPos blockpos = new BlockPos(x + p_192381_4_, y - 1, p_192381_2_ + p_192381_5_);
+        IBlockState iblockstate = this.world.getBlockState(blockpos);
+        return iblockstate.getBlockFaceShape(this.world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID && iblockstate.canEntitySpawn(this.tameable) && this.world.isAirBlock(blockpos.up()) && this.world.isAirBlock(blockpos.up(2));
+    }
 }
