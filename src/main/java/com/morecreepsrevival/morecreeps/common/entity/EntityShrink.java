@@ -689,18 +689,115 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityEvilPig
-                    // TODO: EntityEvilScientist
+                    else if (rtr.entityHit instanceof EntityEvilScientist)
+                    {
+                        EntityEvilScientist evilScientist = (EntityEvilScientist)rtr.entityHit;
+
+                        if (evilScientist.getModelSize() > 0.4f)
+                        {
+                            evilScientist.shrinkModelSize(0.3f);
+                        }
+                        else
+                        {
+                            evilScientist.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityEvilSnowman
-                    // TODO: EntityFloob
+                    else if (rtr.entityHit instanceof EntityFloob)
+                    {
+                        EntityFloob floob = (EntityFloob)rtr.entityHit;
+
+                        if (floob.getModelSize() > 0.4f)
+                        {
+                            floob.shrinkModelSize(0.4f);
+                        }
+                        else
+                        {
+                            floob.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityHippo
-                    // TODO: EntityHunchback
-                    // TODO: EntityHunchbackSkeleton
+                    else if (rtr.entityHit instanceof EntityHunchback)
+                    {
+                        EntityHunchback hunchback = (EntityHunchback)rtr.entityHit;
+
+                        if (hunchback.getModelSize() > 0.3f)
+                        {
+                            hunchback.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            hunchback.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityHunchbackSkeleton)
+                    {
+                        EntityHunchbackSkeleton hunchbackSkeleton = (EntityHunchbackSkeleton)rtr.entityHit;
+
+                        if (hunchbackSkeleton.getModelSize() > 0.3f)
+                        {
+                            hunchbackSkeleton.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            hunchbackSkeleton.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityInvisibleMan
-                    // TODO: EntityManDog
+                    else if (rtr.entityHit instanceof EntityManDog)
+                    {
+                        EntityManDog manDog = (EntityManDog)rtr.entityHit;
+
+                        if (manDog.getModelSize() > 0.3f)
+                        {
+                            manDog.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            manDog.setDead();
+
+                            flag = true;
+                        }
+                    }
                     // TODO: EntityNonSwimmer
-                    // TODO: EntityRocketGiraffe
-                    // TODO: EntitySnowDevil
+                    else if (rtr.entityHit instanceof EntityRocketGiraffe)
+                    {
+                        EntityRocketGiraffe rocketGiraffe = (EntityRocketGiraffe)rtr.entityHit;
+
+                        if (rocketGiraffe.getModelSize() > 0.3f)
+                        {
+                            rocketGiraffe.shrinkModelSize(0.15f);
+                        }
+                        else
+                        {
+                            rocketGiraffe.setDead();
+
+                            flag = true;
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntitySnowDevil)
+                    {
+                        EntitySnowDevil snowDevil = (EntitySnowDevil)rtr.entityHit;
+
+                        if (snowDevil.getModelSize() > 0.4f)
+                        {
+                            snowDevil.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            snowDevil.setDead();
+
+                            flag = true;
+                        }
+                    }
                     else if (rtr.entityHit instanceof EntityThief)
                     {
                         EntityThief thief = (EntityThief)rtr.entityHit;
@@ -716,7 +813,21 @@ public class EntityShrink extends EntityThrowable
                             flag = true;
                         }
                     }
-                    // TODO: EntityZebra
+                    else if (rtr.entityHit instanceof EntityZebra)
+                    {
+                        EntityZebra zebra = (EntityZebra)rtr.entityHit;
+
+                        if (zebra.getModelSize() > 0.3f)
+                        {
+                            zebra.shrinkModelSize(0.2f);
+                        }
+                        else
+                        {
+                            zebra.setDead();
+
+                            flag = true;
+                        }
+                    }
 
                     if (flag)
                     {
