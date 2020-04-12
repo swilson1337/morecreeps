@@ -1,7 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.config;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class MoreCreepsConfig
@@ -130,6 +129,8 @@ public class MoreCreepsConfig
 
     public static int zebraSpawnAmt = 0;
 
+    public static int growbotGreggSpawnAmt = 0;
+
     public static String hideUpdateGuiVersion = "";
 
     public static double globalSpawnRate = 1.0f;
@@ -257,6 +258,8 @@ public class MoreCreepsConfig
             rocketGiraffeSpawnAmt = config.get(spawnNbr, "Rocket Giraffe", 7).getInt();
 
             zebraSpawnAmt = config.get(spawnNbr, "Zebra", 8).getInt();
+
+            growbotGreggSpawnAmt = config.get(spawnNbr, "Growbot Gregg", 6).getInt();
 
             hideUpdateGuiVersion = config.get(miscProperty, "Hide Update for Version", "", "This property is set when you choose to ignore the Update Available popup with the version you're being offered.").getString();
 
@@ -458,6 +461,11 @@ public class MoreCreepsConfig
         if (zebraSpawnAmt < 0 || zebraSpawnAmt > 12)
         {
             zebraSpawnAmt = 6;
+        }
+
+        if (growbotGreggSpawnAmt < 0 || growbotGreggSpawnAmt > 12)
+        {
+            growbotGreggSpawnAmt = 6;
         }
 
         if (pyramidRarity < 1 || pyramidRarity > 10)

@@ -15,7 +15,9 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -44,8 +46,18 @@ public class WorldGenPyramid extends WorldGenerator
     }
 
     @Override
-    public boolean generate(@Nonnull World world, @Nonnull Random rand, BlockPos pos)
+    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos pos)
     {
+        Biome biome = world.getBiome(pos);
+
+        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(biome))
+        {
+            if (type == BiomeDictionary.Type.NETHER || type == BiomeDictionary.Type.END)
+            {
+                return false;
+            }
+        }
+
         int x = pos.getX();
 
         int y = pos.getY();
