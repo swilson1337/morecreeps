@@ -510,6 +510,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent bumThanksSound = createSound("bumthanks");
 
+    public static final SoundEvent snowmanBounceSound = createSound("snowmanbounce");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -766,7 +768,8 @@ public class CreepsSoundHandler
                 bumSuckerSound,
                 bumThankYouSound,
                 bumDontWantSound,
-                bumThanksSound
+                bumThanksSound,
+                snowmanBounceSound
         );
     }
 }

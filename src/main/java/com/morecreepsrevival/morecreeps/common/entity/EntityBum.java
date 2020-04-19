@@ -3,6 +3,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
@@ -11,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -22,6 +24,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class EntityBum extends EntityCreepBase implements IMob
 {
@@ -266,7 +270,51 @@ public class EntityBum extends EntityCreepBase implements IMob
                     }
                     else if (item == Items.LAVA_BUCKET)
                     {
-                        // TODO: lava bucket stuff
+                        playSound(CreepsSoundHandler.bumThanksSound, getSoundVolume(), getSoundPitch());
+
+                        setTimeToPee(rand.nextInt(1900) + 1500);
+
+                        itemStack.shrink(1);
+
+                        if (rand.nextInt(4) == 0)
+                        {
+                            BlockPos blockPos = new BlockPos(posX, posY, posZ);
+
+                            IBlockState blockState = world.getBlockState(blockPos);
+
+                            int randInt = rand.nextInt(3) + 1;
+
+                            for (int i = 0; i < randInt; i++)
+                            {
+                                Blocks.OBSIDIAN.dropBlockAsItem(world, blockPos, blockState, 0);
+                            }
+                        }
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            double d4 = (float)posX + world.rand.nextFloat();
+                            double d7 = (float)posY + world.rand.nextFloat();
+                            double d8 = (float)posZ + world.rand.nextFloat();
+                            double d9 = d4 - posX;
+                            double d10 = d7 - posY;
+                            double d11 = d8 - posZ;
+                            double d12 = MathHelper.sqrt(d9 * d9 + d10 * d10 + d11 * d11);
+                            d9 /= d12;
+                            d10 /= d12;
+                            d11 /= d12;
+                            double d13 = 0.5D / (d12 / 10D + 0.10000000000000001D);
+                            d13 *= world.rand.nextFloat() * world.rand.nextFloat() + 0.3F;
+                            d9 *= d13;
+                            d10 *= d13;
+                            d11 *= d13;
+                            world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (d4 + posX * 1.0D) / 2D, (d7 + posY * 1.0D) / 2D + 2D, (d8 + posZ * 1.0D) / 2D, d9, d10, d11);
+                            world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d4, d7, d8, d9, d10, d11);
+                        }
+
+                        if (rand.nextInt(4) == 0)
+                        {
+                            player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.BUCKET));
+                        }
                     }
                     else if (!getBumGave())
                     {
@@ -358,5 +406,59 @@ public class EntityBum extends EntityCreepBase implements IMob
                 }
             }
         }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsBum");
+
+        props.setBoolean("BumGave", getBumGave());
+
+        props.setInteger("AngerLevel", getAngerLevel());
+
+        props.setInteger("TimeToPee", getTimeToPee());
+
+        compound.setTag("MoreCreepsBum", props);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsBum");
+
+        if (props.hasKey("BumGave"))
+        {
+            setBumGave(props.getBoolean("BumGave"));
+        }
+
+        if (props.hasKey("AngerLevel"))
+        {
+            setAngerLevel(props.getInteger("AngerLevel"));
+        }
+
+        if (props.hasKey("TimeToPee"))
+        {
+            setTimeToPee(props.getInteger("TimeToPee"));
+        }
+    }
+
+    @Override
+    public boolean attackEntityFrom(@Nonnull DamageSource source, float amount)
+    {
+        boolean flag = super.attackEntityFrom(source, amount);
+
+        if (flag)
+        {
+            setTimeToPee(rand.nextInt(900) + 500);
+
+            bumRotation = 999.0f;
+        }
+
+        return flag;
     }
 }
