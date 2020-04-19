@@ -502,6 +502,14 @@ public class CreepsSoundHandler
 
     public static final SoundEvent preacherBurnSound = createSound("preacherburn");
 
+    public static final SoundEvent bumSuckerSound = createSound("bumsucker");
+
+    public static final SoundEvent bumThankYouSound = createSound("bumthankyou");
+
+    public static final SoundEvent bumDontWantSound = createSound("bumdontwant");
+
+    public static final SoundEvent bumThanksSound = createSound("bumthanks");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -754,7 +762,11 @@ public class CreepsSoundHandler
                 preacherSound,
                 preacherHurtSound,
                 preacherDeathSound,
-                preacherBurnSound
+                preacherBurnSound,
+                bumSuckerSound,
+                bumThankYouSound,
+                bumDontWantSound,
+                bumThanksSound
         );
     }
 }
