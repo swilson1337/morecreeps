@@ -255,4 +255,25 @@ public class EntityEvilSnowman extends EntityCreepBase implements IMob
     {
         return ((rand.nextFloat() - rand.nextFloat()) * 0.2f + 1.0f + (1.0f - getModelSize()) * 2.0f);
     }
+
+    @Override
+    public void knockBack(@Nonnull Entity entity, float strength, double xRatio, double zRatio)
+    {
+        float f = getModelSize();
+
+        for (int j = 0; j < 8 + (int)(f * 20F); j++)
+        {
+            world.spawnParticle(EnumParticleTypes.SNOWBALL, posX, posY + (double)f, posZ, 0.0D, 0.0D, 0.0D);
+        }
+
+        strength *= strength;
+
+        motionY += 0.33300000429153442D;
+
+        xRatio *= 8.1999998092651367D;
+
+        zRatio *= 8.3000001907348633D;
+
+        super.knockBack(entity, strength, xRatio, zRatio);
+    }
 }
