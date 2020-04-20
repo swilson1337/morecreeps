@@ -11,7 +11,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -21,7 +20,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -36,8 +38,18 @@ public class WorldGenCastle extends WorldGenerator
 
     private int floor = 1;
 
-    public boolean generate(@Nonnull World world, Random rand, BlockPos pos)
+    public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos pos)
     {
+        Biome biome = world.getBiome(pos);
+
+        for (Type type : BiomeDictionary.getTypes(biome))
+        {
+            if (type == Type.NETHER || type == Type.END)
+            {
+                return false;
+            }
+        }
+
         int x = pos.getX();
 
         int z = pos.getZ();

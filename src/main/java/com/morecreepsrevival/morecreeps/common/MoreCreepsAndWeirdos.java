@@ -52,7 +52,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.15";
+    public static final String version = "1.0.16";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -182,7 +182,11 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityEvilEgg.class, "evilegg", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityGooDonut.class, "goodonut", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityHunchback.class, "hunchback", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.hunchbackSpawnAmt), 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityHunchbackSkeleton.class, "hunchbackskeleton", 0, 0, 0, EnumCreatureType.MONSTER)
+                createEntity(EntityHunchbackSkeleton.class, "hunchbackskeleton", 0, 0, 0, EnumCreatureType.MONSTER),
+                createEntity(EntityBum.class, "bum", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.bumSpawnAmt), 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityEvilSnowman.class, "evilsnowman", 0, 0, 0, EnumCreatureType.MONSTER),
+                createEntity(EntityPreacher.class, "preacher", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.preacherSpawnAmt), 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityGrowbotGregg.class, "growbot_gregg", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.growbotGreggSpawnAmt), 1, 3, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
         );
     }
 
@@ -251,17 +255,23 @@ public class MoreCreepsAndWeirdos
 
         HashSet<Type> typesHash = new HashSet<>(Arrays.asList(types));
 
-        for (Type type : BiomeDictionary.Type.getAll())
+        for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection())
         {
-            if (!typesHash.contains(type))
+            boolean skip = false;
+
+            for (Type type : BiomeDictionary.getTypes(biome))
             {
-                for (Biome biome : BiomeDictionary.getBiomes(type))
+                if (typesHash.contains(type))
                 {
-                    if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
-                    {
-                        biomes.add(biome);
-                    }
+                    skip = true;
+
+                    break;
                 }
+            }
+
+            if (!skip)
+            {
+                biomes.add(biome);
             }
         }
 

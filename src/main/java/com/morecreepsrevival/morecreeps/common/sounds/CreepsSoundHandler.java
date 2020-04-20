@@ -476,6 +476,44 @@ public class CreepsSoundHandler
 
     public static final SoundEvent hunchThankYouSound = createSound("hunchthankyou");
 
+    public static final SoundEvent bumSound = createSound("bum");
+
+    public static final SoundEvent bumLivingPeeSound = createSound("bumlivingpee");
+
+    public static final SoundEvent bumHurtSound = createSound("bumhurt");
+
+    public static final SoundEvent bumDeathSound = createSound("bumdeath");
+
+    public static final SoundEvent bumPeeSound = createSound("bumpee");
+
+    public static final SoundEvent bumLeaveMeAloneSound = createSound("bumleavemealone");
+
+    public static final SoundEvent snowmanSound = createSound("snowman");
+
+    public static final SoundEvent snowmanHurtSound = createSound("snowmanhurt");
+
+    public static final SoundEvent snowmanDeathSound = createSound("snowmandeath");
+
+    public static final SoundEvent preacherSound = createSound("preacher");
+
+    public static final SoundEvent preacherHurtSound = createSound("preacherhurt");
+
+    public static final SoundEvent preacherDeathSound = createSound("preacherdeath");
+
+    public static final SoundEvent preacherBurnSound = createSound("preacherburn");
+
+    public static final SoundEvent bumSuckerSound = createSound("bumsucker");
+
+    public static final SoundEvent bumThankYouSound = createSound("bumthankyou");
+
+    public static final SoundEvent bumDontWantSound = createSound("bumdontwant");
+
+    public static final SoundEvent bumThanksSound = createSound("bumthanks");
+
+    public static final SoundEvent snowmanBounceSound = createSound("snowmanbounce");
+
+    public static final SoundEvent preacherRaiseSound = createSound("preacherraise");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -715,7 +753,26 @@ public class CreepsSoundHandler
                 hunchDeathSound,
                 salNobodyShrinksSound,
                 hunchArmySound,
-                hunchThankYouSound
+                hunchThankYouSound,
+                bumSound,
+                bumLivingPeeSound,
+                bumHurtSound,
+                bumDeathSound,
+                bumPeeSound,
+                bumLeaveMeAloneSound,
+                snowmanSound,
+                snowmanHurtSound,
+                snowmanDeathSound,
+                preacherSound,
+                preacherHurtSound,
+                preacherDeathSound,
+                preacherBurnSound,
+                bumSuckerSound,
+                bumThankYouSound,
+                bumDontWantSound,
+                bumThanksSound,
+                snowmanBounceSound,
+                preacherRaiseSound
         );
     }
 }

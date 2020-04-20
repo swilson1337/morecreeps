@@ -123,6 +123,14 @@ public class ClientProxy implements IProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityHunchback.class, new RenderHunchbackFactory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHunchbackSkeleton.class, new RenderHunchbackSkeletonFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityBum.class, new RenderBumFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityEvilSnowman.class, new RenderEvilSnowmanFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityPreacher.class, new RenderPreacherFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityGrowbotGregg.class, new RenderGrowbotGreggFactory());
     }
 
     @Override
