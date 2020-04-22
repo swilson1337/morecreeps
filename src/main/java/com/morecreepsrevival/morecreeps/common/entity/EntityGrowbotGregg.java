@@ -9,6 +9,14 @@ public class EntityGrowbotGregg extends EntityCreepBase
         super(worldIn);
 
         setCreepTypeName("Growbot Gregg");
+
+        setModelSize(1.5f);
+
+        baseHealth = (float)rand.nextInt(15) + 10.0f;
+
+        baseSpeed = 0.3d;
+
+        updateAttributes();
     }
 
     @Override

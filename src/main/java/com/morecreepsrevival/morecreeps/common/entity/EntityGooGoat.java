@@ -142,6 +142,8 @@ public class EntityGooGoat extends EntityCreepBase
 
                     updateAttributes();
 
+                    addHealth(getLevelHealthMultiplier());
+
                     playSound(CreepsSoundHandler.gooGoatStretchSound, getSoundVolume(), getSoundPitch());
                 }
             }
