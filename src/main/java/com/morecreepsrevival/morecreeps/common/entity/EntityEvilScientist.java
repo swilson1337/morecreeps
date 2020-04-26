@@ -699,7 +699,31 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
                 {
                     case 0:
                     case 4:
-                        // TODO: spawn snowman
+                        int randInt2 = rand.nextInt(8) + 2;
+
+                        for (int j = 0; j < randInt2; j++)
+                        {
+                            EntityEvilSnowman evilSnowman = new EntityEvilSnowman(world);
+
+                            evilSnowman.setLocationAndAngles(towerX + rand.nextInt(3), towerY + iTowerHeight + 1, towerZ + rand.nextInt(3), rotationYaw, 0.0f);
+
+                            evilSnowman.determineBaseTexture();
+
+                            evilSnowman.setInitialHealth();
+
+                            evilSnowman.motionX = rand.nextFloat() * 0.3f;
+
+                            evilSnowman.motionY = rand.nextFloat() * 0.4f;
+
+                            evilSnowman.motionZ = rand.nextFloat() * 0.4f;
+
+                            evilSnowman.fallDistance = -35.0f;
+
+                            if (!world.isRemote)
+                            {
+                                world.spawnEntity(evilSnowman);
+                            }
+                        }
 
                         break;
                     case 1:
@@ -737,11 +761,17 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
 
                         evilChicken.setLocationAndAngles(towerX + rand.nextInt(3), towerY + iTowerHeight + 1, towerZ + rand.nextInt(3), rotationYaw, 0.0f);
 
+                        evilChicken.determineBaseTexture();
+
+                        evilChicken.setInitialHealth();
+
                         evilChicken.motionX = rand.nextFloat() * 0.3f;
 
                         evilChicken.motionY = rand.nextFloat() * 0.4f;
 
                         evilChicken.motionZ = rand.nextFloat() * 0.4f;
+
+                        evilChicken.fallDistance = -35.0f;
 
                         if (!world.isRemote)
                         {
