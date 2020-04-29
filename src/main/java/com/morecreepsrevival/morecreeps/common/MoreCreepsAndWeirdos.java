@@ -52,7 +52,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.16";
+    public static final String version = "1.0.17";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -230,7 +230,7 @@ public class MoreCreepsAndWeirdos
         {
             for (Biome biome : BiomeDictionary.getBiomes(type))
             {
-                if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+                if ((MoreCreepsConfig.spawnInNonVanillaBiomes && MoreCreepsConfig.hasBiome(Objects.requireNonNull(biome.getRegistryName()).toString())) || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
                 {
                     biomes.add(biome);
                 }
@@ -269,7 +269,7 @@ public class MoreCreepsAndWeirdos
                 }
             }
 
-            if (!skip)
+            if (!skip && ((MoreCreepsConfig.spawnInNonVanillaBiomes && MoreCreepsConfig.hasBiome(Objects.requireNonNull(biome.getRegistryName()).toString())) || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft")))
             {
                 biomes.add(biome);
             }
@@ -297,7 +297,7 @@ public class MoreCreepsAndWeirdos
 
         for (Biome biome : biomes)
         {
-            if (MoreCreepsConfig.spawnInNonVanillaBiomes || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
+            if ((MoreCreepsConfig.spawnInNonVanillaBiomes && MoreCreepsConfig.hasBiome(Objects.requireNonNull(biome.getRegistryName()).toString())) || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft"))
             {
                 biomesArray[i++] = biome;
             }
