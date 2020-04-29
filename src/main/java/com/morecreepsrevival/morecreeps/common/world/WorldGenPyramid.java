@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.world;
 
+import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.entity.EntityBabyMummy;
 import com.morecreepsrevival.morecreeps.common.entity.EntityMummy;
 import com.morecreepsrevival.morecreeps.common.entity.EntityPyramidGuardian;
@@ -20,6 +21,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Random;
 
 public class WorldGenPyramid extends WorldGenerator
@@ -49,6 +51,11 @@ public class WorldGenPyramid extends WorldGenerator
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos pos)
     {
         Biome biome = world.getBiome(pos);
+
+        if (!((MoreCreepsConfig.spawnInNonVanillaBiomes && MoreCreepsConfig.hasBiome(Objects.requireNonNull(biome.getRegistryName()).toString())) || Objects.requireNonNull(biome.getRegistryName()).getResourceDomain().equals("minecraft")))
+        {
+            return false;
+        }
 
         for (BiomeDictionary.Type type : BiomeDictionary.getTypes(biome))
         {
