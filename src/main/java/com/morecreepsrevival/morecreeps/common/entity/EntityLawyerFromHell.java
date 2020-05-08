@@ -401,18 +401,20 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                 {
                     smoke2();
 
+                    EntityLawyerFromHell lawyer = new EntityLawyerFromHell(world);
+
+                    lawyer.setLocationAndAngles(entity.posX + (double)(rand.nextInt(4) - rand.nextInt(4)), entity.posY - 1.5d, entity.posZ + (double)(rand.nextInt(4) - rand.nextInt(4)), rotationYaw, 0.0f);
+
+                    lawyer.motionY = 20.0d;
+
+                    lawyer.setUndead(true);
+
+                    lawyer.determineBaseTexture();
+
+                    lawyer.setInitialHealth();
+
                     if (!world.isRemote)
                     {
-                        EntityLawyerFromHell lawyer = new EntityLawyerFromHell(world);
-
-                        lawyer.setLocationAndAngles(entity.posX + (double)(rand.nextInt(4) - rand.nextInt(4)), entity.posY - 1.5d, entity.posZ + (double)(rand.nextInt(4) - rand.nextInt(4)), rotationYaw, 0.0f);
-
-                        lawyer.setUndead(true);
-
-                        lawyer.determineBaseTexture();
-
-                        lawyer.setInitialHealth();
-
                         world.spawnEntity(lawyer);
                     }
                 }
@@ -421,7 +423,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
             {
                 // TODO: spawn bum
             }
-            else if (rand.nextInt(10) == 0)
+            else if (!world.isRemote && rand.nextInt(10) == 0)
             {
                 int randInt = rand.nextInt(40) + 10;
 

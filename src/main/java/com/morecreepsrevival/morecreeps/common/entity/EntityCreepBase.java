@@ -1088,12 +1088,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         super.onLivingUpdate();
 
-        EntityLivingBase target = getAttackTarget();
+        /*EntityLivingBase target = getAttackTarget();
 
         if (target != null && target.equals(getOwner()))
         {
             setAttackTarget(null);
-        }
+        }*/
+
+        // TODO: fix this bullshit
 
         updateArmSwingProgress();
 
