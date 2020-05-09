@@ -1,8 +1,11 @@
 package com.morecreepsrevival.morecreeps.common;
 
 import com.morecreepsrevival.morecreeps.client.gui.GuiUpdate;
+import com.morecreepsrevival.morecreeps.common.capabilities.IPlayerJumping;
+import com.morecreepsrevival.morecreeps.common.capabilities.PlayerJumpingProvider;
 import com.morecreepsrevival.morecreeps.common.entity.*;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageSetJumping;
 import com.morecreepsrevival.morecreeps.proxy.IProxy;
 import com.morecreepsrevival.morecreeps.common.capabilities.CreepsCapabilityHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessagePlayWelcomeSound;
@@ -344,11 +347,18 @@ public class MoreCreepsAndWeirdos
             return;
         }
 
-        if (proxy.isJumpKeyDown())
+        IPlayerJumping capability = event.player.getCapability(PlayerJumpingProvider.capability, null);
+
+        if (capability != null)
         {
-        }
-        else
-        {
+            boolean isJumping = proxy.isJumpKeyDown(event.player);
+
+            if (isJumping != capability.getJumping())
+            {
+                CreepsPacketHandler.INSTANCE.sendToServer(new MessageSetJumping(isJumping));
+
+                capability.setJumping(isJumping);
+            }
         }
     }
 

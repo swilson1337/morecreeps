@@ -36,6 +36,11 @@ public class ItemSkyGem extends CreepsItem
     @Override @Nonnull
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand)
     {
+        if (hand == EnumHand.OFF_HAND && !player.isSneaking())
+        {
+            return super.onItemRightClick(world, player, hand);
+        }
+
         player.playSound(CreepsSoundHandler.skyGemUpSound, 1.0f, 1.0f);
 
         usage -= 10;
@@ -79,7 +84,7 @@ public class ItemSkyGem extends CreepsItem
             player.fallDistance = 0.0f;
         }
 
-        if (isSelected)
+        if (isSelected || player.getHeldItem(EnumHand.OFF_HAND).equals(stack))
         {
             player.fallDistance = -25.0f;
 

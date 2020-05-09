@@ -23,6 +23,8 @@ public class CreepsCapabilityHandler
         CapabilityManager.INSTANCE.register(ILawyerFine.class, new LawyerFineStorage(), LawyerFine::new);
 
         CapabilityManager.INSTANCE.register(ICaveDrums.class, new CaveDrumsStorage(), CaveDrums::new);
+
+        CapabilityManager.INSTANCE.register(IPlayerJumping.class, new PlayerJumpingStorage(), PlayerJumping::new);
     }
 
     @SubscribeEvent
@@ -46,6 +48,8 @@ public class CreepsCapabilityHandler
             event.addCapability(new ResourceLocation(MoreCreepsAndWeirdos.modid, "lawyer_fine"), new LawyerFineProvider());
 
             event.addCapability(new ResourceLocation(MoreCreepsAndWeirdos.modid, "caveman_club_drums"), new CaveDrumsProvider());
+
+            event.addCapability(new ResourceLocation(MoreCreepsAndWeirdos.modid, "player_jumping"), new PlayerJumpingProvider());
         }
     }
 }

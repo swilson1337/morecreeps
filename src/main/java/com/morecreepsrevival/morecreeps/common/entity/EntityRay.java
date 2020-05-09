@@ -408,7 +408,7 @@ public class EntityRay extends Entity implements IProjectile
             {
                 this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
 
-                if (rand.nextInt(3) == 0)
+                if (this.inTile != Blocks.BEDROCK && rand.nextInt(3) == 0)
                 {
                     if (MoreCreepsConfig.rayGunFire)
                     {
@@ -482,8 +482,16 @@ public class EntityRay extends Entity implements IProjectile
         compound.setInteger("xTile", this.xTile);
         compound.setInteger("yTile", this.yTile);
         compound.setInteger("zTile", this.zTile);
-        ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(this.inTile);
-        compound.setString("inTile", resourcelocation.toString());
+        try
+        {
+            ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(this.inTile);
+            compound.setString("inTile", resourcelocation.toString());
+        }
+        catch (Exception ignored)
+        {
+            compound.setString("inTile", "");
+        }
+
         compound.setByte("inData", (byte)this.inData);
         compound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
         compound.setDouble("damage", this.damage);
