@@ -5,7 +5,7 @@ import com.morecreepsrevival.morecreeps.common.capabilities.LawyerFineProvider;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
-import com.morecreepsrevival.morecreeps.common.networking.message.MessageClearLawyerFine;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageSetLawyerFine;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
@@ -256,7 +256,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                 {
                     capability.setFine(0);
 
-                    CreepsPacketHandler.INSTANCE.sendTo(new MessageClearLawyerFine(), (EntityPlayerMP)player);
+                    CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(0), (EntityPlayerMP)player);
                 }
             }
         }
@@ -288,6 +288,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                         if (capability != null)
                         {
                             capability.addFine(25);
+
+                            if (!world.isRemote)
+                            {
+                                CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+                            }
                         }
 
                         playSound(CreepsSoundHandler.lawyerMoneyHitSound, getSoundVolume(), getSoundPitch());
@@ -316,6 +321,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                         if (capability != null)
                         {
                             capability.addFine(10);
+
+                            if (!world.isRemote)
+                            {
+                                CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+                            }
                         }
 
                         playSound(CreepsSoundHandler.lawyerMoneyHitSound, getSoundVolume(), getSoundPitch());
@@ -344,6 +354,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                 if (capability != null)
                 {
                     capability.addFine(50);
+
+                    if (!world.isRemote)
+                    {
+                        CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+                    }
                 }
 
                 setRevengeTarget(playerTarget);

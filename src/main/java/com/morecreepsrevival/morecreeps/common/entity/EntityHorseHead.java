@@ -335,7 +335,7 @@ public class EntityHorseHead extends EntityCreepBase
                 motionZ *= 6.9500000000000002d;
             }
 
-            if (MoreCreepsAndWeirdos.proxy.isJumpKeyDown() && posY < 120.0d)
+            if (MoreCreepsAndWeirdos.proxy.isJumpKeyDown(player) && posY < 120.0d)
             {
                 motionY += 0.15049999952316284d;
 

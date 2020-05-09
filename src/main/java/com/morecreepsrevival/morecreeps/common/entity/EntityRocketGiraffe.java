@@ -274,7 +274,7 @@ public class EntityRocketGiraffe extends EntityCreepBase
 
             if (onGround && !isJumping)
             {
-                if (MoreCreepsAndWeirdos.proxy.isJumpKeyDown())
+                if (riddenByEntity instanceof EntityPlayer && MoreCreepsAndWeirdos.proxy.isJumpKeyDown((EntityPlayer)riddenByEntity))
                 {
                     isJumping = true;
                 }

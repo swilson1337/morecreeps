@@ -5,6 +5,7 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.client.render.*;
 import com.morecreepsrevival.morecreeps.common.entity.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -145,7 +146,7 @@ public class ClientProxy implements IProxy
     }
 
     @Override
-    public boolean isJumpKeyDown()
+    public boolean isJumpKeyDown(EntityPlayer player)
     {
         return Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
     }
