@@ -6,6 +6,7 @@ import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIOwnerHurtB
 import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIOwnerHurtTarget;
 import com.morecreepsrevival.morecreeps.common.helpers.EffectHelper;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiTamableEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -138,11 +139,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         super.dismountRidingEntity();
 
         onDismount(entity);
-
-        if (entity != null && entity != getRidingEntity() && entity instanceof EntityPlayer && entity.isInsideOfMaterial(Material.WATER) && isPlayerOwner((EntityPlayer)entity) && !world.isRemote)
-        {
-            entity.sendMessage(new TextComponentString("\2474>>\247f Your " + getCreepTypeName() + " has jumped off of your head, they hate being underwater! \2474<<"));
-        }
     }
 
     @Override
@@ -1088,20 +1084,23 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         super.onLivingUpdate();
 
-        /*EntityLivingBase target = getAttackTarget();
-
-        if (target != null && target.equals(getOwner()))
-        {
-            setAttackTarget(null);
-        }*/
-
-        // TODO: fix this bullshit
-
         updateArmSwingProgress();
 
-        if (isRiding() && isInsideOfMaterial(Material.WATER))
+        Entity ridingEntity = getRidingEntity();
+
+        if (isInsideOfMaterial(Material.WATER) && ridingEntity != null && ridingEntity.isInsideOfMaterial(Material.WATER))
         {
             dismountRidingEntity();
+
+            if (world.isRemote)
+            {
+                CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(getEntityId()));
+
+                if (ridingEntity instanceof EntityPlayer && isPlayerOwner((EntityPlayer)ridingEntity))
+                {
+                    ridingEntity.sendMessage(new TextComponentString("\2474>>\247f Your " + getCreepTypeName() + " has jumped off of your head, they hate being underwater! \2474<<"));
+                }
+            }
         }
 
         if (getBrightness() > 0.5f)
@@ -1831,6 +1830,13 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void onUpdate()
     {
+        EntityLivingBase target = getAttackTarget();
+
+        if (target != null && target.equals(getOwner()))
+        {
+            setAttackTarget(null);
+        }
+
         super.onUpdate();
 
         if (getHammerSwing() < 0.0f)

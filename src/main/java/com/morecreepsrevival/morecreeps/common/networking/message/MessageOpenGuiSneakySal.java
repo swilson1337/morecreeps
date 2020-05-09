@@ -1,9 +1,8 @@
 package com.morecreepsrevival.morecreeps.common.networking.message;
 
 import com.morecreepsrevival.morecreeps.client.gui.GuiSneakySal;
-import com.morecreepsrevival.morecreeps.client.gui.GuiTamableEntity;
-import com.morecreepsrevival.morecreeps.common.entity.EntityCreepBase;
 import com.morecreepsrevival.morecreeps.common.entity.EntitySneakySal;
+import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -49,6 +48,8 @@ public class MessageOpenGuiSneakySal implements IMessage
 
                 if (sal != null)
                 {
+                    minecraft.player.playSound(CreepsSoundHandler.salGreetingSound, 1.0f, 1.0f);
+
                     minecraft.displayGuiScreen(new GuiSneakySal(sal));
                 }
             });

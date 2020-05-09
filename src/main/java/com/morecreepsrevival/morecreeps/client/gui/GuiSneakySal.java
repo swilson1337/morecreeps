@@ -7,8 +7,6 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageBuyItemFromSal;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageRipOffSal;
-import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -67,8 +65,6 @@ public class GuiSneakySal extends GuiScreen
         buttonList.add(new GuiButton(10, width / 2 - 170, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[8]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[shopItems[8]].getUnlocalizedName() + ".name")));
 
         buttonList.add(new GuiButton(11, width / 2 + 2, height / 4 + 125 + byte0, 155, 20, "\2472$\2476" + Math.round(EntitySneakySal.itemPrices[shopItems[9]] * salePrice) + " \247f" + I18n.format(EntitySneakySal.itemDefinitions[shopItems[9]].getUnlocalizedName() + ".name")));
-
-        Minecraft.getMinecraft().player.playSound(CreepsSoundHandler.salGreetingSound, 1.0f, 1.0f);
     }
 
     @Override
