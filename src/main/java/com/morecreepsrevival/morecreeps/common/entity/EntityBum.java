@@ -341,7 +341,7 @@ public class EntityBum extends EntityCreepBase implements IMob
 
         setTimeToPee(getTimeToPee() - 1);
 
-        if (getTimeToPee() < 0 && !getBumGave() && MoreCreepsConfig.publicUrination)
+        if (getAttackTarget() == null && getTimeToPee() < 0 && !getBumGave() && MoreCreepsConfig.publicUrination)
         {
             isJumping = false;
 

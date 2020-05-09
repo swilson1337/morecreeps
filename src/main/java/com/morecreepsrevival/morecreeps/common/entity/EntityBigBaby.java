@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIAttackMelee;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
@@ -77,7 +78,7 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
 
         tasks.addTask(2, new EntityAIBreakDoor(this));
 
-        tasks.addTask(3, new EntityAIAttackMelee(this, 1.0d, true));
+        tasks.addTask(3, new EntityCreepAIAttackMelee(this, 1.0d, 4.0d, true));
 
         tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
 
