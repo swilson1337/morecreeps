@@ -1080,6 +1080,12 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
+    public boolean shouldDismountInWater(Entity rider)
+    {
+        return false;
+    }
+
+    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
