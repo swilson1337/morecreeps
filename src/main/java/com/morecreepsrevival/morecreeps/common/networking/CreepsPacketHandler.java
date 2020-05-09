@@ -40,6 +40,8 @@ public class CreepsPacketHandler
 
         registerMessage(MessageDismountEntity.MessageHandler.class, MessageDismountEntity.class, Side.SERVER);
 
+        registerMessage(MessageDismountEntity.MessageHandler.class, MessageDismountEntity.class, Side.CLIENT);
+
         registerMessage(MessageOpenGuiSneakySal.MessageHandler.class, MessageOpenGuiSneakySal.class, Side.CLIENT);
 
         registerMessage(MessageRipOffSal.MessageHandler.class, MessageRipOffSal.class, Side.SERVER);

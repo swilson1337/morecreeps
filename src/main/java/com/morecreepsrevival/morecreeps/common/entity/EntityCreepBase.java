@@ -123,6 +123,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void dismountRidingEntity()
     {
+        if (!world.isRemote)
+        {
+            CreepsPacketHandler.INSTANCE.sendToAll(new MessageDismountEntity(getEntityId()));
+        }
+
         fallDistance = -25.0f;
 
         dataManager.set(unmountTimer, 20);
@@ -1080,34 +1085,20 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public boolean shouldDismountInWater(Entity rider)
-    {
-        return false;
-    }
-
-    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
 
         updateArmSwingProgress();
 
-        Entity ridingEntity = getRidingEntity();
+        /*Entity ridingEntity = getRidingEntity();
 
-        if (isInsideOfMaterial(Material.WATER) && ridingEntity != null && ridingEntity.isInsideOfMaterial(Material.WATER))
+        if (isInsideOfMaterial(Material.WATER) && ridingEntity != null && ridingEntity.isInsideOfMaterial(Material.WATER) && world.isRemote)
         {
             dismountRidingEntity();
 
-            if (world.isRemote)
-            {
-                CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(getEntityId()));
-
-                if (ridingEntity instanceof EntityPlayer && isPlayerOwner((EntityPlayer)ridingEntity))
-                {
-                    ridingEntity.sendMessage(new TextComponentString("\2474>>\247f Your " + getCreepTypeName() + " has jumped off of your head, they hate being underwater! \2474<<"));
-                }
-            }
-        }
+            CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(getEntityId()));
+        }*/
 
         if (getBrightness() > 0.5f)
         {
