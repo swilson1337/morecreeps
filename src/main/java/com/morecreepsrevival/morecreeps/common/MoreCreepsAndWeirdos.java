@@ -24,6 +24,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -34,6 +35,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -402,6 +404,23 @@ public class MoreCreepsAndWeirdos
             if (result.status == ForgeVersion.Status.OUTDATED && result.target != null && MoreCreepsConfig.shouldShowUpdateGuiForVersion(result.target.toString()))
             {
                 Minecraft.getMinecraft().displayGuiScreen(new GuiUpdate(result));
+            }
+        }
+    }
+
+    @EventHandler
+    public static void serverStopping(FMLServerStoppingEvent event)
+    {
+        for (EntityPlayerMP player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers())
+        {
+            for (Entity entity : player.getPassengers())
+            {
+                if (entity instanceof EntityCreepBase)
+                {
+                    EntityCreepBase creep = (EntityCreepBase)entity;
+
+                    creep.cloneEntity();
+                }
             }
         }
     }
