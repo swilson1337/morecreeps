@@ -34,6 +34,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
+import java.util.List;
 import java.util.UUID;
 
 public class EntityCreepBase extends EntityCreature implements IEntityOwnable
@@ -368,8 +369,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
-        super.readEntityFromNBT(compound);
-
         NBTTagCompound props = compound.getCompoundTag("MoreCreepsEntity");
 
         if (props.hasKey("ModelSize"))
@@ -467,6 +466,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         updateAttributes();
+
+        super.readEntityFromNBT(compound);
     }
 
     public void determineBaseTexture()
@@ -1993,12 +1994,54 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
             newEntity.readEntityFromNBT(compound);
 
+            newEntity.setHealth(getHealth());
+
             world.spawnEntity(newEntity);
+
+            newEntity.fallDistance = -25.0f;
 
             setDead();
         }
         catch (Exception ignored)
         {
+        }
+    }
+
+    @Override
+    protected void collideWithNearbyEntities()
+    {
+        List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox(), EntitySelectors.getTeamCollisionPredicate(this));
+
+        if (!list.isEmpty())
+        {
+            if (!isTamed())
+            {
+                int i = this.world.getGameRules().getInt("maxEntityCramming");
+
+                if (i > 0 && list.size() > i - 1 && this.rand.nextInt(4) == 0)
+                {
+                    int j = 0;
+
+                    for (int k = 0; k < list.size(); ++k)
+                    {
+                        if (!list.get(k).isRiding())
+                        {
+                            ++j;
+                        }
+                    }
+
+                    if (j > i - 1)
+                    {
+                        this.attackEntityFrom(DamageSource.CRAMMING, 6.0F);
+                    }
+                }
+            }
+
+            for (int l = 0; l < list.size(); ++l)
+            {
+                Entity entity = list.get(l);
+                this.collideWithEntity(entity);
+            }
         }
     }
 }
