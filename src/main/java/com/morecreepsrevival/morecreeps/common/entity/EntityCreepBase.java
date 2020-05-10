@@ -8,7 +8,6 @@ import com.morecreepsrevival.morecreeps.common.helpers.EffectHelper;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiTamableEntity;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -34,6 +33,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
 import java.util.UUID;
 
 public class EntityCreepBase extends EntityCreature implements IEntityOwnable
@@ -1970,5 +1970,35 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public boolean canBeRevived()
     {
         return false;
+    }
+
+    public void cloneEntity()
+    {
+        if (world.isRemote)
+        {
+            return;
+        }
+
+        try
+        {
+            Constructor<? extends EntityCreepBase> constructor = getClass().getConstructor(World.class);
+
+            EntityCreepBase newEntity = constructor.newInstance(world);
+
+            newEntity.copyLocationAndAnglesFrom(this);
+
+            NBTTagCompound compound = new NBTTagCompound();
+
+            writeEntityToNBT(compound);
+
+            newEntity.readEntityFromNBT(compound);
+
+            world.spawnEntity(newEntity);
+
+            setDead();
+        }
+        catch (Exception ignored)
+        {
+        }
     }
 }
