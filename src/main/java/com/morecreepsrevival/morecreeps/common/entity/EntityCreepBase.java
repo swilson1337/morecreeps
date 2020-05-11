@@ -368,8 +368,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
-        super.readEntityFromNBT(compound);
-
         NBTTagCompound props = compound.getCompoundTag("MoreCreepsEntity");
 
         if (props.hasKey("ModelSize"))
@@ -467,6 +465,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         updateAttributes();
+
+        super.readEntityFromNBT(compound);
     }
 
     public void determineBaseTexture()
@@ -1420,7 +1420,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         boolean emptyName = true;
 
-        if (getCreepName().length() < 1)
+        if (getCreepName().length() < 1 && !world.isRemote)
         {
             String[] names = getTamedNames();
 
@@ -1993,7 +1993,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
             newEntity.readEntityFromNBT(compound);
 
+            newEntity.setHealth(getHealth());
+
             world.spawnEntity(newEntity);
+
+            newEntity.fallDistance = -25.0f;
 
             setDead();
         }
