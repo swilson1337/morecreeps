@@ -599,7 +599,7 @@ public class EntityCaveman extends EntityCreepBase
             {
                 playSound(CreepsSoundHandler.cavemanNiceSound, 0.5f, getSoundPitch());
 
-                if (rand.nextInt(100) > 65)
+                if (!world.isRemote && rand.nextInt(100) > 65)
                 {
                     setFrozenLevel(getFrozenLevel() - 1);
 

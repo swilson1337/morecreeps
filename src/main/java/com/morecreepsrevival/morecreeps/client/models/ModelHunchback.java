@@ -127,7 +127,7 @@ public class ModelHunchback extends ModelBase
             bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 5F;
             bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
             bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-            bipedLeftArm.rotateAngleX += bipedBody.rotateAngleX;
+            bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
             f6 = 1.0F - swingProgress;
             f6 *= f6;
             f6 *= f6;
