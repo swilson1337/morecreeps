@@ -8,6 +8,7 @@ import com.morecreepsrevival.morecreeps.common.helpers.EffectHelper;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiTamableEntity;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -93,6 +94,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     protected EnumCreatureType creatureType = EnumCreatureType.CREATURE;
 
     protected boolean spawnOnlyAtNight = false;
+
+    private int internalWanderState = 0;
 
     public EntityCreepBase(World worldIn)
     {
@@ -693,8 +696,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public void setWanderState(int i)
     {
         dataManager.set(wanderState, i);
-
-        initEntityAI();
     }
 
     public int getWanderState()
@@ -957,7 +958,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 {
                     if (!player.equals(getRidingEntity()))
                     {
-                        startRiding(player, isStackable());
+                        if (isStackable())
+                        {
+                            copyLocationAndAnglesFrom(player);
+
+                            startRiding(player, true);
+                        }
+                        else
+                        {
+                            startRiding(player);
+                        }
                     }
                     else
                     {
@@ -1827,6 +1837,13 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void onUpdate()
     {
+        if (internalWanderState != getWanderState())
+        {
+            initEntityAI();
+
+            internalWanderState = getWanderState();
+        }
+
         EntityLivingBase target = getAttackTarget();
 
         if (target != null && target.equals(getOwner()))
@@ -1997,12 +2014,21 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
             world.spawnEntity(newEntity);
 
-            newEntity.fallDistance = -25.0f;
-
             setDead();
         }
         catch (Exception ignored)
         {
         }
+    }
+
+    @Override
+    public boolean isInsideOfMaterial(@Nonnull Material material)
+    {
+        if (material == Material.WATER && isRiding() && dataManager.get(unmountTimer) > 0)
+        {
+            return false;
+        }
+
+        return super.isInsideOfMaterial(material);
     }
 }
