@@ -6,6 +6,7 @@ import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIOwnerHurtB
 import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIOwnerHurtTarget;
 import com.morecreepsrevival.morecreeps.common.helpers.EffectHelper;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageOpenGuiTamableEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -33,6 +34,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
 import java.util.UUID;
 
 public class EntityCreepBase extends EntityCreature implements IEntityOwnable
@@ -93,6 +95,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     protected boolean spawnOnlyAtNight = false;
 
+    private int internalWanderState = 0;
+
     public EntityCreepBase(World worldIn)
     {
         super(worldIn);
@@ -122,6 +126,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void dismountRidingEntity()
     {
+        if (!world.isRemote)
+        {
+            CreepsPacketHandler.INSTANCE.sendToAll(new MessageDismountEntity(getEntityId()));
+        }
+
         fallDistance = -25.0f;
 
         dataManager.set(unmountTimer, 20);
@@ -138,11 +147,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         super.dismountRidingEntity();
 
         onDismount(entity);
-
-        if (entity != null && entity != getRidingEntity() && entity instanceof EntityPlayer && entity.isInsideOfMaterial(Material.WATER) && isPlayerOwner((EntityPlayer)entity) && !world.isRemote)
-        {
-            entity.sendMessage(new TextComponentString("\2474>>\247f Your " + getCreepTypeName() + " has jumped off of your head, they hate being underwater! \2474<<"));
-        }
     }
 
     @Override
@@ -367,8 +371,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
-        super.readEntityFromNBT(compound);
-
         NBTTagCompound props = compound.getCompoundTag("MoreCreepsEntity");
 
         if (props.hasKey("ModelSize"))
@@ -466,6 +468,8 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
 
         updateAttributes();
+
+        super.readEntityFromNBT(compound);
     }
 
     public void determineBaseTexture()
@@ -692,8 +696,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public void setWanderState(int i)
     {
         dataManager.set(wanderState, i);
-
-        initEntityAI();
     }
 
     public int getWanderState()
@@ -956,7 +958,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 {
                     if (!player.equals(getRidingEntity()))
                     {
-                        startRiding(player, isStackable());
+                        if (isStackable())
+                        {
+                            copyLocationAndAnglesFrom(player);
+
+                            startRiding(player, true);
+                        }
+                        else
+                        {
+                            startRiding(player);
+                        }
                     }
                     else
                     {
@@ -1088,19 +1099,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         super.onLivingUpdate();
 
-        EntityLivingBase target = getAttackTarget();
-
-        if (target != null && target.equals(getOwner()))
-        {
-            setAttackTarget(null);
-        }
-
         updateArmSwingProgress();
 
-        if (isRiding() && isInsideOfMaterial(Material.WATER))
+        /*Entity ridingEntity = getRidingEntity();
+
+        if (isInsideOfMaterial(Material.WATER) && ridingEntity != null && ridingEntity.isInsideOfMaterial(Material.WATER) && world.isRemote)
         {
             dismountRidingEntity();
-        }
+
+            CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(getEntityId()));
+        }*/
 
         if (getBrightness() > 0.5f)
         {
@@ -1422,7 +1430,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         boolean emptyName = true;
 
-        if (getCreepName().length() < 1)
+        if (getCreepName().length() < 1 && !world.isRemote)
         {
             String[] names = getTamedNames();
 
@@ -1829,6 +1837,20 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void onUpdate()
     {
+        if (internalWanderState != getWanderState())
+        {
+            initEntityAI();
+
+            internalWanderState = getWanderState();
+        }
+
+        EntityLivingBase target = getAttackTarget();
+
+        if (target != null && target.equals(getOwner()))
+        {
+            setAttackTarget(null);
+        }
+
         super.onUpdate();
 
         if (getHammerSwing() < 0.0f)
@@ -1965,5 +1987,48 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public boolean canBeRevived()
     {
         return false;
+    }
+
+    public void cloneEntity()
+    {
+        if (world.isRemote)
+        {
+            return;
+        }
+
+        try
+        {
+            Constructor<? extends EntityCreepBase> constructor = getClass().getConstructor(World.class);
+
+            EntityCreepBase newEntity = constructor.newInstance(world);
+
+            newEntity.copyLocationAndAnglesFrom(this);
+
+            NBTTagCompound compound = new NBTTagCompound();
+
+            writeEntityToNBT(compound);
+
+            newEntity.readEntityFromNBT(compound);
+
+            newEntity.setHealth(getHealth());
+
+            world.spawnEntity(newEntity);
+
+            setDead();
+        }
+        catch (Exception ignored)
+        {
+        }
+    }
+
+    @Override
+    public boolean isInsideOfMaterial(@Nonnull Material material)
+    {
+        if (material == Material.WATER && isRiding() && dataManager.get(unmountTimer) > 0)
+        {
+            return false;
+        }
+
+        return super.isInsideOfMaterial(material);
     }
 }

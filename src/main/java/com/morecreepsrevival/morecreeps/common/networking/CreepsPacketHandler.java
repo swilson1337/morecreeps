@@ -40,15 +40,19 @@ public class CreepsPacketHandler
 
         registerMessage(MessageDismountEntity.MessageHandler.class, MessageDismountEntity.class, Side.SERVER);
 
+        registerMessage(MessageDismountEntity.MessageHandler.class, MessageDismountEntity.class, Side.CLIENT);
+
         registerMessage(MessageOpenGuiSneakySal.MessageHandler.class, MessageOpenGuiSneakySal.class, Side.CLIENT);
 
         registerMessage(MessageRipOffSal.MessageHandler.class, MessageRipOffSal.class, Side.SERVER);
 
         registerMessage(MessageBuyItemFromSal.MessageHandler.class, MessageBuyItemFromSal.class, Side.SERVER);
 
-        registerMessage(MessageClearLawyerFine.MessageHandler.class, MessageClearLawyerFine.class, Side.CLIENT);
+        registerMessage(MessageSetLawyerFine.MessageHandler.class, MessageSetLawyerFine.class, Side.CLIENT);
 
         registerMessage(MessageOpenGuiTamableEntityName.MessageHandler.class, MessageOpenGuiTamableEntityName.class, Side.CLIENT);
+
+        registerMessage(MessageSetJumping.MessageHandler.class, MessageSetJumping.class, Side.SERVER);
     }
 
     public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType, Side side)

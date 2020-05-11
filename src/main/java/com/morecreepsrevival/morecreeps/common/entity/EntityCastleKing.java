@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.entity.ai.EntityCreepAIAttackMelee;
 import com.morecreepsrevival.morecreeps.common.helpers.InventoryHelper;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
@@ -31,7 +32,7 @@ public class EntityCastleKing extends EntityCreepBase
 
         setCreepTypeName("Castle King");
 
-        baseSpeed = 0.0f;
+        baseSpeed = 0.0d;
 
         baseAttackDamage = 4.0d;
 
@@ -65,7 +66,7 @@ public class EntityCastleKing extends EntityCreepBase
 
         tasks.addTask(1, new EntityAISwimming(this));
 
-        tasks.addTask(2, new EntityAIAttackMelee(this, 1.0d, true));
+        tasks.addTask(2, new EntityCreepAIAttackMelee(this, 1.0d, 4.0d, true));
 
         tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.5d));
 
@@ -102,7 +103,7 @@ public class EntityCastleKing extends EntityCreepBase
             {
                 dataManager.set(intruderID, player.getEntityId());
 
-                baseSpeed = 0.222f;
+                baseSpeed = 0.222d;
 
                 updateMoveSpeed();
             }

@@ -1,8 +1,11 @@
 package com.morecreepsrevival.morecreeps.common;
 
 import com.morecreepsrevival.morecreeps.client.gui.GuiUpdate;
+import com.morecreepsrevival.morecreeps.common.capabilities.IPlayerJumping;
+import com.morecreepsrevival.morecreeps.common.capabilities.PlayerJumpingProvider;
 import com.morecreepsrevival.morecreeps.common.entity.*;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessageDismountEntity;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageSetJumping;
 import com.morecreepsrevival.morecreeps.proxy.IProxy;
 import com.morecreepsrevival.morecreeps.common.capabilities.CreepsCapabilityHandler;
 import com.morecreepsrevival.morecreeps.common.networking.message.MessagePlayWelcomeSound;
@@ -21,6 +24,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -31,6 +35,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -52,7 +57,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.17";
+    public static final String version = "1.0.18";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -344,11 +349,18 @@ public class MoreCreepsAndWeirdos
             return;
         }
 
-        if (proxy.isJumpKeyDown())
+        IPlayerJumping capability = event.player.getCapability(PlayerJumpingProvider.capability, null);
+
+        if (capability != null)
         {
-        }
-        else
-        {
+            boolean isJumping = proxy.isJumpKeyDown(event.player);
+
+            if (isJumping != capability.getJumping())
+            {
+                CreepsPacketHandler.INSTANCE.sendToServer(new MessageSetJumping(isJumping));
+
+                capability.setJumping(isJumping);
+            }
         }
     }
 
@@ -392,6 +404,23 @@ public class MoreCreepsAndWeirdos
             if (result.status == ForgeVersion.Status.OUTDATED && result.target != null && MoreCreepsConfig.shouldShowUpdateGuiForVersion(result.target.toString()))
             {
                 Minecraft.getMinecraft().displayGuiScreen(new GuiUpdate(result));
+            }
+        }
+    }
+
+    @EventHandler
+    public static void serverStopping(FMLServerStoppingEvent event)
+    {
+        for (EntityPlayerMP player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers())
+        {
+            for (Entity entity : player.getPassengers())
+            {
+                if (entity instanceof EntityCreepBase)
+                {
+                    EntityCreepBase creep = (EntityCreepBase)entity;
+
+                    creep.cloneEntity();
+                }
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.morecreepsrevival.morecreeps.proxy;
 
+import com.morecreepsrevival.morecreeps.common.capabilities.IPlayerJumping;
+import com.morecreepsrevival.morecreeps.common.capabilities.PlayerJumpingProvider;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -25,8 +28,15 @@ public class ServerProxy implements IProxy
     }
 
     @Override
-    public boolean isJumpKeyDown()
+    public boolean isJumpKeyDown(EntityPlayer player)
     {
+        IPlayerJumping capability = player.getCapability(PlayerJumpingProvider.capability, null);
+
+        if (capability != null)
+        {
+            return capability.getJumping();
+        }
+
         return false;
     }
 }

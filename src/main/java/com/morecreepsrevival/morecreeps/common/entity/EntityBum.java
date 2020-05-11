@@ -236,11 +236,14 @@ public class EntityBum extends EntityCreepBase implements IMob
                             world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.02D, rand.nextGaussian() * 0.02D, rand.nextGaussian() * 0.02D);
                         }
 
-                        for (int k = 0; k < value; k++)
+                        if (!world.isRemote)
                         {
-                            dropItem(Item.getItemById(rand.nextInt(95)), 1);
+                            for (int k = 0; k < value; k++)
+                            {
+                                dropItem(Item.getItemById(rand.nextInt(95)), 1);
 
-                            dropItem(Items.IRON_SHOVEL, 1);
+                                dropItem(Items.IRON_SHOVEL, 1);
+                            }
                         }
 
                         return true;
@@ -276,7 +279,7 @@ public class EntityBum extends EntityCreepBase implements IMob
 
                         itemStack.shrink(1);
 
-                        if (rand.nextInt(4) == 0)
+                        if (!world.isRemote && rand.nextInt(4) == 0)
                         {
                             BlockPos blockPos = new BlockPos(posX, posY, posZ);
 
@@ -338,7 +341,7 @@ public class EntityBum extends EntityCreepBase implements IMob
 
         setTimeToPee(getTimeToPee() - 1);
 
-        if (getTimeToPee() < 0 && !getBumGave() && MoreCreepsConfig.publicUrination)
+        if (getAttackTarget() == null && getTimeToPee() < 0 && !getBumGave() && MoreCreepsConfig.publicUrination)
         {
             isJumping = false;
 

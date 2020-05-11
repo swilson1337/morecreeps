@@ -5,7 +5,7 @@ import com.morecreepsrevival.morecreeps.common.capabilities.LawyerFineProvider;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.networking.CreepsPacketHandler;
-import com.morecreepsrevival.morecreeps.common.networking.message.MessageClearLawyerFine;
+import com.morecreepsrevival.morecreeps.common.networking.message.MessageSetLawyerFine;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
@@ -256,7 +256,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                 {
                     capability.setFine(0);
 
-                    CreepsPacketHandler.INSTANCE.sendTo(new MessageClearLawyerFine(), (EntityPlayerMP)player);
+                    CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(0), (EntityPlayerMP)player);
                 }
             }
         }
@@ -288,6 +288,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                         if (capability != null)
                         {
                             capability.addFine(25);
+
+                            if (!world.isRemote)
+                            {
+                                CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+                            }
                         }
 
                         playSound(CreepsSoundHandler.lawyerMoneyHitSound, getSoundVolume(), getSoundPitch());
@@ -316,6 +321,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                         if (capability != null)
                         {
                             capability.addFine(10);
+
+                            if (!world.isRemote)
+                            {
+                                CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+                            }
                         }
 
                         playSound(CreepsSoundHandler.lawyerMoneyHitSound, getSoundVolume(), getSoundPitch());
@@ -344,6 +354,11 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                 if (capability != null)
                 {
                     capability.addFine(50);
+
+                    if (!world.isRemote)
+                    {
+                        CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+                    }
                 }
 
                 setRevengeTarget(playerTarget);
@@ -401,18 +416,20 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
                 {
                     smoke2();
 
+                    EntityLawyerFromHell lawyer = new EntityLawyerFromHell(world);
+
+                    lawyer.setLocationAndAngles(entity.posX + (double)(rand.nextInt(4) - rand.nextInt(4)), entity.posY - 1.5d, entity.posZ + (double)(rand.nextInt(4) - rand.nextInt(4)), rotationYaw, 0.0f);
+
+                    lawyer.motionY = 20.0d;
+
+                    lawyer.setUndead(true);
+
+                    lawyer.determineBaseTexture();
+
+                    lawyer.setInitialHealth();
+
                     if (!world.isRemote)
                     {
-                        EntityLawyerFromHell lawyer = new EntityLawyerFromHell(world);
-
-                        lawyer.setLocationAndAngles(entity.posX + (double)(rand.nextInt(4) - rand.nextInt(4)), entity.posY - 1.5d, entity.posZ + (double)(rand.nextInt(4) - rand.nextInt(4)), rotationYaw, 0.0f);
-
-                        lawyer.setUndead(true);
-
-                        lawyer.determineBaseTexture();
-
-                        lawyer.setInitialHealth();
-
                         world.spawnEntity(lawyer);
                     }
                 }
@@ -421,7 +438,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
             {
                 // TODO: spawn bum
             }
-            else if (rand.nextInt(10) == 0)
+            else if (!world.isRemote && rand.nextInt(10) == 0)
             {
                 int randInt = rand.nextInt(40) + 10;
 
