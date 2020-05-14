@@ -151,4 +151,10 @@ public class EntityCastleGuard extends EntityCreepBase implements IMob
 
         return super.attackEntityFrom(damageSource, amt);
     }
+
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        return true;
+    }
 }
