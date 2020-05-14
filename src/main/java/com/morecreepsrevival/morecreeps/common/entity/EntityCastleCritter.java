@@ -113,4 +113,10 @@ public class EntityCastleCritter extends EntityCreepBase implements IMob
     {
         return 2;
     }
+
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        return true;
+    }
 }
