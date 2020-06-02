@@ -307,7 +307,7 @@ public class EntityGrow extends EntityThrowable
                         {
                             ratMan.growModelSize(0.2f + growBonus);
 
-                            ratMan.increaseMoveSpeed(0.15f);
+                            //ratMan.increaseMoveSpeed(0.15f);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityGuineaPig)
