@@ -156,7 +156,10 @@ public class EntityGooDonut extends EntityThrowable
         {
             exploded = true;
 
-            world.createExplosion(null, posX, posY, posZ, 2.0f, true);
+            if (!world.isRemote)
+            {
+                world.createExplosion(null, posX, posY, posZ, 2.0f, true);
+            }
 
             setDead();
         }

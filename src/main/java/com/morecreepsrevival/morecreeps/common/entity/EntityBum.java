@@ -1,9 +1,11 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.client.particles.FxPee;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
@@ -363,7 +365,16 @@ public class EntityBum extends EntityCreepBase implements IMob
 
             if (world.isRemote)
             {
-                // TODO: pee effect
+                double d = -MathHelper.sin((rotationYaw * (float)Math.PI) / 180.0f);
+
+                double d1 = MathHelper.cos((rotationYaw * (float)Math.PI) / 180.0f);
+
+                for (int i = 0; i < 25; i++)
+                {
+                    FxPee pee = new FxPee(world, posX + d * 0.20000000000000001d, (posY + 0.75d) - (double)((1.0f - getModelSize()) * 0.8f), posZ + d1 * 0.20000000000000001d, 0.0d, 0.0d, 0.0d, d, d1);
+
+                    Minecraft.getMinecraft().effectRenderer.addEffect(pee);
+                }
             }
 
             if (getTimeToPee() < -200)
