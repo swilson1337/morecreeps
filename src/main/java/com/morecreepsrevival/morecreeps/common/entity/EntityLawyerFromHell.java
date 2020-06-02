@@ -9,6 +9,7 @@ import com.morecreepsrevival.morecreeps.common.networking.message.MessageSetLawy
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import com.morecreepsrevival.morecreeps.common.world.JailManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
@@ -105,22 +106,38 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
     {
         super.onUpdate();
 
-        if (!getUndead() && getAttackTarget() == null)
+        if (!getUndead())
         {
-            EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
+            EntityLivingBase target = getAttackTarget();
 
-            if (player != null)
+            if (target == null)
             {
-                ILawyerFine capability = player.getCapability(LawyerFineProvider.capability, null);
+                EntityPlayer player = world.getNearestPlayerNotCreative(this, 16.0d);
 
-                if (capability != null)
+                if (player != null)
                 {
-                    int fine = capability.getFine();
+                    ILawyerFine capability = player.getCapability(LawyerFineProvider.capability, null);
 
-                    if (fine > 0)
+                    if (capability != null)
                     {
-                        setAttackTarget(player);
+                        int fine = capability.getFine();
+
+                        if (fine > 0)
+                        {
+                            setAttackTarget(player);
+                        }
                     }
+                }
+            }
+            else if (target instanceof EntityPlayer)
+            {
+                EntityPlayer targetPlayer = (EntityPlayer)target;
+
+                ILawyerFine capability = targetPlayer.getCapability(LawyerFineProvider.capability, null);
+
+                if (capability != null && capability.getFine() < 1)
+                {
+                    setAttackTarget(null);
                 }
             }
         }

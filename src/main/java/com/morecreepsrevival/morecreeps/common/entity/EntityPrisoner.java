@@ -1,8 +1,12 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -11,6 +15,7 @@ import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -26,6 +31,10 @@ public class EntityPrisoner extends EntityCreepBase
     };
 
     private static final DataParameter<Boolean> evil = EntityDataManager.<Boolean>createKey(EntityPrisoner.class, DataSerializers.BOOLEAN);
+
+    private static final DataParameter<Boolean> saved = EntityDataManager.<Boolean>createKey(EntityPrisoner.class, DataSerializers.BOOLEAN);
+
+    private int timeOnLand = 0;
 
     public EntityPrisoner(World worldIn)
     {
@@ -46,6 +55,8 @@ public class EntityPrisoner extends EntityCreepBase
         super.entityInit();
 
         dataManager.register(evil, Boolean.valueOf(rand.nextInt(2) == 0));
+
+        dataManager.register(saved, Boolean.valueOf(false));
     }
 
     @Override
@@ -126,6 +137,16 @@ public class EntityPrisoner extends EntityCreepBase
         return ((Boolean)dataManager.get(evil)).booleanValue();
     }
 
+    private void setSaved(boolean b)
+    {
+        dataManager.set(saved, Boolean.valueOf(b));
+    }
+
+    public boolean getSaved()
+    {
+        return ((Boolean)dataManager.get(saved)).booleanValue();
+    }
+
     @Override
     public boolean isEntityInsideOpaqueBlock()
     {
@@ -154,6 +175,8 @@ public class EntityPrisoner extends EntityCreepBase
 
         props.setBoolean("Evil", getEvil());
 
+        props.setBoolean("Saved", getSaved());
+
         compound.setTag("MoreCreepsPrisoner", props);
     }
 
@@ -167,6 +190,11 @@ public class EntityPrisoner extends EntityCreepBase
         if (props.hasKey("Evil"))
         {
             setEvil(props.getBoolean("Evil"));
+        }
+
+        if (props.hasKey("Saved"))
+        {
+            setSaved(props.getBoolean("Saved"));
         }
     }
 
@@ -190,5 +218,87 @@ public class EntityPrisoner extends EntityCreepBase
                 world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width - (double)i, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)i - (double)width, d, d1, d2);
             }
         }
+    }
+
+    @Override
+    public void onLivingUpdate()
+    {
+        super.onLivingUpdate();
+
+        if (!world.isRemote && !isInWater() && !getEvil() && !getSaved() && timeOnLand++ > 50)
+        {
+            EntityPlayer player = world.getClosestPlayerToEntity(this, 2.0d);
+
+            if (player != null)
+            {
+                double dist = player.getDistanceSq(this);
+
+                if (dist < 9.0d && canEntityBeSeen(player))
+                {
+                    giveReward(player);
+                }
+            }
+        }
+    }
+
+    private void giveReward(EntityPlayer player)
+    {
+        if (world.isRemote)
+        {
+            return;
+        }
+        else if (rand.nextInt(4) == 0)
+        {
+            playSound(CreepsSoundHandler.prisonerSorrySound, 1.0f, 1.0f);
+
+            return;
+        }
+
+        playSound(CreepsSoundHandler.prisonerRewardSound, 1.0f, 1.0f);
+
+        setSaved(true);
+
+        faceEntity(player, 0.0f, 0.0f);
+
+        EntityItem item = null;
+
+        switch (rand.nextInt(4) + 1)
+        {
+            case 1:
+                item = entityDropItem(new ItemStack(CreepsItemHandler.lolly, rand.nextInt(2) + 1), 1.0f);
+
+                break;
+            case 2:
+                item = entityDropItem(new ItemStack(Items.BREAD, 1), 1.0f);
+
+                break;
+            case 3:
+                item = entityDropItem(new ItemStack(Items.CAKE, 1), 1.0f);
+
+                break;
+            case 4:
+                item = entityDropItem(new ItemStack(CreepsItemHandler.money, rand.nextInt(20) + 1), 1.0f);
+
+                break;
+            default:
+                item = entityDropItem(new ItemStack(CreepsItemHandler.money, rand.nextInt(5) + 1), 1.0f);
+
+                break;
+        }
+
+        if (item == null)
+        {
+            return;
+        }
+
+        double d = -MathHelper.sin((player.rotationYaw * (float)Math.PI) / 180.0f);
+
+        double d1 = MathHelper.cos((player.rotationYaw * (float)Math.PI) / 180.0f);
+
+        item.posX = player.posX + d * 0.5d;
+
+        item.posY = player.posY + 0.5d;
+
+        item.posZ = player.posZ + d1 * 0.5d;
     }
 }

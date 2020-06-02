@@ -1,11 +1,11 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelGrowbotGregg extends ModelBase
+public class ModelGrowbotGregg extends ModelBiped
 {
     public ModelRenderer bipedHead;
     public ModelRenderer bipedBody;
