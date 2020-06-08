@@ -1332,6 +1332,13 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         updateMoveSpeed();
     }
 
+    public void increaseMoveSpeed(float f)
+    {
+        baseSpeed += f;
+
+        updateMoveSpeed();
+    }
+
     protected void setSpeedBoost(int i)
     {
         dataManager.set(speedBoost, i);

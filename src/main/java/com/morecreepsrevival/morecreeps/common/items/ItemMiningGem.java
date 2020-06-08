@@ -59,6 +59,8 @@ public class ItemMiningGem extends CreepsItem
             {
                 BlockPos blockPos = rayTraceResult.getBlockPos();
 
+                int x = blockPos.getX();
+
                 int y = blockPos.getY();
 
                 int z = blockPos.getZ();
@@ -70,17 +72,20 @@ public class ItemMiningGem extends CreepsItem
                     if (!world.isRemote)
                     {
                         player.getHeldItem(hand).damageItem(1, player);
+                    }
 
-                        player.playSound(CreepsSoundHandler.miningGemSound, 1.0f, 1.0f);
+                    player.playSound(CreepsSoundHandler.miningGemSound, 1.0f, 1.0f);
 
-                        for (int i = 0; i < 20; i++)
-                        {
-                            double d1 = itemRand.nextGaussian() * 0.02D;
-                            double d4 = itemRand.nextGaussian() * 0.02D;
-                            double d7 = itemRand.nextGaussian() * 0.02D;
-                            world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (double)i + (double)(itemRand.nextFloat() * 1.5F), (double)((float)y + 0.5F) + (double)(itemRand.nextFloat() * 2.5F), (double)z + (double)(itemRand.nextFloat() * 1.5F), d1, d4, d7);
-                        }
+                    for (int i = 0; i < 20; i++)
+                    {
+                        double d1 = itemRand.nextGaussian() * 0.02D;
+                        double d4 = itemRand.nextGaussian() * 0.02D;
+                        double d7 = itemRand.nextGaussian() * 0.02D;
+                        world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (double)x + (double)(itemRand.nextFloat() * 1.5F), (double)((float)y + 0.5F) + (double)(itemRand.nextFloat() * 2.5F), (double)z + (double)(itemRand.nextFloat() * 1.5F), d1, d4, d7);
+                    }
 
+                    if (!world.isRemote)
+                    {
                         switch (itemRand.nextInt(7))
                         {
                             case 1:
@@ -142,7 +147,7 @@ public class ItemMiningGem extends CreepsItem
                         double d2 = itemRand.nextGaussian() * 0.02D;
                         double d5 = itemRand.nextGaussian() * 0.02D;
                         double d8 = itemRand.nextGaussian() * 0.02D;
-                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double)i + (double)(itemRand.nextFloat() * 1.5F), (double)((float)y + 0.5F) + (double)(itemRand.nextFloat() * 2.5F), (double)z + (double)(itemRand.nextFloat() * 1.5F), d2, d5, d8);
+                        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double)x + (double)(itemRand.nextFloat() * 1.5F), (double)((float)y + 0.5F) + (double)(itemRand.nextFloat() * 2.5F), (double)z + (double)(itemRand.nextFloat() * 1.5F), d2, d5, d8);
                     }
                 }
             }
