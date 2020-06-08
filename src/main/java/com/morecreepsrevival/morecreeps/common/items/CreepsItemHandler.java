@@ -115,6 +115,10 @@ public class CreepsItemHandler
 
     public static final Item cavemanClub = new ItemCavemanClub();
 
+    public static final Item growbotGrowRay = new ItemGrowRay("growbot_growray", true);
+
+    public static final Item salGun = new ItemGun("sal_gun", true);
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -160,7 +164,9 @@ public class CreepsItemHandler
                 bulletBullet,
                 growRay,
                 zebraHide,
-                cavemanClub
+                cavemanClub,
+                growbotGrowRay,
+                salGun
         );
     }
 

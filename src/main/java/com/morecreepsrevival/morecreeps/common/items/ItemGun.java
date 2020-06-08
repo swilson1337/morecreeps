@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -15,7 +14,12 @@ public class ItemGun extends CreepsItem
 {
     public ItemGun()
     {
-        super("gun");
+        this("gun", false);
+    }
+
+    public ItemGun(String itemName, boolean noCreativeTab)
+    {
+        super(itemName, noCreativeTab);
 
         setMaxStackSize(1);
 

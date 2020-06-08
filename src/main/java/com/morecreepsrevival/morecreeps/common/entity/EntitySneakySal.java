@@ -77,7 +77,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         setModelSize(1.5f);
 
-        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.gun));
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.salGun));
 
         baseHealth = (float)rand.nextInt(50) + 50.0f;
 

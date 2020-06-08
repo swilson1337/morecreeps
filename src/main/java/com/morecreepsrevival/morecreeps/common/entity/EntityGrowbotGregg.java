@@ -4,7 +4,10 @@ import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -34,9 +37,31 @@ public class EntityGrowbotGregg extends EntityCreepBase
 
         baseSpeed = 0.3d;
 
-        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.growRay));
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.growbotGrowRay));
 
         updateAttributes();
+    }
+
+    @Override
+    public void initEntityAI()
+    {
+        clearAITasks();
+
+        NodeProcessor nodeProcessor = getNavigator().getNodeProcessor();
+
+        nodeProcessor.setCanSwim(true);
+
+        nodeProcessor.setCanEnterDoors(true);
+
+        tasks.addTask(1, new EntityAISwimming(this));
+
+        tasks.addTask(2, new EntityAIBreakDoor(this));
+
+        tasks.addTask(3, new EntityAIMoveTowardsTarget(this, 1.0d, 16.0f));
+
+        tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
+
+        tasks.addTask(5, new EntityAILookIdle(this));
     }
 
     @Override
@@ -144,12 +169,6 @@ public class EntityGrowbotGregg extends EntityCreepBase
 
         if (targetedEntity != null && targetedEntity.getDistanceSq(this) < (var9 * var9))
         {
-            double var11 = targetedEntity.posX - posX;
-
-            double var13 = targetedEntity.getEntityBoundingBox().minY + (targetedEntity.width / 2.0f) - posY + (width / 2.0f);
-
-            double var15 = targetedEntity.posZ - posZ;
-
             if (canEntityBeSeen(targetedEntity))
             {
                 attackCounter++;
@@ -158,11 +177,7 @@ public class EntityGrowbotGregg extends EntityCreepBase
                 {
                     playSound(CreepsSoundHandler.growRaySound, 0.5f, 0.4f / (rand.nextFloat() * 0.4f + 0.8f));
 
-                    double d5 = targetedEntity.posX - posX;
-
-                    double d6 = targetedEntity.getEntityBoundingBox().minY + (targetedEntity.width / 2.0f) - posX + (width / 2.0f);
-
-                    double d7 = targetedEntity.posZ - posZ;
+                    faceEntity(targetedEntity, 360.0f, 360.0f);
 
                     EntityGrow grow = new EntityGrow(world, this);
 
@@ -176,6 +191,8 @@ public class EntityGrowbotGregg extends EntityCreepBase
             }
             else if (attackCounter > 0)
             {
+                faceEntity(targetedEntity, 360.0f, 360.0f);
+
                 attackCounter--;
             }
         }
