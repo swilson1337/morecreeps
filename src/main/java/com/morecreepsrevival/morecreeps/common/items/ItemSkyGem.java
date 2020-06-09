@@ -49,7 +49,10 @@ public class ItemSkyGem extends CreepsItem
         {
             usage = 200;
 
-            player.getHeldItem(hand).damageItem(1, player);
+            if (!world.isRemote)
+            {
+                player.getHeldItem(hand).damageItem(1, player);
+            }
         }
 
         jumpBoost = 1.0f;

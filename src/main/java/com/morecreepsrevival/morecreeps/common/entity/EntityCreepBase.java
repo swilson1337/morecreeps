@@ -1320,9 +1320,21 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         setModelSize(Math.max(0.0f, getModelSize() - f));
     }
 
+    public void growModelSize(float f)
+    {
+        setModelSize(Math.max(0.0f, getModelSize() + f));
+    }
+
     public void decreaseMoveSpeed(float f)
     {
         baseSpeed -= f;
+
+        updateMoveSpeed();
+    }
+
+    public void increaseMoveSpeed(float f)
+    {
+        baseSpeed += f;
 
         updateMoveSpeed();
     }

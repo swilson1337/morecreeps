@@ -201,13 +201,19 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
 
                 playSound(CreepsSoundHandler.babyTakeHomeSound, 1.0f, 1.0f);
 
-                player.sendMessage(new TextComponentString("Now turn that baby into a Schlump on the floor!"));
+                if (!world.isRemote)
+                {
+                    player.sendMessage(new TextComponentString("Now turn that baby into a Schlump on the floor!"));
+                }
             }
             else
             {
                 playSound(CreepsSoundHandler.babyShrinkSound, 1.0f, 1.0f);
 
-                player.sendMessage(new TextComponentString("That baby is too large."));
+                if (!world.isRemote)
+                {
+                    player.sendMessage(new TextComponentString("That baby is too large."));
+                }
             }
 
             return true;

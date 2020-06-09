@@ -57,7 +57,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.18";
+    public static final String version = "1.0.19";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -109,7 +109,8 @@ public class MoreCreepsAndWeirdos
             "Evil Scientists will conduct experiments that sometimes backfire.",
             "Your pet loses a level if resurrected with a LifeGem.",
             "Sneaky Sal will sometimes sell goods at a discount.",
-            "Stan BTS!"
+            "Stan BTS!",
+            "Black Lives Matter | If you would like to help out: https://blacklivesmatters.carrd.co"
     };
 
     @EventHandler
@@ -191,7 +192,8 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityBum.class, "bum", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.bumSpawnAmt), 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityEvilSnowman.class, "evilsnowman", 0, 0, 0, EnumCreatureType.MONSTER),
                 createEntity(EntityPreacher.class, "preacher", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.preacherSpawnAmt), 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityGrowbotGregg.class, "growbot_gregg", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.growbotGreggSpawnAmt), 1, 3, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
+                createEntity(EntityGrowbotGregg.class, "growbot_gregg", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.growbotGreggSpawnAmt), 1, 3, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityGrow.class, "grow", 0, 0, 0, EnumCreatureType.AMBIENT)
         );
     }
 

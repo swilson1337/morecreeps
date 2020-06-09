@@ -408,7 +408,7 @@ public class EntityRay extends Entity implements IProjectile
             {
                 this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
 
-                if (this.inTile != Blocks.BEDROCK && rand.nextInt(3) == 0)
+                if (!world.isRemote && this.inTile != Blocks.BEDROCK && rand.nextInt(3) == 0)
                 {
                     if (MoreCreepsConfig.rayGunFire)
                     {

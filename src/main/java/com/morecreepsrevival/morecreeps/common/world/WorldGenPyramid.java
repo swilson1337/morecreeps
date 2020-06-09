@@ -9,6 +9,7 @@ import com.morecreepsrevival.morecreeps.common.entity.EntityBlackSoul;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -63,6 +64,11 @@ public class WorldGenPyramid extends WorldGenerator
             {
                 return false;
             }
+        }
+
+        if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.SANDY))
+        {
+            return false;
         }
 
         int x = pos.getX();
