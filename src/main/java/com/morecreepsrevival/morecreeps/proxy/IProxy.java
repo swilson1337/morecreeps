@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.proxy;
 
+import com.morecreepsrevival.morecreeps.common.entity.EntityCreepBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -14,4 +15,6 @@ public interface IProxy
     void postInit(FMLPostInitializationEvent event);
 
     boolean isJumpKeyDown(EntityPlayer player);
+
+    void pee(EntityCreepBase entity);
 }
