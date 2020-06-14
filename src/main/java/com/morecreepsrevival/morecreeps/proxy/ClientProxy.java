@@ -1,11 +1,13 @@
 package com.morecreepsrevival.morecreeps.proxy;
 
+import com.morecreepsrevival.morecreeps.client.particles.FxPee;
 import com.morecreepsrevival.morecreeps.common.command.LevelUpTamedCreature;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.client.render.*;
 import com.morecreepsrevival.morecreeps.common.entity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -151,5 +153,20 @@ public class ClientProxy implements IProxy
     public boolean isJumpKeyDown(EntityPlayer player)
     {
         return Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
+    }
+
+    @Override
+    public void pee(EntityCreepBase entity)
+    {
+        double d = -MathHelper.sin((entity.rotationYaw * (float)Math.PI) / 180.0f);
+
+        double d1 = MathHelper.cos((entity.rotationYaw * (float)Math.PI) / 180.0f);
+
+        for (int i = 0; i < 25; i++)
+        {
+            FxPee pee = new FxPee(entity.world, entity.posX + d * 0.20000000000000001d, (entity.posY + 0.75d) - (double)((1.0f - entity.getModelSize()) * 0.8f), entity.posZ + d1 * 0.20000000000000001d, 0.0d, 0.0d, 0.0d, d, d1);
+
+            Minecraft.getMinecraft().effectRenderer.addEffect(pee);
+        }
     }
 }
