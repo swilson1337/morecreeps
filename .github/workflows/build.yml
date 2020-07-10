@@ -1,9 +1,5 @@
 name: Build
-on:
-  push:
-    branches:
-      - alpha
-      - master
+on: push
 jobs:
   build:
     name: Build
