@@ -41,6 +41,9 @@ item.morecreeps.bulletbullet.name=Bullet
 item.morecreeps.grow_ray.name=Grow Ray
 item.morecreeps.zebra_hide.name=Zebra Hide
 item.morecreeps.caveman_club.name=Caveman Club
+item.morecreeps.battery.name=Battery
+item.morecreeps.ram16k.name=16K RAM
+item.morecreeps.mobile_phone.name=Mobile Phone
 
 # Entities
 entity.morecreeps.guineapig.name=Guinea Pig

@@ -119,6 +119,12 @@ public class CreepsItemHandler
 
     public static final Item salGun = new ItemGun("sal_gun", true);
 
+    public static final Item battery = new ItemBattery();
+
+    public static final Item ram16k = new ItemRam16K();
+
+    public static final Item mobilePhone = new ItemMobilePhone();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -166,7 +172,10 @@ public class CreepsItemHandler
                 zebraHide,
                 cavemanClub,
                 growbotGrowRay,
-                salGun
+                salGun,
+                battery,
+                ram16k,
+                mobilePhone
         );
     }
 

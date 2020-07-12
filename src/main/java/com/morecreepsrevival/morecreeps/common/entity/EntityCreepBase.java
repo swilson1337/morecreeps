@@ -1038,8 +1038,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void onDeath(@Nonnull DamageSource cause)
     {
-        System.out.println("onDeath is called");
-
         if (!dead && !world.isRemote)
         {
             if (isTamed() && canBeRevived())
@@ -1484,6 +1482,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
                 player.sendMessage(new TextComponentString("\2476" + getCreepName() + " \247fhas been tamed!"));
             }
         }
+    }
+
+    public void untame()
+    {
+        clearOwner();
+
+        setCreepName("");
+
+        setInterest(0);
     }
 
     public boolean isTamed()
