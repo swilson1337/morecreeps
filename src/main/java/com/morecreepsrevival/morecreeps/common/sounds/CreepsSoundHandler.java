@@ -524,6 +524,18 @@ public class CreepsSoundHandler
 
     public static final SoundEvent greggDeathSound = createSound("greggdeath");
 
+    public static final SoundEvent camelJockeySound = createSound("cameljockey");
+
+    public static final SoundEvent camelJockeyGetSound = createSound("cameljockeyget");
+
+    public static final SoundEvent camelJockeyHurtSound = createSound("cameljockeyhurt");
+
+    public static final SoundEvent camelJockeyDeathSound = createSound("cameljockeydeath");
+
+    public static final SoundEvent sparkSound = createSound("spark");
+
+    public static final SoundEvent mobileSound = createSound("mobile");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -787,7 +799,13 @@ public class CreepsSoundHandler
                 prisonerRewardSound,
                 greggSound,
                 greggHurtSound,
-                greggDeathSound
+                greggDeathSound,
+                camelJockeySound,
+                camelJockeyGetSound,
+                camelJockeyHurtSound,
+                camelJockeyDeathSound,
+                sparkSound,
+                mobileSound
         );
     }
 }

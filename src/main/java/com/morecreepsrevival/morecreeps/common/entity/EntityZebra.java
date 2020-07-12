@@ -50,6 +50,10 @@ public class EntityZebra extends EntityCreepBase
 
         setCreepTypeName("Zebra");
 
+        setModelSize(2.0f);
+
+        setSize(width * 2.0f, height * 2.0f);
+
         baseHealth = 25.0f;
 
         baseAttackDamage = 2.0d;
