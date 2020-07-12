@@ -125,6 +125,8 @@ public class CreepsItemHandler
 
     public static final Item mobilePhone = new ItemMobilePhone();
 
+    public static final Item medicine = new ItemMedicine();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -175,7 +177,8 @@ public class CreepsItemHandler
                 salGun,
                 battery,
                 ram16k,
-                mobilePhone
+                mobilePhone,
+                medicine
         );
     }
 
