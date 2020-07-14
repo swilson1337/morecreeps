@@ -127,6 +127,8 @@ public class CreepsItemHandler
 
     public static final Item medicine = new ItemMedicine();
 
+    public static final Item luckyDress = new ItemLuckyDress();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -178,7 +180,8 @@ public class CreepsItemHandler
                 battery,
                 ram16k,
                 mobilePhone,
-                medicine
+                medicine,
+                luckyDress
         );
     }
 

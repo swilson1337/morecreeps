@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rrr",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:red_flower",
+      "data": 0
+    },
+    "x": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "morecreeps:medicine",
+    "count": 8
+  }
+}
