@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xbx",
+    "rrr"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:glass"
+    },
+    "b": {
+      "item": "morecreeps:battery"
+    },
+    "r": {
+      "item": "morecreeps:ram16k"
+    }
+  },
+  "result": {
+    "item": "morecreeps:mobile_phone",
+    "count": 1
+  }
+}

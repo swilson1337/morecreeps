@@ -536,6 +536,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent mobileSound = createSound("mobile");
 
+    public static final SoundEvent medicine = createSound("medicine");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -805,7 +807,8 @@ public class CreepsSoundHandler
                 camelJockeyHurtSound,
                 camelJockeyDeathSound,
                 sparkSound,
-                mobileSound
+                mobileSound,
+                medicine
         );
     }
 }
