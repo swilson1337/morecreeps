@@ -1,6 +1,5 @@
 package com.morecreepsrevival.morecreeps.common.items;
 
-import com.morecreepsrevival.morecreeps.common.capabilities.CaveDrums;
 import com.morecreepsrevival.morecreeps.common.capabilities.CaveDrumsProvider;
 import com.morecreepsrevival.morecreeps.common.capabilities.ICaveDrums;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
