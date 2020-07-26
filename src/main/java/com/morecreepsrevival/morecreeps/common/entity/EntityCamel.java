@@ -123,7 +123,7 @@ public class EntityCamel extends EntityCreepBase
     @Override
     public boolean isEntityInsideOpaqueBlock()
     {
-        if (getFirstPassenger() != null)
+        if (canPassengerSteer())
         {
             return false;
         }
@@ -137,6 +137,20 @@ public class EntityCamel extends EntityCreepBase
         ignoreFrustumCheck = (getModelSize() > 1.0f);
 
         super.onLivingUpdate();
+
+        if (isTamed())
+        {
+            resetTarget();
+        }
+        else if (getFirstPassenger() instanceof EntityCamelJockey && getAttackTarget() == null)
+        {
+            EntityPlayer player = world.getNearestAttackablePlayer(this, 16.0d, 16.0d);
+
+            if (player != null)
+            {
+                setAttackTarget(player);
+            }
+        }
     }
 
     @Override
@@ -205,7 +219,14 @@ public class EntityCamel extends EntityCreepBase
     @Override @Nullable
     public Entity getControllingPassenger()
     {
-        return getFirstPassenger();
+        Entity passenger = getFirstPassenger();
+
+        if (passenger instanceof EntityCamelJockey)
+        {
+            return null;
+        }
+
+        return passenger;
     }
 
     @Override

@@ -1484,6 +1484,15 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         }
     }
 
+    public void untame()
+    {
+        clearOwner();
+
+        setCreepName("");
+
+        setInterest(0);
+    }
+
     public boolean isTamed()
     {
         return (getOwnerId() != null);

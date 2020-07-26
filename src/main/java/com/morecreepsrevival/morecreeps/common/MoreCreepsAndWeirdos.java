@@ -57,7 +57,7 @@ public class MoreCreepsAndWeirdos
 
     public static final String name = "More Creeps And Weirdos Revival";
 
-    public static final String version = "1.0.20";
+    public static final String version = "1.0.21";
 
     public static final String updateJSON = "https://www.morecreepsrevival.com/update.json";
 
@@ -193,7 +193,9 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityEvilSnowman.class, "evilsnowman", 0, 0, 0, EnumCreatureType.MONSTER),
                 createEntity(EntityPreacher.class, "preacher", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.preacherSpawnAmt), 1, 1, EnumCreatureType.MONSTER, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityGrowbotGregg.class, "growbot_gregg", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.growbotGreggSpawnAmt), 1, 3, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityGrow.class, "grow", 0, 0, 0, EnumCreatureType.AMBIENT)
+                createEntity(EntityGrow.class, "grow", 0, 0, 0, EnumCreatureType.AMBIENT),
+                createEntity(EntityCamelJockey.class, "cameljockey", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.camelJockeySpawnAmt), 1, 2, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
+                createEntity(EntityPonyGirl.class, "ponygirl", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.ponyGirlSpawnAmt), 1, 1, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END))
         );
     }
 
