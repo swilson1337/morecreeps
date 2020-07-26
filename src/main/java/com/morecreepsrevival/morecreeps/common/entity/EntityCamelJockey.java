@@ -66,8 +66,6 @@ public class EntityCamelJockey extends EntityCreepBase
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-
-        targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityCamel.class, true));
     }
 
     @Override

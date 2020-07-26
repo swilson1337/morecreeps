@@ -131,6 +131,8 @@ public class MoreCreepsConfig
 
     public static int growbotGreggSpawnAmt = 0;
 
+    public static int ponyGirlSpawnAmt = 0;
+
     public static String hideUpdateGuiVersion = "";
 
     public static double globalSpawnRate = 1.0f;
@@ -264,6 +266,8 @@ public class MoreCreepsConfig
             zebraSpawnAmt = config.get(spawnNbr, "Zebra", 8).getInt();
 
             growbotGreggSpawnAmt = config.get(spawnNbr, "Growbot Gregg", 6).getInt();
+
+            ponyGirlSpawnAmt = config.get(spawnNbr, "Pony Girl", 5).getInt();
 
             hideUpdateGuiVersion = config.get(miscProperty, "Hide Update for Version", "", "This property is set when you choose to ignore the Update Available popup with the version you're being offered.").getString();
 
@@ -470,6 +474,11 @@ public class MoreCreepsConfig
         if (growbotGreggSpawnAmt < 0 || growbotGreggSpawnAmt > 12)
         {
             growbotGreggSpawnAmt = 6;
+        }
+
+        if (ponyGirlSpawnAmt < 0 || ponyGirlSpawnAmt > 10)
+        {
+            ponyGirlSpawnAmt = 5;
         }
 
         if (pyramidRarity < 1 || pyramidRarity > 10)

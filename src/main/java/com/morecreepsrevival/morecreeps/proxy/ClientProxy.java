@@ -138,6 +138,8 @@ public class ClientProxy implements IProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityGrow.class, new RenderCreepsItemFactory(CreepsItemHandler.shrinkShrink));
 
         RenderingRegistry.registerEntityRenderingHandler(EntityCamelJockey.class, new RenderCamelJockeyFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityPonyGirl.class, new RenderPonyGirlFactory());
     }
 
     @Override
