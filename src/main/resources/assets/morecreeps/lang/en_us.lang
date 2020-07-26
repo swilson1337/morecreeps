@@ -96,6 +96,7 @@ entity.morecreeps.cameljockey.name=Camel Jockey
 entity.morecreeps.bum.name=Bum
 entity.morecreeps.evilsnowman.name=Evil Snowman
 entity.morecreeps.growbot_gregg.name=Growbot Gregg
+entity.morecreeps.ponygirl.name=Pony Girl
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps
