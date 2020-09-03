@@ -5610,5 +5610,130 @@
 				"stream": false
 			}
 		]
+	},
+	"cameljockeydeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:cameljockeydeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeydeath2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:cameljockeydeath3",
+				"stream": false
+			}
+		]
+	},
+	"ponygirlcell": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponygirlcell1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlcell2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlcell3",
+				"stream": false
+			}
+		]
+	},
+	"ponygirlbuy": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponygirlbuy1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlbuy2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlbuy3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlbuy4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlbuy5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlbuy6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlbuy7",
+				"stream": false
+			}
+		]
+	},
+	"ponygirlhurt": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponygirlhurt1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirlhurt10",
+				"stream": false
+			}
+		]
+	},
+	"ponygirldeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponygirldeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponygirldeath2",
+				"stream": false
+			}
+		]
 	}
 }
