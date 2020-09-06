@@ -5735,5 +5735,69 @@
 				"stream": false
 			}
 		]
+	},
+	"ponygirlmoney": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponygirlmoney",
+				"stream": false
+			}
+		]
+	},
+	"ponycloud": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponycloud1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:ponycloud8",
+				"stream": false
+			}
+		]
+	},
+	"ponygirlwaithere": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponygirlwaithere",
+				"stream": false
+			}
+		]
+	},
+	"ponycloudliving": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponycloudliving",
+				"stream": false
+			}
+		]
 	}
 }

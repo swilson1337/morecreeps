@@ -546,6 +546,14 @@ public class CreepsSoundHandler
 
     public static final SoundEvent ponyGirlDeathSound = createSound("ponygirldeath");
 
+    public static final SoundEvent ponyGirlMoneySound = createSound("ponygirlmoney");
+
+    public static final SoundEvent ponyCloudSound = createSound("ponycloud");
+
+    public static final SoundEvent ponyGirlWaitHereSound = createSound("ponygirlwaithere");
+
+    public static final SoundEvent ponyCloudLivingSound = createSound("ponycloudliving");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -820,7 +828,11 @@ public class CreepsSoundHandler
                 ponyGirlCellSound,
                 ponyGirlBuySound,
                 ponyGirlHurtSound,
-                ponyGirlDeathSound
+                ponyGirlDeathSound,
+                ponyGirlMoneySound,
+                ponyCloudSound,
+                ponyGirlWaitHereSound,
+                ponyCloudLivingSound
         );
     }
 }

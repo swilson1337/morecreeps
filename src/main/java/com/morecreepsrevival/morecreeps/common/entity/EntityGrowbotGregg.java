@@ -35,7 +35,7 @@ public class EntityGrowbotGregg extends EntityCreepBase
 
         baseHealth = (float)rand.nextInt(15) + 10.0f;
 
-        baseSpeed = 0.3d;
+        baseSpeed = 0.2d;
 
         setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CreepsItemHandler.growbotGrowRay));
 
