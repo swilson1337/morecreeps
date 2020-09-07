@@ -95,7 +95,7 @@ public class EntityDogHouse extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return null;
     }
@@ -176,7 +176,7 @@ public class EntityDogHouse extends EntityCreepBase
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {

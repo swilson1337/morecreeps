@@ -92,7 +92,7 @@ public class EntityBabyMummy extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.babyMummyHurtSound;
     }

@@ -126,7 +126,7 @@ public class EntityBum extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.bumHurtSound;
     }
@@ -413,7 +413,7 @@ public class EntityBum extends EntityCreepBase implements IMob
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 

@@ -12,6 +12,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityCastleCritter extends EntityCreepBase implements IMob
 {
     public EntityCastleCritter(World worldIn)
@@ -97,7 +99,7 @@ public class EntityCastleCritter extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.castleCritterHurtSound;
     }

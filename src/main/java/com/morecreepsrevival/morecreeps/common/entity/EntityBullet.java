@@ -70,28 +70,28 @@ public class EntityBullet extends Entity
         setPosition(d, d1, d2);
     }
 
-    public EntityBullet(World world, EntityLivingBase entityliving)
+    public EntityBullet(World world, EntityLivingBase entityLiving)
     {
         this(world);
 
-        dataManager.set(shootingEntity, entityliving.getEntityId());
+        dataManager.set(shootingEntity, entityLiving.getEntityId());
 
-        if (entityliving instanceof EntityPlayer)
+        if (entityLiving instanceof EntityPlayer)
         {
             damage = 4;
 
             playerFire = true;
         }
 
-        setLocationAndAngles(entityliving.posX, entityliving.posY + (double)entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
+        setLocationAndAngles(entityLiving.posX, entityLiving.posY + (double)entityLiving.getEyeHeight(), entityLiving.posZ, entityLiving.rotationYaw, entityLiving.rotationPitch);
 
-        double xHeading = -MathHelper.sin(entityliving.rotationYaw * (float)Math.PI / 180.0f);
+        double xHeading = -MathHelper.sin(entityLiving.rotationYaw * (float)Math.PI / 180.0f);
 
-        double zHeading = MathHelper.cos(entityliving.rotationYaw * (float)Math.PI / 180.0f);
+        double zHeading = MathHelper.cos(entityLiving.rotationYaw * (float)Math.PI / 180.0f);
 
         double par13 = xHeading * 0.5d;
 
-        double par15 = entityliving.rotationPitch;
+        double par15 = entityLiving.rotationPitch;
 
         double par17 = zHeading * 0.5d;
 

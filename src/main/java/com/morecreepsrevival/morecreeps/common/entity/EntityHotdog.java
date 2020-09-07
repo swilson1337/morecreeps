@@ -22,6 +22,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityHotdog extends EntityCreepBase
 {
     private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.<Boolean>createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
@@ -101,7 +103,7 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.hotdogHurtSound;
     }
@@ -237,7 +239,7 @@ public class EntityHotdog extends EntityCreepBase
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {

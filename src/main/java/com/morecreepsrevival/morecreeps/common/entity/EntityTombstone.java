@@ -12,6 +12,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityTombstone extends EntityCreepBase
@@ -90,7 +91,7 @@ public class EntityTombstone extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return null;
     }
@@ -120,7 +121,7 @@ public class EntityTombstone extends EntityCreepBase
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         ItemStack itemStack = player.getHeldItem(hand);
 
@@ -231,7 +232,7 @@ public class EntityTombstone extends EntityCreepBase
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 

@@ -9,6 +9,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityEvilLight extends EntityCreepBase
 {
     private int lifespan;
@@ -82,7 +84,7 @@ public class EntityEvilLight extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.evilLightSound;
     }

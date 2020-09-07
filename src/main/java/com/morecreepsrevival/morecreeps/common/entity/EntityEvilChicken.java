@@ -17,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityEvilChicken extends EntityCreepBase implements IMob
 {
     public float wingRotation;
@@ -88,7 +90,7 @@ public class EntityEvilChicken extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return SoundEvents.ENTITY_CHICKEN_HURT;
     }
@@ -145,7 +147,8 @@ public class EntityEvilChicken extends EntityCreepBase implements IMob
     {
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
+    @Override
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn)
     {
         this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }

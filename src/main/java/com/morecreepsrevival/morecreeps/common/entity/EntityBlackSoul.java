@@ -9,9 +9,9 @@ import net.minecraft.init.Items;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class EntityBlackSoul extends EntityCreepBase implements IMob
 {
@@ -88,7 +88,7 @@ public class EntityBlackSoul extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.blackSoulHurtSound;
     }

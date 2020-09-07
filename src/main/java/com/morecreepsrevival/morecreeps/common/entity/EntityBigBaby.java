@@ -118,7 +118,7 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.bigBabyHurtSound;
     }
@@ -187,7 +187,7 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(EntityPlayer player, @Nonnull EnumHand hand)
     {
         ItemStack itemStack = player.getHeldItem(hand);
 

@@ -23,6 +23,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedAttackMob
 {
     private static final DataParameter<Integer> timeLeft = EntityDataManager.createKey(EntityHunchbackSkeleton.class, DataSerializers.VARINT);
@@ -184,7 +186,7 @@ public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedA
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return SoundEvents.ENTITY_SKELETON_HURT;
     }

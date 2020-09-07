@@ -10,7 +10,6 @@ import com.morecreepsrevival.morecreeps.common.entity.EntityTombstone;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class RenderTombstone<T extends EntityTombstone> extends RenderCreep<T>

@@ -10,6 +10,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityEvilPig extends EntityCreepBase implements IMob
 {
     public EntityEvilPig(World worldIn)
@@ -44,7 +46,7 @@ public class EntityEvilPig extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return SoundEvents.ENTITY_PIG_HURT;
     }

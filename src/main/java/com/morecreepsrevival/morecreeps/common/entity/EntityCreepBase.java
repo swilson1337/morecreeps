@@ -320,7 +320,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 
@@ -495,7 +495,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingData)
+    public IEntityLivingData onInitialSpawn(@Nonnull DifficultyInstance difficulty, @Nullable IEntityLivingData livingData)
     {
         super.onInitialSpawn(difficulty, livingData);
 
@@ -932,7 +932,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -1371,7 +1371,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public void setOwner(UUID uuid)
     {
-        dataManager.set(owner, uuid.toString());
+        if (uuid == null)
+        {
+            dataManager.set(owner, "");
+        }
+        else
+        {
+            dataManager.set(owner, uuid.toString());
+        }
     }
 
     public void setOwner(EntityPlayer player)
@@ -1666,7 +1673,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public boolean isOnSameTeam(Entity entity)
+    public boolean isOnSameTeam(@Nonnull Entity entity)
     {
         if (isTamed())
         {
@@ -1890,7 +1897,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public float getBlockPathWeight(BlockPos blockPos)
+    public float getBlockPathWeight(@Nonnull BlockPos blockPos)
     {
         if (getCreatureType() == EnumCreatureType.MONSTER && spawnOnlyAtNight)
         {

@@ -18,6 +18,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityHorseHead extends EntityCreepBase
@@ -26,7 +27,7 @@ public class EntityHorseHead extends EntityCreepBase
 
     private double floatCycle;
 
-    private double floatMaxCycle;
+    private final static double floatMaxCycle = 0.10499999672174454d;
 
     private int blastOff;
 
@@ -47,8 +48,6 @@ public class EntityHorseHead extends EntityCreepBase
         floatDir = 1;
 
         floatCycle = 0.0d;
-
-        floatMaxCycle = 0.10499999672174454d;
 
         gallopTime = 0;
 
@@ -90,7 +89,7 @@ public class EntityHorseHead extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.hippoHurtSound;
     }
@@ -207,7 +206,7 @@ public class EntityHorseHead extends EntityCreepBase
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {

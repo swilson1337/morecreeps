@@ -536,7 +536,7 @@ public class EntityCaveman extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         if (getFrozenLevel() > 0)
         {
@@ -617,7 +617,7 @@ public class EntityCaveman extends EntityCreepBase
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 
