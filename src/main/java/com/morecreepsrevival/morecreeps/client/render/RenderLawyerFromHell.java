@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class RenderLawyerFromHell<T extends EntityLawyerFromHell> extends RenderCreep<T>

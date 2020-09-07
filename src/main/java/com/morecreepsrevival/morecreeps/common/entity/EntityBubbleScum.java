@@ -11,6 +11,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityBubbleScum extends EntityCreepBase
 {
     public EntityBubbleScum(World worldIn)
@@ -103,7 +105,7 @@ public class EntityBubbleScum extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.bubbleScumHurtSound;
     }

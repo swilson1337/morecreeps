@@ -13,6 +13,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityCamelJockey extends EntityCreepBase
 {
     public EntityCamelJockey(World worldIn)
@@ -161,7 +163,7 @@ public class EntityCamelJockey extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.camelJockeyHurtSound;
     }

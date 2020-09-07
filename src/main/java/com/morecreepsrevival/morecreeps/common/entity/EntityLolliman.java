@@ -17,6 +17,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityLolliman extends EntityCreepBase
 {
     private static final DataParameter<Boolean> kidMounted = EntityDataManager.<Boolean>createKey(EntityLolliman.class, DataSerializers.BOOLEAN);
@@ -133,7 +135,7 @@ public class EntityLolliman extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.lollimanHurtSound;
     }

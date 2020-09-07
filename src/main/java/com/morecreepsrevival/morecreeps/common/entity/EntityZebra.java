@@ -84,7 +84,7 @@ public class EntityZebra extends EntityCreepBase
     }
 
     @Override
-    public float getBlockPathWeight(BlockPos blockPos)
+    public float getBlockPathWeight(@Nonnull BlockPos blockPos)
     {
         Block block = world.getBlockState(blockPos).getBlock();
 
@@ -103,7 +103,7 @@ public class EntityZebra extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.hippoHurtSound;
     }
@@ -303,7 +303,7 @@ public class EntityZebra extends EntityCreepBase
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -413,7 +413,7 @@ public class EntityZebra extends EntityCreepBase
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 

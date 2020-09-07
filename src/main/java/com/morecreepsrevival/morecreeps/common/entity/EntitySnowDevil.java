@@ -18,6 +18,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntitySnowDevil extends EntityCreepBase implements IMob
 {
     private static final String[] textures = {
@@ -112,7 +114,7 @@ public class EntitySnowDevil extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.snowDevilHurtSound;
     }
@@ -139,7 +141,7 @@ public class EntitySnowDevil extends EntityCreepBase implements IMob
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {

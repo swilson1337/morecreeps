@@ -5,7 +5,6 @@ import com.morecreepsrevival.morecreeps.client.render.layer.LayerGooGoatSlime;
 import com.morecreepsrevival.morecreeps.common.entity.EntityGooGoat;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 

@@ -1,6 +1,5 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
-import com.morecreepsrevival.morecreeps.common.entity.EntityCastleKing;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

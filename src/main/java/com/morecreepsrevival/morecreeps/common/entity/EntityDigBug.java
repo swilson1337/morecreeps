@@ -21,6 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityDigBug extends EntityCreepBase
 {
     private static final DataParameter<Integer> lifespan = EntityDataManager.createKey(EntityDigBug.class, DataSerializers.VARINT);
@@ -532,7 +534,7 @@ public class EntityDigBug extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.digBugHurtSound;
     }
@@ -550,7 +552,7 @@ public class EntityDigBug extends EntityCreepBase
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 

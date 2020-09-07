@@ -17,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityKid extends EntityCreepBase
 {
     private static final DataParameter<Integer> checkTimer = EntityDataManager.createKey(EntityKid.class, DataSerializers.VARINT);
@@ -114,7 +116,7 @@ public class EntityKid extends EntityCreepBase
 
         if (entity instanceof EntityPlayer)
         {
-            double size = (double)getModelSize();
+            double size = getModelSize();
 
             double d = 0.6d - size;
 
@@ -166,7 +168,7 @@ public class EntityKid extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.kidHurtSound;
     }

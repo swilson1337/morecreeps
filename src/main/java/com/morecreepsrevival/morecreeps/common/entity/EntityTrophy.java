@@ -10,6 +10,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityTrophy extends EntityCreepBase
 {
     private static final DataParameter<Integer> partyTime = EntityDataManager.createKey(EntityTrophy.class, DataSerializers.VARINT);
@@ -62,7 +64,7 @@ public class EntityTrophy extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return null;
     }

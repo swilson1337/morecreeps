@@ -15,7 +15,6 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -30,8 +29,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class EntityRay extends Entity implements IProjectile
 {
@@ -434,7 +433,7 @@ public class EntityRay extends Entity implements IProjectile
     }
 
     @Override
-    public void move(MoverType type, double x, double y, double z)
+    public void move(@Nonnull MoverType type, double x, double y, double z)
     {
         super.move(type, x, y, z);
 

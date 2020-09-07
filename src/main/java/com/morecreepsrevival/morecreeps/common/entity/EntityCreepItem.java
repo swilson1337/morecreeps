@@ -348,7 +348,7 @@ public class EntityCreepItem extends Entity
         {
             return world.getPlayerEntityByUUID(UUID.fromString(getThrower()));
         }
-        catch (Exception e)
+        catch (Exception ignore)
         {
         }
 
@@ -421,7 +421,7 @@ public class EntityCreepItem extends Entity
     }
 
     @Override
-    public void onCollideWithPlayer(EntityPlayer player)
+    public void onCollideWithPlayer(@Nonnull EntityPlayer player)
     {
         if (world.isRemote || getPickupDelay() > 0)
         {

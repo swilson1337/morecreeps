@@ -194,7 +194,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         if (getUndead())
         {

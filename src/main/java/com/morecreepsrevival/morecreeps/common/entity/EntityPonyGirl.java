@@ -15,6 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -91,7 +92,7 @@ public class EntityPonyGirl extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.ponyGirlHurtSound;
     }
@@ -164,6 +165,34 @@ public class EntityPonyGirl extends EntityCreepBase
 
                         player.sendMessage(new TextComponentString("LOOK UP! Your new Pony is being delivered by a PonyCloud!"));
                     }
+
+                    double xHeading = -MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0f);
+
+                    double zHeading = MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0f);
+
+                    EntityPonyCloud ponyCloud = new EntityPonyCloud(world);
+
+                    ponyCloud.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
+
+                    if (!world.isRemote)
+                    {
+                        world.spawnEntity(ponyCloud);
+                    }
+
+                    EntityPony pony = new EntityPony(world);
+
+                    pony.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
+
+                    // TODO: figure out this part
+
+                    if (!world.isRemote)
+                    {
+                        world.spawnEntity(pony);
+                    }
+
+                    playSound(CreepsSoundHandler.ponyCloudSound, getSoundVolume(), getSoundPitch());
+
+                    return true;
                 }
                 else
                 {

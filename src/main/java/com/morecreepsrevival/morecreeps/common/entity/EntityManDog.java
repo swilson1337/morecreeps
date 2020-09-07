@@ -20,6 +20,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityManDog extends EntityCreepBase
 {
     private static final DataParameter<Boolean> superDog = EntityDataManager.<Boolean>createKey(EntityManDog.class, DataSerializers.BOOLEAN);
@@ -119,7 +121,7 @@ public class EntityManDog extends EntityCreepBase
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
     {
         if (hand == EnumHand.OFF_HAND)
         {
@@ -183,7 +185,7 @@ public class EntityManDog extends EntityCreepBase
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSource)
     {
         return CreepsSoundHandler.manDogHurtSound;
     }
@@ -491,7 +493,7 @@ public class EntityManDog extends EntityCreepBase
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 

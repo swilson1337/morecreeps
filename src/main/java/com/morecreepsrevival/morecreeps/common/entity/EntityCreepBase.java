@@ -1371,7 +1371,14 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public void setOwner(UUID uuid)
     {
-        dataManager.set(owner, uuid.toString());
+        if (uuid == null)
+        {
+            dataManager.set(owner, "");
+        }
+        else
+        {
+            dataManager.set(owner, uuid.toString());
+        }
     }
 
     public void setOwner(EntityPlayer player)
@@ -1666,7 +1673,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public boolean isOnSameTeam(Entity entity)
+    public boolean isOnSameTeam(@Nonnull Entity entity)
     {
         if (isTamed())
         {
@@ -1890,7 +1897,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public float getBlockPathWeight(BlockPos blockPos)
+    public float getBlockPathWeight(@Nonnull BlockPos blockPos)
     {
         if (getCreatureType() == EnumCreatureType.MONSTER && spawnOnlyAtNight)
         {
