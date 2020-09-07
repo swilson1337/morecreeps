@@ -320,7 +320,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
 
@@ -495,7 +495,7 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     }
 
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingData)
+    public IEntityLivingData onInitialSpawn(@Nonnull DifficultyInstance difficulty, @Nullable IEntityLivingData livingData)
     {
         super.onInitialSpawn(difficulty, livingData);
 

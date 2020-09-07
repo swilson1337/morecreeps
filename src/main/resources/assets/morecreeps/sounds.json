@@ -5799,5 +5799,87 @@
 				"stream": false
 			}
 		]
+	},
+	"pony": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:pony1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony3",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony4",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony5",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony6",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony7",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony8",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony9",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony10",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony11",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony12",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony13",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony14",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony15",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony16",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:pony17",
+				"stream": false
+			}
+		]
+	},
+	"ponydeath": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponydeath1",
+				"stream": false
+			}
+		]
 	}
 }
