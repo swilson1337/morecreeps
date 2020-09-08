@@ -99,10 +99,10 @@ public class EntityCamelJockey extends EntityCreepBase
                             startRiding(camel);
                         }
 
-                        if (d < 16.0d && camel.canEntityBeSeen(this))
+                        /*if (d < 16.0d && camel.canEntityBeSeen(this))
                         {
                             attackEntityAsMob(camel);
-                        }
+                        }*/
                     }
                 }
             }
@@ -119,7 +119,7 @@ public class EntityCamelJockey extends EntityCreepBase
     }
 
     @Override
-    public float getBlockPathWeight(BlockPos blockPos)
+    public float getBlockPathWeight(@Nonnull BlockPos blockPos)
     {
         Block block = world.getBlockState(blockPos).getBlock();
 
