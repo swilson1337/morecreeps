@@ -135,6 +135,8 @@ public class EntityPonyGirl extends EntityCreepBase
 
             if (item == CreepsItemHandler.mobilePhone && !getCellPhone())
             {
+                InventoryHelper.takeItem(player.inventory, CreepsItemHandler.mobilePhone, 1);
+
                 setHeldItem(hand, new ItemStack(CreepsItemHandler.mobilePhone, 1));
 
                 setCellPhone(true);
@@ -154,7 +156,7 @@ public class EntityPonyGirl extends EntityCreepBase
                             player.sendMessage(new TextComponentString("You need $50 for a Pony!"));
                         }
 
-                        return false;
+                        return true;
                     }
 
                     playSound(CreepsSoundHandler.ponyGirlWaitHereSound, getSoundVolume(), getSoundPitch());
@@ -183,6 +185,8 @@ public class EntityPonyGirl extends EntityCreepBase
 
                     pony.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
 
+                    pony.startRiding(ponyCloud, true);
+
                     // TODO: figure out this part
 
                     if (!world.isRemote)
@@ -201,14 +205,14 @@ public class EntityPonyGirl extends EntityCreepBase
                         player.sendMessage(new TextComponentString("I have to get better reception to order a pony!"));
                     }
 
-                    return false;
+                    return true;
                 }
             }
             else
             {
                 playSound(CreepsSoundHandler.ponyGirlMoneySound, getSoundVolume(), getSoundPitch());
 
-                return false;
+                return true;
             }
         }
 

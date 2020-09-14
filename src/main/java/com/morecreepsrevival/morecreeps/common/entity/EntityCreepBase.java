@@ -1101,15 +1101,6 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
         updateArmSwingProgress();
 
-        /*Entity ridingEntity = getRidingEntity();
-
-        if (isInsideOfMaterial(Material.WATER) && ridingEntity != null && ridingEntity.isInsideOfMaterial(Material.WATER) && world.isRemote)
-        {
-            dismountRidingEntity();
-
-            CreepsPacketHandler.INSTANCE.sendToServer(new MessageDismountEntity(getEntityId()));
-        }*/
-
         if (getBrightness() > 0.5f)
         {
             idleTime += 2;

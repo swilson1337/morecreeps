@@ -34,8 +34,6 @@ public class EntityPony extends EntityCreepBase
     {
         super(worldIn);
 
-        creatureType = EnumCreatureType.AMBIENT;
-
         setCreepTypeName("Pony");
 
         baseHealth = 6.0f;
