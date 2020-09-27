@@ -31,7 +31,7 @@ public class WorldGenStructures implements IWorldGenerator
     {
         if (MoreCreepsConfig.pyramidGen)
         {
-            if (pyramidCount >= (1100 - (MoreCreepsConfig.pyramidRarity * 100) + 100))
+            if (pyramidCount >= (1100 - MoreCreepsConfig.pyramidRarity + 100))
             {
                 if (rand.nextInt(30) == 0)
                 {
@@ -56,7 +56,7 @@ public class WorldGenStructures implements IWorldGenerator
 
         if (MoreCreepsConfig.castleGen)
         {
-            if (castleCount >= (1100 - (MoreCreepsConfig.castleRarity * 100) + 1300))
+            if (castleCount >= (1100 - MoreCreepsConfig.castleRarity + 1300))
             {
                 if (rand.nextInt(30) == 0)
                 {

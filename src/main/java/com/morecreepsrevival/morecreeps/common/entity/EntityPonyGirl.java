@@ -174,6 +174,10 @@ public class EntityPonyGirl extends EntityCreepBase
 
                     EntityPonyCloud ponyCloud = new EntityPonyCloud(world);
 
+                    ponyCloud.setInitialHealth();
+
+                    ponyCloud.determineBaseTexture();
+
                     ponyCloud.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
 
                     if (!world.isRemote)
@@ -182,6 +186,10 @@ public class EntityPonyGirl extends EntityCreepBase
                     }
 
                     EntityPony pony = new EntityPony(world);
+
+                    pony.setInitialHealth();
+
+                    pony.determineBaseTexture();
 
                     pony.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
 

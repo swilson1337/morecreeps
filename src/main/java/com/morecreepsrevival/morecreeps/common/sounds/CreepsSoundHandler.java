@@ -560,6 +560,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent ponyCloudKillSound = createSound("ponycloudkill");
 
+    public static final SoundEvent ponyPopOffSound = createSound("ponypopoff");
+
     private static SoundEvent createSound(String soundName)
     {
         return (new SoundEvent(new ResourceLocation(MoreCreepsAndWeirdos.modid, soundName))).setRegistryName(soundName);
@@ -841,7 +843,8 @@ public class CreepsSoundHandler
                 ponyCloudLivingSound,
                 ponySound,
                 ponyDeathSound,
-                ponyCloudKillSound
+                ponyCloudKillSound,
+                ponyPopOffSound
         );
     }
 }

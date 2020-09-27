@@ -1,7 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -11,15 +10,15 @@ import javax.annotation.Nonnull;
 public class EntityPony extends EntityCreepBase
 {
     private static final String[] textures = {
-            "textures/entity/pony01.png",
-            "textures/entity/pony02.png",
-            "textures/entity/pony03.png",
-            "textures/entity/pony04.png",
-            "textures/entity/pony05.png",
-            "textures/entity/pony06.png",
-            "textures/entity/pony07.png",
-            "textures/entity/pony08.png",
-            "textures/entity/pony09.png"
+            "textures/entity/pony01",
+            "textures/entity/pony02",
+            "textures/entity/pony03",
+            "textures/entity/pony04",
+            "textures/entity/pony05",
+            "textures/entity/pony06",
+            "textures/entity/pony07",
+            "textures/entity/pony08",
+            "textures/entity/pony09"
     };
 
     private static final String[] names = {
@@ -79,5 +78,16 @@ public class EntityPony extends EntityCreepBase
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.ponyDeathSound;
+    }
+
+    @Override
+    public double getYOffset()
+    {
+        if (getRidingEntity() instanceof EntityPonyCloud)
+        {
+            return getRidingYOffset() + 5.0d;
+        }
+
+        return super.getYOffset();
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -96,21 +97,8 @@ public class EntityPonyCloud extends EntityCreepBase
     }
 
     @Override
-    public double getYOffset()
-    {
-        if (getFirstPassenger() instanceof EntityPony)
-        {
-            return getRidingYOffset() + 2.5d;
-        }
-
-        return super.getYOffset();
-    }
-
-    @Override
     public void onLivingUpdate()
     {
-        super.onLivingUpdate();
-
         motionX = 0.0d;
 
         motionY = 0.0d;
@@ -122,6 +110,8 @@ public class EntityPonyCloud extends EntityCreepBase
             playSound(CreepsSoundHandler.ponyCloudKillSound, getSoundVolume(), getSoundPitch());
 
             world.createExplosion(this, posX, posY, posZ, boomSize, false);
+
+            setDead();
         }
 
         Entity firstPassenger = getFirstPassenger();
@@ -144,23 +134,34 @@ public class EntityPonyCloud extends EntityCreepBase
         {
             if (!getDelivered())
             {
-                EntityPlayer player = world.getClosestPlayerToEntity(this, 10.0d);
-
-                if (player != null)
+                if (!world.isAirBlock(new BlockPos(posX, posY - 1, posZ)))
                 {
-                    faceEntity(player, 30.0f, 30.0f);
+                    firstPassenger.dismountRidingEntity();
+
+                    playSound(CreepsSoundHandler.ponyPopOffSound, getSoundVolume(), getSoundPitch());
+
+                    playSound(SoundEvents.BLOCK_LAVA_POP, 0.9f, getSoundPitch());
+
+                    setDelivered(true);
+
+                    smoke();
+                }
+                else
+                {
+                    motionY = -0.2d;
                 }
             }
-            else
-            {
-                firstPassenger.dismountRidingEntity();
-
-                playSound(SoundEvents.BLOCK_LAVA_POP, 0.9f, getSoundPitch());
-
-                setDelivered(true);
-
-                smoke();
-            }
         }
+        else if (getDelivered())
+        {
+            motionY = 0.5d;
+        }
+
+        if (posY > 128.0d)
+        {
+            setDead();
+        }
+
+        super.onLivingUpdate();
     }
 }
