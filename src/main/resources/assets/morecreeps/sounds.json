@@ -5881,5 +5881,23 @@
 				"stream": false
 			}
 		]
+	},
+	"ponycloudkill": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponycloudkill1",
+				"stream": false
+			}
+		]
+	},
+	"ponypopoff": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponypopoff",
+				"stream": false
+			}
+		]
 	}
 }

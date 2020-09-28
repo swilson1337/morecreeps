@@ -22,6 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ITeleporter;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -274,7 +276,7 @@ public class EntityCreepItem extends Entity
         }
     }
 
-    @Override @Nonnull
+    @Override @Nonnull @SideOnly(Side.CLIENT)
     public String getName()
     {
         return I18n.format("item." + getItem().getUnlocalizedName());
