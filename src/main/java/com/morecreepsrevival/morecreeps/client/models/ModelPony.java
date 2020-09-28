@@ -79,13 +79,13 @@ public class ModelPony extends ModelBase
         this.mane2.addBox(0.0F, 0.0F, 0.0F, 2, 9, 3, -0.1F);
         this.mane2.setRotationPoint(-0.5F, 4.5F, -7.666667F);
 
-        this.mane2.rotateAngleZ = 0.4461433F;
+        this.mane2.rotateAngleX = 0.4461433F;
 
         this.neck = new ModelRenderer(this, 18, 0);
         this.neck.addBox(-1.5F, 0.0F, 0.0F, 3, 7, 3, 0.0F);
         this.neck.setRotationPoint(0.5F, 8.0F, -8.6F);
 
-        this.neck.rotateAngleZ = 0.7063936F;
+        this.neck.rotateAngleX = 0.7063936F;
 
         this.ponyHead = new ModelRenderer(this, 0, 0);
         this.ponyHead.addBox(-3.0F, -6.0F, -3.0F, 4, 4, 5, 0.0F);
@@ -112,13 +112,13 @@ public class ModelPony extends ModelBase
         this.mane1.addBox(0.0F, 0.0F, 0.0F, 2, 2, 6, 0.0F);
         this.mane1.setRotationPoint(-0.5F, 3.933333F, -10.96667F);
 
-        this.mane1.rotateAngleZ = 0.3137737F;
+        this.mane1.rotateAngleX = 0.3137737F;
 
         this.tail = new ModelRenderer(this, 0, 24);
         this.tail.addBox(-0.5F, 0.0F, 1.0F, 1, 6, 1, 0.25F);
         this.tail.setRotationPoint(0.5F, 12.0F, 5.966667F);
 
-        this.tail.rotateAngleZ = 0.5235988F;
+        this.tail.rotateAngleX = 0.5235988F;
 
 
         this.eyeR = new ModelRenderer(this, 0, 18);
@@ -133,7 +133,7 @@ public class ModelPony extends ModelBase
         this.tail2.addBox(-0.5F, 5.5F, 0.0F, 1, 3, 1, 0.75F);
         this.tail2.setRotationPoint(0.5F, 12.0F, 7.0F);
 
-        this.tail2.rotateAngleZ = 0.5235988F;
+        this.tail2.rotateAngleX = 0.5235988F;
 
         this.saddle = new ModelRenderer(this, 30, 0);
         this.saddle.addBox(-2.0F, 0.0F, -2.5F, 4, 1, 5, 1.95F);
@@ -183,7 +183,7 @@ public class ModelPony extends ModelBase
         this.horn = new ModelRenderer(this, 0, 25);
         this.horn.addBox(0.0F, -5.0F, 0.0F, 1, 5, 1);
         this.horn.setRotationPoint(0.0F, 3.0F, -8.0F);
-        this.horn.rotateAngleZ = 0.2617994F;
+        this.horn.rotateAngleX = 0.2617994F;
     }
 
     @Override
@@ -195,7 +195,7 @@ public class ModelPony extends ModelBase
         {
             float var8 = 2.0F;
             GlStateManager.pushMatrix();
-            GlStateManager.translate(0.0F, 5.0F + f5, 2.0F * f5);
+            GlStateManager.translate(0.0F, 5.0F * f5, 2.0F * f5);
             this.ponyHead.render(f5);
             this.eyeL.render(f5);
             this.snout.render(f5);
