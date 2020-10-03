@@ -114,7 +114,10 @@ public class EntityPony extends EntityCreepBase
     @Override
     protected SoundEvent getAmbientSound()
     {
-        // TODO: figure this one out
+        if (!isRiding() && rand.nextInt(5) == 0)
+        {
+            return CreepsSoundHandler.ponySound;
+        }
 
         return null;
     }

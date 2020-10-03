@@ -133,13 +133,16 @@ public class EntityPonyGirl extends EntityCreepBase
         {
             Item item = itemStack.getItem();
 
-            if (item == CreepsItemHandler.mobilePhone && !getCellPhone())
+            if (item == CreepsItemHandler.mobilePhone)
             {
-                InventoryHelper.takeItem(player.inventory, CreepsItemHandler.mobilePhone, 1);
+                if (!getCellPhone())
+                {
+                    InventoryHelper.takeItem(player.inventory, CreepsItemHandler.mobilePhone, 1);
 
-                setHeldItem(hand, new ItemStack(CreepsItemHandler.mobilePhone, 1));
+                    setHeldItem(hand, new ItemStack(CreepsItemHandler.mobilePhone, 1));
 
-                setCellPhone(true);
+                    setCellPhone(true);
+                }
 
                 return true;
             }
@@ -203,8 +206,6 @@ public class EntityPonyGirl extends EntityCreepBase
                     }
 
                     playSound(CreepsSoundHandler.ponyCloudSound, getSoundVolume(), getSoundPitch());
-
-                    return true;
                 }
                 else
                 {
@@ -212,9 +213,9 @@ public class EntityPonyGirl extends EntityCreepBase
                     {
                         player.sendMessage(new TextComponentString("I have to get better reception to order a pony!"));
                     }
-
-                    return true;
                 }
+
+                return true;
             }
             else
             {
