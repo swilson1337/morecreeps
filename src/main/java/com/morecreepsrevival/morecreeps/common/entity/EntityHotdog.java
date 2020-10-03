@@ -248,7 +248,7 @@ public class EntityHotdog extends EntityCreepBase
 
         ItemStack itemStack = player.getHeldItem(hand);
 
-        if (!itemStack.isEmpty())
+        if (!itemStack.isEmpty() && isEntityAlive())
         {
             Item item = itemStack.getItem();
 

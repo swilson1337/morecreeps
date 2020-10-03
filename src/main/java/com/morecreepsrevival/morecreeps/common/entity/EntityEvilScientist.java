@@ -193,11 +193,9 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
     }
 
     @Override
-    public void onDeath(@Nonnull DamageSource damageSource)
+    protected void onCreepDeath(@Nonnull DamageSource cause)
     {
         tearDownTower();
-
-        super.onDeath(damageSource);
     }
 
     @Override

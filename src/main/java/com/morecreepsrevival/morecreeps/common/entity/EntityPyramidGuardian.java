@@ -68,9 +68,9 @@ public class EntityPyramidGuardian extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nonnull DamageSource cause)
+    protected void onCreepDeath(@Nonnull DamageSource cause)
     {
-        if (!dead && !world.isRemote)
+        if (!world.isRemote)
         {
             int x = MathHelper.floor(posX);
 
@@ -220,8 +220,6 @@ public class EntityPyramidGuardian extends EntityCreepBase
                 world.setTileEntity(new BlockPos(x - 15, y + 3, z - 14), bed);*/
             }
         }
-
-        super.onDeath(cause);
     }
 
     @Override

@@ -419,7 +419,7 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
     }
 
     @Override
-    public void onDeath(@Nonnull DamageSource cause)
+    protected void onCreepDeath(@Nonnull DamageSource cause)
     {
         if (!getUndead())
         {
@@ -467,7 +467,5 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
         }
 
         smoke2();
-
-        super.onDeath(cause);
     }
 }
