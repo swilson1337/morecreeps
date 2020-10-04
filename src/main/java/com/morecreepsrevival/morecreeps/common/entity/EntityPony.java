@@ -144,4 +144,10 @@ public class EntityPony extends EntityCreepBase
 
         return super.getYOffset();
     }
+
+    @Override
+    public boolean isTamable()
+    {
+        return true;
+    }
 }

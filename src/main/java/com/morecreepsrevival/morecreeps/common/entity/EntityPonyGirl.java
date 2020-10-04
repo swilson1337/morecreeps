@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -198,6 +199,8 @@ public class EntityPonyGirl extends EntityCreepBase
 
                     pony.startRiding(ponyCloud, true);
 
+                    pony.tame(player);
+
                     // TODO: figure out this part
 
                     if (!world.isRemote)
@@ -226,5 +229,30 @@ public class EntityPonyGirl extends EntityCreepBase
         }
 
         return super.processInteract(player, hand);
+    }
+
+    @Override
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsPonyGirl");
+
+        props.setBoolean("CellPhone", getCellPhone());
+
+        compound.setTag("MoreCreepsPonyGirl", props);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        NBTTagCompound props = compound.getCompoundTag("MoreCreepsPonyGirl");
+
+        if (props.hasKey("CellPhone"))
+        {
+            setCellPhone(props.getBoolean("CellPhone"));
+        }
     }
 }
