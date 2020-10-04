@@ -330,11 +330,9 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     }
 
     @Override
-    public void onDeath(@Nonnull DamageSource cause)
+    protected void onCreepDeath(@Nonnull DamageSource cause)
     {
         smoke();
-
-        super.onDeath(cause);
     }
 
     private void setShooting(boolean b)

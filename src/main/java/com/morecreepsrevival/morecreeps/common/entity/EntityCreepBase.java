@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -634,6 +635,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
 
     public void feed(EntityPlayer player, float healthToAdd, int interestToAdd)
     {
+        if (!isEntityAlive())
+        {
+            return;
+        }
+
         addHealth(healthToAdd);
 
         addInterest(interestToAdd, player);
@@ -1038,31 +1044,78 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     @Override
     public void onDeath(@Nonnull DamageSource cause)
     {
-        if (!dead && !world.isRemote)
+        if (net.minecraftforge.common.ForgeHooks.onLivingDeath(this, cause)) return;
+        if (!this.isDead)
         {
-            if (isTamed() && canBeRevived())
+            Entity entity = cause.getTrueSource();
+            EntityLivingBase entitylivingbase = this.getAttackingEntity();
+
+            if (this.scoreValue >= 0 && entitylivingbase != null)
             {
-                if (!(this instanceof EntityTombstone))
+                entitylivingbase.awardKillScore(this, this.scoreValue, cause);
+            }
+
+            if (entity != null)
+            {
+                entity.onKillEntity(this);
+            }
+
+            this.dead = true;
+            this.getCombatTracker().reset();
+
+            if (!this.world.isRemote)
+            {
+                int i = net.minecraftforge.common.ForgeHooks.getLootingLevel(this, entity, cause);
+
+                captureDrops = true;
+                capturedDrops.clear();
+
+                if (this.canDropLoot() && this.world.getGameRules().getBoolean("doMobLoot"))
                 {
-                    EntityTombstone tombstone = new EntityTombstone(world, this);
+                    boolean flag = this.recentlyHit > 0;
+                    this.dropLoot(flag, i, cause);
+                }
 
-                    tombstone.determineBaseTexture();
+                captureDrops = false;
 
-                    tombstone.setInitialHealth();
+                if (!net.minecraftforge.common.ForgeHooks.onLivingDrops(this, cause, capturedDrops, i, recentlyHit > 0))
+                {
+                    for (EntityItem item : capturedDrops)
+                    {
+                        world.spawnEntity(item);
+                    }
+                }
 
-                    world.spawnEntity(tombstone);
+                if (isTamed() && canBeRevived())
+                {
+                    if (!(this instanceof EntityTombstone))
+                    {
+                        EntityTombstone tombstone = new EntityTombstone(world, this);
+
+                        tombstone.determineBaseTexture();
+
+                        tombstone.setInitialHealth();
+
+                        world.spawnEntity(tombstone);
+                    }
+                }
+                else
+                {
+                    dropItemsOnDeath();
                 }
             }
-            else
-            {
-                dropItemsOnDeath();
-            }
-        }
 
-        super.onDeath(cause);
+            onCreepDeath(cause);
+
+            this.world.setEntityState(this, (byte)3);
+        }
     }
 
     protected void dropItemsOnDeath()
+    {
+    }
+
+    protected void onCreepDeath(@Nonnull DamageSource cause)
     {
     }
 

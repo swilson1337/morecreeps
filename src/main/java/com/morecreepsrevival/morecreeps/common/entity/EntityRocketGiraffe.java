@@ -165,11 +165,9 @@ public class EntityRocketGiraffe extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nonnull DamageSource damageSource)
+    protected void onCreepDeath(@Nonnull DamageSource damageSource)
     {
         smoke();
-
-        super.onDeath(damageSource);
     }
 
     @Override

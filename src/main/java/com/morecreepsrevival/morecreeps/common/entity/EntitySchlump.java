@@ -639,10 +639,8 @@ public class EntitySchlump extends EntityCreepBase
     }
 
     @Override
-    public void onDeath(@Nonnull DamageSource cause)
+    protected void onCreepDeath(@Nonnull DamageSource cause)
     {
-        super.onDeath(cause);
-
         giveReward();
     }
 
