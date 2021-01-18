@@ -141,6 +141,8 @@ public class MoreCreepsConfig
 
     public static String[] nonVanillaBiomes = new String[] { };
 
+    public static boolean nonVanillaBiomesBlacklist = false;
+
     public static void preInit(FMLPreInitializationEvent event)
     {
         config = new Configuration(event.getSuggestedConfigurationFile());
@@ -162,6 +164,8 @@ public class MoreCreepsConfig
             globalSpawnRate = config.get("Spawn", "Global Spawn Rate", 1.0f, "This setting controls the overall spawn rate. The spawn rate of every mob is multiplied by this number. So 1.0 is the default rate, 2.0 is 2x the rate, 0.5 is half the rate, etc.").getDouble();
 
             spawnInNonVanillaBiomes = config.get("Spawn", "Spawn In Non-Vanilla Biomes", false, "Setting this to true will cause More Creeps mobs to spawn in biomes added by other mods.").getBoolean();
+
+            nonVanillaBiomesBlacklist = config.get("Spawn", "Make Non-Vanilla Biomes List a Blacklist", false, "Setting this to true will cause the Non-Vanilla Biomes list to act as a blacklist instead of a whitelist.").getBoolean();
 
             nonVanillaBiomes = config.get("Spawn", "Non-Vanilla Biomes", new String[] { }, "This a list of Non-Vanilla biomes that More Creeps mobs should spawn in.").getStringList();
 
