@@ -109,8 +109,7 @@ public class MoreCreepsAndWeirdos
             "Evil Scientists will conduct experiments that sometimes backfire.",
             "Your pet loses a level if resurrected with a LifeGem.",
             "Sneaky Sal will sometimes sell goods at a discount.",
-            "Stan BTS!",
-            "Black Lives Matter | If you would like to help out: https://blacklivesmatters.carrd.co"
+            "Stan BTS!"
     };
 
     @EventHandler
