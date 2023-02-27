@@ -100,4 +100,10 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
     {
         return CreepsSoundHandler.tedDeadSound;
     }
+    
+    @Override
+    public boolean canBleed()
+    {
+    	return false;
+    }
 }
