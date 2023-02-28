@@ -223,9 +223,14 @@ public class EntityThief extends EntityCreepBase implements IMob
                         dataManager.set(ITEM, copy);
 
                         dataManager.setDirty(ITEM);
+                        
+                        //The line below was out of if(not remote)
+                        //meaning, it was being executed on the client as
+                        //well, making a normal robbery look like a double
+                        //robbery, when actually the 2nd item was never taken
+                        //in the first place.
+                        itemStack.shrink(stolenAmount);
                     }
-
-                    itemStack.shrink(stolenAmount);
 
                     playSound(CreepsSoundHandler.thiefStealSound, getSoundVolume(), getSoundPitch());
 

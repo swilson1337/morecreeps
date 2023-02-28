@@ -1969,6 +1969,11 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     {
         return false;
     }
+    
+    public boolean canBleed()
+    {
+    	return true;
+    }
 
     protected Entity getFirstPassenger()
     {

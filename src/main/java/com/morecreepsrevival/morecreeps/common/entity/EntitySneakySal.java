@@ -73,7 +73,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         setCreepTypeName("Sneaky Sal");
 
-        setSize(1.5f, 4.0f);
+        setSize(1.5f, 2.3f);
 
         setModelSize(1.5f);
 
@@ -154,8 +154,10 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         dataManager.set(shootingDelay, 10);
 
         playSound(CreepsSoundHandler.bulletSound, getSoundVolume(), getSoundPitch());
+        
+        //+ target.height / 2.0f
 
-        EntityBullet bullet = new EntityBullet(world, this, target.posX - posX, target.getEntityBoundingBox().minY + (target.height / 2.0f) - posY + (height / 2.0f), target.posZ - posZ);
+        EntityBullet bullet = new EntityBullet(world, this, target.posX, target.getEntityBoundingBox().minY + target.height/2f, target.posZ);
 
         if (!world.isRemote)
         {
@@ -231,12 +233,14 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
         super.onLivingUpdate();
 
         setBlackFriday(MoreCreepsAndWeirdos.isBlackFriday());
+        
+        int shootingdelayvalue = dataManager.get(shootingDelay);
 
-        if (dataManager.get(shootingDelay) > 0)
+        if (shootingdelayvalue > 0)
         {
-            dataManager.set(shootingDelay, dataManager.get(shootingDelay) - 1);
+            dataManager.set(shootingDelay, shootingdelayvalue - 1);
 
-            if (dataManager.get(shootingDelay) < 1)
+            if (shootingdelayvalue - 1 < 1)
             {
                 setShooting(false);
             }
